@@ -1,7 +1,7 @@
-module test_assert_common_unit_collection
+module test_common_unit_collection
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_assert_common_unit_unitTests
+    use :: test_common_unit_unitTests
     implicit none
     private
     public :: collect_unit
@@ -19,4 +19,4 @@ contains
                                     unit_number_should_equal_to_unit_number_passed_to_setter) &
                      ]
     end subroutine collect_unit
-end module test_assert_common_unit_collection
+end module test_common_unit_collection

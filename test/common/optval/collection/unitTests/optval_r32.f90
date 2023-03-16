@@ -1,4 +1,4 @@
-module test_assert_common_optval_unitTests_r32
+module test_common_optval_unitTests_r32
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred
@@ -58,4 +58,4 @@ contains
             call random_number(default)
         end subroutine setup
     end subroutine optval_real32_should_return_default_when_does_not_input_x
-end module test_assert_common_optval_unitTests_r32
+end module test_common_optval_unitTests_r32

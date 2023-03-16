@@ -1,9 +1,9 @@
-module test_assert_common_optval_collection
+module test_common_optval_collection
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_assert_common_optval_unitTests_r32
-    use :: test_assert_common_optval_unitTests_r64
-    use :: test_assert_common_optval_unitTests_l
+    use :: test_common_optval_unitTests_r32
+    use :: test_common_optval_unitTests_r64
+    use :: test_common_optval_unitTests_l
     implicit none
     private
     public :: collect_optval
@@ -29,4 +29,4 @@ contains
                                     optval_logical_should_return_default_when_does_not_input_x) &
                      ]
     end subroutine collect_optval
-end module test_assert_common_optval_collection
+end module test_common_optval_collection

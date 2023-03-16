@@ -1,11 +1,11 @@
 program test_assert_common
-    use :: test_assert_common_unit_collection
-    use :: test_assert_common_store_collection
-    use :: test_assert_common_status_collection
-    use :: test_assert_common_halt_collection
-    use :: test_assert_common_optval_collection
-    use :: test_assert_common_message_collection
-    use :: test_assert_common_check_collection
+    use :: test_common_unit_collection
+    use :: test_common_store_collection
+    use :: test_common_status_collection
+    use :: test_common_halt_collection
+    use :: test_common_optval_collection
+    use :: test_common_message_collection
+    use :: test_common_check_collection
     use :: testdrive, only:new_testsuite, testsuite_type
     use :: testdrive_util, only:run_test
     implicit none

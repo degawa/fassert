@@ -1,6 +1,6 @@
-module test_assert_common_check_collection
+module test_common_check_collection
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_assert_common_check_unitTests_true
+    use :: test_common_check_unitTests_true
     implicit none
     private
     public :: collect_check
@@ -24,4 +24,4 @@ contains
                                     check_true_should_not_write_message_when_passed_quiet_true) &
                      ]
     end subroutine collect_check
-end module test_assert_common_check_collection
+end module test_common_check_collection

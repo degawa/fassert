@@ -1,6 +1,6 @@
-module test_assert_common_halt_collection
+module test_common_halt_collection
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_assert_common_halt_unitTests
+    use :: test_common_halt_unitTests
     implicit none
     private
     public :: collect_halt
@@ -16,4 +16,4 @@ contains
                                   halt_should_not_stop_when_input_passed_status) &
                      ]
     end subroutine collect_halt
-end module test_assert_common_halt_collection
+end module test_common_halt_collection

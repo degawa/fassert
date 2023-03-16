@@ -1,4 +1,4 @@
-module test_assert_common_unit_unitTests
+module test_common_unit_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred
@@ -44,4 +44,4 @@ contains
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
     end subroutine unit_number_should_equal_to_unit_number_passed_to_setter
-end module test_assert_common_unit_unitTests
+end module test_common_unit_unitTests

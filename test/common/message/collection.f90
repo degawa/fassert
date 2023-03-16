@@ -1,6 +1,6 @@
-module test_assert_common_message_collection
+module test_common_message_collection
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_assert_common_message_unitTests_toString
+    use :: test_common_message_unitTests_toString
     implicit none
     private
     public :: collect_message
@@ -18,4 +18,4 @@ contains
                                     to_string_should_return_F_when_input_false) &
                      ]
     end subroutine collect_message
-end module test_assert_common_message_collection
+end module test_common_message_collection

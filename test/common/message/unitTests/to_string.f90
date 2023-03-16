@@ -1,4 +1,4 @@
-module test_assert_common_message_unitTests_toString
+module test_common_message_unitTests_toString
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred
     use :: assert_common_message
@@ -29,4 +29,4 @@ contains
                    //", but got "//to_string(.false.))
         if (occurred(error)) return
     end subroutine to_string_should_return_F_when_input_false
-end module test_assert_common_message_unitTests_toString
+end module test_common_message_unitTests_toString

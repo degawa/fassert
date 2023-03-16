@@ -1,7 +1,7 @@
-module test_assert_common_store_collection
+module test_common_store_collection
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_assert_common_store_unitTests
+    use :: test_common_store_unitTests
     implicit none
     private
     public :: collect_store
@@ -19,4 +19,4 @@ contains
                                     stat_should_not_be_updated_when_does_not_input_stat) &
                      ]
     end subroutine collect_store
-end module test_assert_common_store_collection
+end module test_common_store_collection

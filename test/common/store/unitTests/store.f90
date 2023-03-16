@@ -1,4 +1,4 @@
-module test_assert_common_store_unitTests
+module test_common_store_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred, to_string
@@ -45,4 +45,4 @@ contains
         call check(error, stat .eqv. .true., &
                    "expected "//to_string(.true.)//", but got "//to_string(stat))
     end subroutine stat_should_not_be_updated_when_does_not_input_stat
-end module test_assert_common_store_unitTests
+end module test_common_store_unitTests

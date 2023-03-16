@@ -1,4 +1,4 @@
-module test_assert_common_check_unitTests_true
+module test_common_check_unitTests_true
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string
@@ -227,4 +227,4 @@ contains
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
     end subroutine check_true_should_not_write_message_when_passed_quiet_true
-end module test_assert_common_check_unitTests_true
+end module test_common_check_unitTests_true

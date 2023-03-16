@@ -1,4 +1,4 @@
-module test_assert_common_status_unitTests
+module test_common_status_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred, to_string
@@ -50,4 +50,4 @@ contains
                    "expected "//to_string(.false.)//", but got "//to_string(is_test_failed(passed)))
         if (occurred(error)) return
     end subroutine is_test_failed_should_return_false_when_input_passed
-end module test_assert_common_status_unitTests
+end module test_common_status_unitTests

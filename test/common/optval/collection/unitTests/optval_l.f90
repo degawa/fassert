@@ -1,4 +1,4 @@
-module test_assert_common_optval_unitTests_l
+module test_common_optval_unitTests_l
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred, to_string
@@ -70,4 +70,4 @@ contains
             default = .not. x
         end subroutine setup
     end subroutine optval_logical_should_return_default_when_does_not_input_x
-end module test_assert_common_optval_unitTests_l
+end module test_common_optval_unitTests_l
