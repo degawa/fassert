@@ -1,0 +1,60 @@
+module test_sameShape_compareArrayShape_unitTests_areSameLength
+    use, intrinsic :: iso_fortran_env
+    use :: testdrive, only:error_type, check, to_string
+    use :: testdrive_util, only:occurred, to_string
+    use :: assert_sameShape_compareArrayShape
+    implicit none
+    private
+    public :: str_should_return_true_when_input_same_length_string
+    public :: str_should_return_false_when_input_different_length_string
+    public :: str_should_return_true_when_input_diff_len_due_to_tailing_space
+
+contains
+    subroutine str_should_return_true_when_input_same_length_string(error)
+        implicit none
+        type(error_type), allocatable, intent(out) :: error
+            !! error handler
+
+        character(:), allocatable :: a
+        character(:), allocatable :: b
+
+        a = "abc"
+        b = "xyz"
+
+        call check(error, are_same_length(a, b), &
+                   "expected '"//to_string(.true.)// &
+                   "', but got '"//to_string(are_same_length(a, b))//"'")
+    end subroutine str_should_return_true_when_input_same_length_string
+
+    subroutine str_should_return_false_when_input_different_length_string(error)
+        implicit none
+        type(error_type), allocatable, intent(out) :: error
+            !! error handler
+
+        character(:), allocatable :: a
+        character(:), allocatable :: b
+
+        a = "abc"
+        b = "abca"
+
+        call check(error,.not. are_same_length(a, b), &
+                   "expected '"//to_string(.false.)// &
+                   "', but got '"//to_string(are_same_length(a, b))//"'")
+    end subroutine str_should_return_false_when_input_different_length_string
+
+    subroutine str_should_return_true_when_input_diff_len_due_to_tailing_space(error)
+        implicit none
+        type(error_type), allocatable, intent(out) :: error
+            !! error handler
+
+        character(:), allocatable :: a
+        character(:), allocatable :: b
+
+        a = "abc"
+        b = "xyz "
+
+        call check(error, are_same_length(a, b), &
+                   "expected '"//to_string(.true.)// &
+                   "', but got '"//to_string(are_same_length(a, b))//"'")
+    end subroutine str_should_return_true_when_input_diff_len_due_to_tailing_space
+end module test_sameShape_compareArrayShape_unitTests_areSameLength
