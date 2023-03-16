@@ -1,0 +1,32 @@
+module test_assert_common_optval_collection
+    use, intrinsic :: iso_fortran_env
+    use :: testdrive, only:new_unittest, unittest_type
+    use :: test_assert_common_optval_unitTests_r32
+    use :: test_assert_common_optval_unitTests_r64
+    use :: test_assert_common_optval_unitTests_l
+    implicit none
+    private
+    public :: collect_optval
+
+contains
+    subroutine collect_optval(test_suite)
+        implicit none
+        type(unittest_type), allocatable, intent(out) :: test_suite(:)
+            !! collection of tests
+
+        test_suite = [ &
+                     new_unittest("optval_real32(), it should return x when input x.", &
+                                  optval_real32_should_return_x_when_intpu_x_and_default) &
+                     , new_unittest("optval_real32(), it should return default when doesn't input x.", &
+                                    optval_real32_should_return_default_when_does_not_input_x) &
+                     , new_unittest("optval_real64(), it should return x when input x.", &
+                                    optval_real64_should_return_x_when_intpu_x_and_default) &
+                     , new_unittest("optval_real64(), it should return default when doesn't input x.", &
+                                    optval_real64_should_return_default_when_does_not_input_x) &
+                     , new_unittest("optval_logical(), it should return x when input x.", &
+                                    optval_logical_should_return_x_when_intpu_x_and_default) &
+                     , new_unittest("optval_logical(), it should return default when doesn't input x.", &
+                                    optval_logical_should_return_default_when_does_not_input_x) &
+                     ]
+    end subroutine collect_optval
+end module test_assert_common_optval_collection
