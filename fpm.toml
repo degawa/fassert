@@ -1,0 +1,15 @@
+name = "assert"
+version = "0.1.0"
+license = "MIT"
+author = "Tomohiro Degawa"
+maintainer = "degawa.tomohiro@gmail.com"
+copyright = "Copyright 2023, Tomohiro Degawa"
+
+[build]
+auto-executables = false
+auto-tests = true
+auto-examples = true
+
+[install]
+library = true
+
