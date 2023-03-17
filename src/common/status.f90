@@ -1,4 +1,4 @@
-module assert_common_status
+module fassette_common_status
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -32,4 +32,4 @@ contains
 
         is_test_failed = .not. is_test_passed(test_status)
     end function is_test_failed
-end module assert_common_status
+end module fassette_common_status

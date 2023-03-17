@@ -1,4 +1,4 @@
-module assert_common_unit
+module fassette_common_unit
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -16,4 +16,4 @@ contains
 
         assertion_message_unit = unit
     end subroutine set_assertion_message_unit
-end module assert_common_unit
+end module fassette_common_unit

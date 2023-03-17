@@ -2,7 +2,7 @@ module test_common_unit_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred
-    use :: assert_common_unit
+    use :: fassette_common_unit
     implicit none
     private
     public :: initial_value_should_equal_to_output_unit

@@ -1,4 +1,4 @@
-module assert_common_optval
+module fassette_common_optval
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -63,4 +63,4 @@ contains
             y = default
         end if
     end function optval_logical
-end module assert_common_optval
+end module fassette_common_optval

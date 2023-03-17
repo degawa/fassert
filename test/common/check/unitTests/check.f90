@@ -2,10 +2,10 @@ module test_common_check_unitTests_true
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string, get_actual_value
-    use :: assert_common_unit
-    use :: assert_common_message, only:prefix_passed, prefix_failed
-    use :: assert_common_status
-    use :: assert_common_check
+    use :: fassette_common_unit
+    use :: fassette_common_message, only:prefix_passed, prefix_failed
+    use :: fassette_common_status
+    use :: fassette_common_check
     implicit none
     private
     public :: check_true_should_write_message_with_prefix_when_test_passed

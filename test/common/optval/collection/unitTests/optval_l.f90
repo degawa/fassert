@@ -2,7 +2,7 @@ module test_common_optval_unitTests_l
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred, to_string
-    use :: assert_common_optval
+    use :: fassette_common_optval
     implicit none
     private
     public :: optval_logical_should_return_x_when_intpu_x_and_default

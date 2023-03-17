@@ -1,4 +1,4 @@
-module assert_equal_compareArrayValues
+module fassette_equal_compareArrayValues
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -27,7 +27,7 @@ contains
     !>二つのスカラ値の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function is_approx_equal_real32(val1, val2, tolerance) result(is_equal)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real32), intent(in) :: val1
         real(real32), intent(in) :: val2
@@ -41,7 +41,7 @@ contains
     !>二つのスカラ値の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function is_approx_equal_real64(val1, val2, tolerance) result(is_equal)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real64), intent(in) :: val1
         real(real64), intent(in) :: val2
@@ -85,7 +85,7 @@ contains
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank1_real32(array1, array2, tolerance) result(are_same)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real32), intent(in) :: array1(:)
         real(real32), intent(in) :: array2(:)
@@ -99,7 +99,7 @@ contains
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank2_real32(array1, array2, tolerance) result(are_same)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real32), intent(in) :: array1(:, :)
         real(real32), intent(in) :: array2(:, :)
@@ -113,7 +113,7 @@ contains
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank3_real32(array1, array2, tolerance) result(are_same)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real32), intent(in) :: array1(:, :, :)
         real(real32), intent(in) :: array2(:, :, :)
@@ -127,7 +127,7 @@ contains
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank1_real64(array1, array2, tolerance) result(are_same)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real64), intent(in) :: array1(:)
         real(real64), intent(in) :: array2(:)
@@ -141,7 +141,7 @@ contains
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank2_real64(array1, array2, tolerance) result(are_same)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real64), intent(in) :: array1(:, :)
         real(real64), intent(in) :: array2(:, :)
@@ -155,7 +155,7 @@ contains
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank3_real64(array1, array2, tolerance) result(are_same)
-        use :: assert_common_optval
+        use :: fassette_common_optval
         implicit none
         real(real64), intent(in) :: array1(:, :, :)
         real(real64), intent(in) :: array2(:, :, :)
@@ -175,4 +175,4 @@ contains
 
         are_same = all(array1 == array2)
     end function are_all_values_equal_rank1_char
-end module assert_equal_compareArrayValues
+end module fassette_equal_compareArrayValues

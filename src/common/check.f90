@@ -1,9 +1,9 @@
-module assert_common_check
+module fassette_common_check
     use, intrinsic :: iso_fortran_env
-    use :: assert_common_optval
-    use :: assert_common_store
-    use :: assert_common_unit, msg_unit => assertion_message_unit
-    use :: assert_common_message
+    use :: fassette_common_optval
+    use :: fassette_common_store
+    use :: fassette_common_unit, msg_unit => assertion_message_unit
+    use :: fassette_common_message
     implicit none
     private
     public :: check_true
@@ -54,7 +54,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine check_expected_failure(condition, test_name, stat, quiet)
-        use :: assert_common_message
+        use :: fassette_common_message
         logical, intent(in) :: condition
             !! 判別される条件
         character(*), intent(in) :: test_name
@@ -87,7 +87,7 @@ contains
     !>引数で渡された条件を判別し，
     !>テスト結果を出力する場合に`.true.`そうでない場合`.false.`を返す．
     logical function does_output_message(quiet)
-        use :: assert_common_message
+        use :: fassette_common_message
         implicit none
         logical, intent(in), optional :: quiet
             !! 出力抑制フラグ
@@ -104,4 +104,4 @@ contains
 
         does_not_output_message = .not. does_output_message(quiet)
     end function does_not_output_message
-end module assert_common_check
+end module fassette_common_check

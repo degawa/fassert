@@ -1,5 +1,5 @@
-module assert
-    use :: assert_common_unit
+module fassette
+    use :: fassette_common_unit
     use :: assertEqual
     use :: expectEqual
     use :: expectSameShape
@@ -9,4 +9,4 @@ module assert
     public :: assert_equal
     public :: expect_equal
     public :: expect_same_shape
-end module assert
+end module fassette

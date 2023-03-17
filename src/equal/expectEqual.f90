@@ -1,10 +1,10 @@
 module expectEqual
     use, intrinsic :: iso_fortran_env
-    use :: assert_common_check
-    use :: assert_common_optval
-    use :: assert_common_message
-    use :: assert_common_status
-    use :: assertEqual_outputOnFailure
+    use :: fassette_common_check
+    use :: fassette_common_optval
+    use :: fassette_common_message
+    use :: fassette_common_status
+    use :: fassette_equal_outputOnFailure
     implicit none
     private
     public :: expect_equal
@@ -198,7 +198,7 @@ contains
     subroutine expect_equal_int32_rank1(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
+        use :: fassette_equal_compareArrayValues
         implicit none
 
         integer(int32), intent(in) :: actual(:)
@@ -255,7 +255,7 @@ contains
     subroutine expect_equal_int32_rank2(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
+        use :: fassette_equal_compareArrayValues
         implicit none
 
         integer(int32), intent(in) :: actual(:, :)
@@ -312,7 +312,7 @@ contains
     subroutine expect_equal_int32_rank3(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
+        use :: fassette_equal_compareArrayValues
         implicit none
 
         integer(int32), intent(in) :: actual(:, :, :)
@@ -371,8 +371,8 @@ contains
     subroutine expect_approxequal_real32(actual, expected, test_name, stat, &
                                          tolerance, &
                                          verbose, expected_failure, quiet)
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real32), intent(in) :: actual
@@ -421,8 +421,8 @@ contains
     subroutine expect_approxequal_real64(actual, expected, test_name, stat, &
                                          tolerance, &
                                          verbose, expected_failure, quiet)
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real64), intent(in) :: actual
@@ -472,8 +472,8 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real32), intent(in) :: actual(:)
@@ -534,8 +534,8 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real32), intent(in) :: actual(:, :)
@@ -596,8 +596,8 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real32), intent(in) :: actual(:, :, :)
@@ -658,8 +658,8 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real64), intent(in) :: actual(:)
@@ -720,8 +720,8 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real64), intent(in) :: actual(:, :)
@@ -782,8 +782,8 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
-        use :: assert_common_optval
+        use :: fassette_equal_compareArrayValues
+        use :: fassette_common_optval
         implicit none
 
         real(real64), intent(in) :: actual(:, :, :)
@@ -840,7 +840,7 @@ contains
     !>
     subroutine expect_equiv_logical(actual, expected, test_name, stat, &
                                     verbose, expected_failure, quiet)
-        use :: assert_common_check
+        use :: fassette_common_check
         implicit none
 
         logical, intent(in) :: actual
@@ -879,7 +879,7 @@ contains
     !>
     subroutine expect_equal_str(actual, expected, test_name, stat, &
                                 verbose, expected_failure, quiet)
-        use :: assert_common_check
+        use :: fassette_common_check
         implicit none
 
         character(*), intent(in) :: actual
@@ -932,7 +932,7 @@ contains
     subroutine expect_equal_char_rank1(actual, expected, test_name, stat, &
                                        verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: assert_equal_compareArrayValues
+        use :: fassette_equal_compareArrayValues
         implicit none
 
         character, intent(in) :: actual(:)

@@ -1,4 +1,4 @@
-module assert_common_message
+module fassette_common_message
     implicit none
     private
     public :: to_string
@@ -52,4 +52,4 @@ contains
             string = "F"
         end if
     end function to_string_logical
-end module assert_common_message
+end module fassette_common_message

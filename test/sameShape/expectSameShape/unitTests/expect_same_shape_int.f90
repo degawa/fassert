@@ -2,9 +2,9 @@ module test_sameShape_expectSameShape_unitTests_expect_int
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, get_actual_value
-    use :: assert_common_unit
-    use :: assert_common_message
-    use :: assert_common_status
+    use :: fassette_common_unit
+    use :: fassette_common_message
+    use :: fassette_common_status
     use :: expectSameShape
     implicit none
     private

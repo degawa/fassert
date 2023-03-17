@@ -1,7 +1,7 @@
 module test_common_message_unitTests_toString
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred
-    use :: assert_common_message
+    use :: fassette_common_message
     implicit none
     private
     public :: to_string_should_return_T_when_input_true
