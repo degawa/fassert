@@ -1,8 +1,6 @@
 module expectSameShape
     use, intrinsic :: iso_fortran_env
     use :: assert_common_check
-    use :: assert_common_optval
-    use :: assert_common_message, only:default_quiet_shape_check
     implicit none
     private
     public :: expect_same_shape
@@ -43,8 +41,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank1_int32
 
     !>二つの配列が同じ形状かを検査する．
@@ -69,8 +66,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank2_int32
 
     !>二つの配列が同じ形状かを検査する．
@@ -95,8 +91,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank3_int32
 
     !>二つの配列が同じ形状かを検査する．
@@ -121,8 +116,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank1_real32
 
     !>二つの配列が同じ形状かを検査する．
@@ -147,8 +141,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank2_real32
 
     !>二つの配列が同じ形状かを検査する．
@@ -173,8 +166,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank3_real32
 
     !>二つの配列が同じ形状かを検査する．
@@ -199,8 +191,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank1_real64
 
     !>二つの配列が同じ形状かを検査する．
@@ -225,8 +216,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank2_real64
 
     !>二つの配列が同じ形状かを検査する．
@@ -251,8 +241,7 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank3_real64
 
     !>二つの配列が同じ形状かを検査する．
@@ -277,7 +266,6 @@ contains
         logical, intent(in), optional :: quiet
             !! 表示を抑制するかのフラグ
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, &
-                        quiet=optval(quiet, default_quiet_shape_check))
+        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
     end subroutine expect_same_shape_rank1_char
 end module expectSameShape
