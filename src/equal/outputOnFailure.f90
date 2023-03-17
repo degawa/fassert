@@ -31,7 +31,7 @@ module assertEqual_outputOnFailure
     character(*), private, parameter :: fmt_int = '('//fmt_indent//',A,I0)'
     character(*), private, parameter :: fmt_real = '('//fmt_indent//',A,g0)'
     character(*), private, parameter :: fmt_str = '('//fmt_indent//',A,A)'
-    character(*), private, parameter :: fmt_char = '('//fmt_indent//',A,*(A:))'
+    character(*), private, parameter :: fmt_char = '('//fmt_indent//',A,*(A:," "))'
 
     character(*), private, parameter :: fmt_idx_sep = ',",",'
     character(*), private, parameter :: fmt_idx_d1 = 'i0'
