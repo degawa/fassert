@@ -1,7 +1,7 @@
 module test_common_check_unitTests_true
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
-    use :: testdrive_util, only:occurred, to_string
+    use :: testdrive_util, only:occurred, to_string, get_actual_value
     use :: assert_common_unit
     use :: assert_common_message, only:prefix_passed, prefix_failed
     use :: assert_common_status
@@ -20,27 +20,17 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        integer(int32) :: scratch_unit_number, iostat
-        character(256) :: buffer
-        character(:), allocatable :: test_name
+        integer(int32) :: scratch_unit_number
+        character(:), allocatable :: test_name, buffer
 
         call setup(scratch_unit_number, test_name)
 
         call check_true(.true., test_name)
 
-        rewind (unit=scratch_unit_number)
-        read (scratch_unit_number, '(A)', iostat=iostat) buffer
-        if (is_iostat_end(iostat)) then
-            buffer = ""
-        else
-            call check(error, iostat == 0, &
-                       "io error "//to_string(iostat)//" during getting actual value from scratch file.")
-            if (occurred(error)) return
-        end if
-
+        call get_actual_value(error, scratch_unit_number, buffer)
         call check(error, len_trim(buffer) == len(prefix_passed//test_name), &
-                   "expected message length "//to_string(len(test_name)) &
-                   //", but got "//to_string(len(prefix_passed) + len_trim(buffer)))
+                   "expected message length "//to_string(len(prefix_passed//test_name)) &
+                   //", but got "//to_string(len_trim(buffer)))
         if (occurred(error)) return
 
         call check(error, trim(buffer) == prefix_passed//test_name, &
@@ -71,27 +61,17 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        integer(int32) :: scratch_unit_number, iostat
-        character(256) :: buffer
-        character(:), allocatable :: test_name
+        integer(int32) :: scratch_unit_number
+        character(:), allocatable :: test_name, buffer
 
         call setup(scratch_unit_number, test_name)
 
         call check_true(.false., test_name)
 
-        rewind (unit=scratch_unit_number)
-        read (scratch_unit_number, '(A)', iostat=iostat) buffer
-        if (is_iostat_end(iostat)) then
-            buffer = ""
-        else
-            call check(error, iostat == 0, &
-                       "io error "//to_string(iostat)//" occured during getting actual value from scratch file.")
-            if (occurred(error)) return
-        end if
-
+        call get_actual_value(error, scratch_unit_number, buffer)
         call check(error, len_trim(buffer) == len(prefix_failed//test_name), &
-                   "expected message length "//to_string(len(test_name)) &
-                   //", but got "//to_string(len(prefix_failed) + len_trim(buffer)))
+                   "expected message length "//to_string(len(prefix_failed//test_name)) &
+                   //", but got "//to_string(len_trim(buffer)))
         if (occurred(error)) return
 
         call check(error, trim(buffer) == prefix_failed//test_name, &
@@ -183,24 +163,14 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        integer(int32) :: scratch_unit_number, iostat
-        character(256) :: buffer
-        character(:), allocatable :: test_name
+        integer(int32) :: scratch_unit_number
+        character(:), allocatable :: test_name, buffer
 
         call setup(scratch_unit_number, test_name)
 
         call check_true(.true., test_name, quiet=.true.)
 
-        rewind (unit=scratch_unit_number)
-        read (scratch_unit_number, '(A)', iostat=iostat) buffer
-        if (is_iostat_end(iostat)) then
-            buffer = ""
-        else
-            call check(error, iostat == 0, &
-                       "io error "//to_string(iostat)//" during getting actual value from scratch file.")
-            if (occurred(error)) return
-        end if
-
+        call get_actual_value(error, scratch_unit_number, buffer)
         call check(error, len_trim(buffer) == 0, &
                    "expected zero message length , but got "//to_string(len_trim(buffer)))
         if (occurred(error)) return
