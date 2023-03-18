@@ -13,9 +13,9 @@ contains
 
         test_suite = [ &
                      new_unittest("to_string_logical(), it should return 'T' when input `.true.`.", &
-                                  to_string_should_return_T_when_input_true) &
+                                  toString_should_return_T_when_input_true) &
                      , new_unittest("to_string_logical(), it should return 'F' when input `.false.`.", &
-                                    to_string_should_return_F_when_input_false) &
+                                    toString_should_return_F_when_input_false) &
                      ]
     end subroutine collect_message
 end module test_common_message_collection

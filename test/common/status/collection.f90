@@ -13,13 +13,13 @@ contains
 
         test_suite = [ &
                      new_unittest("is_test_passed(), it should return .true. when input passed status.", &
-                                  is_test_passed_should_return_true_when_input_passed) &
+                                  isTestPassed_should_return_true_when_input_passed) &
                      , new_unittest("is_test_passed(), it should return .false. when input failed status.", &
-                                    is_test_passed_should_return_false_when_input_failed) &
+                                    isTestPassed_should_return_false_when_input_failed) &
                      , new_unittest("is_test_failed(), it should return .true. when input failed status.", &
-                                    is_test_failed_should_return_true_when_input_failed) &
+                                    isTestFailed_should_return_true_when_input_failed) &
                      , new_unittest("is_test_failed(), it should return .false. when input passed status.", &
-                                    is_test_failed_should_return_false_when_input_passed) &
+                                    isTestFailed_should_return_false_when_input_passed) &
                      ]
     end subroutine collect_status
 end module test_common_status_collection
