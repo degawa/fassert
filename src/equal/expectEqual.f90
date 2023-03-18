@@ -198,7 +198,7 @@ contains
     subroutine expect_equal_int32_rank1(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         implicit none
 
         integer(int32), intent(in) :: actual(:)
@@ -255,7 +255,7 @@ contains
     subroutine expect_equal_int32_rank2(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         implicit none
 
         integer(int32), intent(in) :: actual(:, :)
@@ -312,7 +312,7 @@ contains
     subroutine expect_equal_int32_rank3(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         implicit none
 
         integer(int32), intent(in) :: actual(:, :, :)
@@ -371,7 +371,7 @@ contains
     subroutine expect_approxequal_real32(actual, expected, test_name, stat, &
                                          tolerance, &
                                          verbose, expected_failure, quiet)
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_real
         use :: fassert_common_optval
         implicit none
 
@@ -421,7 +421,7 @@ contains
     subroutine expect_approxequal_real64(actual, expected, test_name, stat, &
                                          tolerance, &
                                          verbose, expected_failure, quiet)
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_real
         use :: fassert_common_optval
         implicit none
 
@@ -472,7 +472,7 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         use :: fassert_common_optval
         implicit none
 
@@ -534,7 +534,7 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         use :: fassert_common_optval
         implicit none
 
@@ -596,7 +596,7 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         use :: fassert_common_optval
         implicit none
 
@@ -658,7 +658,7 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         use :: fassert_common_optval
         implicit none
 
@@ -720,7 +720,7 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         use :: fassert_common_optval
         implicit none
 
@@ -782,7 +782,7 @@ contains
                                                tolerance, &
                                                verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         use :: fassert_common_optval
         implicit none
 
