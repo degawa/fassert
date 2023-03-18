@@ -2,7 +2,7 @@ module test_sameShape_compareArrayShape_unitTests_areSameLength
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string
-    use :: fassette_sameShape_compareArrayShape
+    use :: fassert_sameShape_compareArrayShape
     implicit none
     private
     public :: str_should_return_true_when_input_same_length_string

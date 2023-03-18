@@ -2,7 +2,7 @@ module test_common_status_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred, to_string
-    use :: fassette_common_status
+    use :: fassert_common_status
     implicit none
     private
     public :: isTestPassed_should_return_true_when_input_passed

@@ -1,4 +1,4 @@
-module fassette_sameShape_compareArrayShape
+module fassert_sameShape_compareArrayShape
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -133,4 +133,4 @@ contains
 
         are_same = (len_trim(string1) == len_trim(string2))
     end function are_same_length_str
-end module fassette_sameShape_compareArrayShape
+end module fassert_sameShape_compareArrayShape

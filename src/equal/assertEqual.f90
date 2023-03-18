@@ -1,7 +1,7 @@
 module assertEqual
     use, intrinsic :: iso_fortran_env
     use :: expectEqual
-    use :: fassette_common_halt
+    use :: fassert_common_halt
     implicit none
     private
     public :: assert_equal

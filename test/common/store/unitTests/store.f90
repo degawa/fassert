@@ -2,7 +2,7 @@ module test_common_store_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred, to_string
-    use :: fassette_common_store
+    use :: fassert_common_store
     implicit none
     private
     public :: statLogical_should_be_the_same_as_val_when_input_stat

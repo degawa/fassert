@@ -1,8 +1,8 @@
 module test_common_message_unitTests_output
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred
-    use :: fassette_common_message
-    use :: fassette_common_status
+    use :: fassert_common_message
+    use :: fassert_common_status
     implicit none
     private
     public :: doesOutputMsg_should_return_true_when_input_false

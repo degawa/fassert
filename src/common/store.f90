@@ -1,4 +1,4 @@
-module fassette_common_store
+module fassert_common_store
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -22,4 +22,4 @@ contains
 
         if (present(stat)) stat = val
     end subroutine store_logical
-end module fassette_common_store
+end module fassert_common_store

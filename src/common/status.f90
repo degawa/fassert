@@ -1,4 +1,4 @@
-module fassette_common_status
+module fassert_common_status
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -36,10 +36,10 @@ contains
 
     !>予期された失敗をテストするかの真偽値を返す．
     logical function is_test_of_expected_failure(expected_failure)
-        use :: fassette_common_optval
+        use :: fassert_common_optval
         implicit none
         logical, intent(in), optional :: expected_failure
 
         is_test_of_expected_failure = optval(expected_failure, default_test_of_expected_failure)
     end function is_test_of_expected_failure
-end module fassette_common_status
+end module fassert_common_status

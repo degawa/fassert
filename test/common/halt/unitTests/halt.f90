@@ -1,7 +1,7 @@
 module test_common_halt_unitTests
     use :: testdrive, only:error_type
-    use :: fassette_common_status
-    use :: fassette_common_halt
+    use :: fassert_common_status
+    use :: fassert_common_halt
     implicit none
     private
     public :: halt_should_not_stop_when_input_passed_status

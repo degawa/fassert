@@ -1,5 +1,5 @@
-module fassette_common_halt
-    use :: fassette_common_status
+module fassert_common_halt
+    use :: fassert_common_status
     implicit none
     private
     public :: halt_on_failure
@@ -14,4 +14,4 @@ contains
         if (is_test_failed(test_status)) &
             error stop
     end subroutine halt_on_failure
-end module fassette_common_halt
+end module fassert_common_halt

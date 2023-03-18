@@ -1,9 +1,9 @@
-module fassette_common_check
+module fassert_common_check
     use, intrinsic :: iso_fortran_env
-    use :: fassette_common_optval
-    use :: fassette_common_store
-    use :: fassette_common_unit, msg_unit => assertion_message_unit
-    use :: fassette_common_message
+    use :: fassert_common_optval
+    use :: fassert_common_store
+    use :: fassert_common_unit, msg_unit => assertion_message_unit
+    use :: fassert_common_message
     implicit none
     private
     public :: check_true
@@ -54,7 +54,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine check_expected_failure(condition, test_name, stat, quiet)
-        use :: fassette_common_message
+        use :: fassert_common_message
         logical, intent(in) :: condition
             !! 判別される条件
         character(*), intent(in) :: test_name
@@ -83,4 +83,4 @@ contains
             write (msg_unit, '(A)') msg_buffer
         end block
     end subroutine check_expected_failure
-end module fassette_common_check
+end module fassert_common_check

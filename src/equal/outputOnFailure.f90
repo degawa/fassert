@@ -1,7 +1,7 @@
-module fassette_equal_outputOnFailure
+module fassert_equal_outputOnFailure
     use, intrinsic :: iso_fortran_env
-    use :: fassette_common_unit, msg_unit => assertion_message_unit
-    use :: fassette_common_message, only:default_verbose_format_indent
+    use :: fassert_common_unit, msg_unit => assertion_message_unit
+    use :: fassert_common_message, only:default_verbose_format_indent
     implicit none
     private
     public :: output_on_failure
@@ -276,7 +276,7 @@ contains
 
     !>実測値と予測値を標準出力に出力する．
     subroutine output_logical(actual, expected)
-        use :: fassette_common_message, only:to_string
+        use :: fassert_common_message, only:to_string
         implicit none
         logical, intent(in) :: actual
             !! 実測値
@@ -310,4 +310,4 @@ contains
         write (msg_unit, fmt_char) "Expected: ", expected
         write (msg_unit, fmt_char) "Actual  : ", actual
     end subroutine output_char_rank1
-end module fassette_equal_outputOnFailure
+end module fassert_equal_outputOnFailure

@@ -1,5 +1,5 @@
-module fassette_common_message
-    use :: fassette_common_optval
+module fassert_common_message
+    use :: fassert_common_optval
     implicit none
     private
     public :: to_string
@@ -118,4 +118,4 @@ contains
 
         does_not_output_message = .not. does_output_message(quiet)
     end function does_not_output_message
-end module fassette_common_message
+end module fassert_common_message
