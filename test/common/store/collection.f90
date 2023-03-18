@@ -14,9 +14,9 @@ contains
 
         test_suite = [ &
                      new_unittest("store_logical(), stat should be the same as the argument `val` when input stat.", &
-                                  stat_should_be_the_same_as_val_when_input_stat) &
+                                  statLogical_should_be_the_same_as_val_when_input_stat) &
                      , new_unittest("store_logical(), stat should not be updated when does not input stat.", &
-                                    stat_should_not_be_updated_when_does_not_input_stat) &
+                                    statLogical_should_not_be_updated_when_does_not_input_stat) &
                      ]
     end subroutine collect_store
 end module test_common_store_collection

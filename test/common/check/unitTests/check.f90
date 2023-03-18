@@ -8,14 +8,14 @@ module test_common_check_unitTests_true
     use :: fassette_common_check
     implicit none
     private
-    public :: check_true_should_write_message_with_prefix_when_test_passed
-    public :: check_true_should_write_message_with_prefix_when_test_failed
+    public :: checkTrue_should_write_message_with_prefix_when_test_passed
+    public :: checkTrue_should_write_message_with_prefix_when_test_failed
     public :: stat_should_be_passed_status_when_test_passed
     public :: stat_should_be_failed_status_when_test_failed
-    public :: check_true_should_not_write_message_when_passed_quiet_true
+    public :: checkTrue_should_not_write_message_when_passed_quiet_true
 
 contains
-    subroutine check_true_should_write_message_with_prefix_when_test_passed(error)
+    subroutine checkTrue_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -54,9 +54,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine check_true_should_write_message_with_prefix_when_test_passed
+    end subroutine checkTrue_should_write_message_with_prefix_when_test_passed
 
-    subroutine check_true_should_write_message_with_prefix_when_test_failed(error)
+    subroutine checkTrue_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -95,7 +95,7 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine check_true_should_write_message_with_prefix_when_test_failed
+    end subroutine checkTrue_should_write_message_with_prefix_when_test_failed
 
     subroutine stat_should_be_passed_status_when_test_passed(error)
         implicit none
@@ -158,7 +158,7 @@ contains
         end subroutine teardown
     end subroutine stat_should_be_failed_status_when_test_failed
 
-    subroutine check_true_should_not_write_message_when_passed_quiet_true(error)
+    subroutine checkTrue_should_not_write_message_when_passed_quiet_true(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -196,5 +196,5 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine check_true_should_not_write_message_when_passed_quiet_true
+    end subroutine checkTrue_should_not_write_message_when_passed_quiet_true
 end module test_common_check_unitTests_true

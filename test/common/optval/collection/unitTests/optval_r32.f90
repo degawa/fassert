@@ -5,11 +5,11 @@ module test_common_optval_unitTests_r32
     use :: fassette_common_optval
     implicit none
     private
-    public :: optval_real32_should_return_x_when_intpu_x_and_default
-    public :: optval_real32_should_return_default_when_does_not_input_x
+    public :: optvalReal32_should_return_x_when_intpu_x_and_default
+    public :: optvalReal32_should_return_default_when_does_not_input_x
 
 contains
-    subroutine optval_real32_should_return_x_when_intpu_x_and_default(error)
+    subroutine optvalReal32_should_return_x_when_intpu_x_and_default(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -32,9 +32,9 @@ contains
             call random_number(x)
             call random_number(default)
         end subroutine setup
-    end subroutine optval_real32_should_return_x_when_intpu_x_and_default
+    end subroutine optvalReal32_should_return_x_when_intpu_x_and_default
 
-    subroutine optval_real32_should_return_default_when_does_not_input_x(error)
+    subroutine optvalReal32_should_return_default_when_does_not_input_x(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -57,5 +57,5 @@ contains
             call random_number(x)
             call random_number(default)
         end subroutine setup
-    end subroutine optval_real32_should_return_default_when_does_not_input_x
+    end subroutine optvalReal32_should_return_default_when_does_not_input_x
 end module test_common_optval_unitTests_r32

@@ -5,11 +5,11 @@ module test_common_optval_unitTests_l
     use :: fassette_common_optval
     implicit none
     private
-    public :: optval_logical_should_return_x_when_intpu_x_and_default
-    public :: optval_logical_should_return_default_when_does_not_input_x
+    public :: optvalLogical_should_return_x_when_intpu_x_and_default
+    public :: optvalLogical_should_return_default_when_does_not_input_x
 
 contains
-    subroutine optval_logical_should_return_x_when_intpu_x_and_default(error)
+    subroutine optvalLogical_should_return_x_when_intpu_x_and_default(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -38,9 +38,9 @@ contains
             end if
             default = .not. x
         end subroutine setup
-    end subroutine optval_logical_should_return_x_when_intpu_x_and_default
+    end subroutine optvalLogical_should_return_x_when_intpu_x_and_default
 
-    subroutine optval_logical_should_return_default_when_does_not_input_x(error)
+    subroutine optvalLogical_should_return_default_when_does_not_input_x(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -69,5 +69,5 @@ contains
             end if
             default = .not. x
         end subroutine setup
-    end subroutine optval_logical_should_return_default_when_does_not_input_x
+    end subroutine optvalLogical_should_return_default_when_does_not_input_x
 end module test_common_optval_unitTests_l
