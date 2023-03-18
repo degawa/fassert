@@ -2,7 +2,7 @@ module test_sameShape_compareArrayShape_unitTests_areSameShape_real
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string
-    use :: fassert_sameShape_compareArrayShape
+    use :: fassert_common_compare_equal_shape
     implicit none
     private
     public :: d1_r32_should_return_true_when_input_same_shape

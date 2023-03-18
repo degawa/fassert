@@ -25,7 +25,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank1_int32(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         integer(int32), intent(in) :: actual(:)
@@ -50,7 +50,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank2_int32(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         integer(int32), intent(in) :: actual(:, :)
@@ -75,7 +75,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank3_int32(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         integer(int32), intent(in) :: actual(:, :, :)
@@ -100,7 +100,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank1_real32(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         real(real32), intent(in) :: actual(:)
@@ -125,7 +125,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank2_real32(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         real(real32), intent(in) :: actual(:, :)
@@ -150,7 +150,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank3_real32(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         real(real32), intent(in) :: actual(:, :, :)
@@ -175,7 +175,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank1_real64(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         real(real64), intent(in) :: actual(:)
@@ -200,7 +200,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank2_real64(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         real(real64), intent(in) :: actual(:, :)
@@ -225,7 +225,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank3_real64(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         real(real64), intent(in) :: actual(:, :, :)
@@ -250,7 +250,7 @@ contains
     !>
     !>`quiet`が真の場合，表示を抑制する．
     subroutine expect_same_shape_rank1_char(actual, expected, test_name, stat, quiet)
-        use :: fassert_sameShape_compareArrayShape
+        use :: fassert_common_compare_equal_shape
         implicit none
 
         character, intent(in) :: actual(:)
