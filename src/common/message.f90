@@ -1,7 +1,11 @@
 module fassette_common_message
+    use :: fassette_common_optval
     implicit none
     private
     public :: to_string
+    public :: is_verbose_output
+    public :: does_not_output_message
+    public :: does_output_message
 
     interface to_string
         procedure :: to_string_logical
@@ -52,4 +56,66 @@ contains
             string = "F"
         end if
     end function to_string_logical
+
+    !>予測値や実測値を出力する条件の場合に`.true.`，
+    !>そうでない場合`.false.`を返す．
+    !>
+    !>| test result | `verbose` | `quiet` | retval |
+    !>| :---------: | :-------: | :-----: | :----: |
+    !>|      f      |     -     |    -    |   T    |
+    !>|      p      |     -     |    -    |   F    |
+    !>|      f      |     T     |    -    |   T    |
+    !>|      f      |     F     |    -    |   T    |
+    !>|      p      |     T     |    -    |   T    |
+    !>|      p      |     F     |    -    |   F    |
+    !>|      f      |     -     |    T    |   T    |
+    !>|      f      |     -     |    F    |   T    |
+    !>|      f      |     T     |    T    |   T    |
+    !>|      f      |     T     |    F    |   T    |
+    !>|      f      |     F     |    T    |   F    |
+    !>|      f      |     F     |    F    |   T    |
+    !>|      p      |     -     |    T    |   F    |
+    !>|      p      |     -     |    F    |   F    |
+    !>|      p      |     T     |    T    |   T    |
+    !>|      p      |     T     |    F    |   T    |
+    !>|      p      |     F     |    T    |   F    |
+    !>|      p      |     F     |    F    |   F    |
+    !> p: test passed, f: test failed
+    !> T: `.true.`, F: `.false.`, -: not present
+    !>
+    logical function is_verbose_output(stat, verbose, quiet)
+        implicit none
+        logical, intent(in) :: stat
+        logical, intent(in), optional :: verbose
+        logical, intent(in), optional :: quiet
+
+        is_verbose_output = (.not. stat) .or. optval(verbose, default_verbose)
+
+        if (present(verbose) .and. present(quiet)) then
+            if (.not. verbose .and. quiet) then
+                is_verbose_output = .false.
+                return
+            end if
+        end if
+    end function is_verbose_output
+
+    !>引数で渡された条件を判別し，
+    !>テスト結果を出力する場合に`.true.`そうでない場合`.false.`を返す．
+    logical function does_output_message(quiet)
+        implicit none
+        logical, intent(in), optional :: quiet
+            !! 出力抑制フラグ
+
+        does_output_message = .not. optval(quiet, default_quiet)
+    end function does_output_message
+
+    !>引数で渡された条件を判別し，
+    !>テスト結果を出力しない場合に`.true.`そうでない場合`.false.`を返す．
+    logical function does_not_output_message(quiet)
+        implicit none
+        logical, intent(in), optional :: quiet
+            !! 出力抑制フラグ
+
+        does_not_output_message = .not. does_output_message(quiet)
+    end function does_not_output_message
 end module fassette_common_message

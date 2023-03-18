@@ -4,6 +4,7 @@ module fassette_common_status
     private
     public :: is_test_passed
     public :: is_test_failed
+    public :: is_test_of_expected_failure
 
     logical, public, parameter :: passed = .true.
         !! テスト成功を意味する定数
@@ -32,4 +33,13 @@ contains
 
         is_test_failed = .not. is_test_passed(test_status)
     end function is_test_failed
+
+    !>予期された失敗をテストするかの真偽値を返す．
+    logical function is_test_of_expected_failure(expected_failure)
+        use :: fassette_common_optval
+        implicit none
+        logical, intent(in), optional :: expected_failure
+
+        is_test_of_expected_failure = optval(expected_failure, default_test_of_expected_failure)
+    end function is_test_of_expected_failure
 end module fassette_common_status

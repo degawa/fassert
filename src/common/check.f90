@@ -83,25 +83,4 @@ contains
             write (msg_unit, '(A)') msg_buffer
         end block
     end subroutine check_expected_failure
-
-    !>引数で渡された条件を判別し，
-    !>テスト結果を出力する場合に`.true.`そうでない場合`.false.`を返す．
-    logical function does_output_message(quiet)
-        use :: fassette_common_message
-        implicit none
-        logical, intent(in), optional :: quiet
-            !! 出力抑制フラグ
-
-        does_output_message = .not. optval(quiet, default_quiet)
-    end function does_output_message
-
-    !>引数で渡された条件を判別し，
-    !>テスト結果を出力しない場合に`.true.`そうでない場合`.false.`を返す．
-    logical function does_not_output_message(quiet)
-        implicit none
-        logical, intent(in), optional :: quiet
-            !! 出力抑制フラグ
-
-        does_not_output_message = .not. does_output_message(quiet)
-    end function does_not_output_message
 end module fassette_common_check
