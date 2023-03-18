@@ -13,6 +13,9 @@ auto-examples = true
 [install]
 library = true
 
+[preprocess]
+[preprocess.cpp]
+
 [dev-dependencies]
 test-drive = { git="https://github.com/fortran-lang/test-drive" }
 testdrive_util = { git="https://github.com/degawa/testdrive_util" }
