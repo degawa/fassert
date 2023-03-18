@@ -1,8 +1,8 @@
-module test_sameShape_compareArrayShape_collection
+module test_common_compare_equal_shape_collection
     use :: testdrive, only:new_unittest, unittest_type
-    use :: test_sameShape_compareArrayShape_unitTests_areSameShape_int
-    use :: test_sameShape_compareArrayShape_unitTests_areSameShape_real
-    use :: test_sameShape_compareArrayShape_unitTests_areSameLength
+    use :: test_common_compare_equal_shape_unitTests_areSameShape_int
+    use :: test_common_compare_equal_shape_unitTests_areSameShape_real
+    use :: test_common_compare_equal_shape_unitTests_areSameLength
     implicit none
     private
     public :: collect_are_same_shape
@@ -71,4 +71,4 @@ contains
                                     str_should_return_true_when_input_diff_len_due_to_tailing_space) &
                      ]
     end subroutine collect_are_same_shape
-end module test_sameShape_compareArrayShape_collection
+end module test_common_compare_equal_shape_collection

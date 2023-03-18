@@ -1,4 +1,4 @@
-module test_sameShape_compareArrayShape_unitTests_areSameShape_int
+module test_common_compare_equal_shape_unitTests_areSameShape_int
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string
@@ -90,4 +90,4 @@ contains
                    "expected '"//to_string(.false.)// &
                    "', but got '"//to_string(are_same_shape(a, b))//"'")
     end subroutine d3_i32_should_return_false_when_input_different_shape
-end module test_sameShape_compareArrayShape_unitTests_areSameShape_int
+end module test_common_compare_equal_shape_unitTests_areSameShape_int

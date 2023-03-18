@@ -1,4 +1,4 @@
-module test_sameShape_compareArrayShape_unitTests_areSameLength
+module test_common_compare_equal_shape_unitTests_areSameLength
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string
@@ -57,4 +57,4 @@ contains
                    "expected '"//to_string(.true.)// &
                    "', but got '"//to_string(are_same_length(a, b))//"'")
     end subroutine str_should_return_true_when_input_diff_len_due_to_tailing_space
-end module test_sameShape_compareArrayShape_unitTests_areSameLength
+end module test_common_compare_equal_shape_unitTests_areSameLength
