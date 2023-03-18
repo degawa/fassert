@@ -9,7 +9,7 @@ program array_real
                       "result should be [0. 0. 0. 0. 0.] when input [1. 2. 3. 4. 5.]", stat)
     call expect_equal([real(real32) :: 1, 2, 3, 4, 5], [real(real32) :: 0, 0, 0, 0, 0], &
                       "result should be [0. 0. 0. 0. 0.] when input [1. 2. 3. 4. 5.]", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_equal([real(real32) :: 0, 0, 0, 0, 0], [real(real32) :: 0, 0, 0, 0, 0], &
     !                   "result should be [0. 0. 0. 0. 0.] when input [1. 2. 3. 4. 5.]", stat)
@@ -28,7 +28,7 @@ program array_real
     call expect_equal(reshape([real(real32) :: 1, 2, 3, 4, 5, 6], [2, 3]), &
                       reshape([real(real32) :: 0, 0, 0, 0, 0, 0], [2, 3]), &
                       "result should be [[0. 0.] [0. 0.] [0. 0.]] when input [[1. 2.] [3. 4.] [5. 6.]]", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_equal(reshape([real(real32) :: 0, 0, 0, 0, 0, 0], [2, 3]), &
     !                   reshape([real(real32) :: 0, 0, 0, 0, 0, 0], [2, 3]), &

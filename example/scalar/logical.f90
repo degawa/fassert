@@ -6,7 +6,7 @@ program logical
 
     call expect_equal(.true., .true., "result should be true", stat)
     call expect_equal(.false., .true., "result should be true", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_equal(.true., .true., "result should be true", stat)
     ! ! PASSED: result should be true
@@ -19,7 +19,7 @@ program logical
 
     call expect_equal(.false., .false., "result should be false", stat)
     call expect_equal(.true., .false., "result should be false", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_equal(.false., .false., "result should be false", stat)
     ! ! PASSED: result should be false
@@ -32,7 +32,7 @@ program logical
 
     call expect_true(.true., "result should be true", stat)
     call expect_true(.false., "result should be true", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_true(.true., "result should be true", stat)
     ! ! PASSED: result should be true
@@ -45,7 +45,7 @@ program logical
 
     call expect_true(.false., "result should not be true", stat, expected_failure=.true.)
     call expect_true(.true., "result should not be true", stat, expected_failure=.true.)
-    !*
+    !|
     !```Fortran
     ! call expect_true(.false., "result should not be true", stat, expected_failure=.true.)
     ! ! PASSED: result should not be true [expected failure]
@@ -58,7 +58,7 @@ program logical
 
     call expect_false(.false., "result should be false", stat)
     call expect_false(.true., "result should be false", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_false(.false., "result should be false", stat)
     ! ! PASSED: result should be false
@@ -71,7 +71,7 @@ program logical
 
     call expect_false(.true., "result should not be false", stat, expected_failure=.true.)
     call expect_false(.false., "result should not be false", stat, expected_failure=.true.)
-    !*
+    !|
     !```Fortran
     ! call expect_false(.true., "result should not be false", stat, expected_failure=.true.)
     ! ! PASSED: result should not be false [expected failure]

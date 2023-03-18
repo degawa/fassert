@@ -8,7 +8,7 @@ program array_char
                       "result should be ['a', 'b', 'c'] when input 'a', 'b', 'c'", stat)
     call expect_equal(["c", "b", "a"], ["a", "b", "c"], &
                       "result should be ['a', 'b', 'c'] when input 'a', 'b', 'c'", stat)
-    !*
+    !|
     !```Fortran
     ! call expect_equal(["a", "b", "c"], ["a", "b", "c"], &
     !                   "result should be ['a', 'b', 'c'] when input 'a', 'b', 'c'", stat)
