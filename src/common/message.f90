@@ -43,6 +43,11 @@ module fassert_common_message
         !! assertion message出力抑制フラグの既定値
     logical, public, parameter :: default_quiet_shape_check = .true.
         !! 形状チェック時のassertion message出力抑制フラグの既定値
+
+    character(*), public, parameter :: string_true = "T"
+        !! 論理値`.ture.`を文字列に変換した値
+    character(*), public, parameter :: string_false = "F"
+        !! 論理値`.false.`を文字列に変換した値
 contains
     !>`val`が`.true.`のとき文字列"T"，`.false.`のとき文字列"F"を返す．
     pure elemental character(1) function to_string_logical(val) result(string)
@@ -51,9 +56,9 @@ contains
             !! 文字列に変換する論理値
 
         if (val) then
-            string = "T"
+            string = string_true
         else
-            string = "F"
+            string = string_false
         end if
     end function to_string_logical
 
