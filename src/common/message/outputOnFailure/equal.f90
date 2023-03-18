@@ -1,4 +1,4 @@
-module fassert_equal_outputOnFailure
+module fassert_common_message_outputOnFailure_equal
     use, intrinsic :: iso_fortran_env
     use :: fassert_common_unit, msg_unit => assertion_message_unit
     use :: fassert_common_message, only:default_verbose_format_indent
@@ -310,4 +310,4 @@ contains
         write (msg_unit, fmt_char) "Expected: ", expected
         write (msg_unit, fmt_char) "Actual  : ", actual
     end subroutine output_char_rank1
-end module fassert_equal_outputOnFailure
+end module fassert_common_message_outputOnFailure_equal

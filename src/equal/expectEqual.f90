@@ -4,7 +4,7 @@ module expectEqual
     use :: fassert_common_optval
     use :: fassert_common_message
     use :: fassert_common_status
-    use :: fassert_equal_outputOnFailure
+    use :: fassert_common_message_outputOnFailure_equal
     implicit none
     private
     public :: expect_equal
