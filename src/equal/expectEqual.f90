@@ -35,11 +35,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int8(actual, expected, test_name, stat, &
                                  verbose, expected_failure, quiet)
@@ -55,11 +55,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値を標準出力に表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         if (is_test_of_expected_failure(expected_failure)) then
             call check_expected_failure(actual == expected, test_name, stat, quiet)
@@ -74,11 +74,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int16(actual, expected, test_name, stat, &
                                   verbose, expected_failure, quiet)
@@ -94,11 +94,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値を標準出力に表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         if (is_test_of_expected_failure(expected_failure)) then
             call check_expected_failure(actual == expected, test_name, stat, quiet)
@@ -113,11 +113,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int32(actual, expected, test_name, stat, &
                                   verbose, expected_failure, quiet)
@@ -133,11 +133,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値を標準出力に表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         if (is_test_of_expected_failure(expected_failure)) then
             call check_expected_failure(actual == expected, test_name, stat, quiet)
@@ -152,11 +152,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int64(actual, expected, test_name, stat, &
                                   verbose, expected_failure, quiet)
@@ -172,11 +172,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値を標準出力に表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         if (is_test_of_expected_failure(expected_failure)) then
             call check_expected_failure(actual == expected, test_name, stat, quiet)
@@ -191,9 +191,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int32_rank1(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
@@ -212,11 +214,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -248,9 +250,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int32_rank2(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
@@ -269,11 +273,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -305,9 +309,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_int32_rank3(actual, expected, test_name, stat, &
                                         verbose, expected_failure, quiet)
@@ -326,11 +332,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -362,11 +368,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値，それらの差を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real32(actual, expected, test_name, stat, &
                                          tolerance, &
@@ -388,11 +394,11 @@ contains
         real(real32), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値，それらの差を標準出力に表示するフラグ
+            !! 実測値と予測値，それらの差を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: val_stat
 
@@ -412,11 +418,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値，それらの差を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real64(actual, expected, test_name, stat, &
                                          tolerance, &
@@ -438,11 +444,11 @@ contains
         real(real64), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値，それらの差を標準出力に表示するフラグ
+            !! 実測値と予測値，それらの差を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: val_stat
 
@@ -462,11 +468,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real32_rank1(actual, expected, test_name, stat, &
                                                tolerance, &
@@ -489,11 +495,11 @@ contains
         real(real32), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -524,11 +530,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real32_rank2(actual, expected, test_name, stat, &
                                                tolerance, &
@@ -551,11 +557,11 @@ contains
         real(real32), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -586,11 +592,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real32_rank3(actual, expected, test_name, stat, &
                                                tolerance, &
@@ -613,11 +619,11 @@ contains
         real(real32), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -648,11 +654,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real64_rank1(actual, expected, test_name, stat, &
                                                tolerance, &
@@ -675,11 +681,11 @@ contains
         real(real64), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -710,11 +716,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real64_rank2(actual, expected, test_name, stat, &
                                                tolerance, &
@@ -737,11 +743,11 @@ contains
         real(real64), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -772,11 +778,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
-    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を標準出力に出力する．
+    !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
     !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_approxequal_real64_rank3(actual, expected, test_name, stat, &
                                                tolerance, &
@@ -799,11 +805,11 @@ contains
         real(real64), intent(in), optional :: tolerance
             !! 実測値と予測値が等しいと見なす許容値
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値の差の最大・最小値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
@@ -834,9 +840,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equiv_logical(actual, expected, test_name, stat, &
                                     verbose, expected_failure, quiet)
@@ -854,11 +862,11 @@ contains
             !! 実測値と予測値が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値の差の最大・最小値を標準出力に表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         if (is_test_of_expected_failure(expected_failure)) then
             call check_expected_failure(actual .eqv. expected, test_name, stat, quiet)
@@ -873,9 +881,11 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_str(actual, expected, test_name, stat, &
                                 verbose, expected_failure, quiet)
@@ -893,11 +903,11 @@ contains
             !! 実測値と予測値が同じ文字列の場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値を表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: is_same_length, string_stat
 
@@ -925,14 +935,16 @@ contains
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
     !>`expected_failure`が真であれば，比較が失敗することを検査する．
     !>
-    !>`quiet`が真の場合，成功時の表示を抑制する．
+    !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     subroutine expect_equal_char_rank1(actual, expected, test_name, stat, &
                                        verbose, expected_failure, quiet)
         use :: expectSameShape
-        use :: fassert_equal_compareArrayValues
+        use :: fassert_common_compare_equal_array
         implicit none
 
         character, intent(in) :: actual(:)
@@ -946,11 +958,11 @@ contains
             !! 実測値と予測値の全要素が等しい場合`.true.`，
             !! そうでない場合`.false.`
         logical, intent(in), optional :: verbose
-            !! 実測値と予測値を表示するフラグ
+            !! 実測値と予測値を出力するフラグ
         logical, intent(in), optional :: expected_failure
             !! 予期された失敗を検査するかのフラグ
         logical, intent(in), optional :: quiet
-            !! 成功時に表示を抑制するかのフラグ
+            !! 成功時に出力を抑制するかのフラグ
 
         logical :: array_shape_stat, array_values_stat
 
