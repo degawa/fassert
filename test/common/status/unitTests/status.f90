@@ -1,8 +1,9 @@
 module test_common_status_unitTests
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
-    use :: testdrive_util, only:occurred, to_string
+    use :: testdrive_util, only:occurred
     use :: fassert_common_status
+    use :: fassert_common_message
     implicit none
     private
     public :: isTestPassed_should_return_true_when_input_passed
@@ -20,7 +21,7 @@ contains
         !! error handler
 
         call check(error, is_test_passed(passed) .eqv. .true., &
-                   "expected "//to_string(.true.)//", but got "//to_string(is_test_passed(passed)))
+                   "expected "//string_true//", but got "//to_string(is_test_passed(passed)))
         if (occurred(error)) return
     end subroutine isTestPassed_should_return_true_when_input_passed
 
@@ -30,7 +31,7 @@ contains
         !! error handler
 
         call check(error, is_test_passed(failed) .eqv. .false., &
-                   "expected "//to_string(.false.)//", but got "//to_string(is_test_passed(failed)))
+                   "expected "//string_false//", but got "//to_string(is_test_passed(failed)))
         if (occurred(error)) return
     end subroutine isTestPassed_should_return_false_when_input_failed
 
@@ -40,7 +41,7 @@ contains
         !! error handler
 
         call check(error, is_test_failed(failed) .eqv. .true., &
-                   "expected "//to_string(.true.)//", but got "//to_string(is_test_passed(failed)))
+                   "expected "//string_true//", but got "//to_string(is_test_passed(failed)))
         if (occurred(error)) return
     end subroutine isTestFailed_should_return_true_when_input_failed
 
@@ -50,7 +51,7 @@ contains
         !! error handler
 
         call check(error, is_test_failed(passed) .eqv. .false., &
-                   "expected "//to_string(.false.)//", but got "//to_string(is_test_failed(passed)))
+                   "expected "//string_false//", but got "//to_string(is_test_failed(passed)))
         if (occurred(error)) return
     end subroutine isTestFailed_should_return_false_when_input_passed
 
@@ -60,7 +61,7 @@ contains
             !! error handler
 
         call check(error, is_test_of_expected_failure(.true.) .eqv. .true., &
-                   "expected "//to_string(.true.)//", but got "//to_string(is_test_of_expected_failure(.true.)))
+                   "expected "//string_true//", but got "//to_string(is_test_of_expected_failure(.true.)))
         if (occurred(error)) return
     end subroutine isTestExpecFail_should_return_true_when_input_true
 
@@ -70,7 +71,7 @@ contains
             !! error handler
 
         call check(error, is_test_of_expected_failure(.false.) .eqv. .false., &
-                   "expected "//to_string(.false.)//", but got "//to_string(is_test_of_expected_failure(.false.)))
+                   "expected "//string_false//", but got "//to_string(is_test_of_expected_failure(.false.)))
         if (occurred(error)) return
     end subroutine isTestExpecFail_should_return_false_when_input_false
 
@@ -80,7 +81,7 @@ contains
             !! error handler
 
         call check(error, is_test_of_expected_failure() .eqv. .false., &
-                   "expected "//to_string(.false.)//", but got "//to_string(is_test_of_expected_failure()))
+                   "expected "//string_false//", but got "//to_string(is_test_of_expected_failure()))
         if (occurred(error)) return
     end subroutine isTestExpecFail_should_return_false_when_no_input
 end module test_common_status_unitTests

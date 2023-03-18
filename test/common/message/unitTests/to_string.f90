@@ -13,8 +13,8 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        call check(error, to_string(.true.) == "T", &
-                   "expected "//"T" &
+        call check(error, to_string(.true.) == string_true, &
+                   "expected "//string_true &
                    //", but got "//to_string(.true.))
         if (occurred(error)) return
     end subroutine toString_should_return_T_when_input_true
@@ -24,8 +24,8 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        call check(error, to_string(.false.) == "F", &
-                   "expected "//"F" &
+        call check(error, to_string(.false.) == string_false, &
+                   "expected "//string_false &
                    //", but got "//to_string(.false.))
         if (occurred(error)) return
     end subroutine toString_should_return_F_when_input_false

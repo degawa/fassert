@@ -1,7 +1,7 @@
 module test_common_optval_unitTests_l
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
-    use :: testdrive_util, only:occurred, to_string
+    use :: testdrive_util, only:occurred, to_string ! use to_string declared in testdrive_util.
     use :: fassert_common_optval
     implicit none
     private
