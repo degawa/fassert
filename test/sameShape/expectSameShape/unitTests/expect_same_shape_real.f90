@@ -2,6 +2,7 @@ module test_sameShape_expectSameShape_unitTests_expect_real
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, get_actual_value
+    use :: strings_enclose
     use :: fassert_common_unit
     use :: fassert_common_message
     use :: fassert_common_status
@@ -67,7 +68,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -81,7 +82,8 @@ contains
 
             allocate (a(1))
             allocate (b, mold=a)
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_passed, "'")//" when test passed"
             msg = prefix_passed//test_name
 
             unit_number = get_newunit_number()
@@ -123,7 +125,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -137,7 +139,8 @@ contains
 
             allocate (a(1))
             allocate (b(2))
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_failed, "'")//" when test failed"
             msg = prefix_failed//test_name
 
             unit_number = get_newunit_number()
@@ -179,7 +182,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -233,7 +236,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -363,7 +366,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -377,7 +380,8 @@ contains
 
             allocate (a(1, 1))
             allocate (b, mold=a)
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_passed, "'")//" when test passed"
             msg = prefix_passed//test_name
 
             unit_number = get_newunit_number()
@@ -419,7 +423,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -433,7 +437,8 @@ contains
 
             allocate (a(1, 1))
             allocate (b(2, 2))
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_failed, "'")//" when test failed"
             msg = prefix_failed//test_name
 
             unit_number = get_newunit_number()
@@ -475,7 +480,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -529,7 +534,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -659,7 +664,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -673,7 +678,8 @@ contains
 
             allocate (a(1, 1, 1))
             allocate (b, mold=a)
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_passed, "'")//" when test passed"
             msg = prefix_passed//test_name
 
             unit_number = get_newunit_number()
@@ -715,7 +721,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -729,7 +735,8 @@ contains
 
             allocate (a(1, 1, 1))
             allocate (b(2, 2, 2))
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_failed, "'")//" when test failed"
             msg = prefix_failed//test_name
 
             unit_number = get_newunit_number()
@@ -771,7 +778,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -825,7 +832,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -955,7 +962,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -969,7 +976,8 @@ contains
 
             allocate (a(1))
             allocate (b, mold=a)
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_passed, "'")//" when test passed"
             msg = prefix_passed//test_name
 
             unit_number = get_newunit_number()
@@ -1011,7 +1019,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1025,7 +1033,8 @@ contains
 
             allocate (a(1))
             allocate (b(2))
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_failed, "'")//" when test failed"
             msg = prefix_failed//test_name
 
             unit_number = get_newunit_number()
@@ -1067,7 +1076,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1121,7 +1130,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1251,7 +1260,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1265,7 +1274,8 @@ contains
 
             allocate (a(1, 1))
             allocate (b, mold=a)
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_passed, "'")//" when test passed"
             msg = prefix_passed//test_name
 
             unit_number = get_newunit_number()
@@ -1307,7 +1317,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1321,7 +1331,8 @@ contains
 
             allocate (a(1, 1))
             allocate (b(2, 2))
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_failed, "'")//" when test failed"
             msg = prefix_failed//test_name
 
             unit_number = get_newunit_number()
@@ -1363,7 +1374,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1417,7 +1428,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1547,7 +1558,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1561,7 +1572,8 @@ contains
 
             allocate (a(1, 1, 1))
             allocate (b, mold=a)
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_passed, "'")//" when test passed"
             msg = prefix_passed//test_name
 
             unit_number = get_newunit_number()
@@ -1603,7 +1615,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == msg_expected, &
-                   "expected '"//msg_expected//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose(msg_expected, '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1617,7 +1629,8 @@ contains
 
             allocate (a(1, 1, 1))
             allocate (b(2, 2, 2))
-            test_name = "expect_same_shape should write a message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "expect_same_shape should write a message with prefix "// &
+                        enclose(prefix_failed, "'")//" when test failed"
             msg = prefix_failed//test_name
 
             unit_number = get_newunit_number()
@@ -1659,7 +1672,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains
@@ -1713,7 +1726,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(msg_actual) == "", &
-                   "expected '"//""//"', but got '"//trim(msg_actual)//"'")
+                   "expected "//enclose("", '"')//", but got "//enclose(trim(msg_actual), '"'))
 
         call teardown(actual, expected, scratch_unit_number)
     contains

@@ -2,6 +2,7 @@ module test_common_check_unitTests_true
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string, get_actual_value
+    use :: strings_enclose
     use :: fassert_common_unit
     use :: fassert_common_message, only:prefix_passed, prefix_failed
     use :: fassert_common_status
@@ -34,7 +35,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(buffer) == prefix_passed//test_name, &
-                   "expected '"//prefix_passed//test_name//"', but got '"//trim(buffer)//"'")
+                   "expected "//enclose(prefix_passed//test_name, '"')//", but got "//enclose(trim(buffer), '"'))
 
         call teardown(scratch_unit_number)
     contains
@@ -47,7 +48,7 @@ contains
             call set_assertion_message_unit(unit_number)
             open (unit=unit_number, status="scratch")
 
-            test_name = "check_true should write message with prefix '"//prefix_passed//"' when test passed"
+            test_name = "check_true should write message with prefix "//enclose(prefix_passed, "'")//" when test passed"
         end subroutine setup
         subroutine teardown(unit_number)
             integer(int32), intent(in) :: unit_number
@@ -75,7 +76,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(buffer) == prefix_failed//test_name, &
-                   "expected '"//prefix_failed//test_name//"', but got '"//trim(buffer)//"'")
+                   "expected "//enclose(prefix_failed//test_name, '"')//", but got "//enclose(trim(buffer), '"'))
 
         call teardown(scratch_unit_number)
     contains
@@ -88,7 +89,7 @@ contains
             call set_assertion_message_unit(unit_number)
             open (unit=unit_number, status="scratch")
 
-            test_name = "check_true should write message with prefix '"//prefix_failed//"' when test failed"
+            test_name = "check_true should write message with prefix "//enclose(prefix_failed, "'")//" when test failed"
         end subroutine setup
         subroutine teardown(unit_number)
             integer(int32), intent(in) :: unit_number
@@ -176,7 +177,7 @@ contains
         if (occurred(error)) return
 
         call check(error, trim(buffer) == "", &
-                   'expected "", but got "'//trim(buffer)//'"')
+                   'expected "", but got '//enclose(trim(buffer), '"'))
 
         call teardown(scratch_unit_number)
     contains

@@ -17,3 +17,4 @@ library = true
 test-drive = { git="https://github.com/fortran-lang/test-drive" }
 testdrive_util = { git="https://github.com/degawa/testdrive_util" }
 newunit = { git="https://github.com/degawa/newunit" }
+enclose = {git = "https://github.com/degawa/enclose"}
