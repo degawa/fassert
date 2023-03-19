@@ -54,7 +54,11 @@ contains
 
         descriptor = get_descriptor()
         compiler = get_compiler_name()
-        command = "fpm run --compiler "//compiler//" --example "//exe//" > "//descriptor
+        command = 'fpm run'// &
+                  ' --compiler '//compiler// &
+                  ' --example '//exe// &
+                  ' > '//descriptor
+        ! the compiler flag for enabling preprocess is not necessary
     end function construct_command
 
     function get_descriptor() result(descriptor)
