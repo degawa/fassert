@@ -14,6 +14,8 @@ contains
         test_suite = [ &
                      new_unittest("halt_on_failure(), it should not stop execution when input passed status.", &
                                   halt_should_not_stop_when_input_passed_status) &
+                     , new_unittest("halt_on_failure(), it should stop execution when input failed status.", &
+                                    halt_should_error_stop_when_input_failed_status) &
                      ]
     end subroutine collect_halt
 end module test_common_halt_collection
