@@ -61,10 +61,9 @@ contains
         implicit none
         character(:), allocatable :: descriptor
 
-#if defined _WIN32
-        descriptor = "NUL 2>&1"
-#else
-        descriptor = "/dev/null 2>&1"
+        descriptor = "NUL 2>&1" ! windows OS
+#if defined(__unix__) || (__linux__)
+        descriptor = "/dev/null 2>&1" ! unix/linux OS
 #endif
     end function get_descriptor
 
