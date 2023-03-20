@@ -28,6 +28,8 @@ module expectEqual
         procedure :: expect_equiv_logical
         procedure :: expect_equal_str
         procedure :: expect_equal_char_rank1
+
+        procedure :: expect_equal_int32_msg
     end interface
 
     interface
