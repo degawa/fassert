@@ -12,8 +12,8 @@ module test_common_check_unitTests_expectedFailure
     private
     public :: checkExpecFail_should_write_msg_with_prefix_when_test_failed
     public :: checkExpecFail_should_write_msg_with_prefix_when_test_passed
-    public :: stat_should_be_passed_status_when_test_failed
-    public :: stat_should_be_failed_status_when_test_passed
+    public :: checkExpecFail_stat_should_be_passed_status_when_test_failed
+    public :: checkExpecFail_stat_should_be_failed_status_when_test_passed
     public :: checkExpecFail_should_not_write_msg_when_failed_quiet_true
 
 contains
@@ -107,7 +107,7 @@ contains
         end subroutine teardown
     end subroutine checkExpecFail_should_write_msg_with_prefix_when_test_passed
 
-    subroutine stat_should_be_passed_status_when_test_failed(error)
+    subroutine checkExpecFail_stat_should_be_passed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -136,9 +136,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine stat_should_be_passed_status_when_test_failed
+    end subroutine checkExpecFail_stat_should_be_passed_status_when_test_failed
 
-    subroutine stat_should_be_failed_status_when_test_passed(error)
+    subroutine checkExpecFail_stat_should_be_failed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -166,7 +166,7 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine stat_should_be_failed_status_when_test_passed
+    end subroutine checkExpecFail_stat_should_be_failed_status_when_test_passed
 
     subroutine checkExpecFail_should_not_write_msg_when_failed_quiet_true(error)
         implicit none
