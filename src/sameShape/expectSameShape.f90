@@ -6,266 +6,70 @@ module expectSameShape
     public :: expect_same_shape
 
     interface expect_same_shape
-        procedure :: expect_same_shape_rank1_int32
-        procedure :: expect_same_shape_rank2_int32
-        procedure :: expect_same_shape_rank3_int32
-        procedure :: expect_same_shape_rank1_real32
-        procedure :: expect_same_shape_rank2_real32
-        procedure :: expect_same_shape_rank3_real32
-        procedure :: expect_same_shape_rank1_real64
-        procedure :: expect_same_shape_rank2_real64
-        procedure :: expect_same_shape_rank3_real64
-        procedure :: expect_same_shape_rank1_char
+        procedure :: expect_same_shape_rank1
+        procedure :: expect_same_shape_rank2
+        procedure :: expect_same_shape_rank3
     end interface
 
-contains
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank1_int32(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
+    interface
+        !>二つの配列が同じ形状かを検査する．
+        !>
+        !>検査結果を`stat`に書き込む．
+        !>
+        !>`quiet`が真の場合，表示を抑制する．
+        module subroutine expect_same_shape_rank1(actual, expected, test_name, stat, quiet)
+            class(*), intent(in) :: actual(:)
+                !! 実測値
+            class(*), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値の配列形状が同じの場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: quiet
+                !! 表示を抑制するかのフラグ
+        end subroutine expect_same_shape_rank1
 
-        integer(int32), intent(in) :: actual(:)
-            !! 実測値
-        integer(int32), intent(in) :: expected(:)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
+        !>二つの配列が同じ形状かを検査する．
+        !>
+        !>検査結果を`stat`に書き込む．
+        !>
+        !>`quiet`が真の場合，表示を抑制する．
+        module subroutine expect_same_shape_rank2(actual, expected, test_name, stat, quiet)
+            class(*), intent(in) :: actual(:, :)
+                !! 実測値
+            class(*), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値の配列形状が同じの場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: quiet
+                !! 表示を抑制するかのフラグ
+        end subroutine expect_same_shape_rank2
 
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank1_int32
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank2_int32(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        integer(int32), intent(in) :: actual(:, :)
-            !! 実測値
-        integer(int32), intent(in) :: expected(:, :)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank2_int32
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank3_int32(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        integer(int32), intent(in) :: actual(:, :, :)
-            !! 実測値
-        integer(int32), intent(in) :: expected(:, :, :)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank3_int32
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank1_real32(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        real(real32), intent(in) :: actual(:)
-            !! 実測値
-        real(real32), intent(in) :: expected(:)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank1_real32
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank2_real32(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        real(real32), intent(in) :: actual(:, :)
-            !! 実測値
-        real(real32), intent(in) :: expected(:, :)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank2_real32
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank3_real32(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        real(real32), intent(in) :: actual(:, :, :)
-            !! 実測値
-        real(real32), intent(in) :: expected(:, :, :)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank3_real32
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank1_real64(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        real(real64), intent(in) :: actual(:)
-            !! 実測値
-        real(real64), intent(in) :: expected(:)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank1_real64
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank2_real64(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        real(real64), intent(in) :: actual(:, :)
-            !! 実測値
-        real(real64), intent(in) :: expected(:, :)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank2_real64
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank3_real64(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        real(real64), intent(in) :: actual(:, :, :)
-            !! 実測値
-        real(real64), intent(in) :: expected(:, :, :)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank3_real64
-
-    !>二つの配列が同じ形状かを検査する．
-    !>
-    !>検査結果を`stat`に書き込む．
-    !>
-    !>`quiet`が真の場合，表示を抑制する．
-    subroutine expect_same_shape_rank1_char(actual, expected, test_name, stat, quiet)
-        use :: fassert_common_compare_equal_shape
-        implicit none
-
-        character, intent(in) :: actual(:)
-            !! 実測値
-        character, intent(in) :: expected(:)
-            !! 予測値
-        character(*), intent(in) :: test_name
-            !! テスト名
-        logical, intent(out) :: stat
-            !! 比較結果の真偽値<br>
-            !! 実測値と予測値の配列形状が同じの場合`.true.`，
-            !! そうでない場合`.false.`
-        logical, intent(in), optional :: quiet
-            !! 表示を抑制するかのフラグ
-
-        call check_true(are_same_shape(actual, expected), test_name, stat, quiet)
-    end subroutine expect_same_shape_rank1_char
+        !>二つの配列が同じ形状かを検査する．
+        !>
+        !>検査結果を`stat`に書き込む．
+        !>
+        !>`quiet`が真の場合，表示を抑制する．
+        module subroutine expect_same_shape_rank3(actual, expected, test_name, stat, quiet)
+            class(*), intent(in) :: actual(:, :, :)
+                !! 実測値
+            class(*), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値の配列形状が同じの場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: quiet
+                !! 表示を抑制するかのフラグ
+        end subroutine expect_same_shape_rank3
+    end interface
 end module expectSameShape
