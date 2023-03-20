@@ -8,10 +8,12 @@ module fassert_common_message_outputOnFailure_format
 
     character(*), private, parameter :: fmt_index_separator = ',",",'
         !! 配列添字の各要素の区切り
-    character(*), public, parameter :: fmt_index_d1 = 'i0'
+    character(*), public, parameter :: fmt_index_rank1 = 'i0'
         !! 1次元配列に対する配列添字の書式指定文字列
-    character(*), public, parameter :: fmt_index_d2 = fmt_index_d1//repeat(fmt_index_separator//fmt_index_d1, 2 - 1)
+    character(*), public, parameter :: fmt_index_rank2 = fmt_index_rank1// &
+                                       repeat(fmt_index_separator//fmt_index_rank1, 2 - 1)
         !! 2次元配列に対する配列添字の書式指定文字列
-    character(*), public, parameter :: fmt_index_d3 = fmt_index_d1//repeat(fmt_index_separator//fmt_index_d1, 3 - 1)
+    character(*), public, parameter :: fmt_index_rank3 = fmt_index_rank1// &
+                                       repeat(fmt_index_separator//fmt_index_rank1, 3 - 1)
         !! 3次元配列に対する配列添字の書式指定文字列
 end module fassert_common_message_outputOnFailure_format

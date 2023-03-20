@@ -150,7 +150,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_d1//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank1//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -173,7 +173,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_d2//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank2//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -196,7 +196,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_d3//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank3//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -219,7 +219,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_d1//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank1//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -242,7 +242,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_d2//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank2//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -265,7 +265,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_d3//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank3//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -288,7 +288,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_d1//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank1//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -311,7 +311,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_d2//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank2//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
@@ -334,7 +334,7 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_d3//',")")'
+        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank3//',")")'
 
         write (buffer, fmt) "Maximum Absolute Difference: ", &
                                 maxval(abs(expected - actual)), &
