@@ -17,7 +17,8 @@ module expectSameShape
         !>検査結果を`stat`に書き込む．
         !>
         !>`quiet`が真の場合，表示を抑制する．
-        module subroutine expect_same_shape_rank1(actual, expected, test_name, stat, quiet)
+        module subroutine expect_same_shape_rank1(actual, expected, test_name, stat, &
+                                                  verbose, quiet)
             class(*), intent(in) :: actual(:)
                 !! 実測値
             class(*), intent(in) :: expected(:)
@@ -28,6 +29,8 @@ module expectSameShape
                 !! 比較結果の真偽値<br>
                 !! 実測値と予測値の配列形状が同じの場合`.true.`，
                 !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の配列形状を出力するフラグ
             logical, intent(in), optional :: quiet
                 !! 表示を抑制するかのフラグ
         end subroutine expect_same_shape_rank1
@@ -37,7 +40,8 @@ module expectSameShape
         !>検査結果を`stat`に書き込む．
         !>
         !>`quiet`が真の場合，表示を抑制する．
-        module subroutine expect_same_shape_rank2(actual, expected, test_name, stat, quiet)
+        module subroutine expect_same_shape_rank2(actual, expected, test_name, stat, &
+                                                  verbose, quiet)
             class(*), intent(in) :: actual(:, :)
                 !! 実測値
             class(*), intent(in) :: expected(:, :)
@@ -48,6 +52,8 @@ module expectSameShape
                 !! 比較結果の真偽値<br>
                 !! 実測値と予測値の配列形状が同じの場合`.true.`，
                 !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の配列形状を出力するフラグ
             logical, intent(in), optional :: quiet
                 !! 表示を抑制するかのフラグ
         end subroutine expect_same_shape_rank2
@@ -57,7 +63,8 @@ module expectSameShape
         !>検査結果を`stat`に書き込む．
         !>
         !>`quiet`が真の場合，表示を抑制する．
-        module subroutine expect_same_shape_rank3(actual, expected, test_name, stat, quiet)
+        module subroutine expect_same_shape_rank3(actual, expected, test_name, stat, &
+                                                  verbose, quiet)
             class(*), intent(in) :: actual(:, :, :)
                 !! 実測値
             class(*), intent(in) :: expected(:, :, :)
@@ -68,6 +75,8 @@ module expectSameShape
                 !! 比較結果の真偽値<br>
                 !! 実測値と予測値の配列形状が同じの場合`.true.`，
                 !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の配列形状を出力するフラグ
             logical, intent(in), optional :: quiet
                 !! 表示を抑制するかのフラグ
         end subroutine expect_same_shape_rank3
