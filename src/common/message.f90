@@ -48,6 +48,9 @@ module fassert_common_message
         !! 論理値`.ture.`を文字列に変換した値
     character(*), public, parameter :: string_false = "F"
         !! 論理値`.false.`を文字列に変換した値
+
+    character(*), public, parameter :: NL = new_line("a")
+        !! new line character
 contains
     !>`val`が`.true.`のとき文字列"T"，`.false.`のとき文字列"F"を返す．
     pure elemental character(1) function to_string_logical(val) result(string)
