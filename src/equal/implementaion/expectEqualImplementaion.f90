@@ -11,6 +11,7 @@ contains
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
     module procedure expect_equal_int8
+    implicit none
     if (is_test_of_expected_failure(expected_failure)) then
         call check_expected_failure(actual == expected, test_name, stat, quiet)
     else
