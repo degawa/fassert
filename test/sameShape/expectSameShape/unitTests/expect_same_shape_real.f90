@@ -1,7 +1,7 @@
 module test_sameShape_expectSameShape_unitTests_expect_real
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
-    use :: testdrive_util, only:occurred, get_actual_value
+    use :: testdrive_util, only:occurred, get_all_actual_value
     use :: strings_enclose
     use :: fassert_common_unit
     use :: fassert_common_message
@@ -9,45 +9,47 @@ module test_sameShape_expectSameShape_unitTests_expect_real
     use :: expectSameShape
     implicit none
     private
-    public :: d1_r32_should_write_message_with_prefix_when_test_passed
-    public :: d1_r32_should_write_message_with_prefix_when_test_failed
-    public :: d1_r32_should_not_write_message_when_passed_input_quiet_true
-    public :: d1_r32_should_not_write_message_when_failed_input_quiet_true
-    public :: d1_r32_stat_should_be_passed_status_when_test_passed
-    public :: d1_r32_stat_should_be_failed_status_when_test_failed
-    public :: d2_r32_should_write_message_with_prefix_when_test_passed
-    public :: d2_r32_should_write_message_with_prefix_when_test_failed
-    public :: d2_r32_should_not_write_message_when_passed_input_quiet_true
-    public :: d2_r32_should_not_write_message_when_failed_input_quiet_true
-    public :: d2_r32_stat_should_be_passed_status_when_test_passed
-    public :: d2_r32_stat_should_be_failed_status_when_test_failed
-    public :: d3_r32_should_write_message_with_prefix_when_test_passed
-    public :: d3_r32_should_write_message_with_prefix_when_test_failed
-    public :: d3_r32_should_not_write_message_when_passed_input_quiet_true
-    public :: d3_r32_should_not_write_message_when_failed_input_quiet_true
-    public :: d3_r32_stat_should_be_passed_status_when_test_passed
-    public :: d3_r32_stat_should_be_failed_status_when_test_failed
-    public :: d1_r64_should_write_message_with_prefix_when_test_passed
-    public :: d1_r64_should_write_message_with_prefix_when_test_failed
-    public :: d1_r64_should_not_write_message_when_passed_input_quiet_true
-    public :: d1_r64_should_not_write_message_when_failed_input_quiet_true
-    public :: d1_r64_stat_should_be_passed_status_when_test_passed
-    public :: d1_r64_stat_should_be_failed_status_when_test_failed
-    public :: d2_r64_should_write_message_with_prefix_when_test_passed
-    public :: d2_r64_should_write_message_with_prefix_when_test_failed
-    public :: d2_r64_should_not_write_message_when_passed_input_quiet_true
-    public :: d2_r64_should_not_write_message_when_failed_input_quiet_true
-    public :: d2_r64_stat_should_be_passed_status_when_test_passed
-    public :: d2_r64_stat_should_be_failed_status_when_test_failed
-    public :: d3_r64_should_write_message_with_prefix_when_test_passed
-    public :: d3_r64_should_write_message_with_prefix_when_test_failed
-    public :: d3_r64_should_not_write_message_when_passed_input_quiet_true
-    public :: d3_r64_should_not_write_message_when_failed_input_quiet_true
-    public :: d3_r64_stat_should_be_passed_status_when_test_passed
-    public :: d3_r64_stat_should_be_failed_status_when_test_failed
+    ! D: dimension, R: real
+    ! T: true
+    public :: D1R32_should_write_message_with_prefix_when_test_passed
+    public :: D1R32_should_write_message_with_prefix_when_test_failed
+    public :: D1R32_should_not_write_message_when_passed_input_quiet_T
+    public :: D1R32_should_not_write_message_when_failed_input_quiet_T
+    public :: D1R32_stat_should_be_passed_status_when_test_passed
+    public :: D1R32_stat_should_be_failed_status_when_test_failed
+    public :: D2R32_should_write_message_with_prefix_when_test_passed
+    public :: D2R32_should_write_message_with_prefix_when_test_failed
+    public :: D2R32_should_not_write_message_when_passed_input_quiet_T
+    public :: D2R32_should_not_write_message_when_failed_input_quiet_T
+    public :: D2R32_stat_should_be_passed_status_when_test_passed
+    public :: D2R32_stat_should_be_failed_status_when_test_failed
+    public :: D3R32_should_write_message_with_prefix_when_test_passed
+    public :: D3R32_should_write_message_with_prefix_when_test_failed
+    public :: D3R32_should_not_write_message_when_passed_input_quiet_T
+    public :: D3R32_should_not_write_message_when_failed_input_quiet_T
+    public :: D3R32_stat_should_be_passed_status_when_test_passed
+    public :: D3R32_stat_should_be_failed_status_when_test_failed
+    public :: D1R64_should_write_message_with_prefix_when_test_passed
+    public :: D1R64_should_write_message_with_prefix_when_test_failed
+    public :: D1R64_should_not_write_message_when_passed_input_quiet_T
+    public :: D1R64_should_not_write_message_when_failed_input_quiet_T
+    public :: D1R64_stat_should_be_passed_status_when_test_passed
+    public :: D1R64_stat_should_be_failed_status_when_test_failed
+    public :: D2R64_should_write_message_with_prefix_when_test_passed
+    public :: D2R64_should_write_message_with_prefix_when_test_failed
+    public :: D2R64_should_not_write_message_when_passed_input_quiet_T
+    public :: D2R64_should_not_write_message_when_failed_input_quiet_T
+    public :: D2R64_stat_should_be_passed_status_when_test_passed
+    public :: D2R64_stat_should_be_failed_status_when_test_failed
+    public :: D3R64_should_write_message_with_prefix_when_test_passed
+    public :: D3R64_should_write_message_with_prefix_when_test_failed
+    public :: D3R64_should_not_write_message_when_passed_input_quiet_T
+    public :: D3R64_should_not_write_message_when_failed_input_quiet_T
+    public :: D3R64_stat_should_be_passed_status_when_test_passed
+    public :: D3R64_stat_should_be_failed_status_when_test_failed
 
 contains
-    subroutine d1_r32_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D1R32_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -61,7 +63,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -102,9 +104,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_write_message_with_prefix_when_test_passed
+    end subroutine D1R32_should_write_message_with_prefix_when_test_passed
 
-    subroutine d1_r32_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D1R32_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -118,7 +120,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -141,7 +143,9 @@ contains
             allocate (b(2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2)"//new_line(" ")// &
+                  "    Actual Shape  : (1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -159,9 +163,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_write_message_with_prefix_when_test_failed
+    end subroutine D1R32_should_write_message_with_prefix_when_test_failed
 
-    subroutine d1_r32_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D1R32_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -175,7 +179,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -213,9 +217,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D1R32_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d1_r32_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D1R32_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -227,9 +231,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -267,9 +271,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D1R32_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d1_r32_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D1R32_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -305,9 +309,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r32_stat_should_be_passed_status_when_test_passed
+    end subroutine D1R32_stat_should_be_passed_status_when_test_passed
 
-    subroutine d1_r32_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D1R32_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -318,7 +322,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -343,9 +347,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r32_stat_should_be_failed_status_when_test_failed
+    end subroutine D1R32_stat_should_be_failed_status_when_test_failed
 
-    subroutine d2_r32_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D2R32_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -359,7 +363,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -400,9 +404,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_write_message_with_prefix_when_test_passed
+    end subroutine D2R32_should_write_message_with_prefix_when_test_passed
 
-    subroutine d2_r32_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D2R32_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -416,7 +420,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -439,7 +443,9 @@ contains
             allocate (b(2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -457,9 +463,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_write_message_with_prefix_when_test_failed
+    end subroutine D2R32_should_write_message_with_prefix_when_test_failed
 
-    subroutine d2_r32_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D2R32_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -473,7 +479,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -511,9 +517,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D2R32_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d2_r32_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D2R32_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -525,9 +531,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -565,9 +571,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D2R32_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d2_r32_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D2R32_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -603,9 +609,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r32_stat_should_be_passed_status_when_test_passed
+    end subroutine D2R32_stat_should_be_passed_status_when_test_passed
 
-    subroutine d2_r32_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D2R32_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -616,7 +622,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -641,9 +647,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r32_stat_should_be_failed_status_when_test_failed
+    end subroutine D2R32_stat_should_be_failed_status_when_test_failed
 
-    subroutine d3_r32_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D3R32_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -657,7 +663,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -698,9 +704,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_write_message_with_prefix_when_test_passed
+    end subroutine D3R32_should_write_message_with_prefix_when_test_passed
 
-    subroutine d3_r32_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D3R32_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -714,7 +720,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -737,7 +743,9 @@ contains
             allocate (b(2, 2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -755,9 +763,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_write_message_with_prefix_when_test_failed
+    end subroutine D3R32_should_write_message_with_prefix_when_test_failed
 
-    subroutine d3_r32_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D3R32_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -771,7 +779,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -809,9 +817,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D3R32_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d3_r32_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D3R32_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -823,9 +831,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -863,9 +871,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D3R32_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d3_r32_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D3R32_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -901,9 +909,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r32_stat_should_be_passed_status_when_test_passed
+    end subroutine D3R32_stat_should_be_passed_status_when_test_passed
 
-    subroutine d3_r32_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D3R32_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -914,7 +922,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -939,9 +947,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r32_stat_should_be_failed_status_when_test_failed
+    end subroutine D3R32_stat_should_be_failed_status_when_test_failed
 
-    subroutine d1_r64_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D1R64_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -955,7 +963,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -996,9 +1004,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_write_message_with_prefix_when_test_passed
+    end subroutine D1R64_should_write_message_with_prefix_when_test_passed
 
-    subroutine d1_r64_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D1R64_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1012,7 +1020,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1035,7 +1043,9 @@ contains
             allocate (b(2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2)"//new_line(" ")// &
+                  "    Actual Shape  : (1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -1053,9 +1063,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_write_message_with_prefix_when_test_failed
+    end subroutine D1R64_should_write_message_with_prefix_when_test_failed
 
-    subroutine d1_r64_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D1R64_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1069,7 +1079,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1107,9 +1117,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D1R64_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d1_r64_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D1R64_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1121,9 +1131,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1161,9 +1171,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D1R64_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d1_r64_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D1R64_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1199,9 +1209,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r64_stat_should_be_passed_status_when_test_passed
+    end subroutine D1R64_stat_should_be_passed_status_when_test_passed
 
-    subroutine d1_r64_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D1R64_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1212,7 +1222,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -1237,9 +1247,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r64_stat_should_be_failed_status_when_test_failed
+    end subroutine D1R64_stat_should_be_failed_status_when_test_failed
 
-    subroutine d2_r64_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D2R64_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1253,7 +1263,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1294,9 +1304,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_write_message_with_prefix_when_test_passed
+    end subroutine D2R64_should_write_message_with_prefix_when_test_passed
 
-    subroutine d2_r64_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D2R64_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1310,7 +1320,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1333,7 +1343,9 @@ contains
             allocate (b(2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -1351,9 +1363,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_write_message_with_prefix_when_test_failed
+    end subroutine D2R64_should_write_message_with_prefix_when_test_failed
 
-    subroutine d2_r64_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D2R64_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1367,7 +1379,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1405,9 +1417,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D2R64_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d2_r64_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D2R64_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1419,9 +1431,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1459,9 +1471,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D2R64_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d2_r64_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D2R64_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1497,9 +1509,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r64_stat_should_be_passed_status_when_test_passed
+    end subroutine D2R64_stat_should_be_passed_status_when_test_passed
 
-    subroutine d2_r64_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D2R64_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1510,7 +1522,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -1535,9 +1547,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r64_stat_should_be_failed_status_when_test_failed
+    end subroutine D2R64_stat_should_be_failed_status_when_test_failed
 
-    subroutine d3_r64_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D3R64_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1551,7 +1563,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1592,9 +1604,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_write_message_with_prefix_when_test_passed
+    end subroutine D3R64_should_write_message_with_prefix_when_test_passed
 
-    subroutine d3_r64_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D3R64_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1608,7 +1620,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1631,7 +1643,9 @@ contains
             allocate (b(2, 2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -1649,9 +1663,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_write_message_with_prefix_when_test_failed
+    end subroutine D3R64_should_write_message_with_prefix_when_test_failed
 
-    subroutine d3_r64_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D3R64_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1665,7 +1679,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1703,9 +1717,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D3R64_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d3_r64_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D3R64_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1717,9 +1731,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1757,9 +1771,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D3R64_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d3_r64_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D3R64_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1795,9 +1809,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r64_stat_should_be_passed_status_when_test_passed
+    end subroutine D3R64_stat_should_be_passed_status_when_test_passed
 
-    subroutine d3_r64_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D3R64_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1808,7 +1822,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -1833,6 +1847,6 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r64_stat_should_be_failed_status_when_test_failed
+    end subroutine D3R64_stat_should_be_failed_status_when_test_failed
 
 end module test_sameShape_expectSameShape_unitTests_expect_real

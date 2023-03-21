@@ -1,4 +1,4 @@
-module test_common_store_unitTests
+module test_common_store_unitTests_store
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred
@@ -46,4 +46,4 @@ contains
         call check(error, stat .eqv. .true., &
                    "expected "//string_true//", but got "//to_string(stat))
     end subroutine statLogical_should_not_be_updated_when_does_not_input_stat
-end module test_common_store_unitTests
+end module test_common_store_unitTests_store

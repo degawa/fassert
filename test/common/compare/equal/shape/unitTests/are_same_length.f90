@@ -7,12 +7,14 @@ module test_common_compare_equal_shape_unitTests_areSameLength
     use :: fassert_common_message
     implicit none
     private
-    public :: str_should_return_true_when_input_same_length_string
-    public :: str_should_return_false_when_input_different_length_string
-    public :: str_should_return_true_when_input_diff_len_due_to_tailing_space
+    ! STR: character(:), allocatable
+    ! T: true, F: false
+    public :: STR_should_return_T_when_input_same_length_string
+    public :: STR_should_return_F_when_input_different_length_string
+    public :: STR_should_return_T_when_input_diff_len_due_to_tailing_space
 
 contains
-    subroutine str_should_return_true_when_input_same_length_string(error)
+    subroutine STR_should_return_T_when_input_same_length_string(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -26,9 +28,9 @@ contains
         call check(error, are_same_length(a, b), &
                    "expected "//enclose(string_true, '"')// &
                    ", but got "//enclose(to_string(are_same_length(a, b)), '"'))
-    end subroutine str_should_return_true_when_input_same_length_string
+    end subroutine STR_should_return_T_when_input_same_length_string
 
-    subroutine str_should_return_false_when_input_different_length_string(error)
+    subroutine STR_should_return_F_when_input_different_length_string(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -42,9 +44,9 @@ contains
         call check(error,.not. are_same_length(a, b), &
                    "expected "//enclose(string_false, '"')// &
                    ", but got "//enclose(to_string(are_same_length(a, b)), '"'))
-    end subroutine str_should_return_false_when_input_different_length_string
+    end subroutine STR_should_return_F_when_input_different_length_string
 
-    subroutine str_should_return_true_when_input_diff_len_due_to_tailing_space(error)
+    subroutine STR_should_return_T_when_input_diff_len_due_to_tailing_space(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -58,5 +60,5 @@ contains
         call check(error, are_same_length(a, b), &
                    "expected "//enclose(string_true, '"')// &
                    ", but got "//enclose(to_string(are_same_length(a, b)), '"'))
-    end subroutine str_should_return_true_when_input_diff_len_due_to_tailing_space
+    end subroutine STR_should_return_T_when_input_diff_len_due_to_tailing_space
 end module test_common_compare_equal_shape_unitTests_areSameLength

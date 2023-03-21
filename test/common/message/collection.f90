@@ -2,6 +2,7 @@ module test_common_message_collection
     use :: testdrive, only:new_unittest, unittest_type
     use :: test_common_message_unitTests_toString
     use :: test_common_message_unitTests_output
+    use :: test_common_message_unitTests_write
     implicit none
     private
     public :: collect_message
@@ -33,6 +34,18 @@ contains
                                     isVerboseOutput_should_return_true_when_input_parameters) &
                      , new_unittest("is_verbose_output(), it should return `.false.` when input parameters.", &
                                     isVerboseOutput_should_return_false_when_input_parameters) &
+                     , new_unittest("write_message_to_string(), it should write `message` to `output_message` "// &
+                                    "when `message` is allocated.", &
+                                    writeMsgToString_should_write_msg_to_str_when_allocated) &
+                     , new_unittest("write_message_to_string(), it should not write `message` to `output_message` "// &
+                                    "when `message` is not allocated.", &
+                                    writeMsgToString_should_not_write_msg_to_str_when_not_allocated) &
+                     , new_unittest("write_message_to_unit(), it should write `message` to unit "// &
+                                    "when `message` is allocated.", &
+                                    writeMsgToUnit_should_write_msg_to_unit_when_allocated) &
+                     , new_unittest("write_message_to_unit(), it should not write `message` to unit "// &
+                                    "when `message` is not allocated.", &
+                                    writeMsgToUnit_should_not_write_msg_to_unit_when_not_allocated) &
                      ]
     end subroutine collect_message
 end module test_common_message_collection

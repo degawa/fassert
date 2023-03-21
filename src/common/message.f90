@@ -3,12 +3,18 @@ module fassert_common_message
     implicit none
     private
     public :: to_string
+    public :: write_message
     public :: is_verbose_output
     public :: does_not_output_message
     public :: does_output_message
 
     interface to_string
         procedure :: to_string_logical
+    end interface
+
+    interface write_message
+        procedure :: write_message_to_string
+        procedure :: write_message_to_unit
     end interface
 
     character(*), private, parameter :: prefix_sep = ": "
@@ -48,6 +54,9 @@ module fassert_common_message
         !! 論理値`.ture.`を文字列に変換した値
     character(*), public, parameter :: string_false = "F"
         !! 論理値`.false.`を文字列に変換した値
+
+    character(*), public, parameter :: NL = new_line("a")
+        !! new line character
 contains
     !>`val`が`.true.`のとき文字列"T"，`.false.`のとき文字列"F"を返す．
     pure elemental character(1) function to_string_logical(val) result(string)
@@ -62,8 +71,35 @@ contains
         end if
     end function to_string_logical
 
+    !>`message`が割り付けられていれば，
+    !>その値を`output_message`に書き込む．
+    subroutine write_message_to_string(message, output_message)
+        implicit none
+        character(:), allocatable, intent(in) :: message
+        character(:), allocatable, intent(out) :: output_message
+
+        if (allocated(message)) &
+            output_message = message
+    end subroutine write_message_to_string
+
+    !>`message`が割り付けられていれば，
+    !>その値を`assertion_message_unit`に出力する．
+    subroutine write_message_to_unit(message)
+        use :: fassert_common_unit
+        implicit none
+        character(:), allocatable, intent(in) :: message
+
+        if (allocated(message)) &
+            write (assertion_message_unit, '(A)') message
+    end subroutine write_message_to_unit
+
     !>予測値や実測値を出力する条件の場合に`.true.`，
     !>そうでない場合`.false.`を返す．
+    !>
+    !>- テストが失敗した場合は原則として表示
+    !>    - `verbose=.false., quiet=.true.`の場合のみ非表示
+    !>- テストが成功した場合は非表示
+    !>    - `verbose=.true.`の場合は表示
     !>
     !>| test result | `verbose` | `quiet` | retval |
     !>| :---------: | :-------: | :-----: | :----: |
