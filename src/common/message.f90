@@ -3,12 +3,18 @@ module fassert_common_message
     implicit none
     private
     public :: to_string
+    public :: write_message
     public :: is_verbose_output
     public :: does_not_output_message
     public :: does_output_message
 
     interface to_string
         procedure :: to_string_logical
+    end interface
+
+    interface write_message
+        procedure :: write_message_to_string
+        procedure :: write_message_to_unit
     end interface
 
     character(*), private, parameter :: prefix_sep = ": "
@@ -64,6 +70,28 @@ contains
             string = string_false
         end if
     end function to_string_logical
+
+    !>`message`が割り付けられていれば，
+    !>その値を`output_message`に書き込む．
+    subroutine write_message_to_string(message, output_message)
+        implicit none
+        character(:), allocatable, intent(in) :: message
+        character(:), allocatable, intent(out) :: output_message
+
+        if (allocated(message)) &
+            output_message = message
+    end subroutine write_message_to_string
+
+    !>`message`が割り付けられていれば，
+    !>その値を`assertion_message_unit`に出力する．
+    subroutine write_message_to_unit(message)
+        use :: fassert_common_unit
+        implicit none
+        character(:), allocatable, intent(in) :: message
+
+        if (allocated(message)) &
+            write (assertion_message_unit, '(A)') message
+    end subroutine write_message_to_unit
 
     !>予測値や実測値を出力する条件の場合に`.true.`，
     !>そうでない場合`.false.`を返す．
