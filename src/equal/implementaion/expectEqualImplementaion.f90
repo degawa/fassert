@@ -572,18 +572,23 @@ contains
     use :: fassert_common_check
     implicit none
 
-    logical :: same_length_stat, is_same_string
+    logical :: is_same_string
 
-    ! 文字列の長さを比較
-    call expect_equal(len(actual), len(expected), test_name//note_length_check, same_length_stat, &
-                      verbose=verbose, quiet=quiet)
-    if (is_test_failed(same_length_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に文字列の長さを比較し，異なっていれば失敗とする．
+    block
+        character(:), allocatable :: length_check_msg
+        logical :: same_length_stat
+        call expect_equal(len(actual), len(expected), test_name//note_length_check, same_length_stat, &
+                          verbose=verbose, quiet=quiet, output_message=length_check_msg)
+        if (is_test_failed(same_length_stat)) then
+            stat = failed
+            call write_message(length_check_msg)
+            return
+        end if
+    end block
 
-    ! 同じ長さかつ文字列の各要素が同じ
-    is_same_string = same_length_stat .and. (actual == expected)
+    ! 文字列の各要素を比較
+    is_same_string = (actual == expected)
 
     if (is_test_of_expected_failure(expected_failure)) then
         call check_expected_failure(is_same_string, test_name, stat, quiet)
