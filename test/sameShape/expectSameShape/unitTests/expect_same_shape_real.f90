@@ -1,7 +1,7 @@
 module test_sameShape_expectSameShape_unitTests_expect_real
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
-    use :: testdrive_util, only:occurred, get_actual_value
+    use :: testdrive_util, only:occurred, get_all_actual_value
     use :: strings_enclose
     use :: fassert_common_unit
     use :: fassert_common_message
@@ -61,7 +61,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -118,7 +118,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -141,7 +141,9 @@ contains
             allocate (b(2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2)"//new_line(" ")// &
+                  "    Actual Shape  : (1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -175,7 +177,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -227,9 +229,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -318,7 +320,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -359,7 +361,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -416,7 +418,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -439,7 +441,9 @@ contains
             allocate (b(2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -473,7 +477,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -525,9 +529,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -616,7 +620,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -657,7 +661,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -714,7 +718,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -737,7 +741,9 @@ contains
             allocate (b(2, 2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")//&
+            "    Expected Shape: (2,2,2)"//new_line(" ")//&
+            "    Actual Shape  : (1,1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -771,7 +777,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -823,9 +829,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -914,7 +920,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -955,7 +961,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1012,7 +1018,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1035,7 +1041,9 @@ contains
             allocate (b(2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2)"//new_line(" ")// &
+                  "    Actual Shape  : (1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -1069,7 +1077,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1121,9 +1129,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1212,7 +1220,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -1253,7 +1261,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1310,7 +1318,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1333,7 +1341,9 @@ contains
             allocate (b(2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -1367,7 +1377,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1419,9 +1429,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1510,7 +1520,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
@@ -1551,7 +1561,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1608,7 +1618,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == len(msg_expected), &
                    "expected message length "//to_string(len(msg_expected)) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1631,7 +1641,9 @@ contains
             allocate (b(2, 2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -1665,7 +1677,7 @@ contains
 
         call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1717,9 +1729,9 @@ contains
 
         call setup(actual, expected, test_name, scratch_unit_number)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
-        call get_actual_value(error, scratch_unit_number, msg_actual)
+        call get_all_actual_value(error, scratch_unit_number, msg_actual)
         call check(error, len_trim(msg_actual) == 0, &
                    "expected message length "//to_string(0) &
                    //", but got "//to_string(len_trim(msg_actual)))
@@ -1808,7 +1820,7 @@ contains
 
         call setup(actual, expected, test_name)
 
-        call expect_same_shape(actual, expected, test_name, stat, quiet=.true.)
+        call expect_same_shape(actual, expected, test_name, stat, verbose=.false., quiet=.true.)
 
         call check(error, stat .eqv. failed, &
                    "expected "//to_string(failed)//", but got "//to_string(stat))
