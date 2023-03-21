@@ -28,9 +28,9 @@ contains
 
         character(128) :: buffer
 
-        write (buffer, fmt_shape_rank1) "Expected: ", shape(expected)
+        write (buffer, fmt_shape_rank1) "Expected Shape: ", shape(expected)
         call append(output_message, trim(buffer))
-        write (buffer, fmt_shape_rank1) "Actual  : ", shape(actual)
+        write (buffer, fmt_shape_rank1) "Actual Shape  : ", shape(actual)
         call append(output_message, trim(buffer))
     end subroutine output_rank1_to_string
 
@@ -45,9 +45,9 @@ contains
 
         character(128) :: buffer
 
-        write (buffer, fmt_shape_rank2) "Expected: ", shape(expected)
+        write (buffer, fmt_shape_rank2) "Expected Shape: ", shape(expected)
         call append(output_message, trim(buffer))
-        write (buffer, fmt_shape_rank2) "Actual  : ", shape(actual)
+        write (buffer, fmt_shape_rank2) "Actual Shape  : ", shape(actual)
         call append(output_message, trim(buffer))
     end subroutine output_rank2_to_string
 
@@ -62,9 +62,9 @@ contains
 
         character(128) :: buffer
 
-        write (buffer, fmt_shape_rank3) "Expected: ", shape(expected)
+        write (buffer, fmt_shape_rank3) "Expected Shape: ", shape(expected)
         call append(output_message, trim(buffer))
-        write (buffer, fmt_shape_rank3) "Actual  : ", shape(actual)
+        write (buffer, fmt_shape_rank3) "Actual Shape  : ", shape(actual)
         call append(output_message, trim(buffer))
     end subroutine output_rank3_to_string
 end module fassert_common_message_outputOnFailure_toString_shape
