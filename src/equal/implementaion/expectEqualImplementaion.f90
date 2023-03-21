@@ -99,15 +99,21 @@ contains
     use :: fassert_common_compare_equal_array
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    ! 値比較の前に配列要素数を比較
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected)
@@ -136,15 +142,21 @@ contains
     use :: fassert_common_compare_equal_array
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    ! 値比較の前に配列要素数を比較
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected)
@@ -173,15 +185,21 @@ contains
     use :: fassert_common_compare_equal_array
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    ! 値比較の前に配列要素数を比較
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected)
@@ -208,7 +226,6 @@ contains
     !>
     module procedure expect_approxequal_real32
     use :: fassert_common_compare_equal_real
-    use :: fassert_common_optval
     implicit none
 
     logical :: has_same_value
@@ -238,7 +255,6 @@ contains
     !>
     module procedure expect_approxequal_real64
     use :: fassert_common_compare_equal_real
-    use :: fassert_common_optval
     implicit none
 
     logical :: has_same_value
@@ -269,17 +285,23 @@ contains
     module procedure expect_approxequal_real32_rank1
     use :: expectSameShape
     use :: fassert_common_compare_equal_array
-    use :: fassert_common_optval
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected, tolerance)
@@ -307,17 +329,23 @@ contains
     module procedure expect_approxequal_real32_rank2
     use :: expectSameShape
     use :: fassert_common_compare_equal_array
-    use :: fassert_common_optval
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected, tolerance)
@@ -345,17 +373,23 @@ contains
     module procedure expect_approxequal_real32_rank3
     use :: expectSameShape
     use :: fassert_common_compare_equal_array
-    use :: fassert_common_optval
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected, tolerance)
@@ -383,17 +417,23 @@ contains
     module procedure expect_approxequal_real64_rank1
     use :: expectSameShape
     use :: fassert_common_compare_equal_array
-    use :: fassert_common_optval
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected, tolerance)
@@ -421,17 +461,23 @@ contains
     module procedure expect_approxequal_real64_rank2
     use :: expectSameShape
     use :: fassert_common_compare_equal_array
-    use :: fassert_common_optval
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected, tolerance)
@@ -459,17 +505,23 @@ contains
     module procedure expect_approxequal_real64_rank3
     use :: expectSameShape
     use :: fassert_common_compare_equal_array
-    use :: fassert_common_optval
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected, tolerance)
@@ -524,7 +576,7 @@ contains
 
     ! 文字列の長さを比較
     call expect_equal(len(actual), len(expected), test_name//note_length_check, same_length_stat, &
-                      quiet=optval(quiet, default=default_quiet_shape_check))
+                      verbose=verbose, quiet=quiet)
     if (is_test_failed(same_length_stat)) then
         stat = failed
         return
@@ -557,14 +609,21 @@ contains
     use :: fassert_common_compare_equal_array
     implicit none
 
-    logical :: array_shape_stat, has_same_values
+    logical :: has_same_values
 
-    call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
-                           quiet=optval(quiet, default_quiet_shape_check))
-    if (is_test_failed(array_shape_stat)) then
-        stat = failed
-        return
-    end if
+    ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
+    block
+        logical :: array_shape_stat
+        character(:), allocatable :: shape_check_msg
+
+        call expect_same_shape(actual, expected, test_name//note_shape_check, array_shape_stat, &
+                               verbose=verbose, quiet=quiet, output_message=shape_check_msg)
+        if (is_test_failed(array_shape_stat)) then
+            stat = failed
+            call write_message(shape_check_msg)
+            return
+        end if
+    end block
 
     ! 各要素の値を比較
     has_same_values = are_equal(actual, expected)
