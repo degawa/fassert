@@ -18,151 +18,151 @@ contains
         test_suite_int = [ &
                          new_unittest("expect_same_shape_rank1_int32(), it should write message"// &
                                       " with prefix 'PASSED: ' when test passed.", &
-                                      d1_i32_should_write_message_with_prefix_when_test_passed) &
+                                      D1I32_should_write_message_with_prefix_when_test_passed) &
                          , new_unittest("expect_same_shape_rank1_int32(), it should write message"// &
                                         " with prefix 'FAILED: ' when test failed.", &
-                                        d1_i32_should_write_message_with_prefix_when_test_failed) &
+                                        D1I32_should_write_message_with_prefix_when_test_failed) &
                          , new_unittest("expect_same_shape_rank1_int32(), it should not write any messages "// &
                                         "when test passed and `quiet`=`.true.`.", &
-                                        d1_i32_should_not_write_message_when_passed_input_quiet_true) &
+                                        D1I32_should_not_write_message_when_passed_input_quiet_T) &
                          , new_unittest("expect_same_shape_rank1_int32(), it should not write any messages "// &
                                         "when test failed and `quiet`=`.true.`.", &
-                                        d1_i32_should_not_write_message_when_failed_input_quiet_true) &
+                                        D1I32_should_not_write_message_when_failed_input_quiet_T) &
                          , new_unittest("expect_same_shape_rank1_int32(), stat should be passed-status when test passed.", &
-                                        d1_i32_stat_should_be_passed_status_when_test_passed) &
+                                        D1I32_stat_should_be_passed_status_when_test_passed) &
                          , new_unittest("expect_same_shape_rank1_int32(), stat should be failed-status when test failed.", &
-                                        d1_i32_stat_should_be_failed_status_when_test_failed) &
+                                        D1I32_stat_should_be_failed_status_when_test_failed) &
                          , new_unittest("expect_same_shape_rank2_int32(), it should write message"// &
                                         " with prefix 'PASSED: ' when test passed.", &
-                                        d2_i32_should_write_message_with_prefix_when_test_passed) &
+                                        D2I32_should_write_message_with_prefix_when_test_passed) &
                          , new_unittest("expect_same_shape_rank2_int32(), it should write message"// &
                                         " with prefix 'FAILED: ' when test failed.", &
-                                        d2_i32_should_write_message_with_prefix_when_test_failed) &
+                                        D2I32_should_write_message_with_prefix_when_test_failed) &
                          , new_unittest("expect_same_shape_rank2_int32(), it should not write any messages "// &
                                         "when test passed and `quiet`=`.true.`.", &
-                                        d2_i32_should_not_write_message_when_passed_input_quiet_true) &
+                                        D2I32_should_not_write_message_when_passed_input_quiet_T) &
                          , new_unittest("expect_same_shape_rank2_int32(), it should not write any messages "// &
                                         "when test failed and `quiet`=`.true.`.", &
-                                        d2_i32_should_not_write_message_when_failed_input_quiet_true) &
+                                        D2I32_should_not_write_message_when_failed_input_quiet_T) &
                          , new_unittest("expect_same_shape_rank2_int32(), stat should be passed-status when test passed.", &
-                                        d2_i32_stat_should_be_passed_status_when_test_passed) &
+                                        D2I32_stat_should_be_passed_status_when_test_passed) &
                          , new_unittest("expect_same_shape_rank2_int32(), stat should be failed-status when test failed.", &
-                                        d2_i32_stat_should_be_failed_status_when_test_failed) &
+                                        D2I32_stat_should_be_failed_status_when_test_failed) &
                          , new_unittest("expect_same_shape_rank3_int32(), it should write message"// &
                                         " with prefix 'PASSED: ' when test passed.", &
-                                        d3_i32_should_write_message_with_prefix_when_test_passed) &
+                                        D3I32_should_write_message_with_prefix_when_test_passed) &
                          , new_unittest("expect_same_shape_rank3_int32(), it should write message"// &
                                         " with prefix 'FAILED: ' when test failed.", &
-                                        d3_i32_should_write_message_with_prefix_when_test_failed) &
+                                        D3I32_should_write_message_with_prefix_when_test_failed) &
                          , new_unittest("expect_same_shape_rank3_int32(), it should not write any messages "// &
                                         "when test passed and `quiet`=`.true.`.", &
-                                        d3_i32_should_not_write_message_when_passed_input_quiet_true) &
+                                        D3I32_should_not_write_message_when_passed_input_quiet_T) &
                          , new_unittest("expect_same_shape_rank3_int32(), it should not write any messages "// &
                                         "when test failed and `quiet`=`.true.`.", &
-                                        d3_i32_should_not_write_message_when_failed_input_quiet_true) &
+                                        D3I32_should_not_write_message_when_failed_input_quiet_T) &
                          , new_unittest("expect_same_shape_rank3_int32(), stat should be passed-status when test passed.", &
-                                        d3_i32_stat_should_be_passed_status_when_test_passed) &
+                                        D3I32_stat_should_be_passed_status_when_test_passed) &
                          , new_unittest("expect_same_shape_rank3_int32(), stat should be failed-status when test failed.", &
-                                        d3_i32_stat_should_be_failed_status_when_test_failed) &
+                                        D3I32_stat_should_be_failed_status_when_test_failed) &
                          ]
 
         test_suite_real = [ &
                           new_unittest("expect_same_shape_rank1_real32(), it should write message"// &
                                        " with prefix 'PASSED: ' when test passed.", &
-                                       d1_r32_should_write_message_with_prefix_when_test_passed) &
+                                       D1R32_should_write_message_with_prefix_when_test_passed) &
                           , new_unittest("expect_same_shape_rank1_real32(), it should write message"// &
                                          " with prefix 'FAILED: ' when test failed.", &
-                                         d1_r32_should_write_message_with_prefix_when_test_failed) &
+                                         D1R32_should_write_message_with_prefix_when_test_failed) &
                           , new_unittest("expect_same_shape_rank1_real32(), it should not write any messages "// &
                                          "when test passed and `quiet`=`.true.`.", &
-                                         d1_r32_should_not_write_message_when_passed_input_quiet_true) &
+                                         D1R32_should_not_write_message_when_passed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank1_real32(), it should not write any messages "// &
                                          "when test failed and `quiet`=`.true.`.", &
-                                         d1_r32_should_not_write_message_when_failed_input_quiet_true) &
+                                         D1R32_should_not_write_message_when_failed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank1_real32(), stat should be passed-status when test passed.", &
-                                         d1_r32_stat_should_be_passed_status_when_test_passed) &
+                                         D1R32_stat_should_be_passed_status_when_test_passed) &
                           , new_unittest("expect_same_shape_rank1_real32(), stat should be failed-status when test failed.", &
-                                         d1_r32_stat_should_be_failed_status_when_test_failed) &
+                                         D1R32_stat_should_be_failed_status_when_test_failed) &
                           , new_unittest("expect_same_shape_rank2_real32(), it should write message"// &
                                          " with prefix 'PASSED: ' when test passed.", &
-                                         d2_r32_should_write_message_with_prefix_when_test_passed) &
+                                         D2R32_should_write_message_with_prefix_when_test_passed) &
                           , new_unittest("expect_same_shape_rank2_real32(), it should write message"// &
                                          " with prefix 'FAILED: ' when test failed.", &
-                                         d2_r32_should_write_message_with_prefix_when_test_failed) &
+                                         D2R32_should_write_message_with_prefix_when_test_failed) &
                           , new_unittest("expect_same_shape_rank2_real32(), it should not write any messages "// &
                                          "when test passed and `quiet`=`.true.`.", &
-                                         d2_r32_should_not_write_message_when_passed_input_quiet_true) &
+                                         D2R32_should_not_write_message_when_passed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank2_real32(), it should not write any messages "// &
                                          "when test failed and `quiet`=`.true.`.", &
-                                         d2_r32_should_not_write_message_when_failed_input_quiet_true) &
+                                         D2R32_should_not_write_message_when_failed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank2_real32(), stat should be passed-status when test passed.", &
-                                         d2_r32_stat_should_be_passed_status_when_test_passed) &
+                                         D2R32_stat_should_be_passed_status_when_test_passed) &
                           , new_unittest("expect_same_shape_rank2_real32(), stat should be failed-status when test failed.", &
-                                         d2_r32_stat_should_be_failed_status_when_test_failed) &
+                                         D2R32_stat_should_be_failed_status_when_test_failed) &
                           , new_unittest("expect_same_shape_rank3_real32(), it should write message"// &
                                          " with prefix 'PASSED: ' when test passed.", &
-                                         d3_r32_should_write_message_with_prefix_when_test_passed) &
+                                         D3R32_should_write_message_with_prefix_when_test_passed) &
                           , new_unittest("expect_same_shape_rank3_real32(), it should write message"// &
                                          " with prefix 'FAILED: ' when test failed.", &
-                                         d3_r32_should_write_message_with_prefix_when_test_failed) &
+                                         D3R32_should_write_message_with_prefix_when_test_failed) &
                           , new_unittest("expect_same_shape_rank3_real32(), it should not write any messages "// &
                                          "when test passed and `quiet`=`.true.`.", &
-                                         d3_r32_should_not_write_message_when_passed_input_quiet_true) &
+                                         D3R32_should_not_write_message_when_passed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank3_real32(), it should not write any messages "// &
                                          "when test failed and `quiet`=`.true.`.", &
-                                         d3_r32_should_not_write_message_when_failed_input_quiet_true) &
+                                         D3R32_should_not_write_message_when_failed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank3_real32(), stat should be passed-status when test passed.", &
-                                         d3_r32_stat_should_be_passed_status_when_test_passed) &
+                                         D3R32_stat_should_be_passed_status_when_test_passed) &
                           , new_unittest("expect_same_shape_rank3_real32(), stat should be failed-status when test failed.", &
-                                         d3_r32_stat_should_be_failed_status_when_test_failed) &
+                                         D3R32_stat_should_be_failed_status_when_test_failed) &
                           , new_unittest("expect_same_shape_rank1_real64(), it should write message"// &
                                          " with prefix 'PASSED: ' when test passed.", &
-                                         d1_r64_should_write_message_with_prefix_when_test_passed) &
+                                         D1R64_should_write_message_with_prefix_when_test_passed) &
                           , new_unittest("expect_same_shape_rank1_real64(), it should write message"// &
                                          " with prefix 'FAILED: ' when test failed.", &
-                                         d1_r64_should_write_message_with_prefix_when_test_failed) &
+                                         D1R64_should_write_message_with_prefix_when_test_failed) &
                           , new_unittest("expect_same_shape_rank1_real64(), it should not write any messages "// &
                                          "when test passed and `quiet`=`.true.`.", &
-                                         d1_r64_should_not_write_message_when_passed_input_quiet_true) &
+                                         D1R64_should_not_write_message_when_passed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank1_real64(), it should not write any messages "// &
                                          "when test failed and `quiet`=`.true.`.", &
-                                         d1_r64_should_not_write_message_when_failed_input_quiet_true) &
+                                         D1R64_should_not_write_message_when_failed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank1_real64(), stat should be passed-status when test passed.", &
-                                         d1_r64_stat_should_be_passed_status_when_test_passed) &
+                                         D1R64_stat_should_be_passed_status_when_test_passed) &
                           , new_unittest("expect_same_shape_rank1_real64(), stat should be failed-status when test failed.", &
-                                         d1_r64_stat_should_be_failed_status_when_test_failed) &
+                                         D1R64_stat_should_be_failed_status_when_test_failed) &
                           , new_unittest("expect_same_shape_rank2_real64(), it should write message"// &
                                          " with prefix 'PASSED: ' when test passed.", &
-                                         d2_r64_should_write_message_with_prefix_when_test_passed) &
+                                         D2R64_should_write_message_with_prefix_when_test_passed) &
                           , new_unittest("expect_same_shape_rank2_real64(), it should write message"// &
                                          " with prefix 'FAILED: ' when test failed.", &
-                                         d2_r64_should_write_message_with_prefix_when_test_failed) &
+                                         D2R64_should_write_message_with_prefix_when_test_failed) &
                           , new_unittest("expect_same_shape_rank2_real64(), it should not write any messages "// &
                                          "when test passed and `quiet`=`.true.`.", &
-                                         d2_r64_should_not_write_message_when_passed_input_quiet_true) &
+                                         D2R64_should_not_write_message_when_passed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank2_real64(), it should not write any messages "// &
                                          "when test failed and `quiet`=`.true.`.", &
-                                         d2_r64_should_not_write_message_when_failed_input_quiet_true) &
+                                         D2R64_should_not_write_message_when_failed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank2_real64(), stat should be passed-status when test passed.", &
-                                         d2_r64_stat_should_be_passed_status_when_test_passed) &
+                                         D2R64_stat_should_be_passed_status_when_test_passed) &
                           , new_unittest("expect_same_shape_rank2_real64(), stat should be failed-status when test failed.", &
-                                         d2_r64_stat_should_be_failed_status_when_test_failed) &
+                                         D2R64_stat_should_be_failed_status_when_test_failed) &
                           , new_unittest("expect_same_shape_rank3_real64(), it should write message"// &
                                          " with prefix 'PASSED: ' when test passed.", &
-                                         d3_r64_should_write_message_with_prefix_when_test_passed) &
+                                         D3R64_should_write_message_with_prefix_when_test_passed) &
                           , new_unittest("expect_same_shape_rank3_real64(), it should write message"// &
                                          " with prefix 'FAILED: ' when test failed.", &
-                                         d3_r64_should_write_message_with_prefix_when_test_failed) &
+                                         D3R64_should_write_message_with_prefix_when_test_failed) &
                           , new_unittest("expect_same_shape_rank3_real64(), it should not write any messages "// &
                                          "when test passed and `quiet`=`.true.`.", &
-                                         d3_r64_should_not_write_message_when_passed_input_quiet_true) &
+                                         D3R64_should_not_write_message_when_passed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank3_real64(), it should not write any messages "// &
                                          "when test failed and `quiet`=`.true.`.", &
-                                         d3_r64_should_not_write_message_when_failed_input_quiet_true) &
+                                         D3R64_should_not_write_message_when_failed_input_quiet_T) &
                           , new_unittest("expect_same_shape_rank3_real64(), stat should be passed-status when test passed.", &
-                                         d3_r64_stat_should_be_passed_status_when_test_passed) &
+                                         D3R64_stat_should_be_passed_status_when_test_passed) &
                           , new_unittest("expect_same_shape_rank3_real64(), stat should be failed-status when test failed.", &
-                                         d3_r64_stat_should_be_failed_status_when_test_failed) &
+                                         D3R64_stat_should_be_failed_status_when_test_failed) &
                           ]
 
         test_suite = [test_suite_int, test_suite_real]

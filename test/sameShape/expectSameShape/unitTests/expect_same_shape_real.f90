@@ -9,45 +9,47 @@ module test_sameShape_expectSameShape_unitTests_expect_real
     use :: expectSameShape
     implicit none
     private
-    public :: d1_r32_should_write_message_with_prefix_when_test_passed
-    public :: d1_r32_should_write_message_with_prefix_when_test_failed
-    public :: d1_r32_should_not_write_message_when_passed_input_quiet_true
-    public :: d1_r32_should_not_write_message_when_failed_input_quiet_true
-    public :: d1_r32_stat_should_be_passed_status_when_test_passed
-    public :: d1_r32_stat_should_be_failed_status_when_test_failed
-    public :: d2_r32_should_write_message_with_prefix_when_test_passed
-    public :: d2_r32_should_write_message_with_prefix_when_test_failed
-    public :: d2_r32_should_not_write_message_when_passed_input_quiet_true
-    public :: d2_r32_should_not_write_message_when_failed_input_quiet_true
-    public :: d2_r32_stat_should_be_passed_status_when_test_passed
-    public :: d2_r32_stat_should_be_failed_status_when_test_failed
-    public :: d3_r32_should_write_message_with_prefix_when_test_passed
-    public :: d3_r32_should_write_message_with_prefix_when_test_failed
-    public :: d3_r32_should_not_write_message_when_passed_input_quiet_true
-    public :: d3_r32_should_not_write_message_when_failed_input_quiet_true
-    public :: d3_r32_stat_should_be_passed_status_when_test_passed
-    public :: d3_r32_stat_should_be_failed_status_when_test_failed
-    public :: d1_r64_should_write_message_with_prefix_when_test_passed
-    public :: d1_r64_should_write_message_with_prefix_when_test_failed
-    public :: d1_r64_should_not_write_message_when_passed_input_quiet_true
-    public :: d1_r64_should_not_write_message_when_failed_input_quiet_true
-    public :: d1_r64_stat_should_be_passed_status_when_test_passed
-    public :: d1_r64_stat_should_be_failed_status_when_test_failed
-    public :: d2_r64_should_write_message_with_prefix_when_test_passed
-    public :: d2_r64_should_write_message_with_prefix_when_test_failed
-    public :: d2_r64_should_not_write_message_when_passed_input_quiet_true
-    public :: d2_r64_should_not_write_message_when_failed_input_quiet_true
-    public :: d2_r64_stat_should_be_passed_status_when_test_passed
-    public :: d2_r64_stat_should_be_failed_status_when_test_failed
-    public :: d3_r64_should_write_message_with_prefix_when_test_passed
-    public :: d3_r64_should_write_message_with_prefix_when_test_failed
-    public :: d3_r64_should_not_write_message_when_passed_input_quiet_true
-    public :: d3_r64_should_not_write_message_when_failed_input_quiet_true
-    public :: d3_r64_stat_should_be_passed_status_when_test_passed
-    public :: d3_r64_stat_should_be_failed_status_when_test_failed
+    ! D: dimension, R: real
+    ! T: true
+    public :: D1R32_should_write_message_with_prefix_when_test_passed
+    public :: D1R32_should_write_message_with_prefix_when_test_failed
+    public :: D1R32_should_not_write_message_when_passed_input_quiet_T
+    public :: D1R32_should_not_write_message_when_failed_input_quiet_T
+    public :: D1R32_stat_should_be_passed_status_when_test_passed
+    public :: D1R32_stat_should_be_failed_status_when_test_failed
+    public :: D2R32_should_write_message_with_prefix_when_test_passed
+    public :: D2R32_should_write_message_with_prefix_when_test_failed
+    public :: D2R32_should_not_write_message_when_passed_input_quiet_T
+    public :: D2R32_should_not_write_message_when_failed_input_quiet_T
+    public :: D2R32_stat_should_be_passed_status_when_test_passed
+    public :: D2R32_stat_should_be_failed_status_when_test_failed
+    public :: D3R32_should_write_message_with_prefix_when_test_passed
+    public :: D3R32_should_write_message_with_prefix_when_test_failed
+    public :: D3R32_should_not_write_message_when_passed_input_quiet_T
+    public :: D3R32_should_not_write_message_when_failed_input_quiet_T
+    public :: D3R32_stat_should_be_passed_status_when_test_passed
+    public :: D3R32_stat_should_be_failed_status_when_test_failed
+    public :: D1R64_should_write_message_with_prefix_when_test_passed
+    public :: D1R64_should_write_message_with_prefix_when_test_failed
+    public :: D1R64_should_not_write_message_when_passed_input_quiet_T
+    public :: D1R64_should_not_write_message_when_failed_input_quiet_T
+    public :: D1R64_stat_should_be_passed_status_when_test_passed
+    public :: D1R64_stat_should_be_failed_status_when_test_failed
+    public :: D2R64_should_write_message_with_prefix_when_test_passed
+    public :: D2R64_should_write_message_with_prefix_when_test_failed
+    public :: D2R64_should_not_write_message_when_passed_input_quiet_T
+    public :: D2R64_should_not_write_message_when_failed_input_quiet_T
+    public :: D2R64_stat_should_be_passed_status_when_test_passed
+    public :: D2R64_stat_should_be_failed_status_when_test_failed
+    public :: D3R64_should_write_message_with_prefix_when_test_passed
+    public :: D3R64_should_write_message_with_prefix_when_test_failed
+    public :: D3R64_should_not_write_message_when_passed_input_quiet_T
+    public :: D3R64_should_not_write_message_when_failed_input_quiet_T
+    public :: D3R64_stat_should_be_passed_status_when_test_passed
+    public :: D3R64_stat_should_be_failed_status_when_test_failed
 
 contains
-    subroutine d1_r32_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D1R32_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -102,9 +104,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_write_message_with_prefix_when_test_passed
+    end subroutine D1R32_should_write_message_with_prefix_when_test_passed
 
-    subroutine d1_r32_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D1R32_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -161,9 +163,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_write_message_with_prefix_when_test_failed
+    end subroutine D1R32_should_write_message_with_prefix_when_test_failed
 
-    subroutine d1_r32_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D1R32_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -215,9 +217,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D1R32_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d1_r32_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D1R32_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -269,9 +271,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r32_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D1R32_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d1_r32_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D1R32_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -307,9 +309,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r32_stat_should_be_passed_status_when_test_passed
+    end subroutine D1R32_stat_should_be_passed_status_when_test_passed
 
-    subroutine d1_r32_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D1R32_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -345,9 +347,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r32_stat_should_be_failed_status_when_test_failed
+    end subroutine D1R32_stat_should_be_failed_status_when_test_failed
 
-    subroutine d2_r32_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D2R32_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -402,9 +404,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_write_message_with_prefix_when_test_passed
+    end subroutine D2R32_should_write_message_with_prefix_when_test_passed
 
-    subroutine d2_r32_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D2R32_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -461,9 +463,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_write_message_with_prefix_when_test_failed
+    end subroutine D2R32_should_write_message_with_prefix_when_test_failed
 
-    subroutine d2_r32_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D2R32_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -515,9 +517,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D2R32_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d2_r32_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D2R32_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -569,9 +571,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r32_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D2R32_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d2_r32_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D2R32_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -607,9 +609,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r32_stat_should_be_passed_status_when_test_passed
+    end subroutine D2R32_stat_should_be_passed_status_when_test_passed
 
-    subroutine d2_r32_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D2R32_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -645,9 +647,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r32_stat_should_be_failed_status_when_test_failed
+    end subroutine D2R32_stat_should_be_failed_status_when_test_failed
 
-    subroutine d3_r32_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D3R32_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -702,9 +704,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_write_message_with_prefix_when_test_passed
+    end subroutine D3R32_should_write_message_with_prefix_when_test_passed
 
-    subroutine d3_r32_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D3R32_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -741,9 +743,9 @@ contains
             allocate (b(2, 2, 2))
             test_name = "expect_same_shape should write a message with prefix "// &
                         enclose(prefix_failed, "'")//" when test failed"
-            msg = prefix_failed//test_name//new_line(" ")//&
-            "    Expected Shape: (2,2,2)"//new_line(" ")//&
-            "    Actual Shape  : (1,1,1)"
+            msg = prefix_failed//test_name//new_line(" ")// &
+                  "    Expected Shape: (2,2,2)"//new_line(" ")// &
+                  "    Actual Shape  : (1,1,1)"
 
             unit_number = get_newunit_number()
             call set_assertion_message_unit(unit_number)
@@ -761,9 +763,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_write_message_with_prefix_when_test_failed
+    end subroutine D3R32_should_write_message_with_prefix_when_test_failed
 
-    subroutine d3_r32_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D3R32_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -815,9 +817,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D3R32_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d3_r32_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D3R32_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -869,9 +871,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r32_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D3R32_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d3_r32_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D3R32_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -907,9 +909,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r32_stat_should_be_passed_status_when_test_passed
+    end subroutine D3R32_stat_should_be_passed_status_when_test_passed
 
-    subroutine d3_r32_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D3R32_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -945,9 +947,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r32_stat_should_be_failed_status_when_test_failed
+    end subroutine D3R32_stat_should_be_failed_status_when_test_failed
 
-    subroutine d1_r64_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D1R64_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1002,9 +1004,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_write_message_with_prefix_when_test_passed
+    end subroutine D1R64_should_write_message_with_prefix_when_test_passed
 
-    subroutine d1_r64_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D1R64_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1061,9 +1063,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_write_message_with_prefix_when_test_failed
+    end subroutine D1R64_should_write_message_with_prefix_when_test_failed
 
-    subroutine d1_r64_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D1R64_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1115,9 +1117,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D1R64_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d1_r64_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D1R64_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1169,9 +1171,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d1_r64_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D1R64_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d1_r64_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D1R64_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1207,9 +1209,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r64_stat_should_be_passed_status_when_test_passed
+    end subroutine D1R64_stat_should_be_passed_status_when_test_passed
 
-    subroutine d1_r64_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D1R64_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1245,9 +1247,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d1_r64_stat_should_be_failed_status_when_test_failed
+    end subroutine D1R64_stat_should_be_failed_status_when_test_failed
 
-    subroutine d2_r64_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D2R64_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1302,9 +1304,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_write_message_with_prefix_when_test_passed
+    end subroutine D2R64_should_write_message_with_prefix_when_test_passed
 
-    subroutine d2_r64_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D2R64_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1361,9 +1363,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_write_message_with_prefix_when_test_failed
+    end subroutine D2R64_should_write_message_with_prefix_when_test_failed
 
-    subroutine d2_r64_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D2R64_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1415,9 +1417,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D2R64_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d2_r64_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D2R64_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1469,9 +1471,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d2_r64_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D2R64_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d2_r64_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D2R64_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1507,9 +1509,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r64_stat_should_be_passed_status_when_test_passed
+    end subroutine D2R64_stat_should_be_passed_status_when_test_passed
 
-    subroutine d2_r64_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D2R64_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1545,9 +1547,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d2_r64_stat_should_be_failed_status_when_test_failed
+    end subroutine D2R64_stat_should_be_failed_status_when_test_failed
 
-    subroutine d3_r64_should_write_message_with_prefix_when_test_passed(error)
+    subroutine D3R64_should_write_message_with_prefix_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1602,9 +1604,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_write_message_with_prefix_when_test_passed
+    end subroutine D3R64_should_write_message_with_prefix_when_test_passed
 
-    subroutine d3_r64_should_write_message_with_prefix_when_test_failed(error)
+    subroutine D3R64_should_write_message_with_prefix_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1661,9 +1663,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_write_message_with_prefix_when_test_failed
+    end subroutine D3R64_should_write_message_with_prefix_when_test_failed
 
-    subroutine d3_r64_should_not_write_message_when_passed_input_quiet_true(error)
+    subroutine D3R64_should_not_write_message_when_passed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1715,9 +1717,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_not_write_message_when_passed_input_quiet_true
+    end subroutine D3R64_should_not_write_message_when_passed_input_quiet_T
 
-    subroutine d3_r64_should_not_write_message_when_failed_input_quiet_true(error)
+    subroutine D3R64_should_not_write_message_when_failed_input_quiet_T(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1769,9 +1771,9 @@ contains
             close (unit_number)
             call set_assertion_message_unit(output_unit)
         end subroutine teardown
-    end subroutine d3_r64_should_not_write_message_when_failed_input_quiet_true
+    end subroutine D3R64_should_not_write_message_when_failed_input_quiet_T
 
-    subroutine d3_r64_stat_should_be_passed_status_when_test_passed(error)
+    subroutine D3R64_stat_should_be_passed_status_when_test_passed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1807,9 +1809,9 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r64_stat_should_be_passed_status_when_test_passed
+    end subroutine D3R64_stat_should_be_passed_status_when_test_passed
 
-    subroutine d3_r64_stat_should_be_failed_status_when_test_failed(error)
+    subroutine D3R64_stat_should_be_failed_status_when_test_failed(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
@@ -1845,6 +1847,6 @@ contains
             deallocate (a)
             deallocate (b)
         end subroutine teardown
-    end subroutine d3_r64_stat_should_be_failed_status_when_test_failed
+    end subroutine D3R64_stat_should_be_failed_status_when_test_failed
 
 end module test_sameShape_expectSameShape_unitTests_expect_real
