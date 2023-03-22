@@ -1283,6 +1283,7 @@ contains
                                          comparator, verbose_message_writer, &
                                          verbose, expected_failure, quiet)
         use :: fassert_interface
+        implicit none
         class(*), intent(in) :: actual
             !! 実測値
         class(*), intent(in) :: expected
@@ -1337,6 +1338,7 @@ contains
                                              verbose, expected_failure, quiet, &
                                              output_message)
         use :: fassert_interface
+        implicit none
         class(*), intent(in) :: actual
             !! 実測値
         class(*), intent(in) :: expected
