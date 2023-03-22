@@ -46,6 +46,9 @@ module expectEqual
         procedure :: expect_equiv_logical_msg
         procedure :: expect_equal_str_msg
         procedure :: expect_equal_char_rank1_msg
+
+        procedure :: expect_equal_user_defined
+        procedure :: expect_equal_user_defined_msg
     end interface
 
     interface
@@ -1261,4 +1264,113 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_char_rank1_msg
     end interface
+
+contains
+    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>比較には，手続`comparator`が用いられる．
+    !>
+    !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+    !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>実測値と予測値の出力には，手続`verbose_message_writer`
+    !>が用いられる．
+    !>
+    !>`expected_failure`が真であれば，比較が失敗することを検査する．
+    !>
+    !>`quiet`が真の場合，成功時の出力を抑制する．
+    !>
+    subroutine expect_equal_user_defined(actual, expected, test_name, stat, &
+                                         comparator, verbose_message_writer, &
+                                         verbose, expected_failure, quiet)
+        use :: fassert_interface
+        class(*), intent(in) :: actual
+            !! 実測値
+        class(*), intent(in) :: expected
+            !! 予測値
+        character(*), intent(in) :: test_name
+            !! テスト名
+        logical, intent(out) :: stat
+            !! 比較結果の真偽値<br>
+            !! 実測値と予測値が等しい場合`.true.`，
+            !! そうでない場合`.false.`
+        procedure(Iis_equal) :: comparator
+            !! ユーザ定義型変数`actual`, `expected`の等価演算を行う手続
+        procedure(Ioutput_on_failure_to_unit), optional :: verbose_message_writer
+            !! 値の出力を行う手続
+        logical, intent(in), optional :: verbose
+            !! 実測値と予測値を出力するフラグ
+        logical, intent(in), optional :: expected_failure
+            !! 予期された失敗を検査するかのフラグ
+        logical, intent(in), optional :: quiet
+            !! 成功時に出力を抑制するかのフラグ
+
+        logical :: has_same_value
+
+        has_same_value = comparator(actual, expected)
+        if (is_test_of_expected_failure(expected_failure)) then
+            call check_expected_failure(has_same_value, test_name, stat, quiet)
+        else
+            call check_true(has_same_value, test_name, stat, quiet)
+        end if
+
+        if (is_verbose_output(stat, verbose, quiet) &
+            .and. present(verbose_message_writer)) &
+            call verbose_message_writer(actual, expected)
+    end subroutine expect_equal_user_defined
+
+    !>実測値`actual`と予測値`expected`の等値性を比較し，
+    !>出力を`output_message`に書き込む．
+    !>比較には，手続`comparator`が用いられる．
+    !>
+    !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+    !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>実測値と予測値の出力には，手続`verbose_message_writer`
+    !>が用いられる．
+    !>
+    !>`expected_failure`が真であれば，比較が失敗することを検査する．
+    !>
+    !>`quiet`が真の場合，成功時の出力を抑制する．
+    !>
+    subroutine expect_equal_user_defined_msg(actual, expected, test_name, stat, &
+                                             comparator, verbose_message_writer, &
+                                             verbose, expected_failure, quiet, &
+                                             output_message)
+        use :: fassert_interface
+        class(*), intent(in) :: actual
+            !! 実測値
+        class(*), intent(in) :: expected
+            !! 予測値
+        character(*), intent(in) :: test_name
+            !! テスト名
+        logical, intent(out) :: stat
+            !! 比較結果の真偽値<br>
+            !! 実測値と予測値が等しい場合`.true.`，
+            !! そうでない場合`.false.`
+        procedure(Iis_equal) :: comparator
+            !! ユーザ定義型変数`actual`, `expected`の等価演算を行う手続
+        procedure(Ioutput_on_failure_to_string), optional :: verbose_message_writer
+            !! 値の出力を行う手続
+        logical, intent(in), optional :: verbose
+            !! 実測値と予測値を出力するフラグ
+        logical, intent(in), optional :: expected_failure
+            !! 予期された失敗を検査するかのフラグ
+        logical, intent(in), optional :: quiet
+            !! 成功時に出力を抑制するかのフラグ
+        character(:), allocatable, intent(out) :: output_message
+            !! 出力を格納する文字列
+
+        logical :: has_same_value
+
+        has_same_value = comparator(actual, expected)
+        if (is_test_of_expected_failure(expected_failure)) then
+            call check_expected_failure(has_same_value, test_name, stat, quiet, output_message)
+        else
+            call check_true(has_same_value, test_name, stat, quiet, output_message)
+        end if
+
+        if (is_verbose_output(stat, verbose, quiet) &
+            .and. present(verbose_message_writer)) &
+            call verbose_message_writer(actual, expected, output_message)
+    end subroutine expect_equal_user_defined_msg
 end module expectEqual
