@@ -1464,10 +1464,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    subroutine expect_equal_user_defined_rank1_msg(actual, expected, test_name, stat, &
-                                                   comparator, verbose_message_writer, &
-                                                   verbose, expected_failure, quiet, &
-                                                   output_message)
+    pure subroutine expect_equal_user_defined_rank1_msg(actual, expected, test_name, stat, &
+                                                        comparator, verbose_message_writer, &
+                                                        verbose, expected_failure, quiet, &
+                                                        output_message)
         use :: fassert_interface
         use :: expectSameShape
         implicit none
@@ -1604,10 +1604,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    subroutine expect_equal_user_defined_rank2_msg(actual, expected, test_name, stat, &
-                                                   comparator, verbose_message_writer, &
-                                                   verbose, expected_failure, quiet, &
-                                                   output_message)
+    pure subroutine expect_equal_user_defined_rank2_msg(actual, expected, test_name, stat, &
+                                                        comparator, verbose_message_writer, &
+                                                        verbose, expected_failure, quiet, &
+                                                        output_message)
         use :: fassert_interface
         use :: expectSameShape
         implicit none
@@ -1744,10 +1744,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    subroutine expect_equal_user_defined_rank3_msg(actual, expected, test_name, stat, &
-                                                   comparator, verbose_message_writer, &
-                                                   verbose, expected_failure, quiet, &
-                                                   output_message)
+    pure subroutine expect_equal_user_defined_rank3_msg(actual, expected, test_name, stat, &
+                                                        comparator, verbose_message_writer, &
+                                                        verbose, expected_failure, quiet, &
+                                                        output_message)
         use :: fassert_interface
         use :: expectSameShape
         implicit none
