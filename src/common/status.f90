@@ -35,7 +35,7 @@ contains
     end function is_test_failed
 
     !>予期された失敗をテストするかの真偽値を返す．
-    logical function is_test_of_expected_failure(expected_failure)
+    pure elemental logical function is_test_of_expected_failure(expected_failure)
         use :: fassert_common_optval
         implicit none
         logical, intent(in), optional :: expected_failure

@@ -92,8 +92,8 @@ module expectSameShape
         !>検査結果を`stat`に書き込む．
         !>
         !>`quiet`が真の場合，表示を抑制する．
-        module subroutine expect_same_shape_rank1_msg(actual, expected, test_name, stat, &
-                                                      verbose, quiet, output_message)
+        pure module subroutine expect_same_shape_rank1_msg(actual, expected, test_name, stat, &
+                                                           verbose, quiet, output_message)
             class(*), intent(in) :: actual(:)
                 !! 実測値
             class(*), intent(in) :: expected(:)
@@ -117,8 +117,8 @@ module expectSameShape
         !>検査結果を`stat`に書き込む．
         !>
         !>`quiet`が真の場合，表示を抑制する．
-        module subroutine expect_same_shape_rank2_msg(actual, expected, test_name, stat, &
-                                                      verbose, quiet, output_message)
+        pure module subroutine expect_same_shape_rank2_msg(actual, expected, test_name, stat, &
+                                                           verbose, quiet, output_message)
             class(*), intent(in) :: actual(:, :)
                 !! 実測値
             class(*), intent(in) :: expected(:, :)
@@ -142,8 +142,8 @@ module expectSameShape
         !>検査結果を`stat`に書き込む．
         !>
         !>`quiet`が真の場合，表示を抑制する．
-        module subroutine expect_same_shape_rank3_msg(actual, expected, test_name, stat, &
-                                                      verbose, quiet, output_message)
+        pure module subroutine expect_same_shape_rank3_msg(actual, expected, test_name, stat, &
+                                                           verbose, quiet, output_message)
             class(*), intent(in) :: actual(:, :, :)
                 !! 実測値
             class(*), intent(in) :: expected(:, :, :)

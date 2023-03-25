@@ -88,9 +88,9 @@ module expectLogical
         !>
         !>`quiet`が真の場合，出力を抑制する．
         !>
-        module subroutine expect_true_msg(actual, test_name, stat, &
-                                          verbose, expected_failure, quiet, &
-                                          output_message)
+        pure module subroutine expect_true_msg(actual, test_name, stat, &
+                                               verbose, expected_failure, quiet, &
+                                               output_message)
             logical, intent(in) :: actual
                 !! 実測値
             character(*), intent(in) :: test_name
@@ -120,9 +120,9 @@ module expectLogical
         !>
         !>`quiet`が真の場合，出力を抑制する．
         !>
-        module subroutine expect_false_msg(actual, test_name, stat, &
-                                           verbose, expected_failure, quiet, &
-                                           output_message)
+        pure module subroutine expect_false_msg(actual, test_name, stat, &
+                                                verbose, expected_failure, quiet, &
+                                                output_message)
             logical, intent(in) :: actual
                 !! 実測値
             character(*), intent(in) :: test_name

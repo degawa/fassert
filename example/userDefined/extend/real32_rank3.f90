@@ -7,7 +7,7 @@ module assert_real32_rank3
     public :: output_on_failure_real32_rank3
 
 contains
-    logical function is_equal_real32_rank3(actual, expected)
+    pure logical function is_equal_real32_rank3(actual, expected)
         implicit none
         class(*), intent(in) :: actual(:, :, :)
         class(*), intent(in) :: expected(:, :, :)

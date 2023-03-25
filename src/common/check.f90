@@ -94,8 +94,8 @@ contains
     !>`stat`が存在していれば，真偽を書き込む．
     !>
     !>`quiet`が真の場合，`output_message`を割り付けず，何も書き込まない．
-    subroutine check_true_write_to_string(condition, test_name, stat, &
-                                          quiet, output_message)
+    pure subroutine check_true_write_to_string(condition, test_name, stat, &
+                                               quiet, output_message)
         logical, intent(in) :: condition
             !! 判別される条件
         character(*), intent(in) :: test_name
@@ -135,8 +135,8 @@ contains
     !>`stat`が存在していれば，真偽（偽の時に真，真の時に偽）を書き込む．
     !>
     !>`quiet`が真の場合，`output_message`を割り付けず，何も書き込まない．
-    subroutine check_expected_failure_write_to_string(condition, test_name, stat, &
-                                                      quiet, output_message)
+    pure subroutine check_expected_failure_write_to_string(condition, test_name, stat, &
+                                                           quiet, output_message)
         use :: fassert_common_message
         logical, intent(in) :: condition
             !! 判別される条件

@@ -34,7 +34,7 @@ module fassert_common_message_outputOnFailure_toString_equal
 
 contains
     !>実測値と予測値を文字列に出力する．
-    subroutine output_int8_to_string(actual, expected, output_message)
+    pure subroutine output_int8_to_string(actual, expected, output_message)
         implicit none
         integer(int8), intent(in) :: actual
             !! 実測値
@@ -51,7 +51,7 @@ contains
     end subroutine output_int8_to_string
 
     !>実測値と予測値を文字列に出力する．
-    subroutine output_int16_to_string(actual, expected, output_message)
+    pure subroutine output_int16_to_string(actual, expected, output_message)
         implicit none
         integer(int16), intent(in) :: actual
             !! 実測値
@@ -68,7 +68,7 @@ contains
     end subroutine output_int16_to_string
 
     !>実測値と予測値を文字列に出力する．
-    subroutine output_int32_to_string(actual, expected, output_message)
+    pure subroutine output_int32_to_string(actual, expected, output_message)
         implicit none
         integer(int32), intent(in) :: actual
             !! 実測値
@@ -85,7 +85,7 @@ contains
     end subroutine output_int32_to_string
 
     !>実測値と予測値を文字列に出力する．
-    subroutine output_int64_to_string(actual, expected, output_message)
+    pure subroutine output_int64_to_string(actual, expected, output_message)
         implicit none
         integer(int64), intent(in) :: actual
             !! 実測値
@@ -102,7 +102,7 @@ contains
     end subroutine output_int64_to_string
 
     !>実測値と予測値，それらの差を文字列に出力する．
-    subroutine output_real32_to_string(actual, expected, output_message)
+    pure subroutine output_real32_to_string(actual, expected, output_message)
         implicit none
         real(real32), intent(in) :: actual
             !! 実測値
@@ -121,7 +121,7 @@ contains
     end subroutine output_real32_to_string
 
     !>実測値と予測値，それらの差を文字列に出力する．
-    subroutine output_real64_to_string(actual, expected, output_message)
+    pure subroutine output_real64_to_string(actual, expected, output_message)
         implicit none
         real(real64), intent(in) :: actual
             !! 実測値
@@ -140,7 +140,7 @@ contains
     end subroutine output_real64_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_int32_rank1_to_string(actual, expected, output_message)
+    pure subroutine output_int32_rank1_to_string(actual, expected, output_message)
         implicit none
         integer(int32), intent(in) :: actual(:)
             !! 実測値
@@ -163,7 +163,7 @@ contains
     end subroutine output_int32_rank1_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_int32_rank2_to_string(actual, expected, output_message)
+    pure subroutine output_int32_rank2_to_string(actual, expected, output_message)
         implicit none
         integer(int32), intent(in) :: actual(:, :)
             !! 実測値
@@ -186,7 +186,7 @@ contains
     end subroutine output_int32_rank2_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_int32_rank3_to_string(actual, expected, output_message)
+    pure subroutine output_int32_rank3_to_string(actual, expected, output_message)
         implicit none
         integer(int32), intent(in) :: actual(:, :, :)
             !! 実測値
@@ -209,7 +209,7 @@ contains
     end subroutine output_int32_rank3_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_real32_rank1_to_string(actual, expected, output_message)
+    pure subroutine output_real32_rank1_to_string(actual, expected, output_message)
         implicit none
         real(real32), intent(in) :: actual(:)
             !! 実測値
@@ -232,7 +232,7 @@ contains
     end subroutine output_real32_rank1_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_real32_rank2_to_string(actual, expected, output_message)
+    pure subroutine output_real32_rank2_to_string(actual, expected, output_message)
         implicit none
         real(real32), intent(in) :: actual(:, :)
             !! 実測値
@@ -255,7 +255,7 @@ contains
     end subroutine output_real32_rank2_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_real32_rank3_to_string(actual, expected, output_message)
+    pure subroutine output_real32_rank3_to_string(actual, expected, output_message)
         implicit none
         real(real32), intent(in) :: actual(:, :, :)
             !! 実測値
@@ -278,7 +278,7 @@ contains
     end subroutine output_real32_rank3_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_real64_rank1_to_string(actual, expected, output_message)
+    pure subroutine output_real64_rank1_to_string(actual, expected, output_message)
         implicit none
         real(real64), intent(in) :: actual(:)
             !! 実測値
@@ -301,7 +301,7 @@ contains
     end subroutine output_real64_rank1_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_real64_rank2_to_string(actual, expected, output_message)
+    pure subroutine output_real64_rank2_to_string(actual, expected, output_message)
         implicit none
         real(real64), intent(in) :: actual(:, :)
             !! 実測値
@@ -324,7 +324,7 @@ contains
     end subroutine output_real64_rank2_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
-    subroutine output_real64_rank3_to_string(actual, expected, output_message)
+    pure subroutine output_real64_rank3_to_string(actual, expected, output_message)
         implicit none
         real(real64), intent(in) :: actual(:, :, :)
             !! 実測値
@@ -347,7 +347,7 @@ contains
     end subroutine output_real64_rank3_to_string
 
     !>実測値と予測値を文字列に出力する．
-    subroutine output_logical_to_string(actual, expected, output_message)
+    pure subroutine output_logical_to_string(actual, expected, output_message)
         use :: fassert_common_message, only:to_string
         implicit none
         logical, intent(in) :: actual
@@ -365,7 +365,7 @@ contains
     end subroutine output_logical_to_string
 
     !>実測値と予測値を文字列に出力する．
-    subroutine output_string_to_string(actual, expected, output_message)
+    pure subroutine output_string_to_string(actual, expected, output_message)
         implicit none
         character(*), intent(in) :: actual
             !! 実測値
@@ -382,7 +382,7 @@ contains
     end subroutine output_string_to_string
 
     !>実測値と予測値を文字列に出力する．
-    subroutine output_char_rank1_to_string(actual, expected, output_message)
+    pure subroutine output_char_rank1_to_string(actual, expected, output_message)
         implicit none
         character, intent(in) :: actual(:)
             !! 実測値

@@ -16,7 +16,7 @@ module fassert_interface
 
     interface
         !>任意のスカラ型の比較を行う手続のインタフェース
-        logical function Iis_equal(actual, expected)
+        pure logical function Iis_equal(actual, expected)
             implicit none
             class(*), intent(in) :: actual
                 !! 予測値
@@ -25,7 +25,7 @@ module fassert_interface
         end function Iis_equal
 
         !>任意の1次元配列の比較を行う手続のインタフェース
-        logical function Iis_equal_rank1(actual, expected)
+        pure logical function Iis_equal_rank1(actual, expected)
             implicit none
             class(*), intent(in) :: actual(:)
                 !! 予測値
@@ -34,7 +34,7 @@ module fassert_interface
         end function Iis_equal_rank1
 
         !>任意の2次元配列の比較を行う手続のインタフェース
-        logical function Iis_equal_rank2(actual, expected)
+        pure logical function Iis_equal_rank2(actual, expected)
             implicit none
             class(*), intent(in) :: actual(:, :)
                 !! 予測値
@@ -43,7 +43,7 @@ module fassert_interface
         end function Iis_equal_rank2
 
         !>任意の3次元配列の比較を行う手続のインタフェース
-        logical function Iis_equal_rank3(actual, expected)
+        pure logical function Iis_equal_rank3(actual, expected)
             implicit none
             class(*), intent(in) :: actual(:, :, :)
                 !! 予測値
@@ -92,7 +92,7 @@ module fassert_interface
 
     interface
         !>検査失敗時に予測値と実測値を文字列に出力する手続のインタフェース
-        subroutine Ioutput_on_failure_to_string(actual, expected, output_message)
+        pure subroutine Ioutput_on_failure_to_string(actual, expected, output_message)
             implicit none
             class(*), intent(in) :: actual
                 !! 予測値
@@ -103,7 +103,7 @@ module fassert_interface
         end subroutine Ioutput_on_failure_to_string
 
         !>検査失敗時に予測値と実測値を文字列に出力する手続のインタフェース
-        subroutine Ioutput_on_failure_to_string_rank1(actual, expected, output_message)
+        pure subroutine Ioutput_on_failure_to_string_rank1(actual, expected, output_message)
             implicit none
             class(*), intent(in) :: actual(:)
                 !! 予測値
@@ -114,7 +114,7 @@ module fassert_interface
         end subroutine Ioutput_on_failure_to_string_rank1
 
         !>検査失敗時に予測値と実測値を文字列に出力する手続のインタフェース
-        subroutine Ioutput_on_failure_to_string_rank2(actual, expected, output_message)
+        pure subroutine Ioutput_on_failure_to_string_rank2(actual, expected, output_message)
             implicit none
             class(*), intent(in) :: actual(:, :)
                 !! 予測値
@@ -125,7 +125,7 @@ module fassert_interface
         end subroutine Ioutput_on_failure_to_string_rank2
 
         !>検査失敗時に予測値と実測値を文字列に出力する手続のインタフェース
-        subroutine Ioutput_on_failure_to_string_rank3(actual, expected, output_message)
+        pure subroutine Ioutput_on_failure_to_string_rank3(actual, expected, output_message)
             implicit none
             class(*), intent(in) :: actual(:, :, :)
                 !! 予測値

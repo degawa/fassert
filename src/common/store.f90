@@ -29,7 +29,7 @@ contains
     end subroutine store_logical
 
     !>`str`が渡されている場合に，`val`の値を`str`末尾に改行して追記する．
-    subroutine append_str(str, val)
+    pure subroutine append_str(str, val)
         implicit none
         !&<
         character(:), allocatable   , intent(inout) :: str
