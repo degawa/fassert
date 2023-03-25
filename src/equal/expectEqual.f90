@@ -638,9 +638,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int8_msg(actual, expected, test_name, stat, &
-                                                verbose, expected_failure, quiet, &
-                                                output_message)
+        pure module subroutine expect_equal_int8_msg(actual, expected, test_name, stat, &
+                                                     verbose, expected_failure, quiet, &
+                                                     output_message)
             integer(int8), intent(in) :: actual
                 !! 実測値
             integer(int8), intent(in) :: expected
@@ -672,9 +672,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int16_msg(actual, expected, test_name, stat, &
-                                                 verbose, expected_failure, quiet, &
-                                                 output_message)
+        pure module subroutine expect_equal_int16_msg(actual, expected, test_name, stat, &
+                                                      verbose, expected_failure, quiet, &
+                                                      output_message)
             integer(int16), intent(in) :: actual
                 !! 実測値
             integer(int16), intent(in) :: expected
@@ -706,9 +706,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int32_msg(actual, expected, test_name, stat, &
-                                                 verbose, expected_failure, quiet, &
-                                                 output_message)
+        pure module subroutine expect_equal_int32_msg(actual, expected, test_name, stat, &
+                                                      verbose, expected_failure, quiet, &
+                                                      output_message)
             integer(int32), intent(in) :: actual
                 !! 実測値
             integer(int32), intent(in) :: expected
@@ -740,9 +740,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int64_msg(actual, expected, test_name, stat, &
-                                                 verbose, expected_failure, quiet, &
-                                                 output_message)
+        pure module subroutine expect_equal_int64_msg(actual, expected, test_name, stat, &
+                                                      verbose, expected_failure, quiet, &
+                                                      output_message)
             integer(int64), intent(in) :: actual
                 !! 実測値
             integer(int64), intent(in) :: expected
@@ -774,9 +774,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int32_rank1_msg(actual, expected, test_name, stat, &
-                                                       verbose, expected_failure, quiet, &
-                                                       output_message)
+        pure module subroutine expect_equal_int32_rank1_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
             integer(int32), intent(in) :: actual(:)
                 !! 実測値
             integer(int32), intent(in) :: expected(:)
@@ -808,9 +808,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int32_rank2_msg(actual, expected, test_name, stat, &
-                                                       verbose, expected_failure, quiet, &
-                                                       output_message)
+        pure module subroutine expect_equal_int32_rank2_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
             integer(int32), intent(in) :: actual(:, :)
                 !! 実測値
             integer(int32), intent(in) :: expected(:, :)
@@ -842,9 +842,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_int32_rank3_msg(actual, expected, test_name, stat, &
-                                                       verbose, expected_failure, quiet, &
-                                                       output_message)
+        pure module subroutine expect_equal_int32_rank3_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
             integer(int32), intent(in) :: actual(:, :, :)
                 !! 実測値
             integer(int32), intent(in) :: expected(:, :, :)
@@ -877,10 +877,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real32_msg(actual, expected, test_name, stat, &
-                                                        tolerance, &
-                                                        verbose, expected_failure, quiet, &
-                                                        output_message)
+        pure module subroutine expect_approxequal_real32_msg(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet, &
+                                                             output_message)
             real(real32), intent(in) :: actual
                 !! 実測値
             real(real32), intent(in) :: expected
@@ -914,10 +914,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real64_msg(actual, expected, test_name, stat, &
-                                                        tolerance, &
-                                                        verbose, expected_failure, quiet, &
-                                                        output_message)
+        pure module subroutine expect_approxequal_real64_msg(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet, &
+                                                             output_message)
             real(real64), intent(in) :: actual
                 !! 実測値
             real(real64), intent(in) :: expected
@@ -952,10 +952,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real32_rank1_msg(actual, expected, test_name, stat, &
-                                                              tolerance, &
-                                                              verbose, expected_failure, quiet, &
-                                                              output_message)
+        pure module subroutine expect_approxequal_real32_rank1_msg(actual, expected, test_name, stat, &
+                                                                   tolerance, &
+                                                                   verbose, expected_failure, quiet, &
+                                                                   output_message)
             real(real32), intent(in) :: actual(:)
                 !! 実測値
             real(real32), intent(in) :: expected(:)
@@ -990,10 +990,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real32_rank2_msg(actual, expected, test_name, stat, &
-                                                              tolerance, &
-                                                              verbose, expected_failure, quiet, &
-                                                              output_message)
+        pure module subroutine expect_approxequal_real32_rank2_msg(actual, expected, test_name, stat, &
+                                                                   tolerance, &
+                                                                   verbose, expected_failure, quiet, &
+                                                                   output_message)
             real(real32), intent(in) :: actual(:, :)
                 !! 実測値
             real(real32), intent(in) :: expected(:, :)
@@ -1028,10 +1028,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real32_rank3_msg(actual, expected, test_name, stat, &
-                                                              tolerance, &
-                                                              verbose, expected_failure, quiet, &
-                                                              output_message)
+        pure module subroutine expect_approxequal_real32_rank3_msg(actual, expected, test_name, stat, &
+                                                                   tolerance, &
+                                                                   verbose, expected_failure, quiet, &
+                                                                   output_message)
             real(real32), intent(in) :: actual(:, :, :)
                 !! 実測値
             real(real32), intent(in) :: expected(:, :, :)
@@ -1066,10 +1066,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real64_rank1_msg(actual, expected, test_name, stat, &
-                                                              tolerance, &
-                                                              verbose, expected_failure, quiet, &
-                                                              output_message)
+        pure module subroutine expect_approxequal_real64_rank1_msg(actual, expected, test_name, stat, &
+                                                                   tolerance, &
+                                                                   verbose, expected_failure, quiet, &
+                                                                   output_message)
             real(real64), intent(in) :: actual(:)
                 !! 実測値
             real(real64), intent(in) :: expected(:)
@@ -1104,10 +1104,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real64_rank2_msg(actual, expected, test_name, stat, &
-                                                              tolerance, &
-                                                              verbose, expected_failure, quiet, &
-                                                              output_message)
+        pure module subroutine expect_approxequal_real64_rank2_msg(actual, expected, test_name, stat, &
+                                                                   tolerance, &
+                                                                   verbose, expected_failure, quiet, &
+                                                                   output_message)
             real(real64), intent(in) :: actual(:, :)
                 !! 実測値
             real(real64), intent(in) :: expected(:, :)
@@ -1142,10 +1142,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_real64_rank3_msg(actual, expected, test_name, stat, &
-                                                              tolerance, &
-                                                              verbose, expected_failure, quiet, &
-                                                              output_message)
+        pure module subroutine expect_approxequal_real64_rank3_msg(actual, expected, test_name, stat, &
+                                                                   tolerance, &
+                                                                   verbose, expected_failure, quiet, &
+                                                                   output_message)
             real(real64), intent(in) :: actual(:, :, :)
                 !! 実測値
             real(real64), intent(in) :: expected(:, :, :)
@@ -1179,9 +1179,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equiv_logical_msg(actual, expected, test_name, stat, &
-                                                   verbose, expected_failure, quiet, &
-                                                   output_message)
+        pure module subroutine expect_equiv_logical_msg(actual, expected, test_name, stat, &
+                                                        verbose, expected_failure, quiet, &
+                                                        output_message)
             logical, intent(in) :: actual
                 !! 実測値
             logical, intent(in) :: expected
@@ -1213,9 +1213,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_str_msg(actual, expected, test_name, stat, &
-                                               verbose, expected_failure, quiet, &
-                                               output_message)
+        pure module subroutine expect_equal_str_msg(actual, expected, test_name, stat, &
+                                                    verbose, expected_failure, quiet, &
+                                                    output_message)
             character(*), intent(in) :: actual
                 !! 実測値
             character(*), intent(in) :: expected
@@ -1247,9 +1247,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_equal_char_rank1_msg(actual, expected, test_name, stat, &
-                                                      verbose, expected_failure, quiet, &
-                                                      output_message)
+        pure module subroutine expect_equal_char_rank1_msg(actual, expected, test_name, stat, &
+                                                           verbose, expected_failure, quiet, &
+                                                           output_message)
             character, intent(in) :: actual(:)
                 !! 実測値
             character, intent(in) :: expected(:)
