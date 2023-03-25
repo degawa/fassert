@@ -1505,7 +1505,7 @@ contains
                                    verbose=verbose, quiet=quiet, output_message=shape_check_msg)
             if (is_test_failed(array_shape_stat)) then
                 stat = failed
-                call write_message(shape_check_msg)
+                call write_message(output_message, shape_check_msg)
                 return
             end if
         end block
@@ -1645,7 +1645,7 @@ contains
                                    verbose=verbose, quiet=quiet, output_message=shape_check_msg)
             if (is_test_failed(array_shape_stat)) then
                 stat = failed
-                call write_message(shape_check_msg)
+                call write_message(output_message, shape_check_msg)
                 return
             end if
         end block
@@ -1785,7 +1785,7 @@ contains
                                    verbose=verbose, quiet=quiet, output_message=shape_check_msg)
             if (is_test_failed(array_shape_stat)) then
                 stat = failed
-                call write_message(shape_check_msg)
+                call write_message(output_message, shape_check_msg)
                 return
             end if
         end block
