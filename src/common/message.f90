@@ -73,7 +73,7 @@ contains
 
     !>`message`が割り付けられていれば，
     !>その値を`output_message`に書き込む．
-    subroutine write_message_to_string(message, output_message)
+    pure subroutine write_message_to_string(message, output_message)
         implicit none
         character(:), allocatable, intent(in) :: message
         character(:), allocatable, intent(out) :: output_message
@@ -124,7 +124,7 @@ contains
     !> p: test passed, f: test failed
     !> T: `.true.`, F: `.false.`, -: not present
     !>
-    logical function is_verbose_output(stat, verbose, quiet)
+    pure logical function is_verbose_output(stat, verbose, quiet)
         implicit none
         logical, intent(in) :: stat
         logical, intent(in), optional :: verbose
@@ -142,7 +142,7 @@ contains
 
     !>引数で渡された条件を判別し，
     !>テスト結果を出力する場合に`.true.`そうでない場合`.false.`を返す．
-    logical function does_output_message(quiet)
+    pure logical function does_output_message(quiet)
         implicit none
         logical, intent(in), optional :: quiet
             !! 出力抑制フラグ
@@ -152,7 +152,7 @@ contains
 
     !>引数で渡された条件を判別し，
     !>テスト結果を出力しない場合に`.true.`そうでない場合`.false.`を返す．
-    logical function does_not_output_message(quiet)
+    pure logical function does_not_output_message(quiet)
         implicit none
         logical, intent(in), optional :: quiet
             !! 出力抑制フラグ

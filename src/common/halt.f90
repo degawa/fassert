@@ -6,7 +6,7 @@ module fassert_common_halt
 
 contains
     !>テスト結果が失敗（`test_status`が偽）の場合，直ちにテストを停止する．
-    subroutine halt_on_failure(test_status)
+    pure subroutine halt_on_failure(test_status)
         implicit none
         logical, intent(in) :: test_status
             !! テスト結果

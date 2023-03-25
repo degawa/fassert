@@ -18,7 +18,7 @@ module fassert_common_message_outputOnFailure_toString_shape
 
 contains
     !>配列形状の実測値と予測値を装置に出力する．
-    subroutine output_rank1_to_string(actual, expected, output_message)
+    pure subroutine output_rank1_to_string(actual, expected, output_message)
         implicit none
         class(*), intent(in) :: actual(:)
             !! 実測値
@@ -35,7 +35,7 @@ contains
     end subroutine output_rank1_to_string
 
     !>配列形状の実測値と予測値を装置に出力する．
-    subroutine output_rank2_to_string(actual, expected, output_message)
+    pure subroutine output_rank2_to_string(actual, expected, output_message)
         implicit none
         class(*), intent(in) :: actual(:, :)
             !! 実測値
@@ -52,7 +52,7 @@ contains
     end subroutine output_rank2_to_string
 
     !>配列形状の実測値と予測値を装置に出力する．
-    subroutine output_rank3_to_string(actual, expected, output_message)
+    pure subroutine output_rank3_to_string(actual, expected, output_message)
         implicit none
         class(*), intent(in) :: actual(:, :, :)
             !! 実測値
