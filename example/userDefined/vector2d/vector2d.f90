@@ -13,7 +13,7 @@ module vector2d
     end type vector2d_type
 
 contains
-    logical function is_equal_vec2d(actual, expected)
+    pure logical function is_equal_vec2d(actual, expected)
         implicit none
         class(*), intent(in) :: actual
         class(*), intent(in) :: expected
@@ -52,7 +52,7 @@ contains
         end select
     end subroutine output_on_failure_vec2d
 
-    subroutine output_on_failure_vec2d_to_str(actual, expected, output_message)
+    pure subroutine output_on_failure_vec2d_to_str(actual, expected, output_message)
         implicit none
         class(*), intent(in) :: actual
         class(*), intent(in) :: expected
