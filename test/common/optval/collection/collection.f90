@@ -15,18 +15,12 @@ contains
             !! collection of tests
 
         test_suite = [ &
-                     new_unittest("optval_real32(), it should return x when input x.", &
-                                  optvalReal32_should_return_x_when_intpu_x_and_default) &
-                     , new_unittest("optval_real32(), it should return default when doesn't input x.", &
-                                    optvalReal32_should_return_default_when_does_not_input_x) &
-                     , new_unittest("optval_real64(), it should return x when input x.", &
-                                    optvalReal64_should_return_x_when_intpu_x_and_default) &
-                     , new_unittest("optval_real64(), it should return default when doesn't input x.", &
-                                    optvalReal64_should_return_default_when_does_not_input_x) &
-                     , new_unittest("optval_logical(), it should return x when input x.", &
-                                    optvalLogical_should_return_x_when_intpu_x_and_default) &
-                     , new_unittest("optval_logical(), it should return default when doesn't input x.", &
-                                    optvalLogical_should_return_default_when_does_not_input_x) &
+                     new_unittest("optval_real32(), parameterized test.", &
+                                  optvalReal32_parameterized_test) &
+                     , new_unittest("optval_real64(), parameterized test.", &
+                                    optvalReal64_parameterized_test) &
+                     , new_unittest("optval_logical(), parameterized test.", &
+                                    optvalLogical_parameterized_test) &
                      ]
     end subroutine collect_optval
 end module test_common_optval_collection
