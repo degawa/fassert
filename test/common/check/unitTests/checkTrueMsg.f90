@@ -3,135 +3,111 @@ module test_common_check_unitTests_trueStr
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string, get_actual_value
     use :: strings_enclose
-    use :: fassert_common_unit
-    use :: fassert_common_message, only:prefix_passed, prefix_failed
-    use :: fassert_common_status
+    use :: test_common_check_unitTests_common
     use :: fassert_common_check
     implicit none
     private
-    public :: checkTrueStr_should_store_message_with_prefix_when_test_passed
-    public :: checkTrueStr_should_store_message_with_prefix_when_test_failed
-    public :: checkTrueStr_stat_should_be_passed_status_when_test_passed
-    public :: checkTrueStr_stat_should_be_failed_status_when_test_failed
-    public :: checkTrueStr_should_not_alloc_message_when_passed_quiet_true
+    public :: checkTrueMsg_parameterized_test
 
 contains
-    subroutine checkTrueStr_should_store_message_with_prefix_when_test_passed(error)
+    subroutine checkTrueMsg_parameterized_test(error)
+        use :: par_funnel
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        character(:), allocatable :: test_name, buffer, expected
+        type(test_parameter_type), allocatable :: params(:)
+        type(test_results_type) :: results
 
-        call setup(test_name, expected)
+        params = [ &
+                 new_test_parameter(arguments="test_name='a unit test' condition=true", &
+                                    expected="message='PASSED: a unit test' alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=false", &
+                                      expected="message='FAILED: a unit test' alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false", &
+                                      expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true", &
+                                      expected="message='FAILED: a unit test' stat_exp=false alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=true quiet=false", &
+                                      expected="message='PASSED: a unit test' alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=false quiet=false", &
+                                      expected="message='FAILED: a unit test' alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=true quiet=true", &
+                                      expected="message='' alloced=false") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=false quiet=true", &
+                                      expected="message='' alloced=false") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false quiet=false", &
+                                      expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true quiet=false", &
+                                      expected="message='FAILED: a unit test' stat_exp=false alloced=true") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false quiet=true", &
+                                      expected="message='' stat_exp=true alloced=false") &
+                 , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true quiet=true", &
+                                      expected="message='' stat_exp=false alloced=false") &
+                 ]
 
-        call check_true(.true., test_name, output_message=buffer)
-
-        call check(error, len_trim(buffer) == len(expected), &
-                   "expected message length "//to_string(len(expected)) &
-                   //", but got "//to_string(len_trim(buffer)))
-        if (occurred(error)) return
-
-        call check(error, trim(buffer) == expected, &
-                   "expected "//enclose(expected, '"')//", but got "//enclose(trim(buffer), '"'))
-
-        call teardown()
+        call run_test_cases(params, results)
+        call check(error, results%all_cases_successful(), results%get_summary_message())
     contains
-        subroutine setup(test_name, expected)
-            character(:), allocatable :: test_name, expected
+        subroutine run_test_cases(params, results)
+            use :: strings_enclose
+            type(test_parameter_type), intent(in) :: params(:)
+            type(test_results_type), intent(inout) :: results
 
-            test_name = "check_true_write_to_string should store message with prefix "// &
-                        enclose(prefix_passed, "'")//" when test passed"
-            expected = prefix_passed//test_name
-        end subroutine setup
+            ! expected
+            character(256) :: test_name
+            logical :: condition, stat, quiet
 
-        subroutine teardown()
-        end subroutine teardown
-    end subroutine checkTrueStr_should_store_message_with_prefix_when_test_passed
+            ! actual
+            character(256) :: message
+            logical :: stat_exp, alloced
 
-    subroutine checkTrueStr_should_store_message_with_prefix_when_test_failed(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
+            call results%construct(params)
 
-        character(:), allocatable :: test_name, buffer, expected
+            block
+                character(:), allocatable :: case_name, message_act
+                integer(int32) :: case, scratch_unit_number
+                type(arguments_presence_type) :: arg_pres
+                logical :: cond, alloced_act
 
-        call setup(test_name, expected)
+                do case = 1, results%get_number_of_test_cases()
+                    call setup_case(params(case), case_name, arg_pres, &
+                                    test_name, condition, stat, quiet, &
+                                    message, stat_exp, alloced)
 
-        call check_true(.false., test_name, output_message=buffer)
+                    write (output_unit, '(12X, "- ",A)') case_name
 
-        call check(error, len_trim(buffer) == len(expected), &
-                   "expected message length "//to_string(len(expected)) &
-                   //", but got "//to_string(len_trim(buffer)))
-        if (occurred(error)) return
+                    if (arg_pres.has. [.false., .false.]) &
+                        call check_true(condition, trim(test_name), output_message=message_act)
+                    if (arg_pres.has. [.true., .false.]) &
+                        call check_true(condition, trim(test_name), stat=stat, output_message=message_act)
+                    if (arg_pres.has. [.false., .true.]) &
+                        call check_true(condition, trim(test_name), quiet=quiet, output_message=message_act)
+                    if (arg_pres.has. [.true., .true.]) &
+                        call check_true(condition, trim(test_name), stat=stat, quiet=quiet, output_message=message_act)
 
-        call check(error, trim(buffer) == expected, &
-                   "expected "//enclose(expected, '"')//", but got "//enclose(trim(buffer), '"'))
+                    alloced_act = allocated(message_act)
+                    cond = alloced_act .eqv. alloced
+                    if (.not. alloced_act) message_act = ""
+                    cond = all([cond, &
+                                len_trim(message_act) == len_trim(message), &
+                                trim(message_act) == trim(message)])
 
-        call teardown()
-    contains
-        subroutine setup(test_name, expected)
-            character(:), allocatable, intent(inout) :: test_name, expected
+                    if (params(case)%presented("stat")) then
+                        cond = cond .and. (stat .eqv. stat_exp)
+                        call results%check_test(case, cond, &
+                                                failure_message_msg(case_name, trim(message), trim(message_act), &
+                                                                    [alloced, alloced_act], [stat_exp, stat]))
+                    else
+                        call results%check_test(case, cond, &
+                                                failure_message_msg(case_name, trim(message), trim(message_act), &
+                                                                    [alloced, alloced_act]))
+                    end if
 
-            test_name = "check_true_write_to_string should store message with prefix "// &
-                        enclose(prefix_failed, "'")//" when test failed"
-            expected = prefix_failed//test_name
-        end subroutine setup
+                    call teardown_case(message_act)
+                end do
+            end block
+        end subroutine run_test_cases
 
-        subroutine teardown()
-        end subroutine teardown
-    end subroutine checkTrueStr_should_store_message_with_prefix_when_test_failed
-
-    subroutine checkTrueStr_stat_should_be_passed_status_when_test_passed(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-        logical :: stat
-        character(:), allocatable :: buffer
-
-        call check_true(.true., "", stat, output_message=buffer)
-
-        call check(error, stat .eqv. passed, &
-                   "expected "//to_string(passed)//", but got "//to_string(stat))
-    end subroutine checkTrueStr_stat_should_be_passed_status_when_test_passed
-
-    subroutine checkTrueStr_stat_should_be_failed_status_when_test_failed(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-        logical :: stat
-        character(:), allocatable :: buffer
-
-        call check_true(.false., "", stat, output_message=buffer)
-
-        call check(error, stat .eqv. failed, &
-                   "expected "//to_string(failed)//", but got "//to_string(stat))
-    end subroutine checkTrueStr_stat_should_be_failed_status_when_test_failed
-
-    subroutine checkTrueStr_should_not_alloc_message_when_passed_quiet_true(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        character(:), allocatable :: test_name, buffer
-
-        call setup(test_name)
-
-        call check_true(.true., test_name, quiet=.true., output_message=buffer)
-
-        call check(error,.not. allocated(buffer), &
-                   "expected allocate status "//to_string(.false.)// &
-                   ", but got "//to_string(.not. allocated(buffer)))
-        if (occurred(error)) return
-
-        call teardown()
-    contains
-        subroutine setup(test_name)
-            character(:), allocatable :: test_name
-            test_name = "check_true_write_to_string should not allocate message when test passed but quiet=.true."
-        end subroutine setup
-
-        subroutine teardown()
-        end subroutine teardown
-    end subroutine checkTrueStr_should_not_alloc_message_when_passed_quiet_true
+    end subroutine checkTrueMsg_parameterized_test
 end module test_common_check_unitTests_trueStr
