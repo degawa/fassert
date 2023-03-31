@@ -15,20 +15,24 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
+        type(parameterization_spec_type) :: spec
         type(test_results_type) :: results
 
-        params = [ &
-                 new_test_parameter(arguments="a='abc' b='xyz'", expected="same_length=true") &
-                 , new_test_parameter(arguments="a='abc' b='abca'", expected="same_length=false") &
-                 , new_test_parameter(arguments="a='abc' b='xyz '", expected="same_length=true") &
-                 ]
+        spec = new_parameterization_spec( &
+               [ &
+               new_test_parameter(arguments="a='abc' b='xyz'", expected="same_length=true") &
+               , new_test_parameter(arguments="a='abc' b='abca'", expected="same_length=false") &
+               , new_test_parameter(arguments="a='abc' b='xyz '", expected="same_length=true") &
+               ] &
+               )
+        call results%construct(spec)
 
-        call run_test_cases(params, results)
+        call run_test_cases(spec, results)
         call check(error, results%all_cases_successful(), results%get_summary_message())
+        call results%destruct()
     contains
-        subroutine run_test_cases(params, results)
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             character(:), allocatable :: a
@@ -38,10 +42,9 @@ contains
             namelist /arguments/ a, b
             namelist /expected/ same_length
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
+                type(test_parameter_type) :: param
                 integer(int32) :: case
                 integer(int32) :: len_a(3) = [3, 3, 3], len_b(3) = [3, 4, 4]
 
@@ -49,11 +52,12 @@ contains
                     allocate (character(len_a(case)) :: a)
                     allocate (character(len_b(case)) :: b)
 
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
 
                     write (output_unit, '(12X, "- ",A)') test_name
                     call results%check_test(case, are_same_length(a, b) .eqv. same_length, &

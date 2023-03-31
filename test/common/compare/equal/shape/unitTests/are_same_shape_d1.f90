@@ -18,23 +18,26 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
+        type(parameterization_spec_type) :: spec
         type(test_results_type) :: results
 
-        params = [ &
-                   new_test_parameter(arguments="vtype='int32' dim_a=3 dim_b=3" , expected="same_shape=true") &
-                 , new_test_parameter(arguments="vtype='int32' dim_a=3 dim_b=2" , expected="same_shape=false") &
-                 , new_test_parameter(arguments="vtype='real32' dim_a=3 dim_b=3", expected="same_shape=true") &
-                 , new_test_parameter(arguments="vtype='real32' dim_a=3 dim_b=2", expected="same_shape=false") &
-                 , new_test_parameter(arguments="vtype='real64' dim_a=3 dim_b=3", expected="same_shape=true") &
-                 , new_test_parameter(arguments="vtype='real64' dim_a=3 dim_b=2", expected="same_shape=false") &
-                 ] !&
+        spec = new_parameterization_spec( &
+               [ &
+                 new_test_parameter(arguments="vtype='int32' dim_a=3 dim_b=3" , expected="same_shape=true") &
+               , new_test_parameter(arguments="vtype='int32' dim_a=3 dim_b=2" , expected="same_shape=false") &
+               , new_test_parameter(arguments="vtype='real32' dim_a=3 dim_b=3", expected="same_shape=true") &
+               , new_test_parameter(arguments="vtype='real32' dim_a=3 dim_b=2", expected="same_shape=false") &
+               , new_test_parameter(arguments="vtype='real64' dim_a=3 dim_b=3", expected="same_shape=true") &
+               , new_test_parameter(arguments="vtype='real64' dim_a=3 dim_b=2", expected="same_shape=false") &
+               ]) !&
+        call results%construct(spec)
 
-        call run_test_cases(params, results)
+        call run_test_cases(spec, results)
         call check(error, results%all_cases_successful(), results%get_summary_message())
+        call results%destruct()
     contains
-        subroutine run_test_cases(params, results)
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             character(64) :: vtype
@@ -44,19 +47,19 @@ contains
             namelist /arguments/ vtype, dim_a, dim_b
             namelist /expected/ same_shape
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
+                type(test_parameter_type) :: param
                 integer(int32) :: case
                 class(*), allocatable :: a(:), b(:)
 
                 do case = 1, results%get_number_of_test_cases()
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
                     write (output_unit, '(12X, "- ",A)') test_name
 
                     select case (trim(adjustl(vtype)))
