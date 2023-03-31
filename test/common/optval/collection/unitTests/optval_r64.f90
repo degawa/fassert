@@ -2,6 +2,8 @@ module test_common_optval_unitTests_r64
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred
+    use :: par_funnel
+    use :: test_common_optval_unitTests_common
     use :: fassert_common_optval
     implicit none
     private
@@ -9,26 +11,25 @@ module test_common_optval_unitTests_r64
 
 contains
     subroutine optvalReal64_parameterized_test(error)
-        use :: par_funnel
         implicit none
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                   new_test_parameter(arguments="x=15689 default=0.1378", expected="retval=15689") &
-                 , new_test_parameter(arguments="x=48.648 default=563.5", expected="retval=48.648") &
-                 , new_test_parameter(arguments="default=231d3"       , expected="retval=231d3") &
-                 , new_test_parameter(arguments="default=81d-3"        , expected="retval=81d-3") &
-                 ] !&
+        spec = new_parameterization_spec( &
+               [ &
+               new_test_parameter(arguments="x=15689 default=0.1378", expected="retval=15689") &
+               , new_test_parameter(arguments="x=48.648 default=563.5", expected="retval=48.648") &
+               , new_test_parameter(arguments="default=231d3", expected="retval=231d3") &
+               , new_test_parameter(arguments="default=81d-3", expected="retval=81d-3") &
+               ], &
+               optional_args=[argument("x")])
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             real(real64) :: x, default, retval
@@ -36,23 +37,23 @@ contains
             namelist /arguments/ x, default
             namelist /expected/ retval
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
                 integer(int32) :: case
                 real(real64) :: actual
+                type(test_parameter_type) :: param
                 type(arguments_presence_type) :: arg_pres
 
                 do case = 1, results%get_number_of_test_cases()
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
                     write (output_unit, '(12X, "- ",A)') test_name
 
-                    arg_pres = arguments_presence([params(case)%presented("x")])
+                    arg_pres = spec%get_optional_arguments_presence_in(case)
                     if (arg_pres.has. [.true.]) &
                         actual = optval(x, default)
                     if (arg_pres.has. [.false.]) &
