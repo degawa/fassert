@@ -2,7 +2,7 @@ module test_common_check_collection
     use :: testdrive, only:new_unittest, unittest_type
     use :: test_common_check_unitTests_true
     use :: test_common_check_unitTests_expectedFailure
-    use :: test_common_check_unitTests_trueStr
+    use :: test_common_check_unitTests_trueMsg
     use :: test_common_check_unitTests_expectedFailureMsg
     implicit none
     private

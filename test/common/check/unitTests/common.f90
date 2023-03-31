@@ -21,11 +21,13 @@ module test_common_check_unitTests_common
     end interface
 
 contains
-    subroutine setup_case_un(param, unit_number, case_name, arg_pres, &
+    subroutine setup_case_un(spec, case, param, unit_number, case_name, arg_pres, &
                              test_name, condition, stat, quiet, &
                              message, stat_exp)
         use :: newunit
-        type(test_parameter_type), intent(in) :: param
+        type(parameterization_spec_type), intent(in) :: spec
+        integer(int32), intent(in) :: case
+        type(test_parameter_type), intent(inout) :: param
         integer(int32), intent(inout) :: unit_number
         character(:), allocatable, intent(out) :: case_name
         type(arguments_presence_type), intent(inout) :: arg_pres
@@ -40,25 +42,27 @@ contains
         namelist /arguments/ test_name, condition, stat, quiet
         namelist /expected/ message, stat_exp
 
+        param = spec%get_test_parameter_in(case)
         read (unit=param%arguments_namelist, nml=arguments)
         read (unit=param%expected_namelist, nml=expected)
 
         case_name = "it should get "//enclose(param%expected(), "{")// &
                     " when input "//enclose(param%arguments(), "{")
 
-        arg_pres = arguments_presence([param%presented("stat"), &
-                                       param%presented("quiet")])
+        arg_pres = spec%get_optional_arguments_presence_in(case)
 
         unit_number = get_newunit_number()
         call set_assertion_message_unit(unit_number)
         open (unit=unit_number, status="scratch")
     end subroutine setup_case_un
 
-    subroutine setup_case_wo_un(param, case_name, arg_pres, &
+    subroutine setup_case_wo_un(spec, case, param, case_name, arg_pres, &
                                 test_name, condition, stat, quiet, &
                                 message, stat_exp, alloced)
         use :: newunit
-        type(test_parameter_type), intent(in) :: param
+        type(parameterization_spec_type), intent(in) :: spec
+        integer(int32), intent(in) :: case
+        type(test_parameter_type), intent(inout) :: param
         character(:), allocatable, intent(out) :: case_name
         type(arguments_presence_type), intent(inout) :: arg_pres
 
@@ -72,14 +76,14 @@ contains
         namelist /arguments/ test_name, condition, stat, quiet
         namelist /expected/ message, stat_exp, alloced
 
+        param = spec%get_test_parameter_in(case)
         read (unit=param%arguments_namelist, nml=arguments)
         read (unit=param%expected_namelist, nml=expected)
 
         case_name = "it should get "//enclose(param%expected(), "{")// &
                     " when input "//enclose(param%arguments(), "{")
 
-        arg_pres = arguments_presence([param%presented("stat"), &
-                                       param%presented("quiet")])
+        arg_pres = spec%get_optional_arguments_presence_in(case)
     end subroutine setup_case_wo_un
 
     subroutine teardown_case_un(unit_number, buffer)

@@ -1,4 +1,4 @@
-module test_common_check_unitTests_trueStr
+module test_common_check_unitTests_trueMsg
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string, get_actual_value
@@ -16,42 +16,47 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
+        type(parameterization_spec_type) :: spec
         type(test_results_type) :: results
 
-        params = [ &
-                 new_test_parameter(arguments="test_name='a unit test' condition=true", &
+        spec = new_parameterization_spec( &
+               [ &
+               new_test_parameter(arguments="test_name='a unit test' condition=true", &
+                                  expected="message='PASSED: a unit test' alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=false", &
+                                    expected="message='FAILED: a unit test' alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false", &
+                                    expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true", &
+                                    expected="message='FAILED: a unit test' stat_exp=false alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=true quiet=false", &
                                     expected="message='PASSED: a unit test' alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=false", &
-                                      expected="message='FAILED: a unit test' alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false", &
-                                      expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true", &
-                                      expected="message='FAILED: a unit test' stat_exp=false alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=true quiet=false", &
-                                      expected="message='PASSED: a unit test' alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=false quiet=false", &
-                                      expected="message='FAILED: a unit test' alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=true quiet=true", &
-                                      expected="message='' alloced=false") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=false quiet=true", &
-                                      expected="message='' alloced=false") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false quiet=false", &
-                                      expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true quiet=false", &
-                                      expected="message='FAILED: a unit test' stat_exp=false alloced=true") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false quiet=true", &
-                                      expected="message='' stat_exp=true alloced=false") &
-                 , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true quiet=true", &
-                                      expected="message='' stat_exp=false alloced=false") &
-                 ]
+               , new_test_parameter(arguments="test_name='a unit test' condition=false quiet=false", &
+                                    expected="message='FAILED: a unit test' alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=true quiet=true", &
+                                    expected="message='' alloced=false") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=false quiet=true", &
+                                    expected="message='' alloced=false") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false quiet=false", &
+                                    expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true quiet=false", &
+                                    expected="message='FAILED: a unit test' stat_exp=false alloced=true") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=true stat=false quiet=true", &
+                                    expected="message='' stat_exp=true alloced=false") &
+               , new_test_parameter(arguments="test_name='a unit test' condition=false stat=true quiet=true", &
+                                    expected="message='' stat_exp=false alloced=false") &
+               ], &
+               optional_args=[argument("stat"), argument("quiet")] &
+               )
 
-        call run_test_cases(params, results)
+        call results%construct(spec)
+        call run_test_cases(spec, results)
         call check(error, results%all_cases_successful(), results%get_summary_message())
+        call results%destruct()
     contains
-        subroutine run_test_cases(params, results)
+        subroutine run_test_cases(spec, results)
             use :: strings_enclose
-            type(test_parameter_type), intent(in) :: params(:)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             ! expected
@@ -62,16 +67,15 @@ contains
             character(256) :: message
             logical :: stat_exp, alloced
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: case_name, message_act
                 integer(int32) :: case, scratch_unit_number
                 type(arguments_presence_type) :: arg_pres
+                type(test_parameter_type) :: param
                 logical :: cond, alloced_act
 
                 do case = 1, results%get_number_of_test_cases()
-                    call setup_case(params(case), case_name, arg_pres, &
+                    call setup_case(spec, case, param, case_name, arg_pres, &
                                     test_name, condition, stat, quiet, &
                                     message, stat_exp, alloced)
 
@@ -93,7 +97,7 @@ contains
                                 len_trim(message_act) == len_trim(message), &
                                 trim(message_act) == trim(message)])
 
-                    if (params(case)%presented("stat")) then
+                    if (param%presented("stat")) then
                         cond = cond .and. (stat .eqv. stat_exp)
                         call results%check_test(case, cond, &
                                                 failure_message_msg(case_name, trim(message), trim(message_act), &
@@ -110,4 +114,4 @@ contains
         end subroutine run_test_cases
 
     end subroutine checkTrueMsg_parameterized_test
-end module test_common_check_unitTests_trueStr
+end module test_common_check_unitTests_trueMsg
