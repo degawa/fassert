@@ -6,34 +6,83 @@ module test_sameShape_expectSameShape_unitTests_expect_common
     use :: fassert_common_unit
     implicit none
     private
-    public :: replace_all
+    public :: runner
+    public :: setup_case
     public :: failure_message
+    public :: teardown_case
 
-    type, public :: string_type
-        character(:), allocatable :: val
-    end type string_type
+    interface setup_case
+        procedure :: setup_case_un
+    end interface
+
+    interface teardown_case
+        procedure :: teardown_case_un_D1
+        procedure :: teardown_case_un_D2
+        procedure :: teardown_case_un_D3
+    end interface
 
 contains
-
-    function replace_all(str, it, with) result(replaced)
+    subroutine runner(error, spec, run_test_cases)
+        use :: testdrive, only:error_type, check
         implicit none
-        character(*), intent(in) :: str
-        character(*), intent(in) :: it
-        character(*), intent(in) :: with
-        character(:), allocatable :: replaced
+        interface
+            subroutine test_case_runner(spec, results)
+                import parameterization_spec_type, test_results_type
+                import error_type
+                type(parameterization_spec_type), intent(in) :: spec
+                type(test_results_type), intent(inout) :: results
+            end subroutine test_case_runner
+        end interface
 
-        integer(int32) :: len_it, len_with, idx_it
-        len_it = len(it)
-        len_with = len(with)
+        type(error_type), allocatable, intent(out) :: error
+        type(parameterization_spec_type), intent(in) :: spec
+        procedure(test_case_runner) :: run_test_cases
 
-        replaced = str
+        type(test_results_type) :: results
 
-        idx_it = index(replaced, it, back=.false.)
-        do while (idx_it > 0)
-            replaced = replaced(1:idx_it - 1)//with//replaced(idx_it + len_it:)
-            idx_it = index(replaced, it, back=.false.)
-        end do
-    end function replace_all
+        call results%construct(spec)
+        call run_test_cases(spec, results)
+        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call results%destruct()
+    end subroutine runner
+
+    subroutine setup_case_un(spec, case, param, dim, unit_number, case_name, arg_pres, &
+                             vtype, dim_act, dim_exp, test_name, stat, verbose, quiet, &
+                             message, stat_exp)
+        use :: newunit
+        type(parameterization_spec_type), intent(in) :: spec
+        integer(int32), intent(in) :: case, dim
+        type(test_parameter_type), intent(out) :: param
+        integer(int32), intent(inout) :: unit_number
+        character(:), allocatable, intent(out) :: case_name
+        type(arguments_presence_type), intent(inout) :: arg_pres
+
+        ! arguments
+        character(64), intent(out) :: vtype
+        integer(int32), intent(out) :: dim_act(dim), dim_exp(dim)
+        character(256), intent(out) :: test_name
+        logical, intent(out) :: stat, verbose, quiet
+
+        ! expected
+        character(256), intent(out) :: message
+        logical, intent(out) :: stat_exp
+
+        namelist /arguments/ vtype, dim_act, dim_exp, test_name, stat, verbose, quiet
+        namelist /expected/ message, stat_exp
+
+        param = spec%get_test_parameter_in(case)
+        read (unit=param%arguments_namelist, nml=arguments)
+        read (unit=param%expected_namelist, nml=expected)
+
+        case_name = "it should get "//enclose(param%expected(), "{")// &
+                    " when input "//enclose(param%arguments(), "{")
+
+        arg_pres = spec%get_optional_arguments_presence_in(case)
+
+        unit_number = get_newunit_number()
+        call set_assertion_message_unit(unit_number)
+        open (unit=unit_number, status="scratch")
+    end subroutine setup_case_un
 
     function failure_message(case_name, expected, actual, stat) result(msg)
         implicit none
@@ -55,4 +104,40 @@ contains
               "    expected : "//expected//" "//stat_exp//new_line(" ")// &
               "    actual   : "//actual//" "//stat_act
     end function failure_message
+
+    subroutine teardown_case_un_D1(unit_number, buffer, act, exp)
+        integer(int32), intent(in) :: unit_number
+        character(:), allocatable, intent(inout) :: buffer
+        class(*), allocatable, intent(inout) :: act(:), exp(:)
+        close (unit_number)
+        call set_assertion_message_unit(output_unit)
+        deallocate (buffer)
+
+        deallocate (act)
+        deallocate (exp)
+    end subroutine teardown_case_un_D1
+
+    subroutine teardown_case_un_D2(unit_number, buffer, act, exp)
+        integer(int32), intent(in) :: unit_number
+        character(:), allocatable, intent(inout) :: buffer
+        class(*), allocatable, intent(inout) :: act(:, :), exp(:, :)
+        close (unit_number)
+        call set_assertion_message_unit(output_unit)
+        deallocate (buffer)
+
+        deallocate (act)
+        deallocate (exp)
+    end subroutine teardown_case_un_D2
+
+    subroutine teardown_case_un_D3(unit_number, buffer, act, exp)
+        integer(int32), intent(in) :: unit_number
+        character(:), allocatable, intent(inout) :: buffer
+        class(*), allocatable, intent(inout) :: act(:, :, :), exp(:, :, :)
+        close (unit_number)
+        call set_assertion_message_unit(output_unit)
+        deallocate (buffer)
+
+        deallocate (act)
+        deallocate (exp)
+    end subroutine teardown_case_un_D3
 end module test_sameShape_expectSameShape_unitTests_expect_common
