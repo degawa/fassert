@@ -18,92 +18,91 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                 !v success cases
-                 !-v expect_false(actual,name,stat,expected_failure=F)
-                 new_test_parameter(arguments="actual=false test_name='a unit test' "// &
+        spec = new_parameterization_spec( &
+               [ &
+               !v success cases
+               !-v expect_false(actual,name,stat,expected_failure=F)
+               new_test_parameter(arguments="actual=false test_name='a unit test' "// &
+                                  "expected_failure=false", &
+                                  expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false "// &
                                     "expected_failure=false", &
                                     expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false "// &
-                                      "expected_failure=false", &
-                                      expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=false "// &
-                                      "expected_failure=false", &
-                                      expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=true "// &
-                                      "expected_failure=false", &
-                                      expected="message='' stat_exp=true alloced=false") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true "// &
-                                      "expected_failure=false", &
-                                      expected="message='PASSED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : F' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=false "// &
-                                      "expected_failure=false", &
-                                      expected="message='PASSED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : F' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=true "// &
-                                      "expected_failure=false", &
-                                      expected="message='    Expected: F\n"// &
-                                      "    Actual  : F' stat_exp=true alloced=true") &
-                 !v failed cases
-                 !-v expect_false(actual,name,stat,expected_failure=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' "// &
-                                      "expected_failure=false", &
-                                      expected="message='FAILED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : T' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false "// &
-                                      "expected_failure=false", &
-                                      expected="message='FAILED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : T' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=false "// &
-                                      "expected_failure=false", &
-                                      expected="message='FAILED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : T' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=true "// &
-                                      "expected_failure=false", &
-                                      expected="message='' stat_exp=false alloced=false") &
-                 !-v expect_false(actual,name,stat,verbose=T)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true "// &
-                                      "expected_failure=false", &
-                                      expected="message='FAILED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : T' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=false "// &
-                                      "expected_failure=false", &
-                                      expected="message='FAILED: a unit test\n"// &
-                                      "    Expected: F\n"// &
-                                      "    Actual  : T' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=true "// &
-                                      "expected_failure=false", &
-                                      expected="message='    Expected: F\n"// &
-                                      "    Actual  : T' stat_exp=false alloced=true") &
-                 ]
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=false "// &
+                                    "expected_failure=false", &
+                                    expected="message='PASSED: a unit test' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=true "// &
+                                    "expected_failure=false", &
+                                    expected="message='' stat_exp=true alloced=false") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true "// &
+                                    "expected_failure=false", &
+                                    expected="message='PASSED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : F' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=false "// &
+                                    "expected_failure=false", &
+                                    expected="message='PASSED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : F' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=true "// &
+                                    "expected_failure=false", &
+                                    expected="message='    Expected: F\n"// &
+                                    "    Actual  : F' stat_exp=true alloced=true") &
+               !v failed cases
+               !-v expect_false(actual,name,stat,expected_failure=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' "// &
+                                    "expected_failure=false", &
+                                    expected="message='FAILED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : T' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false "// &
+                                    "expected_failure=false", &
+                                    expected="message='FAILED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : T' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=false "// &
+                                    "expected_failure=false", &
+                                    expected="message='FAILED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : T' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=true "// &
+                                    "expected_failure=false", &
+                                    expected="message='' stat_exp=false alloced=false") &
+               !-v expect_false(actual,name,stat,verbose=T)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true "// &
+                                    "expected_failure=false", &
+                                    expected="message='FAILED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : T' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=false "// &
+                                    "expected_failure=false", &
+                                    expected="message='FAILED: a unit test\n"// &
+                                    "    Expected: F\n"// &
+                                    "    Actual  : T' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=true "// &
+                                    "expected_failure=false", &
+                                    expected="message='    Expected: F\n"// &
+                                    "    Actual  : T' stat_exp=false alloced=true") &
+               ], &
+               optional_args=[argument("verbose"), argument("quiet")])
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
-            use :: strings_enclose
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             ! arguments
@@ -114,18 +113,17 @@ contains
             character(256) :: message
             logical :: stat_exp, alloced
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: case_name
                 integer(int32) :: case
+                type(test_parameter_type) :: param
                 type(arguments_presence_type) :: arg_pres
                 character(:), allocatable :: msg_exp, message_act
 
                 logical :: alloced_act, cond
 
                 do case = 1, results%get_number_of_test_cases()
-                    call setup_case(params(case), case_name, arg_pres, &
+                    call setup_case(spec, case, param, case_name, arg_pres, &
                                     actual, test_name, stat, verbose, expected_failure, quiet, &
                                     message, stat_exp, alloced)
 
@@ -148,7 +146,7 @@ contains
                     cond = alloced_act .eqv. alloced
                     if (.not. alloced_act) message_act = ""
 
-                    msg_exp = replace_all(trim(message), "\n", new_line(" "))
+                    msg_exp = replace_new_line_mark(trim(message))
                     cond = all([cond, &
                                 stat .eqv. stat_exp, &
                                 len(message_act) == len_trim(msg_exp), &
@@ -169,92 +167,91 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                 !v expected failure cases
-                 !-v expect_false(actual,name,stat,expected_failure=F)
-                 new_test_parameter(arguments="actual=true test_name='a unit test' "// &
+        spec = new_parameterization_spec( &
+               [ &
+               !v expected failure cases
+               !-v expect_false(actual,name,stat,expected_failure=F)
+               new_test_parameter(arguments="actual=true test_name='a unit test' "// &
+                                  "expected_failure=true", &
+                                  expected="message='PASSED: a unit test [expected failure]' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false "// &
                                     "expected_failure=true", &
                                     expected="message='PASSED: a unit test [expected failure]' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false "// &
-                                      "expected_failure=true", &
-                                      expected="message='PASSED: a unit test [expected failure]' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=false "// &
-                                      "expected_failure=true", &
-                                      expected="message='PASSED: a unit test [expected failure]' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=true "// &
-                                      "expected_failure=true", &
-                                      expected="message='' stat_exp=true alloced=false") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true "// &
-                                      "expected_failure=true", &
-                                      expected="message='PASSED: a unit test [expected failure]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : T' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=false "// &
-                                      "expected_failure=true", &
-                                      expected="message='PASSED: a unit test [expected failure]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : T' stat_exp=true alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=true "// &
-                                      "expected_failure=true", &
-                                      expected="message='    Expected: T\n"// &
-                                      "    Actual  : T' stat_exp=true alloced=true") &
-                 !v failed cases
-                 !-v expect_false(actual,name,stat,expected_failure=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' "// &
-                                      "expected_failure=true", &
-                                      expected="message='FAILED: a unit test [unexpected pass]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : F' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false "// &
-                                      "expected_failure=true", &
-                                      expected="message='FAILED: a unit test [unexpected pass]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : F' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=false "// &
-                                      "expected_failure=true", &
-                                      expected="message='FAILED: a unit test [unexpected pass]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : F' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=true "// &
-                                      "expected_failure=true", &
-                                      expected="message='' stat_exp=false alloced=false") &
-                 !-v expect_false(actual,name,stat,verbose=T)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true "// &
-                                      "expected_failure=true", &
-                                      expected="message='FAILED: a unit test [unexpected pass]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : F' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=false "// &
-                                      "expected_failure=true", &
-                                      expected="message='FAILED: a unit test [unexpected pass]\n"// &
-                                      "    Expected: T\n"// &
-                                      "    Actual  : F' stat_exp=false alloced=true") &
-                 !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
-                 , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=true "// &
-                                      "expected_failure=true", &
-                                      expected="message='    Expected: T\n"// &
-                                      "    Actual  : F' stat_exp=false alloced=true") &
-                 ]
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=false "// &
+                                    "expected_failure=true", &
+                                    expected="message='PASSED: a unit test [expected failure]' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=true "// &
+                                    "expected_failure=true", &
+                                    expected="message='' stat_exp=true alloced=false") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true "// &
+                                    "expected_failure=true", &
+                                    expected="message='PASSED: a unit test [expected failure]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : T' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=false "// &
+                                    "expected_failure=true", &
+                                    expected="message='PASSED: a unit test [expected failure]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : T' stat_exp=true alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=true "// &
+                                    "expected_failure=true", &
+                                    expected="message='    Expected: T\n"// &
+                                    "    Actual  : T' stat_exp=true alloced=true") &
+               !v failed cases
+               !-v expect_false(actual,name,stat,expected_failure=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' "// &
+                                    "expected_failure=true", &
+                                    expected="message='FAILED: a unit test [unexpected pass]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : F' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false "// &
+                                    "expected_failure=true", &
+                                    expected="message='FAILED: a unit test [unexpected pass]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : F' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=false "// &
+                                    "expected_failure=true", &
+                                    expected="message='FAILED: a unit test [unexpected pass]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : F' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=F,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=false quiet=true "// &
+                                    "expected_failure=true", &
+                                    expected="message='' stat_exp=false alloced=false") &
+               !-v expect_false(actual,name,stat,verbose=T)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true "// &
+                                    "expected_failure=true", &
+                                    expected="message='FAILED: a unit test [unexpected pass]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : F' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=F)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=false "// &
+                                    "expected_failure=true", &
+                                    expected="message='FAILED: a unit test [unexpected pass]\n"// &
+                                    "    Expected: T\n"// &
+                                    "    Actual  : F' stat_exp=false alloced=true") &
+               !-v expect_false(actual,name,stat,verbose=T,expected_failure=F,quiet=T)
+               , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=true "// &
+                                    "expected_failure=true", &
+                                    expected="message='    Expected: T\n"// &
+                                    "    Actual  : F' stat_exp=false alloced=true") &
+               ], &
+               optional_args=[argument("verbose"), argument("quiet")])
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
-            use :: strings_enclose
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             ! arguments
@@ -265,18 +262,17 @@ contains
             character(256) :: message
             logical :: stat_exp, alloced
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: case_name
                 integer(int32) :: case
+                type(test_parameter_type) :: param
                 type(arguments_presence_type) :: arg_pres
                 character(:), allocatable :: msg_exp, message_act
 
                 logical :: alloced_act, cond
 
                 do case = 1, results%get_number_of_test_cases()
-                    call setup_case(params(case), case_name, arg_pres, &
+                    call setup_case(spec, case, param, case_name, arg_pres, &
                                     actual, test_name, stat, verbose, expected_failure, quiet, &
                                     message, stat_exp, alloced)
 
@@ -299,7 +295,7 @@ contains
                     cond = alloced_act .eqv. alloced
                     if (.not. alloced_act) message_act = ""
 
-                    msg_exp = replace_all(trim(message), "\n", new_line(" "))
+                    msg_exp = replace_new_line_mark(trim(message))
                     cond = all([cond, &
                                 stat .eqv. stat_exp, &
                                 len(message_act) == len_trim(msg_exp), &
