@@ -6,6 +6,13 @@ module fassert_common_message_outputOnFailure_format
     character(*), public, parameter :: fmt_indent = default_verbose_format_indent
         !! 出力時にインデントするための書式指定文字列
 
+    character(*), public, parameter :: int_specifier = "I0"
+        !! 整数型変数の出力書式指定子
+    character(*), public, parameter :: real32_specifier = "E13.6e2"
+        !! 4バイト浮動小数点数型変数の出力書式指定子
+    character(*), public, parameter :: real64_specifier = "E23.15e3"
+        !! 8バイト浮動小数点数型変数の出力書式指定子
+
     character(*), private, parameter :: fmt_index_separator = ',",",'
         !! 配列添字の各要素の区切り
     character(*), public, parameter :: fmt_index_rank1 = 'i0'
