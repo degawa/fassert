@@ -1,6 +1,7 @@
 module test_common_message_unitTests_toString
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred
+    use :: test_common_message_unitTests_common
     use :: fassert_common_message
     implicit none
     private
@@ -14,20 +15,19 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                   new_test_parameter(arguments="val=false", expected="retval='F'") &
-                 , new_test_parameter(arguments="val=true" , expected="retval='T'") &
-                 ] !&
+        spec = new_parameterization_spec( &
+               [ &
+               new_test_parameter(arguments="val=false", expected="retval='F'") &
+               , new_test_parameter(arguments="val=true", expected="retval='T'") &
+               ])
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
+        subroutine run_test_cases(spec, results)
             use, intrinsic :: iso_fortran_env
-            type(test_parameter_type), intent(in) :: params(:)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             logical :: val
@@ -36,19 +36,19 @@ contains
             namelist /arguments/ val
             namelist /expected/ retval
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
                 integer(int32) :: case
                 character(1) :: actual
+                type(test_parameter_type) :: param
 
                 do case = 1, results%get_number_of_test_cases()
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
                     write (output_unit, '(12X, "- ",A)') test_name
 
                     actual = to_string(val)

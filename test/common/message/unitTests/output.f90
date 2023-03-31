@@ -2,6 +2,7 @@ module test_common_message_unitTests_output
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check
     use :: testdrive_util, only:occurred
+    use :: test_common_message_unitTests_common
     use :: fassert_common_message
     use :: fassert_common_unit
     implicit none
@@ -17,20 +18,20 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                   new_test_parameter(arguments="quiet=false", expected="retval=true") &
-                 , new_test_parameter(arguments="quiet=true" , expected="retval=false") &
-                 , new_test_parameter(arguments=""           , expected="retval=true") &
-                 ] !&
+        spec = new_parameterization_spec( &
+               [ &
+                 new_test_parameter(arguments="quiet=false", expected="retval=true") &
+               , new_test_parameter(arguments="quiet=true" , expected="retval=false") &
+               , new_test_parameter(arguments=""           , expected="retval=true") &
+               ], &
+               optional_args=[argument("quiet")]) !&
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             logical :: quiet, retval
@@ -38,23 +39,23 @@ contains
             namelist /arguments/ quiet
             namelist /expected/ retval
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
                 integer(int32) :: case
                 logical :: actual
+                type(test_parameter_type) :: param
                 type(arguments_presence_type) :: arg_pres
 
                 do case = 1, results%get_number_of_test_cases()
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
                     write (output_unit, '(12X, "- ",A)') test_name
 
-                    arg_pres = arguments_presence([params(case)%presented("quiet")])
+                    arg_pres = spec%get_optional_arguments_presence_in(case)
                     if (arg_pres.has. [.true.]) &
                         actual = does_output_message(quiet)
                     if (arg_pres.has. [.false.]) &
@@ -74,20 +75,20 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                   new_test_parameter(arguments="quiet=false", expected="retval=false") &
-                 , new_test_parameter(arguments="quiet=true" , expected="retval=true") &
-                 , new_test_parameter(arguments=""           , expected="retval=false") &
-                 ] !&
+        spec = new_parameterization_spec( &
+               [ &
+                 new_test_parameter(arguments="quiet=false", expected="retval=false") &
+               , new_test_parameter(arguments="quiet=true" , expected="retval=true") &
+               , new_test_parameter(arguments=""           , expected="retval=false") &
+               ], &
+               optional_args=[argument("quiet")]) !&
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             logical :: quiet, retval
@@ -95,23 +96,23 @@ contains
             namelist /arguments/ quiet
             namelist /expected/ retval
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
                 integer(int32) :: case
                 logical :: actual
+                type(test_parameter_type) :: param
                 type(arguments_presence_type) :: arg_pres
 
                 do case = 1, results%get_number_of_test_cases()
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
                     write (output_unit, '(12X, "- ",A)') test_name
 
-                    arg_pres = arguments_presence([params(case)%presented("quiet")])
+                    arg_pres = spec%get_optional_arguments_presence_in(case)
                     if (arg_pres.has. [.true.]) &
                         actual = does_not_output_message(quiet)
                     if (arg_pres.has. [.false.]) &
@@ -131,35 +132,35 @@ contains
         type(error_type), allocatable, intent(out) :: error
             !! error handler
 
-        type(test_parameter_type), allocatable :: params(:)
-        type(test_results_type) :: results
+        type(parameterization_spec_type) :: spec
 
-        params = [ &
-                   new_test_parameter(arguments="stat=false"                            , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true"                             , expected="retval=false") &
-                 , new_test_parameter(arguments="stat=false verbose=true"               , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=false verbose=false"              , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true verbose=true"                , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true verbose=false"               , expected="retval=false") &
-                 , new_test_parameter(arguments="stat=false quiet=true"                 , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=false quiet=false"                , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true quiet=true"                  , expected="retval=false") &
-                 , new_test_parameter(arguments="stat=true quiet=false"                 , expected="retval=false") &
-                 , new_test_parameter(arguments="stat=false verbose=true quiet=true"    , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=false verbose=true quiet=false"   , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=false verbose=false quiet=true"   , expected="retval=false") &
-                 , new_test_parameter(arguments="stat=false verbose=false quiet=false"  , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true verbose=true quiet=true"     , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true verbose=true quiet=false"    , expected="retval=true") &
-                 , new_test_parameter(arguments="stat=true verbose=false quiet=true"    , expected="retval=false") &
-                 , new_test_parameter(arguments="stat=true verbose=false quiet=false"   , expected="retval=false") &
-                 ] !&
+        spec = new_parameterization_spec( &
+               [ &
+                 new_test_parameter(arguments="stat=false"                            , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true"                             , expected="retval=false") &
+               , new_test_parameter(arguments="stat=false verbose=true"               , expected="retval=true") &
+               , new_test_parameter(arguments="stat=false verbose=false"              , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true verbose=true"                , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true verbose=false"               , expected="retval=false") &
+               , new_test_parameter(arguments="stat=false quiet=true"                 , expected="retval=true") &
+               , new_test_parameter(arguments="stat=false quiet=false"                , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true quiet=true"                  , expected="retval=false") &
+               , new_test_parameter(arguments="stat=true quiet=false"                 , expected="retval=false") &
+               , new_test_parameter(arguments="stat=false verbose=true quiet=true"    , expected="retval=true") &
+               , new_test_parameter(arguments="stat=false verbose=true quiet=false"   , expected="retval=true") &
+               , new_test_parameter(arguments="stat=false verbose=false quiet=true"   , expected="retval=false") &
+               , new_test_parameter(arguments="stat=false verbose=false quiet=false"  , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true verbose=true quiet=true"     , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true verbose=true quiet=false"    , expected="retval=true") &
+               , new_test_parameter(arguments="stat=true verbose=false quiet=true"    , expected="retval=false") &
+               , new_test_parameter(arguments="stat=true verbose=false quiet=false"   , expected="retval=false") &
+               ], &
+               optional_args=[argument("verbose"), argument("quiet")]) !&
 
-        call run_test_cases(params, results)
-        call check(error, results%all_cases_successful(), results%get_summary_message())
+        call runner(error, spec, run_test_cases)
     contains
-        subroutine run_test_cases(params, results)
-            type(test_parameter_type), intent(in) :: params(:)
+        subroutine run_test_cases(spec, results)
+            type(parameterization_spec_type), intent(in) :: spec
             type(test_results_type), intent(inout) :: results
 
             logical :: stat, verbose, quiet, retval
@@ -167,24 +168,23 @@ contains
             namelist /arguments/ stat, verbose, quiet
             namelist /expected/ retval
 
-            call results%construct(params)
-
             block
                 character(:), allocatable :: test_name
                 integer(int32) :: case
                 logical :: actual
+                type(test_parameter_type) :: param
                 type(arguments_presence_type) :: arg_pres
 
                 do case = 1, results%get_number_of_test_cases()
-                    read (unit=params(case)%arguments_namelist, nml=arguments)
-                    read (unit=params(case)%expected_namelist, nml=expected)
+                    param = spec%get_test_parameter_in(case)
+                    read (unit=param%arguments_namelist, nml=arguments)
+                    read (unit=param%expected_namelist, nml=expected)
 
-                    test_name = "it should return "//params(case)%expected()// &
-                                " when input "//params(case)%arguments()
+                    test_name = "it should return "//param%expected()// &
+                                " when input "//param%arguments()
                     write (output_unit, '(12X, "- ",A)') test_name
 
-                    arg_pres = arguments_presence([params(case)%presented("verbose"), &
-                                                   params(case)%presented("quiet")])
+                    arg_pres = spec%get_optional_arguments_presence_in(case)
                     if (arg_pres.has. [.false., .false.]) &
                         actual = is_verbose_output(stat)
                     if (arg_pres.has. [.true., .false.]) &
