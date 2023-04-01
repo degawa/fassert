@@ -12,20 +12,12 @@ contains
             !! collection of tests
 
         test_suite = [ &
-                     new_unittest("is_test_passed(), it should return .true. when input passed status.", &
-                                  isTestPassed_should_return_true_when_input_passed) &
-                     , new_unittest("is_test_passed(), it should return .false. when input failed status.", &
-                                    isTestPassed_should_return_false_when_input_failed) &
-                     , new_unittest("is_test_failed(), it should return .true. when input failed status.", &
-                                    isTestFailed_should_return_true_when_input_failed) &
-                     , new_unittest("is_test_failed(), it should return .false. when input passed status.", &
-                                    isTestFailed_should_return_false_when_input_passed) &
-                     , new_unittest("is_test_of_expected_failure(), it should return `.true.` when input `.true.`.", &
-                                    isTestExpecFail_should_return_true_when_input_true) &
-                     , new_unittest("is_test_of_expected_failure(), it should return `.false.` when input `.false.`.", &
-                                    isTestExpecFail_should_return_false_when_input_false) &
-                     , new_unittest("is_test_of_expected_failure(), it should return `.false.` when no input.", &
-                                    isTestExpecFail_should_return_false_when_no_input) &
+                     new_unittest("is_test_passed(), parameterized test.", &
+                                  isTestPassed_parameterized_test) &
+                     , new_unittest("is_test_failed(), parameterized test.", &
+                                    isTestFailed_parameterized_test) &
+                     , new_unittest("is_test_of_expected_failure(), parameterized test.", &
+                                    isTestExpecFail_parameterized_test) &
                      ]
     end subroutine collect_status
 end module test_common_status_collection

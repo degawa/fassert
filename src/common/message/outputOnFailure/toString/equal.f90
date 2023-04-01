@@ -27,10 +27,35 @@ module fassert_common_message_outputOnFailure_toString_equal
         procedure :: output_char_rank1_to_string
     end interface
 
-    character(*), private, parameter :: fmt_int = '('//fmt_indent//',A,I0)'
-    character(*), private, parameter :: fmt_real = '('//fmt_indent//',A,g0)'
+    character(*), private, parameter :: fmt_int = '('//fmt_indent//',A,'//int_specifier//')'
+        !! 整数の文字列出力書式
+    character(*), private, parameter :: fmt_real32 = '('//fmt_indent//',A,'//real32_specifier//')'
+        !! 4バイト浮動小数点数の文字列出力書式
+    character(*), private, parameter :: fmt_real64 = '('//fmt_indent//',A,'//real64_specifier//')'
+        !! 8バイト浮動小数点数の文字列出力書式
     character(*), private, parameter :: fmt_str = '('//fmt_indent//',A,A)'
+        !! 文字列の出力書式
     character(*), private, parameter :: fmt_char = '('//fmt_indent//',A,*(A:," "))'
+        !! 文字の出力書式
+
+    character(*), private, parameter :: fmt_int_rank1 &
+                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_int_rank2 &
+                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_int_rank3 &
+                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_real32_rank1 &
+                                        = '('//fmt_indent//',A,'//real32_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_real32_rank2 &
+                                        = '('//fmt_indent//',A,'//real32_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_real32_rank3 &
+                                        = '('//fmt_indent//',A,'//real32_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_real64_rank1 &
+                                        = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_real64_rank2 &
+                                        = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_real64_rank3 &
+                                        = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank3//',")")'
 
 contains
     !>実測値と予測値を文字列に出力する．
@@ -112,11 +137,11 @@ contains
 
         character(128) :: buffer
 
-        write (buffer, fmt_real) "Expected: ", expected
+        write (buffer, fmt_real32) "Expected: ", expected
         call append(output_message, trim(buffer))
-        write (buffer, fmt_real) "Actual  : ", actual
+        write (buffer, fmt_real32) "Actual  : ", actual
         call append(output_message, trim(buffer))
-        write (buffer, fmt_real) "Difference: ", expected - actual
+        write (buffer, fmt_real32) "Difference: ", expected - actual
         call append(output_message, trim(buffer))
     end subroutine output_real32_to_string
 
@@ -131,11 +156,11 @@ contains
 
         character(128) :: buffer
 
-        write (buffer, fmt_real) "Expected: ", expected
+        write (buffer, fmt_real64) "Expected: ", expected
         call append(output_message, trim(buffer))
-        write (buffer, fmt_real) "Actual  : ", actual
+        write (buffer, fmt_real64) "Actual  : ", actual
         call append(output_message, trim(buffer))
-        write (buffer, fmt_real) "Difference:", expected - actual
+        write (buffer, fmt_real64) "Difference: ", expected - actual
         call append(output_message, trim(buffer))
     end subroutine output_real64_to_string
 
@@ -150,15 +175,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank1//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_int_rank1) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_int_rank1) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_int32_rank1_to_string
 
@@ -173,15 +196,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank2//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_int_rank2) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_int_rank2) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_int32_rank2_to_string
 
@@ -196,15 +217,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank3//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_int_rank3) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_int_rank3) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_int32_rank3_to_string
 
@@ -219,15 +238,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank1//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_real32_rank1) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_real32_rank1) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_real32_rank1_to_string
 
@@ -242,15 +259,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank2//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_real32_rank2) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_real32_rank2) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_real32_rank2_to_string
 
@@ -265,15 +280,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank3//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_real32_rank3) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_real32_rank3) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_real32_rank3_to_string
 
@@ -288,15 +301,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank1//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_real64_rank1) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_real64_rank1) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_real64_rank1_to_string
 
@@ -311,15 +322,13 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank2//',")")'
-
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_real64_rank2) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_real64_rank2) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_real64_rank2_to_string
 
@@ -336,13 +345,13 @@ contains
 
         character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank3//',")")'
 
-        write (buffer, fmt) "Maximum Absolute Difference: ", &
-                                maxval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        write (buffer, fmt_real64_rank3) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt) "Minimum Absolute Difference: ", &
-                                minval(abs(expected - actual)), &
-                                findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        write (buffer, fmt_real64_rank3) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_real64_rank3_to_string
 
