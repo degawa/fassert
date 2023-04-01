@@ -49,37 +49,43 @@ contains
                 !-v expect_same_shape(actual,expected,name,stat,verbose=T)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=3,2,1 "// &
                                      "test_name='a unit test' verbose=true", &
-                                     expected="message='PASSED: a unit test"//new_line_char// &
+                                     expected="message='"// &
+                                     "PASSED: a unit test"//new_line_char// &
                                      "    Expected Shape: (3,2,1)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=true") &
                 !-v expect_same_shape(actual,expected,name,stat,verbose=T, quiet=F)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=3,2,1 "// &
                                      "test_name='a unit test' verbose=true quiet=false", &
-                                     expected="message='PASSED: a unit test"//new_line_char// &
+                                     expected="message='"// &
+                                     "PASSED: a unit test"//new_line_char// &
                                      "    Expected Shape: (3,2,1)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=true") &
                 !-v expect_same_shape(actual,expected,name,stat,verbose=T, quiet=T)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=3,2,1 "// &
                                      "test_name='a unit test' verbose=true quiet=true", &
-                                     expected="message='    Expected Shape: (3,2,1)"//new_line_char// &
+                                     expected="message='"// &
+                                     "    Expected Shape: (3,2,1)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=true") &
                 !v failed case
                 !-v expect_same_shape(actual,expected,name,stat)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=1,2,3 "// &
                                      "test_name='a unit test'", &
-                                     expected="message='FAILED: a unit test"//new_line_char// &
+                                     expected="message='"// &
+                                     "FAILED: a unit test"//new_line_char// &
                                      "    Expected Shape: (1,2,3)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=false") &
                 !-v expect_same_shape(actual,expected,name,stat,verbose=F)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=1,2,3 "// &
                                      "test_name='a unit test' verbose=false", &
-                                     expected="message='FAILED: a unit test"//new_line_char// &
+                                     expected="message='"// &
+                                     "FAILED: a unit test"//new_line_char// &
                                      "    Expected Shape: (1,2,3)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=false") &
                 !-v expect_same_shape(actual,expected,name,stat,verbose=F, quiet=F)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=1,2,3 "// &
                                      "test_name='a unit test' verbose=false quiet=false", &
-                                     expected="message='FAILED: a unit test"//new_line_char// &
+                                     expected="message='"// &
+                                     "FAILED: a unit test"//new_line_char// &
                                      "    Expected Shape: (1,2,3)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=false") &
                 !-v expect_same_shape(actual,expected,name,stat,verbose=F, quiet=T)
@@ -89,13 +95,15 @@ contains
                 !-v expect_same_shape(actual,expected,name,stat,verbose=T, quiet=F)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=1,2,3 "// &
                                      "test_name='a unit test' verbose=true quiet=false", &
-                                     expected="message='FAILED: a unit test"//new_line_char// &
+                                     expected="message='"// &
+                                     "FAILED: a unit test"//new_line_char// &
                                      "    Expected Shape: (1,2,3)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=false") &
                 !-v expect_same_shape(actual,expected,name,stat,verbose=T, quiet=T)
                 , new_test_parameter(arguments="vtype='"//vtype_list(i)%name//"' dim_act=3,2,1 dim_exp=1,2,3 "// &
                                      "test_name='a unit test' verbose=true quiet=true", &
-                                     expected="message='    Expected Shape: (1,2,3)"//new_line_char// &
+                                     expected="message='"// &
+                                     "    Expected Shape: (1,2,3)"//new_line_char// &
                                      "    Actual Shape  : (3,2,1)' stat_exp=false") &
                 , i=1, size(vtype_list)) &
                 ], &
