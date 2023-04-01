@@ -36,32 +36,38 @@ contains
                                     expected="message='' stat_exp=true") &
                !-v expect_false(actual,name,stat,verbose=T)
                , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true", &
-                                    expected="message='PASSED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "PASSED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : F' stat_exp=true") &
                !-v expect_false(actual,name,stat,verbose=T,quiet=F)
                , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=false", &
-                                    expected="message='PASSED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "PASSED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : F' stat_exp=true") &
                !-v expect_false(actual,name,stat,verbose=T,quiet=T)
                , new_test_parameter(arguments="actual=false test_name='a unit test' verbose=true quiet=true", &
-                                    expected="message='    Expected: F"//new_line_char// &
+                                    expected="message='"// &
+                                    "    Expected: F"//new_line_char// &
                                     "    Actual  : F' stat_exp=true") &
                !v failed cases
                !-v expect_false(actual,name,stat)
                , new_test_parameter(arguments="actual=true test_name='a unit test'", &
-                                    expected="message='FAILED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "FAILED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : T' stat_exp=false") &
                !-v expect_false(actual,name,stat,verbose=F)
                , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false", &
-                                    expected="message='FAILED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "FAILED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : T' stat_exp=false") &
                !-v expect_false(actual,name,stat,verbose=F,quiet=F)
                , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=false quiet=false", &
-                                    expected="message='FAILED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "FAILED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : T' stat_exp=false") &
                !-v expect_false(actual,name,stat,verbose=F,quiet=T)
@@ -69,17 +75,20 @@ contains
                                     expected="message='' stat_exp=false") &
                !-v expect_false(actual,name,stat,verbose=T)
                , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true", &
-                                    expected="message='FAILED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "FAILED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : T' stat_exp=false") &
                !-v expect_false(actual,name,stat,verbose=T,quiet=F)
                , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=false", &
-                                    expected="message='FAILED: a unit test"//new_line_char// &
+                                    expected="message='"// &
+                                    "FAILED: a unit test"//new_line_char// &
                                     "    Expected: F"//new_line_char// &
                                     "    Actual  : T' stat_exp=false") &
                !-v expect_false(actual,name,stat,verbose=T,quiet=T)
                , new_test_parameter(arguments="actual=true test_name='a unit test' verbose=true quiet=true", &
-                                    expected="message='    Expected: F"//new_line_char// &
+                                    expected="message='"// &
+                                    "    Expected: F"//new_line_char// &
                                     "    Actual  : T' stat_exp=false") &
                ], &
                optional_args=[argument("verbose"), argument("quiet")], &
