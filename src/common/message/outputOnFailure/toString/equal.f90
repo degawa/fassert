@@ -43,7 +43,7 @@ module fassert_common_message_outputOnFailure_toString_equal
     character(*), private, parameter :: fmt_int_rank2 &
                                         = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank2//',")")'
     character(*), private, parameter :: fmt_int_rank3 &
-                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank1//',")")'
+                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank3//',")")'
     character(*), private, parameter :: fmt_real32_rank1 &
                                         = '('//fmt_indent//',A,'//real32_specifier//'," at (",'//fmt_index_rank1//',")")'
     character(*), private, parameter :: fmt_real32_rank2 &
@@ -216,8 +216,6 @@ contains
         character(:), allocatable, intent(inout) :: output_message
 
         character(128) :: buffer
-
-        character(*), parameter :: fmt = '('//fmt_indent//',A,i0," at (",'//fmt_index_rank3//',")")'
 
         write (buffer, fmt_int_rank3) "Maximum Absolute Difference: ", &
                                       maxval(abs(expected - actual)), &
