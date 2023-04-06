@@ -47,7 +47,7 @@ contains
 
         test_suite = [ &
                      new_unittest("doublify() should return 20 when input 10", &
-                                  doublify_return_20_when_input_10, should_fail=.true.) &
+                                  doublify_return_20_when_input_10) &
                      ]
     end subroutine collect
 end module collab_testdrive_collect

@@ -108,4 +108,13 @@ program user_defined_vector2d
     call expect_equal(x, 0d0, "vector x should equal to y", stat, &
                       is_equal_vec2d, output_on_failure_vec2d)
     print *, "^--"
+
+    call assert_equal(x, y, "vector x should equal to y", &
+                      is_equal_vec2d, output_on_failure_vec2d)
+    ! FAILED: vector x should equal to y
+    !     Expected: [2.00000000,1.00000000]
+    !     Actual  : [1.00000000,2.00000000]
+    !     Difference:[1.00000000,-1.00000000]
+    ! ERROR STOP
+
 end program user_defined_vector2d
