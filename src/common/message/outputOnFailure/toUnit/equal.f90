@@ -194,8 +194,6 @@ contains
         real(real64), intent(in) :: expected(:)
             !! 予測値
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank1//',")")'
-
         character(:), allocatable :: msg
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
@@ -209,8 +207,6 @@ contains
         real(real64), intent(in) :: expected(:, :)
             !! 予測値
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank2//',")")'
-
         character(:), allocatable :: msg
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
@@ -223,8 +219,6 @@ contains
             !! 実測値
         real(real64), intent(in) :: expected(:, :, :)
             !! 予測値
-
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank3//',")")'
 
         character(:), allocatable :: msg
         call output_on_failure(actual, expected, msg)

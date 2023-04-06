@@ -343,8 +343,6 @@ contains
 
         character(128) :: buffer
 
-        character(*), parameter :: fmt = '('//fmt_indent//',A,g0," at (",'//fmt_index_rank3//',")")'
-
         write (buffer, fmt_real64_rank3) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
                                          findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
