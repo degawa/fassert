@@ -154,9 +154,9 @@ Add the following `use` statement to modules or procedures calling fassert.
 use :: fassert
 ```
 
-Use the `assert_kit` module when writing a comparator and message output procedure for supporting user-defined types or extending behavior for supported types.
+Use the `fassert_kit` module when writing a comparator and message output procedure for supporting user-defined types or extending behavior for supported types.
 ```Fortran
-use :: assert_kit
+use :: fassert_kit
 ```
 
 ### Reference as a fpm project's dependency
