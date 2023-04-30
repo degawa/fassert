@@ -33,6 +33,10 @@ module fassert_common_message_outputOnFailure_toString_equal
         !! 4バイト浮動小数点数の文字列出力書式
     character(*), private, parameter :: fmt_real64 = '('//fmt_indent//',A,'//real64_specifier//')'
         !! 8バイト浮動小数点数の文字列出力書式
+    character(*), private, parameter :: fmt_complex32 = '('//fmt_indent//',A,'//complex32_specifier//')'
+        !! 4バイト複素数の文字列出力書式
+    character(*), private, parameter :: fmt_complex64 = '('//fmt_indent//',A,'//complex64_specifier//')'
+        !! 8バイト複素数の文字列出力書式
     character(*), private, parameter :: fmt_str = '('//fmt_indent//',A,A)'
         !! 文字列の出力書式
     character(*), private, parameter :: fmt_char = '('//fmt_indent//',A,*(A:," "))'
