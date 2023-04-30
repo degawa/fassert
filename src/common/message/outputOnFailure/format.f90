@@ -12,6 +12,10 @@ module fassert_common_message_outputOnFailure_format
         !! 4バイト浮動小数点数型変数の出力書式指定子
     character(*), public, parameter :: real64_specifier = "E23.15e3"
         !! 8バイト浮動小数点数型変数の出力書式指定子
+    character(*), public, parameter :: complex32_specifier = '"(",'//real32_specifier//',",",'//real32_specifier//',")"'
+        !! 4バイト浮動小数点数型変数の出力書式指定子
+    character(*), public, parameter :: complex64_specifier = '"(",'//real64_specifier//',",",'//real64_specifier//',")"'
+        !! 8バイト浮動小数点数型変数の出力書式指定子
 
     character(*), private, parameter :: fmt_index_separator = ',",",'
         !! 配列添字の各要素の区切り
