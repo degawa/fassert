@@ -43,6 +43,8 @@ Supported types and ranks currently are listed below:
 |                                   | `integer(int64)`  | 0       |                                                                                    |
 |                                   | `real(real32)`    | 0,1,2,3 |                                                                                    |
 |                                   | `real(real64)`    | 0,1,2,3 |                                                                                    |
+|                                   | `complex(real32)` | 0       |                                                                                    |
+|                                   | `complex(real64)` | 0       |                                                                                    |
 |                                   | `logical`         | 0       |                                                                                    |
 |                                   | `character`       | 1       |                                                                                    |
 |                                   | `character(*)`    | 0       |                                                                                    |
