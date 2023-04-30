@@ -39,10 +39,9 @@ contains
 
         type(test_results_type) :: results
 
-        call results%construct(spec)
+        results = new_test_results_for(spec)
         call run_test_cases(spec, results)
         call check(error, results%all_cases_successful(), results%get_summary_message())
-        call results%destruct()
     end subroutine runner
 
     subroutine setup_case_un(spec, case, unit_number, case_name, arg_pres, &

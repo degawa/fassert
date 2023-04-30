@@ -65,7 +65,7 @@ contains
 
         block
             character(:), allocatable :: case_name, message_act
-            integer(int32) :: case, scratch_unit_number
+            integer(int32) :: case
             type(arguments_presence_type) :: arg_pres
             type(test_parameter_type) :: param
             logical :: cond, alloced_act
