@@ -18,6 +18,8 @@ module fassert_common_compare_equal_array
         procedure :: are_all_values_equal_rank2_logical
         procedure :: are_all_values_equal_rank3_logical
         procedure :: are_all_values_equal_rank1_char
+        procedure :: are_all_values_equal_rank2_char
+        procedure :: are_all_values_equal_rank3_char
     end interface
 
 contains
@@ -174,10 +176,31 @@ contains
     !>二つの文字型配列の全要素が等しい場合に`.true.`，そうでない場合`.false.`を返す．
     pure function are_all_values_equal_rank1_char(array1, array2) result(are_same)
         implicit none
-        character, intent(in) :: array1(:)
-        character, intent(in) :: array2(:)
+        character(*), intent(in) :: array1(:)
+        character(*), intent(in) :: array2(:)
         logical :: are_same
 
         are_same = all(array1 == array2)
     end function are_all_values_equal_rank1_char
+
+    !>二つの文字型配列の全要素が等しい場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function are_all_values_equal_rank2_char(array1, array2) result(are_same)
+        implicit none
+        character(*), intent(in) :: array1(:, :)
+        character(*), intent(in) :: array2(:, :)
+        logical :: are_same
+
+        are_same = all(array1 == array2)
+    end function are_all_values_equal_rank2_char
+
+    !>二つの文字型配列の全要素が等しい場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function are_all_values_equal_rank3_char(array1, array2) result(are_same)
+        implicit none
+        character(*), intent(in) :: array1(:, :, :)
+        character(*), intent(in) :: array2(:, :, :)
+        logical :: are_same
+
+        are_same = all(array1 == array2)
+    end function are_all_values_equal_rank3_char
+
 end module fassert_common_compare_equal_array
