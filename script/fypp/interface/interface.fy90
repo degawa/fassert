@@ -1,0 +1,90 @@
+#:include "../common.fypp"
+module fassert_interface
+    implicit none
+    private
+    public :: Iis_equal
+    #:for rank in RANKS
+    public :: Iis_equal_rank${rank}$
+    #:endfor
+    public :: Ioutput_on_failure_to_unit
+    #:for rank in RANKS
+    public :: Ioutput_on_failure_to_unit_rank${rank}$
+    #:endfor
+    public :: Ioutput_on_failure_to_string
+    #:for rank in RANKS
+    public :: Ioutput_on_failure_to_string_rank${rank}$
+    #:endfor
+
+    interface
+        !>任意のスカラ型の比較を行う手続のインタフェース
+        pure logical function Iis_equal(actual, expected)
+            implicit none
+            class(*), intent(in) :: actual
+                !! 予測値
+            class(*), intent(in) :: expected
+                !! 実測値
+        end function Iis_equal
+
+        #:for rank in RANKS
+        !>任意の${rank}$次元配列の比較を行う手続のインタフェース
+        pure logical function Iis_equal_rank${rank}$(actual, expected)
+            implicit none
+            class(*), intent(in) :: actual${rank_suffix(rank)}$
+                !! 予測値
+            class(*), intent(in) :: expected${rank_suffix(rank)}$
+                !! 実測値
+        end function Iis_equal_rank${rank}$
+
+        #:endfor
+    end interface
+
+    interface
+        !>検査失敗時に予測値と実測値を出力する手続のインタフェース
+        subroutine Ioutput_on_failure_to_unit(actual, expected)
+            implicit none
+            class(*), intent(in) :: actual
+                !! 予測値
+            class(*), intent(in) :: expected
+                !! 実測値
+        end subroutine Ioutput_on_failure_to_unit
+
+        #:for rank in RANKS
+        !>検査失敗時に予測値と実測値を出力する手続のインタフェース
+        subroutine Ioutput_on_failure_to_unit_rank${rank}$(actual, expected)
+            implicit none
+            class(*), intent(in) :: actual${rank_suffix(rank)}$
+                !! 予測値
+            class(*), intent(in) :: expected${rank_suffix(rank)}$
+                !! 実測値
+        end subroutine Ioutput_on_failure_to_unit_rank${rank}$
+
+        #:endfor
+    end interface
+
+    interface
+        !>検査失敗時に予測値と実測値を文字列に出力する手続のインタフェース
+        pure subroutine Ioutput_on_failure_to_string(actual, expected, output_message)
+            implicit none
+            class(*), intent(in) :: actual
+                !! 予測値
+            class(*), intent(in) :: expected
+                !! 実測値
+            character(:), allocatable, intent(inout) :: output_message
+                !! 出力を格納する文字列
+        end subroutine Ioutput_on_failure_to_string
+
+        #:for rank in RANKS
+        !>検査失敗時に予測値と実測値を文字列に出力する手続のインタフェース
+        pure subroutine Ioutput_on_failure_to_string_rank${rank}$(actual, expected, output_message)
+            implicit none
+            class(*), intent(in) :: actual${rank_suffix(rank)}$
+                !! 予測値
+            class(*), intent(in) :: expected${rank_suffix(rank)}$
+                !! 実測値
+            character(:), allocatable, intent(inout) :: output_message
+                !! 出力を格納する文字列
+        end subroutine Ioutput_on_failure_to_string_rank${rank}$
+
+        #:endfor
+    end interface
+end module fassert_interface

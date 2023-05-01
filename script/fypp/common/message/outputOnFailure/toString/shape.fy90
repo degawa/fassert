@@ -1,0 +1,40 @@
+#:include "../../../../common.fypp"
+module fassert_common_message_outputOnFailure_toString_shape
+    use, intrinsic :: iso_fortran_env
+    use :: fassert_common_message_outputOnFailure_format
+    use :: fassert_common_store
+    implicit none
+    private
+    public :: output_on_failure
+
+    interface output_on_failure
+        #:for rank in RANKS
+        procedure :: output_rank${rank}$_to_string
+        #:endfor
+    end interface
+
+    #:for rank in RANKS
+    character(*), private, parameter :: fmt_shape_rank${rank}$ = '('//fmt_indent//',A,"(",'//fmt_index_rank${rank}$//',")")'
+    #:endfor
+
+contains
+    #:for rank in RANKS
+    !>配列形状の実測値と予測値を装置に出力する．
+    pure subroutine output_rank${rank}$_to_string(actual, expected, output_message)
+        implicit none
+        class(*), intent(in) :: actual${rank_suffix(rank)}$
+            !! 実測値
+        class(*), intent(in) :: expected${rank_suffix(rank)}$
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(128) :: buffer
+
+        write (buffer, fmt_shape_rank${rank}$) "Expected Shape: ", shape(expected)
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_shape_rank${rank}$) "Actual Shape  : ", shape(actual)
+        call append(output_message, trim(buffer))
+    end subroutine output_rank${rank}$_to_string
+
+    #:endfor
+end module fassert_common_message_outputOnFailure_toString_shape

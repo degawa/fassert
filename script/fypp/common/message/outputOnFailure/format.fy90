@@ -1,0 +1,34 @@
+#:include "../../../common.fypp"
+module fassert_common_message_outputOnFailure_format
+    use :: fassert_common_message, only:default_verbose_format_indent
+    implicit none
+    private
+
+    character(*), public, parameter :: fmt_indent = default_verbose_format_indent
+        !! 出力時にインデントするための書式指定文字列
+
+    character(*), public, parameter :: int_specifier = "I0"
+        !! 整数型変数の出力書式指定子
+    #:for i, kind_byte in enumerate(REAL_KINDS_BYTES)
+    #:set kind = kind_byte[0]
+    #:set byte = kind_byte[1]
+    character(*), public, parameter :: ${kind}$_specifier = "${REAL_SPECIFIERS[i]}$"
+        !! ${byte}$バイト浮動小数点数型変数の出力書式指定子
+    #:endfor
+    #:for i, kind_byte in enumerate(COMPLEX_KINDS_BYTES)
+    #:set kind = kind_byte[0]
+    #:set byte = kind_byte[1]
+    #:set rkind = REAL_KINDS[i]
+    character(*), public, parameter :: ${kind}$_specifier = '"(",'//${rkind}$_specifier//',",",'//${rkind}$_specifier//',")"'
+        !! ${byte}$バイト複素数型変数の出力書式指定子
+    #:endfor
+
+    character(*), private, parameter :: fmt_index_separator = ',",",'
+        !! 配列添字の各要素の区切り
+    character(*), private, parameter :: fmt_index= 'I0'
+        !! 配列添字の書式指定文字列
+    #:for rank in RANKS
+    character(*), public, parameter :: fmt_index_rank${rank}$ = #{if rank == 1}#fmt_index#{else}#fmt_index//repeat(fmt_index_separator//fmt_index, ${rank}$ - 1)#{endif}#
+        !! ${rank}$次元配列に対する配列添字の書式指定文字列
+    #:endfor
+end module fassert_common_message_outputOnFailure_format

@@ -1,0 +1,249 @@
+#:include "../../../../common.fypp"
+module fassert_common_message_outputOnFailure_toString_equal
+    use, intrinsic :: iso_fortran_env
+    use :: fassert_common_message_outputOnFailure_format
+    use :: fassert_common_store
+    implicit none
+    private
+    public :: output_on_failure
+
+    interface output_on_failure
+        #:for kind in INTRINSIC_KINDS
+        procedure :: output_${kind}$_to_string
+        #:endfor
+        #:for kind in INTRINSIC_KINDS
+        #:for rank in RANKS
+        procedure :: output_${kind}$_rank${rank}$_to_string
+        #:endfor
+        #:endfor
+    end interface
+
+    character(*), private, parameter :: fmt_int = '('//fmt_indent//',A,'//int_specifier//')'
+        !! 整数の文字列出力書式
+    #:for kind, byte in REAL_KINDS_BYTES
+    character(*), private, parameter :: fmt_${kind}$ = '('//fmt_indent//',A,'//${kind}$_specifier//')'
+        !! ${byte}$バイト浮動小数点数の文字列出力書式
+    #:endfor
+    #:for kind, byte in COMPLEX_KINDS_BYTES
+    character(*), private, parameter :: fmt_${kind}$ = '('//fmt_indent//',A,'//${kind}$_specifier//')'
+        !! ${byte}$バイト複素数の文字列出力書式
+    #:endfor
+    character(*), private, parameter :: fmt_str = '('//fmt_indent//',A,A)'
+        !! 文字列の出力書式
+    character(*), private, parameter :: fmt_char = '('//fmt_indent//',A,*(A:," "))'
+        !! 文字の出力書式
+
+    #:for rank in RANKS
+    character(*), private, parameter :: fmt_int_rank${rank}$ &
+                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank${rank}$//',")")'
+    #:endfor
+    #:for kind in REAL_KINDS
+    #:for rank in RANKS
+    character(*), private, parameter :: fmt_${kind}$_rank${rank}$ &
+                                        = '('//fmt_indent//',A,'//${kind}$_specifier//'," at (",'//fmt_index_rank${rank}$//',")")'
+    #:endfor
+    #:endfor
+    #:for kind in COMPLEX_KINDS
+    #:for rank in RANKS
+    character(*), private, parameter :: fmt_${kind}$_rank${rank}$ &
+                                        = '('//fmt_indent//',A,'//${kind}$_specifier//'," at (",'//fmt_index_rank${rank}$//',")")'
+    #:endfor
+    #:endfor
+    #:for rank in RANKS
+    character(*), private, parameter :: fmt_position_rank${rank}$ &
+                                        = '('//fmt_indent//',A,"at (",'//fmt_index_rank${rank}$//',")")'
+    #:endfor
+
+contains
+    #:for kind, type in INTEGER_KINDS_TYPES
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_${kind}$_to_string(actual, expected, output_message)
+        implicit none
+        ${type}$, intent(in) :: actual
+            !! 実測値
+        ${type}$, intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+    end subroutine output_${kind}$_to_string
+
+    #:endfor
+
+    #:for kind, type in REAL_KINDS_TYPES + COMPLEX_KINDS_TYPES
+    !>実測値と予測値，それらの差を文字列に出力する．
+    pure subroutine output_${kind}$_to_string(actual, expected, output_message)
+        implicit none
+        ${type}$, intent(in) :: actual
+            !! 実測値
+        ${type}$, intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_${kind}$) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_${kind}$) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_${kind}$) "Difference: ", expected - actual
+        call append(output_message, trim(buffer))
+    end subroutine output_${kind}$_to_string
+
+    #:endfor
+
+    #:for kind, type in INTEGER_KINDS_TYPES
+    #:for rank in RANKS
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_${kind}$_rank${rank}$_to_string(actual, expected, output_message)
+        implicit none
+        ${type}$, intent(in) :: actual${rank_suffix(rank)}$
+            !! 実測値
+        ${type}$, intent(in) :: expected${rank_suffix(rank)}$
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank${rank}$) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank${rank}$) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_${kind}$_rank${rank}$_to_string
+
+    #:endfor
+    #:endfor
+
+    #:for kind, type in REAL_KINDS_TYPES + COMPLEX_KINDS_TYPES
+    #:for rank in RANKS
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_${kind}$_rank${rank}$_to_string(actual, expected, output_message)
+        implicit none
+        ${type}$, intent(in) :: actual${rank_suffix(rank)}$
+            !! 実測値
+        ${type}$, intent(in) :: expected${rank_suffix(rank)}$
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_${kind}$_rank${rank}$) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_${kind}$_rank${rank}$) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_${kind}$_rank${rank}$_to_string
+
+    #:endfor
+    #:endfor
+
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_logical_to_string(actual, expected, output_message)
+        use :: fassert_common_message, only:to_string
+        implicit none
+        logical, intent(in) :: actual
+            !! 実測値
+        logical, intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_str) "Expected: ", to_string(expected)
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_str) "Actual  : ", to_string(actual)
+        call append(output_message, trim(buffer))
+    end subroutine output_logical_to_string
+
+    #:for rank in RANKS
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_logical_rank${rank}$_to_string(actual, expected, output_message)
+        use :: fassert_common_message, only:to_string
+        use :: fassert_common_hasZero
+        implicit none
+        logical, intent(in) :: actual${rank_suffix(rank)}$
+            !! 実測値
+        logical, intent(in) :: expected${rank_suffix(rank)}$
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual .eqv. expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_str) "Expected: ", to_string(expected(${at("idx", rank)}$))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_str) "Actual  : ", to_string(actual(${at("idx", rank)}$))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank${rank}$) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_logical_rank${rank}$_to_string
+
+    #:endfor
+
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_char_to_string(actual, expected, output_message)
+        implicit none
+        character(*), intent(in) :: actual
+            !! 実測値
+        character(*), intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_str) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_str) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+    end subroutine output_char_to_string
+
+    #:for rank in RANKS
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_char_rank${rank}$_to_string(actual, expected, output_message)
+        use :: fassert_common_hasZero
+        implicit none
+        character(*), intent(in) :: actual${rank_suffix(rank)}$
+            !! 実測値
+        character(*), intent(in) :: expected${rank_suffix(rank)}$
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual == expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_char) "Expected: ", expected(${at("idx", rank)}$)
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_char) "Actual  : ", actual(${at("idx", rank)}$)
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank${rank}$) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_char_rank${rank}$_to_string
+
+    #:endfor
+end module fassert_common_message_outputOnFailure_toString_equal
