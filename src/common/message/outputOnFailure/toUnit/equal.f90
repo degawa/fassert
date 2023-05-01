@@ -19,6 +19,8 @@ module fassert_common_message_outputOnFailure_toUnit_equal
         procedure :: output_complex32
         procedure :: output_complex64
         procedure :: output_complex128
+        procedure :: output_logical
+        procedure :: output_char
         procedure :: output_int32_rank1
         procedure :: output_int32_rank2
         procedure :: output_int32_rank3
@@ -28,8 +30,9 @@ module fassert_common_message_outputOnFailure_toUnit_equal
         procedure :: output_real64_rank1
         procedure :: output_real64_rank2
         procedure :: output_real64_rank3
-        procedure :: output_logical
-        procedure :: output_string
+        procedure :: output_logical_rank1
+        procedure :: output_logical_rank2
+        procedure :: output_logical_rank3
         procedure :: output_char_rank1
     end interface
 
