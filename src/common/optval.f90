@@ -7,6 +7,7 @@ module fassert_common_optval
     interface optval
         procedure :: optval_real32
         procedure :: optval_real64
+        procedure :: optval_real128
         procedure :: optval_logical
     end interface
 contains
@@ -45,6 +46,24 @@ contains
             y = default
         end if
     end function optval_real64
+
+    !>4倍精度実数型引数`x`が渡されていれば`x`を，
+    !>渡されていなければ`deafult`を返す．
+    pure elemental function optval_real128(x, default) result(y)
+        implicit none
+        !&<
+        real(real128), intent(in), optional  :: x
+        real(real128), intent(in)            :: default
+            !! `x`が渡されていない場合の既定値
+        !&>
+        real(real128) :: y
+
+        if (present(x)) then
+            y = x
+        else
+            y = default
+        end if
+    end function optval_real128
 
     !>論理型引数`x`が渡されていれば`x`を，
     !>渡されていなければ`deafult`を返す．
