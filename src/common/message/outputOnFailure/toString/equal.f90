@@ -466,6 +466,93 @@ contains
     end subroutine output_logical_to_string
 
     !>実測値と予測値を文字列に出力する．
+    pure subroutine output_logical_rank1_to_string(actual, expected, output_message)
+        use :: fassert_common_message, only:to_string
+        use :: fassert_common_hasZero
+        implicit none
+        logical, intent(in) :: actual(:)
+            !! 実測値
+        logical, intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual .eqv. expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_str) "Expected: ", to_string(expected(idx(1)))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_str) "Actual  : ", to_string(actual(idx(1)))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank1) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_logical_rank1_to_string
+
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_logical_rank2_to_string(actual, expected, output_message)
+        use :: fassert_common_message, only:to_string
+        use :: fassert_common_hasZero
+        implicit none
+        logical, intent(in) :: actual(:, :)
+            !! 実測値
+        logical, intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual .eqv. expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_str) "Expected: ", to_string(expected(idx(1), idx(2)))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_str) "Actual  : ", to_string(actual(idx(1), idx(2)))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank2) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_logical_rank2_to_string
+
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_logical_rank3_to_string(actual, expected, output_message)
+        use :: fassert_common_message, only:to_string
+        use :: fassert_common_hasZero
+        implicit none
+        logical, intent(in) :: actual(:, :, :)
+            !! 実測値
+        logical, intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual .eqv. expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_str) "Expected: ", to_string(expected(idx(1), idx(2), idx(3)))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_str) "Actual  : ", to_string(actual(idx(1), idx(2), idx(3)))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank3) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_logical_rank3_to_string
+
+    !>実測値と予測値を文字列に出力する．
     pure subroutine output_char_to_string(actual, expected, output_message)
         implicit none
         character(*), intent(in) :: actual
