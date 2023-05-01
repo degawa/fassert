@@ -85,7 +85,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int) "Expected: ", expected
         call append(output_message, trim(buffer))
