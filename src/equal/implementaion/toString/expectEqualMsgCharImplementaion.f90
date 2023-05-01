@@ -11,7 +11,7 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module procedure expect_equal_str_msg
+    module procedure expect_equal_char_msg
     use :: fassert_common_check
     implicit none
 
@@ -39,7 +39,7 @@ contains
     end if
 
     if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected, output_message)
-    end procedure expect_equal_str_msg
+    end procedure expect_equal_char_msg
 
     !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
     !>出力を`output_message`に書き込む．

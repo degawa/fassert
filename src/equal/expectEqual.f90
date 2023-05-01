@@ -29,7 +29,7 @@ module expectEqual
         procedure :: expect_approxequal_real64_rank2
         procedure :: expect_approxequal_real64_rank3
         procedure :: expect_equiv_logical
-        procedure :: expect_equal_str
+        procedure :: expect_equal_char
         procedure :: expect_equal_char_rank1
 
         procedure :: expect_equal_int8_msg
@@ -1511,9 +1511,9 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        pure module subroutine expect_equal_str_msg(actual, expected, test_name, stat, &
-                                                    verbose, expected_failure, quiet, &
-                                                    output_message)
+        pure module subroutine expect_equal_char_msg(actual, expected, test_name, stat, &
+                                                     verbose, expected_failure, quiet, &
+                                                     output_message)
             character(*), intent(in) :: actual
                 !! 実測値
             character(*), intent(in) :: expected
@@ -1532,7 +1532,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
             character(:), allocatable, intent(out) :: output_message
                 !! 出力を格納する文字列
-        end subroutine expect_equal_str_msg
+        end subroutine expect_equal_char_msg
 
         !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
         !>出力を`output_message`に書き込む．

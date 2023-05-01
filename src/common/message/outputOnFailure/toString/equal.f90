@@ -460,7 +460,7 @@ contains
     end subroutine output_logical_to_string
 
     !>実測値と予測値を文字列に出力する．
-    pure subroutine output_string_to_string(actual, expected, output_message)
+    pure subroutine output_char_to_string(actual, expected, output_message)
         implicit none
         character(*), intent(in) :: actual
             !! 実測値
@@ -468,13 +468,13 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_str) "Expected: ", expected
         call append(output_message, trim(buffer))
         write (buffer, fmt_str) "Actual  : ", actual
         call append(output_message, trim(buffer))
-    end subroutine output_string_to_string
+    end subroutine output_char_to_string
 
     !>実測値と予測値を文字列に出力する．
     pure subroutine output_char_rank1_to_string(actual, expected, output_message)

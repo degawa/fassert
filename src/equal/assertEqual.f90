@@ -27,7 +27,7 @@ module assertEqual
         procedure :: assert_approxequal_complex64
         procedure :: assert_approxequal_complex128
         procedure :: assert_equiv_logical
-        procedure :: assert_equal_str
+        procedure :: assert_equal_char
         procedure :: assert_equal_char_rank1
         procedure :: assert_equal_user_defined
         procedure :: assert_equal_user_defined_rank1
@@ -739,8 +739,8 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    subroutine assert_equal_str(actual, expected, test_name, &
-                                verbose, expected_failure, quiet)
+    subroutine assert_equal_char(actual, expected, test_name, &
+                                 verbose, expected_failure, quiet)
         implicit none
 
         character(*), intent(in) :: actual
@@ -760,7 +760,7 @@ contains
 
         call expect_equal(actual, expected, test_name, stat, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
-    end subroutine assert_equal_str
+    end subroutine assert_equal_char
 
     !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
