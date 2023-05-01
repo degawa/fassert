@@ -13,9 +13,18 @@ module expectEqual
         procedure :: expect_equal_int16
         procedure :: expect_equal_int32
         procedure :: expect_equal_int64
+        procedure :: expect_equal_int8_rank1
+        procedure :: expect_equal_int16_rank1
         procedure :: expect_equal_int32_rank1
+        procedure :: expect_equal_int64_rank1
+        procedure :: expect_equal_int8_rank2
+        procedure :: expect_equal_int16_rank2
         procedure :: expect_equal_int32_rank2
+        procedure :: expect_equal_int64_rank2
+        procedure :: expect_equal_int8_rank3
+        procedure :: expect_equal_int16_rank3
         procedure :: expect_equal_int32_rank3
+        procedure :: expect_equal_int64_rank3
         procedure :: expect_approxequal_real32
         procedure :: expect_approxequal_real64
         procedure :: expect_approxequal_real128
@@ -23,11 +32,23 @@ module expectEqual
         procedure :: expect_approxequal_complex64
         procedure :: expect_approxequal_complex128
         procedure :: expect_approxequal_real32_rank1
-        procedure :: expect_approxequal_real32_rank2
-        procedure :: expect_approxequal_real32_rank3
         procedure :: expect_approxequal_real64_rank1
+        procedure :: expect_approxequal_real128_rank1
+        procedure :: expect_approxequal_complex32_rank1
+        procedure :: expect_approxequal_complex64_rank1
+        procedure :: expect_approxequal_complex128_rank1
+        procedure :: expect_approxequal_real32_rank2
         procedure :: expect_approxequal_real64_rank2
+        procedure :: expect_approxequal_real128_rank2
+        procedure :: expect_approxequal_complex32_rank2
+        procedure :: expect_approxequal_complex64_rank2
+        procedure :: expect_approxequal_complex128_rank2
+        procedure :: expect_approxequal_real32_rank3
         procedure :: expect_approxequal_real64_rank3
+        procedure :: expect_approxequal_real128_rank3
+        procedure :: expect_approxequal_complex32_rank3
+        procedure :: expect_approxequal_complex64_rank3
+        procedure :: expect_approxequal_complex128_rank3
         procedure :: expect_equiv_logical
         procedure :: expect_equiv_logical_rank1
         procedure :: expect_equiv_logical_rank2
@@ -41,9 +62,18 @@ module expectEqual
         procedure :: expect_equal_int16_msg
         procedure :: expect_equal_int32_msg
         procedure :: expect_equal_int64_msg
+        procedure :: expect_equal_int8_rank1_msg
+        procedure :: expect_equal_int16_rank1_msg
         procedure :: expect_equal_int32_rank1_msg
+        procedure :: expect_equal_int64_rank1_msg
+        procedure :: expect_equal_int8_rank2_msg
+        procedure :: expect_equal_int16_rank2_msg
         procedure :: expect_equal_int32_rank2_msg
+        procedure :: expect_equal_int64_rank2_msg
+        procedure :: expect_equal_int8_rank3_msg
+        procedure :: expect_equal_int16_rank3_msg
         procedure :: expect_equal_int32_rank3_msg
+        procedure :: expect_equal_int64_rank3_msg
         procedure :: expect_approxequal_real32_msg
         procedure :: expect_approxequal_real64_msg
         procedure :: expect_approxequal_real128_msg
@@ -51,11 +81,23 @@ module expectEqual
         procedure :: expect_approxequal_complex64_msg
         procedure :: expect_approxequal_complex128_msg
         procedure :: expect_approxequal_real32_rank1_msg
-        procedure :: expect_approxequal_real32_rank2_msg
-        procedure :: expect_approxequal_real32_rank3_msg
         procedure :: expect_approxequal_real64_rank1_msg
+        procedure :: expect_approxequal_real128_rank1_msg
+        procedure :: expect_approxequal_complex32_rank1_msg
+        procedure :: expect_approxequal_complex64_rank1_msg
+        procedure :: expect_approxequal_complex128_rank1_msg
+        procedure :: expect_approxequal_real32_rank2_msg
         procedure :: expect_approxequal_real64_rank2_msg
+        procedure :: expect_approxequal_real128_rank2_msg
+        procedure :: expect_approxequal_complex32_rank2_msg
+        procedure :: expect_approxequal_complex64_rank2_msg
+        procedure :: expect_approxequal_complex128_rank2_msg
+        procedure :: expect_approxequal_real32_rank3_msg
         procedure :: expect_approxequal_real64_rank3_msg
+        procedure :: expect_approxequal_real128_rank3_msg
+        procedure :: expect_approxequal_complex32_rank3_msg
+        procedure :: expect_approxequal_complex64_rank3_msg
+        procedure :: expect_approxequal_complex128_rank3_msg
         procedure :: expect_equiv_logical_msg
         procedure :: expect_equiv_logical_rank1_msg
         procedure :: expect_equiv_logical_rank2_msg
@@ -206,6 +248,186 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
+        module subroutine expect_equal_int8_rank1(actual, expected, test_name, stat, &
+                                                  verbose, expected_failure, quiet)
+            integer(int8), intent(in) :: actual(:)
+                !! 実測値
+            integer(int8), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int8_rank1
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int8_rank2(actual, expected, test_name, stat, &
+                                                  verbose, expected_failure, quiet)
+            integer(int8), intent(in) :: actual(:, :)
+                !! 実測値
+            integer(int8), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int8_rank2
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int8_rank3(actual, expected, test_name, stat, &
+                                                  verbose, expected_failure, quiet)
+            integer(int8), intent(in) :: actual(:, :, :)
+                !! 実測値
+            integer(int8), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int8_rank3
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int16_rank1(actual, expected, test_name, stat, &
+                                                   verbose, expected_failure, quiet)
+            integer(int16), intent(in) :: actual(:)
+                !! 実測値
+            integer(int16), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int16_rank1
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int16_rank2(actual, expected, test_name, stat, &
+                                                   verbose, expected_failure, quiet)
+            integer(int16), intent(in) :: actual(:, :)
+                !! 実測値
+            integer(int16), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int16_rank2
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int16_rank3(actual, expected, test_name, stat, &
+                                                   verbose, expected_failure, quiet)
+            integer(int16), intent(in) :: actual(:, :, :)
+                !! 実測値
+            integer(int16), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int16_rank3
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
         module subroutine expect_equal_int32_rank1(actual, expected, test_name, stat, &
                                                    verbose, expected_failure, quiet)
             integer(int32), intent(in) :: actual(:)
@@ -285,6 +507,96 @@ module expectEqual
             logical, intent(in), optional :: quiet
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int32_rank3
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int64_rank1(actual, expected, test_name, stat, &
+                                                   verbose, expected_failure, quiet)
+            integer(int64), intent(in) :: actual(:)
+                !! 実測値
+            integer(int64), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int64_rank1
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int64_rank2(actual, expected, test_name, stat, &
+                                                   verbose, expected_failure, quiet)
+            integer(int64), intent(in) :: actual(:, :)
+                !! 実測値
+            integer(int64), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int64_rank2
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_equal_int64_rank3(actual, expected, test_name, stat, &
+                                                   verbose, expected_failure, quiet)
+            integer(int64), intent(in) :: actual(:, :, :)
+                !! 実測値
+            integer(int64), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_equal_int64_rank3
 
         !>実測値`actual`と予測値`expected`の差が
         !>許容値`tolerance`より小さいかを比較する．
@@ -422,7 +734,8 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_real32_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -455,7 +768,8 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_real32_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -488,7 +802,8 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_real32_rank3
 
-        !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -521,7 +836,8 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_real64_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -554,7 +870,8 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_real64_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -587,8 +904,109 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_real64_rank3
 
-        !>実測値`actual`と予測値`expected`の差が
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
         !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_real128_rank1(actual, expected, test_name, stat, &
+                                                           tolerance, &
+                                                           verbose, expected_failure, quiet)
+            real(real128), intent(in) :: actual(:)
+                !! 実測値
+            real(real128), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_real128_rank1
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_real128_rank2(actual, expected, test_name, stat, &
+                                                           tolerance, &
+                                                           verbose, expected_failure, quiet)
+            real(real128), intent(in) :: actual(:, :)
+                !! 実測値
+            real(real128), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_real128_rank2
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_real128_rank3(actual, expected, test_name, stat, &
+                                                           tolerance, &
+                                                           verbose, expected_failure, quiet)
+            real(real128), intent(in) :: actual(:, :, :)
+                !! 実測値
+            real(real128), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_real128_rank3
+
+        !>実測値`actual`と予測値`expected`の差が
         !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -623,7 +1041,6 @@ module expectEqual
         end subroutine expect_approxequal_complex32
 
         !>実測値`actual`と予測値`expected`の差が
-        !>
         !>許容値`tolerance`より小さいかを比較する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -690,6 +1107,312 @@ module expectEqual
             logical, intent(in), optional :: quiet
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_approxequal_complex128
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex32_rank1(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet)
+            complex(real32), intent(in) :: actual(:)
+                !! 実測値
+            complex(real32), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real32), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex32_rank1
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex32_rank2(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet)
+            complex(real32), intent(in) :: actual(:, :)
+                !! 実測値
+            complex(real32), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real32), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex32_rank2
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex32_rank3(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet)
+            complex(real32), intent(in) :: actual(:, :, :)
+                !! 実測値
+            complex(real32), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real32), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex32_rank3
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex64_rank1(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet)
+            complex(real64), intent(in) :: actual(:)
+                !! 実測値
+            complex(real64), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real64), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex64_rank1
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex64_rank2(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet)
+            complex(real64), intent(in) :: actual(:, :)
+                !! 実測値
+            complex(real64), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real64), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex64_rank2
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex64_rank3(actual, expected, test_name, stat, &
+                                                             tolerance, &
+                                                             verbose, expected_failure, quiet)
+            complex(real64), intent(in) :: actual(:, :, :)
+                !! 実測値
+            complex(real64), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real64), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex64_rank3
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex128_rank1(actual, expected, test_name, stat, &
+                                                              tolerance, &
+                                                              verbose, expected_failure, quiet)
+            complex(real128), intent(in) :: actual(:)
+                !! 実測値
+            complex(real128), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex128_rank1
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex128_rank2(actual, expected, test_name, stat, &
+                                                              tolerance, &
+                                                              verbose, expected_failure, quiet)
+            complex(real128), intent(in) :: actual(:, :)
+                !! 実測値
+            complex(real128), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex128_rank2
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較する．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        module subroutine expect_approxequal_complex128_rank3(actual, expected, test_name, stat, &
+                                                              tolerance, &
+                                                              verbose, expected_failure, quiet)
+            complex(real128), intent(in) :: actual(:, :, :)
+                !! 実測値
+            complex(real128), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+        end subroutine expect_approxequal_complex128_rank3
 
         !>実測値`actual`と予測値`expected`が等価かを比較する．
         !>
@@ -1081,6 +1804,210 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
+        pure module subroutine expect_equal_int8_rank1_msg(actual, expected, test_name, stat, &
+                                                           verbose, expected_failure, quiet, &
+                                                           output_message)
+            integer(int8), intent(in) :: actual(:)
+                !! 実測値
+            integer(int8), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int8_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int8_rank2_msg(actual, expected, test_name, stat, &
+                                                           verbose, expected_failure, quiet, &
+                                                           output_message)
+            integer(int8), intent(in) :: actual(:, :)
+                !! 実測値
+            integer(int8), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int8_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int8_rank3_msg(actual, expected, test_name, stat, &
+                                                           verbose, expected_failure, quiet, &
+                                                           output_message)
+            integer(int8), intent(in) :: actual(:, :, :)
+                !! 実測値
+            integer(int8), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int8_rank3_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int16_rank1_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
+            integer(int16), intent(in) :: actual(:)
+                !! 実測値
+            integer(int16), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int16_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int16_rank2_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
+            integer(int16), intent(in) :: actual(:, :)
+                !! 実測値
+            integer(int16), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int16_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int16_rank3_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
+            integer(int16), intent(in) :: actual(:, :, :)
+                !! 実測値
+            integer(int16), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int16_rank3_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
         pure module subroutine expect_equal_int32_rank1_msg(actual, expected, test_name, stat, &
                                                             verbose, expected_failure, quiet, &
                                                             output_message)
@@ -1172,6 +2099,108 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int32_rank3_msg
 
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int64_rank1_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
+            integer(int64), intent(in) :: actual(:)
+                !! 実測値
+            integer(int64), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int64_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int64_rank2_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
+            integer(int64), intent(in) :: actual(:, :)
+                !! 実測値
+            integer(int64), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int64_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_equal_int64_rank3_msg(actual, expected, test_name, stat, &
+                                                            verbose, expected_failure, quiet, &
+                                                            output_message)
+            integer(int64), intent(in) :: actual(:, :, :)
+                !! 実測値
+            integer(int64), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が等しい場合`.true.`，
+                !! そうでない場合`.false.`
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_equal_int64_rank3_msg
+
         !>実測値`actual`と予測値`expected`の差が
         !>許容値`tolerance`より小さいかを比較し，
         !>出力を`output_message`に書き込む．
@@ -1211,7 +2240,8 @@ module expectEqual
         end subroutine expect_approxequal_real32_msg
 
         !>実測値`actual`と予測値`expected`の差が
-        !>許容値`tolerance`より小さいかを比較する．
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1513,9 +2543,123 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_approxequal_real64_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の差が
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
         !>
-        !>許容値`tolerance`より小さいかを比較する．
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_real128_rank1_msg(actual, expected, test_name, stat, &
+                                                                    tolerance, &
+                                                                    verbose, expected_failure, quiet, &
+                                                                    output_message)
+            real(real128), intent(in) :: actual(:)
+                !! 実測値
+            real(real128), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_real128_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_real128_rank2_msg(actual, expected, test_name, stat, &
+                                                                    tolerance, &
+                                                                    verbose, expected_failure, quiet, &
+                                                                    output_message)
+            real(real128), intent(in) :: actual(:, :)
+                !! 実測値
+            real(real128), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_real128_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_real128_rank3_msg(actual, expected, test_name, stat, &
+                                                                    tolerance, &
+                                                                    verbose, expected_failure, quiet, &
+                                                                    output_message)
+            real(real128), intent(in) :: actual(:, :, :)
+                !! 実測値
+            real(real128), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_real128_rank3_msg
+
+        !>実測値`actual`と予測値`expected`の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1525,10 +2669,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_complex32_msg(actual, expected, test_name, stat, &
-                                                           tolerance, &
-                                                           verbose, expected_failure, quiet, &
-                                                           output_message)
+        pure module subroutine expect_approxequal_complex32_msg(actual, expected, test_name, stat, &
+                                                                tolerance, &
+                                                                verbose, expected_failure, quiet, &
+                                                                output_message)
             complex(real32), intent(in) :: actual
                 !! 実測値
             complex(real32), intent(in) :: expected
@@ -1552,8 +2696,8 @@ module expectEqual
         end subroutine expect_approxequal_complex32_msg
 
         !>実測値`actual`と予測値`expected`の差が
-        !>
-        !>許容値`tolerance`より小さいかを比較する．
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1563,10 +2707,10 @@ module expectEqual
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
-        module subroutine expect_approxequal_complex64_msg(actual, expected, test_name, stat, &
-                                                           tolerance, &
-                                                           verbose, expected_failure, quiet, &
-                                                           output_message)
+        pure module subroutine expect_approxequal_complex64_msg(actual, expected, test_name, stat, &
+                                                                tolerance, &
+                                                                verbose, expected_failure, quiet, &
+                                                                output_message)
             complex(real64), intent(in) :: actual
                 !! 実測値
             complex(real64), intent(in) :: expected
@@ -1626,6 +2770,348 @@ module expectEqual
             character(:), allocatable, intent(out) :: output_message
                 !! 出力を格納する文字列
         end subroutine expect_approxequal_complex128_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex32_rank1_msg(actual, expected, test_name, stat, &
+                                                                      tolerance, &
+                                                                      verbose, expected_failure, quiet, &
+                                                                      output_message)
+            complex(real32), intent(in) :: actual(:)
+                !! 実測値
+            complex(real32), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real32), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex32_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex32_rank2_msg(actual, expected, test_name, stat, &
+                                                                      tolerance, &
+                                                                      verbose, expected_failure, quiet, &
+                                                                      output_message)
+            complex(real32), intent(in) :: actual(:, :)
+                !! 実測値
+            complex(real32), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real32), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex32_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex32_rank3_msg(actual, expected, test_name, stat, &
+                                                                      tolerance, &
+                                                                      verbose, expected_failure, quiet, &
+                                                                      output_message)
+            complex(real32), intent(in) :: actual(:, :, :)
+                !! 実測値
+            complex(real32), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real32), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex32_rank3_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex64_rank1_msg(actual, expected, test_name, stat, &
+                                                                      tolerance, &
+                                                                      verbose, expected_failure, quiet, &
+                                                                      output_message)
+            complex(real64), intent(in) :: actual(:)
+                !! 実測値
+            complex(real64), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real64), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex64_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex64_rank2_msg(actual, expected, test_name, stat, &
+                                                                      tolerance, &
+                                                                      verbose, expected_failure, quiet, &
+                                                                      output_message)
+            complex(real64), intent(in) :: actual(:, :)
+                !! 実測値
+            complex(real64), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real64), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex64_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex64_rank3_msg(actual, expected, test_name, stat, &
+                                                                      tolerance, &
+                                                                      verbose, expected_failure, quiet, &
+                                                                      output_message)
+            complex(real64), intent(in) :: actual(:, :, :)
+                !! 実測値
+            complex(real64), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real64), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex64_rank3_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex128_rank1_msg(actual, expected, test_name, stat, &
+                                                                       tolerance, &
+                                                                       verbose, expected_failure, quiet, &
+                                                                       output_message)
+            complex(real128), intent(in) :: actual(:)
+                !! 実測値
+            complex(real128), intent(in) :: expected(:)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex128_rank1_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex128_rank2_msg(actual, expected, test_name, stat, &
+                                                                       tolerance, &
+                                                                       verbose, expected_failure, quiet, &
+                                                                       output_message)
+            complex(real128), intent(in) :: actual(:, :)
+                !! 実測値
+            complex(real128), intent(in) :: expected(:, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex128_rank2_msg
+
+        !>実測値`actual`と予測値`expected`の各要素の差が
+        !>許容値`tolerance`より小さいかを比較し，
+        !>出力を`output_message`に書き込む．
+        !>
+        !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
+        !>
+        !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
+        !>
+        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>
+        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>
+        pure module subroutine expect_approxequal_complex128_rank3_msg(actual, expected, test_name, stat, &
+                                                                       tolerance, &
+                                                                       verbose, expected_failure, quiet, &
+                                                                       output_message)
+            complex(real128), intent(in) :: actual(:, :, :)
+                !! 実測値
+            complex(real128), intent(in) :: expected(:, :, :)
+                !! 予測値
+            character(*), intent(in) :: test_name
+                !! テスト名
+            logical, intent(out) :: stat
+                !! 比較結果の真偽値<br>
+                !! 実測値と予測値が許容値以下の場合`.true.`，
+                !! そうでない場合`.false.`
+            real(real128), intent(in), optional :: tolerance
+                !! 実測値と予測値が等しいと見なす許容値
+            logical, intent(in), optional :: verbose
+                !! 実測値と予測値の差の最大・最小値を出力するフラグ
+            logical, intent(in), optional :: expected_failure
+                !! 予期された失敗を検査するかのフラグ
+            logical, intent(in), optional :: quiet
+                !! 成功時に出力を抑制するかのフラグ
+            character(:), allocatable, intent(out) :: output_message
+                !! 出力を格納する文字列
+        end subroutine expect_approxequal_complex128_rank3_msg
 
         !>実測値`actual`と予測値`expected`が等価かを比較し，
         !>出力を`output_message`に書き込む．
