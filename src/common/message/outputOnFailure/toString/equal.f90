@@ -90,7 +90,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int) "Expected: ", expected
         call append(output_message, trim(buffer))
@@ -107,7 +107,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int) "Expected: ", expected
         call append(output_message, trim(buffer))
@@ -124,7 +124,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int) "Expected: ", expected
         call append(output_message, trim(buffer))
@@ -141,7 +141,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real32) "Expected: ", expected
         call append(output_message, trim(buffer))
@@ -160,7 +160,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real64) "Expected: ", expected
         call append(output_message, trim(buffer))
@@ -179,7 +179,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int_rank1) "Maximum Absolute Difference: ", &
                                       maxval(abs(expected - actual)), &
@@ -200,7 +200,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int_rank2) "Maximum Absolute Difference: ", &
                                       maxval(abs(expected - actual)), &
@@ -221,7 +221,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_int_rank3) "Maximum Absolute Difference: ", &
                                       maxval(abs(expected - actual)), &
@@ -242,7 +242,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real32_rank1) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
@@ -263,7 +263,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real32_rank2) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
@@ -284,7 +284,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real32_rank3) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
@@ -305,7 +305,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real64_rank1) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
@@ -326,7 +326,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real64_rank2) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
@@ -347,7 +347,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_real64_rank3) "Maximum Absolute Difference: ", &
                                          maxval(abs(expected - actual)), &
@@ -407,7 +407,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_str) "Expected: ", to_string(expected)
         call append(output_message, trim(buffer))
@@ -441,7 +441,7 @@ contains
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
-        character(128) :: buffer
+        character(256) :: buffer
 
         write (buffer, fmt_char) "Expected: ", expected
         call append(output_message, trim(buffer))
