@@ -173,5 +173,5 @@ fassert = {git = "https://github.com/degawa/fassert.git"}
 - [x] To support `complex` types.
 - [ ] To support High-ranked arrays.
 - [ ] To add unit tests.
-- [ ] To generate codes using fypp.
+- [x] To generate codes using fypp.
 - [ ] To add other assertion procedures.
