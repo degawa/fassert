@@ -14,7 +14,11 @@ module fassert_common_message_outputOnFailure_toString_equal
         procedure :: output_real32_to_string
         procedure :: output_real64_to_string
         procedure :: output_real128_to_string
+        procedure :: output_complex32_to_string
+        procedure :: output_complex64_to_string
         procedure :: output_complex128_to_string
+        procedure :: output_logical_to_string
+        procedure :: output_char_to_string
         procedure :: output_int32_rank1_to_string
         procedure :: output_int32_rank2_to_string
         procedure :: output_int32_rank3_to_string
@@ -24,10 +28,9 @@ module fassert_common_message_outputOnFailure_toString_equal
         procedure :: output_real64_rank1_to_string
         procedure :: output_real64_rank2_to_string
         procedure :: output_real64_rank3_to_string
-        procedure :: output_complex32_to_string
-        procedure :: output_complex64_to_string
-        procedure :: output_logical_to_string
-        procedure :: output_string_to_string
+        procedure :: output_logical_rank1_to_string
+        procedure :: output_logical_rank2_to_string
+        procedure :: output_logical_rank3_to_string
         procedure :: output_char_rank1_to_string
     end interface
 
