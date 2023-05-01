@@ -13,6 +13,8 @@ module fassert_common_message_outputOnFailure_toString_equal
         procedure :: output_int64_to_string
         procedure :: output_real32_to_string
         procedure :: output_real64_to_string
+        procedure :: output_real128_to_string
+        procedure :: output_complex128_to_string
         procedure :: output_int32_rank1_to_string
         procedure :: output_int32_rank2_to_string
         procedure :: output_int32_rank3_to_string
@@ -173,6 +175,44 @@ contains
         write (buffer, fmt_real64) "Difference: ", expected - actual
         call append(output_message, trim(buffer))
     end subroutine output_real64_to_string
+
+    !>実測値と予測値，それらの差を文字列に出力する．
+    pure subroutine output_real128_to_string(actual, expected, output_message)
+        implicit none
+        real(real128), intent(in) :: actual
+            !! 実測値
+        real(real128), intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_real128) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_real128) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_real128) "Difference: ", expected - actual
+        call append(output_message, trim(buffer))
+    end subroutine output_real128_to_string
+
+    !>実測値と予測値，それらの差を文字列に出力する．
+    pure subroutine output_complex128_to_string(actual, expected, output_message)
+        implicit none
+        complex(real128), intent(in) :: actual
+            !! 実測値
+        complex(real128), intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex128) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex128) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex128) "Difference: ", expected - actual
+        call append(output_message, trim(buffer))
+    end subroutine output_complex128_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
     pure subroutine output_int32_rank1_to_string(actual, expected, output_message)

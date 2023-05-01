@@ -15,8 +15,10 @@ module fassert_common_message_outputOnFailure_toUnit_equal
         procedure :: output_int64
         procedure :: output_real32
         procedure :: output_real64
+        procedure :: output_real128
         procedure :: output_complex32
         procedure :: output_complex64
+        procedure :: output_complex128
         procedure :: output_int32_rank1
         procedure :: output_int32_rank2
         procedure :: output_int32_rank3
@@ -109,6 +111,33 @@ contains
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
     end subroutine output_real64
+
+    !>実測値と予測値を装置に出力する．
+    subroutine output_real128(actual, expected)
+        implicit none
+        real(real128), intent(in) :: actual
+            !! 実測値
+        real(real128), intent(in) :: expected
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_real128
+
+
+    !>実測値と予測値を装置に出力する．
+    subroutine output_complex128(actual, expected)
+        implicit none
+        complex(real128), intent(in) :: actual
+            !! 実測値
+        complex(real128), intent(in) :: expected
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_complex128
 
     !>実測値と予測値の差の最大・最小値を装置に出力する．
     subroutine output_int32_rank1(actual, expected)
