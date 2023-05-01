@@ -1,0 +1,104 @@
+#:include "../../../common.fypp"
+module fassert_common_compare_equal_array
+    use, intrinsic :: iso_fortran_env
+    implicit none
+    private
+    public :: are_equal
+
+    interface are_equal
+        #:for kind in INTEGER_KINDS + REAL_KINDS + COMPLEX_KINDS + LOGICAL_KINDS + CHAR_KINDS
+        #:for rank in RANKS
+        procedure :: are_all_values_equal_rank${rank}$_${kind}$
+        #:endfor
+        #:endfor
+    end interface
+
+contains
+    #:for kind, type in INTEGER_KINDS_TYPES
+    #:for rank in RANKS
+    !>二つの配列の全要素が等しい場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2) result(are_same)
+        implicit none
+        ${type}$, intent(in) :: array1${rank_suffix(rank)}$
+        ${type}$, intent(in) :: array2${rank_suffix(rank)}$
+        logical :: are_same
+
+        are_same = all(array1 == array2)
+    end function are_all_values_equal_rank${rank}$_${kind}$
+
+    #:endfor
+    #:endfor
+
+    #:for kind, type in REAL_KINDS_TYPES
+    #:for rank in RANKS
+    !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
+    !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2, tolerance) result(are_same)
+        use :: fassert_common_optval
+        implicit none
+        ${type}$, intent(in) :: array1${rank_suffix(rank)}$
+        ${type}$, intent(in) :: array2${rank_suffix(rank)}$
+        ${type}$, intent(in), optional :: tolerance
+        logical :: are_same
+
+        are_same = all(abs(array1 - array2) <= optval(tolerance, &
+                                                      default=epsilon(0._${kind}$)))
+    end function are_all_values_equal_rank${rank}$_${kind}$
+
+    #:endfor
+    #:endfor
+
+    #:for i, kind_type in enumerate(COMPLEX_KINDS_TYPES)
+    #:set kind = kind_type[0]
+    #:set type = kind_type[1]
+    #:set rkind, rtype = REAL_KINDS_TYPES[i]
+    #:for rank in RANKS
+    !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
+    !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2, tolerance) result(are_same)
+        use :: fassert_common_optval
+        implicit none
+        ${type}$, intent(in) :: array1${rank_suffix(rank)}$
+        ${type}$, intent(in) :: array2${rank_suffix(rank)}$
+        ${rtype}$, intent(in), optional :: tolerance
+        logical :: are_same
+
+        are_same = all(abs(array1 - array2) <= optval(tolerance, &
+                                                      default=epsilon(0._${rkind}$)))
+    end function are_all_values_equal_rank${rank}$_${kind}$
+
+    #:endfor
+    #:endfor
+
+    #:for kind, type in LOGICAL_KINDS_TYPES
+    #:for rank in RANKS
+    !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
+    !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2) result(are_same)
+        use :: fassert_common_optval
+        implicit none
+        ${type}$, intent(in) :: array1${rank_suffix(rank)}$
+        ${type}$, intent(in) :: array2${rank_suffix(rank)}$
+        logical :: are_same
+
+        are_same = all(array1 .eqv. array2)
+    end function are_all_values_equal_rank${rank}$_${kind}$
+
+    #:endfor
+    #:endfor
+
+    #:for kind, type in CHAR_KINDS_TYPES
+    #:for rank in RANKS
+    !>二つの文字型配列の全要素が等しい場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2) result(are_same)
+        implicit none
+        ${type}$, intent(in) :: array1${rank_suffix(rank)}$
+        ${type}$, intent(in) :: array2${rank_suffix(rank)}$
+        logical :: are_same
+
+        are_same = all(array1 == array2)
+    end function are_all_values_equal_rank${rank}$_${kind}$
+
+    #:endfor
+    #:endfor
+end module fassert_common_compare_equal_array

@@ -1,0 +1,32 @@
+#:include "../../../../common.fypp"
+module fassert_common_message_outputOnFailure_toUnit_shape
+    use, intrinsic :: iso_fortran_env
+    use :: fassert_common_unit, msg_unit => assertion_message_unit
+    use :: fassert_common_message_outputOnFailure_toString_shape
+    implicit none
+    private
+    public :: output_on_failure
+
+    interface output_on_failure
+        #:for rank in RANKS
+        procedure :: output_rank${rank}$
+        #:endfor
+    end interface
+
+contains
+    #:for rank in RANKS
+    !>配列形状の実測値と予測値を装置に出力する．
+    subroutine output_rank${rank}$(actual, expected)
+        implicit none
+        class(*), intent(in) :: actual${rank_suffix(rank)}$
+            !! 実測値
+        class(*), intent(in) :: expected${rank_suffix(rank)}$
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_rank${rank}$
+
+    #:endfor
+end module fassert_common_message_outputOnFailure_toUnit_shape

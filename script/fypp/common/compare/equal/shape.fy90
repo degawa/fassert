@@ -1,0 +1,27 @@
+#:include "../../../common.fypp"
+module fassert_common_compare_equal_shape
+    use, intrinsic :: iso_fortran_env
+    implicit none
+    private
+    public :: are_same_shape
+
+    interface are_same_shape
+        #:for rank in RANKS
+        procedure :: are_same_shape_rank${rank}$
+        #:endfor
+    end interface
+
+contains
+    #:for rank in RANKS
+    !>二つの配列の形状が等しい場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function are_same_shape_rank${rank}$(array1, array2) result(are_same)
+        implicit none
+        class(*), intent(in) :: array1${rank_suffix(rank)}$
+        class(*), intent(in) :: array2${rank_suffix(rank)}$
+        logical :: are_same
+
+        are_same = all(shape(array1) == shape(array2))
+    end function are_same_shape_rank${rank}$
+
+    #:endfor
+end module fassert_common_compare_equal_shape

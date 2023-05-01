@@ -1,0 +1,202 @@
+#:mute
+
+#!-------------------------------------------------------------------
+#! number of bits of integer type
+#:set INTEGER_BITS = [8, 16, 32, 64]
+
+#! number of bytes of integer type
+#:set INTEGER_BYTES = [1, 2, 4 , 8]
+
+#! integer kinds
+#:set INTEGER_KINDS = ["int{}".format(bits) for bits in INTEGER_BITS]
+
+#! integer types
+#:set INTEGER_TYPES = ["integer({})".format(kind) for kind in INTEGER_KINDS]
+
+#! (kind, type) tuple for integer
+#:set INTEGER_KINDS_TYPES = list(zip(INTEGER_KINDS, INTEGER_TYPES))
+
+#! (kind, bytes) tuple for integer
+#:set INTEGER_KINDS_BYTES = list(zip(INTEGER_KINDS, INTEGER_BYTES))
+
+#!-------------------------------------------------------------------
+#! nubmer of bits of real type
+#:set REAL_BITS = [32, 64]
+
+#! nubmer of bytes of real type
+#:set REAL_BYTES = [4, 8]
+
+#! format specifier for real variable
+#:set REAL_SPECIFIERS = ["E13.6e2", "E23.15e3"]
+
+#! supporting real128
+#:if defined("QP")
+#:set REAL_BITS = REAL_BITS + [128]
+#:set REAL_BYTES = REAL_BYTES + [16]
+#:set REAL_SPECIFIERS = REAL_SPECIFIERS + ["E40.32e5"]
+#:endif
+
+#! real kinds
+#:set REAL_KINDS = ["real{}".format(bits) for bits in REAL_BITS]
+
+#! real types
+#:set REAL_TYPES = ["real({})".format(kind) for kind in REAL_KINDS]
+
+#! (kind, type) tuple for real
+#:set REAL_KINDS_TYPES = list(zip(REAL_KINDS, REAL_TYPES))
+
+#! (kind, byte) tuple for real
+#:set REAL_KINDS_BYTES = list(zip(REAL_KINDS, REAL_BYTES))
+
+#! (kind, bit) tuple for real
+#:set REAL_KINDS_BITS = list(zip(REAL_KINDS, REAL_BITS))
+
+#!-------------------------------------------------------------------
+#! complex kinds
+#:set COMPLEX_KINDS = ["complex{}".format(bits) for bits in REAL_BITS]
+
+#! complex types
+#! referring to REAL_KINDS, not COMPLEX_KINDS
+#:set COMPLEX_TYPES = ["complex({})".format(kind) for kind in REAL_KINDS]
+
+#! (kind, type) tuple for complex
+#:set COMPLEX_KINDS_TYPES = list(zip(COMPLEX_KINDS, COMPLEX_TYPES))
+
+#! (kind, byte) tuple for complex
+#:set COMPLEX_KINDS_BYTES = list(zip(COMPLEX_KINDS, REAL_BYTES))
+
+#! (kind, bit) tuple for complex
+#:set COMPLEX_KINDS_BITS = list(zip(COMPLEX_KINDS, REAL_BITS))
+
+#!-------------------------------------------------------------------
+#! logical kinds
+#:set LOGICAL_KINDS = ["logical"]
+
+#! logical types
+#:set LOGICAL_TYPES = ["logical"]
+
+#! (kind, type) tuple for logical
+#:set LOGICAL_KINDS_TYPES = list(zip(LOGICAL_KINDS, LOGICAL_TYPES))
+
+#!-------------------------------------------------------------------
+#! character kinds
+#:set CHAR_KINDS = ["char"]
+
+#! character types
+#:set CHAR_TYPES = ["character(*)"]
+
+#! (kind, type) tuple for character
+#:set CHAR_KINDS_TYPES = list(zip(CHAR_KINDS, CHAR_TYPES))
+
+#!-------------------------------------------------------------------
+#! kinds for intrinsic types
+#:set INTRINSIC_KINDS = []
+#:if not defined("NO_INT")
+    #:set INTRINSIC_KINDS = INTRINSIC_KINDS + INTEGER_KINDS
+#:endif
+#:if not defined("NO_REAL")
+    #:set INTRINSIC_KINDS = INTRINSIC_KINDS + REAL_KINDS
+#:endif
+#:if not defined("NO_COMPLEX")
+    #:set INTRINSIC_KINDS = INTRINSIC_KINDS + COMPLEX_KINDS
+#:endif
+#:if not defined("NO_LOGICAL")
+    #:set INTRINSIC_KINDS = INTRINSIC_KINDS + LOGICAL_KINDS
+#:endif
+#:if not defined("NO_CHAR")
+    #:set INTRINSIC_KINDS = INTRINSIC_KINDS + CHAR_KINDS
+#:endif
+
+#! intrinsic types
+#:set INTRINSIC_TYPES = []
+#:if not defined("NO_INT")
+    #:set INTRINSIC_TYPES = INTRINSIC_TYPES + INTEGER_TYPES
+#:endif
+#:if not defined("NO_REAL")
+    #:set INTRINSIC_TYPES = INTRINSIC_TYPES + REAL_TYPES
+#:endif
+#:if not defined("NO_COMPLEX")
+    #:set INTRINSIC_TYPES = INTRINSIC_TYPES + COMPLEX_TYPES
+#:endif
+#:if not defined("NO_LOGICAL")
+    #:set INTRINSIC_TYPES = INTRINSIC_TYPES + LOGICAL_TYPES
+#:endif
+#:if not defined("NO_CHAR")
+    #:set INTRINSIC_TYPES = INTRINSIC_TYPES + CHAR_TYPES
+#:endif
+
+#! (kind, type) tuple for intrinsic type
+#:set INTRINSIC_KINDS_TYPES = list(zip(INTRINSIC_KINDS, INTRINSIC_TYPES))
+
+#!-------------------------------------------------------------------
+#! target array rank
+#:if not defined("MAXRANK")
+    #:set MAXRANK=3
+#:endif
+
+#:if 0<MAXRANK<=15
+    #:set MAX_RANK = MAXRANK
+#:else
+    #:set MAX_RANK = 7
+#:endif
+
+#! rank
+#:set RANKS = [rank for rank in range(1, MAX_RANK+1)]
+
+#!-------------------------------------------------------------------
+#! Generate rank suffix such as (:), (:,:)
+#!
+#! Args:
+#!     rank (int): Rank of the variable
+#!
+#! Returns:
+#!     Array rank suffix
+#!
+#! Examples:
+#!      ```Fortran
+#!          #:for rank in range(1, 3+1)
+#!          real(real32), intent(in) :: array${rank_suffix(rank)}$
+#!          #:endfor
+#!
+#!          ! real(real32), intent(in) :: array(:)
+#!          ! real(real32), intent(in) :: array(:,:)
+#!          ! real(real32), intent(in) :: array(:,:,:)
+#!      ```
+#! Note:
+#!     This macro is based on the implementation in Fortran-stdlib.
+#!
+#:def rank_suffix(rank)
+#{if rank > 0}#(${":" + ", :" * (rank - 1)}$)#{endif}#
+#:enddef
+
+#!-------------------------------------------------------------------
+#! Generate indirect reference of array using variable
+#! such as (index(1), index(2), index(3))
+#!
+#! Args:
+#!     idx (string): indexing variable name
+#!     rank (int): Rank of the variable
+#!
+#! Returns:
+#!     expression of indirect reference of array with specified variable name
+#!
+#! Examples:
+#!      ```Fortran
+#!          integer, intent(in) :: actual(2, 4, 1)
+#!          integer, intent(in) :: expected(2, 4, 1)
+#!          integer(int32) :: idx(3)
+#!          idx = findloc((actual == expected), .false.)
+#!          print *, actual(${at(idx, 3)}$), expected(${at(idx, 3)}$)
+#!
+#!          ! integer, intent(in) :: actual(2, 4, 1)
+#!          ! integer, intent(in) :: expected(2, 4, 1)
+#!          ! integer(int32) :: idx(3)
+#!          ! idx = findloc((actual == expected), .false.)
+#!          ! print *, actual(idx(1), idx(2), idx(3)), expected(idx(1), idx(2), idx(3))
+#!      ```
+#!
+#:def at(idx, rank)
+${", ".join([idx+"({})".format(r) for r in range(1, rank+1)])}$
+#:enddef
+
+#:endmute
