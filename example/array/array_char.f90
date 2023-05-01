@@ -17,7 +17,8 @@ program array_char
     ! call expect_equal(["c", "b", "a"], ["a", "b", "c"], &
     !                   "result should be ['a', 'b', 'c'] when input 'a', 'b', 'c'", stat)
     ! ! FAILED: result should be ['a', 'b', 'c'] when input 'a', 'b', 'c'
-    ! !     Expected: a b c
-    ! !     Actual  : c b a
+    ! !     Expected: a
+    ! !     Actual  : c
+    ! !     Position: at (1)
     !```
 end program array_char
