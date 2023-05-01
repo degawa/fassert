@@ -19,15 +19,36 @@ module fassert_common_message_outputOnFailure_toString_equal
         procedure :: output_complex128_to_string
         procedure :: output_logical_to_string
         procedure :: output_char_to_string
+        procedure :: output_int8_rank1_to_string
+        procedure :: output_int8_rank2_to_string
+        procedure :: output_int8_rank3_to_string
+        procedure :: output_int16_rank1_to_string
+        procedure :: output_int16_rank2_to_string
+        procedure :: output_int16_rank3_to_string
         procedure :: output_int32_rank1_to_string
         procedure :: output_int32_rank2_to_string
         procedure :: output_int32_rank3_to_string
+        procedure :: output_int64_rank1_to_string
+        procedure :: output_int64_rank2_to_string
+        procedure :: output_int64_rank3_to_string
         procedure :: output_real32_rank1_to_string
         procedure :: output_real32_rank2_to_string
         procedure :: output_real32_rank3_to_string
         procedure :: output_real64_rank1_to_string
         procedure :: output_real64_rank2_to_string
         procedure :: output_real64_rank3_to_string
+        procedure :: output_real128_rank1_to_string
+        procedure :: output_real128_rank2_to_string
+        procedure :: output_real128_rank3_to_string
+        procedure :: output_complex32_rank1_to_string
+        procedure :: output_complex32_rank2_to_string
+        procedure :: output_complex32_rank3_to_string
+        procedure :: output_complex64_rank1_to_string
+        procedure :: output_complex64_rank2_to_string
+        procedure :: output_complex64_rank3_to_string
+        procedure :: output_complex128_rank1_to_string
+        procedure :: output_complex128_rank2_to_string
+        procedure :: output_complex128_rank3_to_string
         procedure :: output_logical_rank1_to_string
         procedure :: output_logical_rank2_to_string
         procedure :: output_logical_rank3_to_string
@@ -73,6 +94,30 @@ module fassert_common_message_outputOnFailure_toString_equal
                                         = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank2//',")")'
     character(*), private, parameter :: fmt_real64_rank3 &
                                         = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_real128_rank1 &
+                                        = '('//fmt_indent//',A,'//real128_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_real128_rank2 &
+                                        = '('//fmt_indent//',A,'//real128_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_real128_rank3 &
+                                        = '('//fmt_indent//',A,'//real128_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_complex32_rank1 &
+                                        = '('//fmt_indent//',A,'//complex32_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_complex32_rank2 &
+                                        = '('//fmt_indent//',A,'//complex32_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_complex32_rank3 &
+                                        = '('//fmt_indent//',A,'//complex32_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_complex64_rank1 &
+                                        = '('//fmt_indent//',A,'//complex64_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_complex64_rank2 &
+                                        = '('//fmt_indent//',A,'//complex64_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_complex64_rank3 &
+                                        = '('//fmt_indent//',A,'//complex64_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_complex128_rank1 &
+                                        = '('//fmt_indent//',A,'//complex128_specifier//'," at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_complex128_rank2 &
+                                        = '('//fmt_indent//',A,'//complex128_specifier//'," at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_complex128_rank3 &
+                                        = '('//fmt_indent//',A,'//complex128_specifier//'," at (",'//fmt_index_rank3//',")")'
     character(*), private, parameter :: fmt_position_rank1 &
                                         = '('//fmt_indent//',A,"at (",'//fmt_index_rank1//',")")'
     character(*), private, parameter :: fmt_position_rank2 &
@@ -207,6 +252,44 @@ contains
     end subroutine output_real128_to_string
 
     !>実測値と予測値，それらの差を文字列に出力する．
+    pure subroutine output_complex32_to_string(actual, expected, output_message)
+        implicit none
+        complex(real32), intent(in) :: actual
+            !! 実測値
+        complex(real32), intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex32) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex32) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex32) "Difference: ", expected - actual
+        call append(output_message, trim(buffer))
+    end subroutine output_complex32_to_string
+
+    !>実測値と予測値，それらの差を文字列に出力する．
+    pure subroutine output_complex64_to_string(actual, expected, output_message)
+        implicit none
+        complex(real64), intent(in) :: actual
+            !! 実測値
+        complex(real64), intent(in) :: expected
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex64) "Expected: ", expected
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex64) "Actual  : ", actual
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex64) "Difference: ", expected - actual
+        call append(output_message, trim(buffer))
+    end subroutine output_complex64_to_string
+
+    !>実測値と予測値，それらの差を文字列に出力する．
     pure subroutine output_complex128_to_string(actual, expected, output_message)
         implicit none
         complex(real128), intent(in) :: actual
@@ -224,6 +307,132 @@ contains
         write (buffer, fmt_complex128) "Difference: ", expected - actual
         call append(output_message, trim(buffer))
     end subroutine output_complex128_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int8_rank1_to_string(actual, expected, output_message)
+        implicit none
+        integer(int8), intent(in) :: actual(:)
+            !! 実測値
+        integer(int8), intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank1) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank1) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int8_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int8_rank2_to_string(actual, expected, output_message)
+        implicit none
+        integer(int8), intent(in) :: actual(:, :)
+            !! 実測値
+        integer(int8), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank2) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank2) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int8_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int8_rank3_to_string(actual, expected, output_message)
+        implicit none
+        integer(int8), intent(in) :: actual(:, :, :)
+            !! 実測値
+        integer(int8), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank3) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank3) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int8_rank3_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int16_rank1_to_string(actual, expected, output_message)
+        implicit none
+        integer(int16), intent(in) :: actual(:)
+            !! 実測値
+        integer(int16), intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank1) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank1) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int16_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int16_rank2_to_string(actual, expected, output_message)
+        implicit none
+        integer(int16), intent(in) :: actual(:, :)
+            !! 実測値
+        integer(int16), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank2) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank2) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int16_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int16_rank3_to_string(actual, expected, output_message)
+        implicit none
+        integer(int16), intent(in) :: actual(:, :, :)
+            !! 実測値
+        integer(int16), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank3) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank3) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int16_rank3_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
     pure subroutine output_int32_rank1_to_string(actual, expected, output_message)
@@ -287,6 +496,69 @@ contains
                                       findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
     end subroutine output_int32_rank3_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int64_rank1_to_string(actual, expected, output_message)
+        implicit none
+        integer(int64), intent(in) :: actual(:)
+            !! 実測値
+        integer(int64), intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank1) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank1) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int64_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int64_rank2_to_string(actual, expected, output_message)
+        implicit none
+        integer(int64), intent(in) :: actual(:, :)
+            !! 実測値
+        integer(int64), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank2) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank2) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int64_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_int64_rank3_to_string(actual, expected, output_message)
+        implicit none
+        integer(int64), intent(in) :: actual(:, :, :)
+            !! 実測値
+        integer(int64), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_int_rank3) "Maximum Absolute Difference: ", &
+                                      maxval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_int_rank3) "Minimum Absolute Difference: ", &
+                                      minval(abs(expected - actual)), &
+                                      findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_int64_rank3_to_string
 
     !>実測値と予測値の差の最大・最小値を文字列に出力する．
     pure subroutine output_real32_rank1_to_string(actual, expected, output_message)
@@ -414,43 +686,257 @@ contains
         call append(output_message, trim(buffer))
     end subroutine output_real64_rank3_to_string
 
-    !>実測値と予測値，それらの差を文字列に出力する．
-    pure subroutine output_complex32_to_string(actual, expected, output_message)
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_real128_rank1_to_string(actual, expected, output_message)
         implicit none
-        complex(real32), intent(in) :: actual
+        real(real128), intent(in) :: actual(:)
             !! 実測値
-        complex(real32), intent(in) :: expected
-            !! 予測値
-        character(:), allocatable, intent(inout) :: output_message
-
-        character(128) :: buffer
-
-        write (buffer, fmt_complex32) "Expected: ", expected
-        call append(output_message, trim(buffer))
-        write (buffer, fmt_complex32) "Actual  : ", actual
-        call append(output_message, trim(buffer))
-        write (buffer, fmt_complex32) "Difference: ", expected - actual
-        call append(output_message, trim(buffer))
-    end subroutine output_complex32_to_string
-
-    !>実測値と予測値，それらの差を文字列に出力する．
-    pure subroutine output_complex64_to_string(actual, expected, output_message)
-        implicit none
-        complex(real64), intent(in) :: actual
-            !! 実測値
-        complex(real64), intent(in) :: expected
+        real(real128), intent(in) :: expected(:)
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
         character(256) :: buffer
 
-        write (buffer, fmt_complex32) "Expected: ", expected
+        write (buffer, fmt_real128_rank1) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt_complex32) "Actual  : ", actual
+        write (buffer, fmt_real128_rank1) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-        write (buffer, fmt_complex32) "Difference: ", expected - actual
+    end subroutine output_real128_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_real128_rank2_to_string(actual, expected, output_message)
+        implicit none
+        real(real128), intent(in) :: actual(:, :)
+            !! 実測値
+        real(real128), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_real128_rank2) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
         call append(output_message, trim(buffer))
-    end subroutine output_complex64_to_string
+        write (buffer, fmt_real128_rank2) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_real128_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_real128_rank3_to_string(actual, expected, output_message)
+        implicit none
+        real(real128), intent(in) :: actual(:, :, :)
+            !! 実測値
+        real(real128), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_real128_rank3) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_real128_rank3) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_real128_rank3_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex32_rank1_to_string(actual, expected, output_message)
+        implicit none
+        complex(real32), intent(in) :: actual(:)
+            !! 実測値
+        complex(real32), intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex32_rank1) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex32_rank1) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex32_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex32_rank2_to_string(actual, expected, output_message)
+        implicit none
+        complex(real32), intent(in) :: actual(:, :)
+            !! 実測値
+        complex(real32), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex32_rank2) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex32_rank2) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex32_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex32_rank3_to_string(actual, expected, output_message)
+        implicit none
+        complex(real32), intent(in) :: actual(:, :, :)
+            !! 実測値
+        complex(real32), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex32_rank3) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex32_rank3) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex32_rank3_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex64_rank1_to_string(actual, expected, output_message)
+        implicit none
+        complex(real64), intent(in) :: actual(:)
+            !! 実測値
+        complex(real64), intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex64_rank1) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex64_rank1) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex64_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex64_rank2_to_string(actual, expected, output_message)
+        implicit none
+        complex(real64), intent(in) :: actual(:, :)
+            !! 実測値
+        complex(real64), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex64_rank2) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex64_rank2) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex64_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex64_rank3_to_string(actual, expected, output_message)
+        implicit none
+        complex(real64), intent(in) :: actual(:, :, :)
+            !! 実測値
+        complex(real64), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex64_rank3) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex64_rank3) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex64_rank3_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex128_rank1_to_string(actual, expected, output_message)
+        implicit none
+        complex(real128), intent(in) :: actual(:)
+            !! 実測値
+        complex(real128), intent(in) :: expected(:)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex128_rank1) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex128_rank1) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex128_rank1_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex128_rank2_to_string(actual, expected, output_message)
+        implicit none
+        complex(real128), intent(in) :: actual(:, :)
+            !! 実測値
+        complex(real128), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex128_rank2) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex128_rank2) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex128_rank2_to_string
+
+    !>実測値と予測値の差の最大・最小値を文字列に出力する．
+    pure subroutine output_complex128_rank3_to_string(actual, expected, output_message)
+        implicit none
+        complex(real128), intent(in) :: actual(:, :, :)
+            !! 実測値
+        complex(real128), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+
+        write (buffer, fmt_complex128_rank3) "Maximum Absolute Difference: ", &
+                                         maxval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), maxval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+        write (buffer, fmt_complex128_rank3) "Minimum Absolute Difference: ", &
+                                         minval(abs(expected - actual)), &
+                                         findloc(abs(expected - actual), minval(abs(expected - actual))) !&
+        call append(output_message, trim(buffer))
+    end subroutine output_complex128_rank3_to_string
 
     !>実測値と予測値を文字列に出力する．
     pure subroutine output_logical_to_string(actual, expected, output_message)
@@ -657,4 +1143,5 @@ contains
             call append(output_message, trim(buffer))
         end if
     end subroutine output_char_rank3_to_string
+
 end module fassert_common_message_outputOnFailure_toString_equal
