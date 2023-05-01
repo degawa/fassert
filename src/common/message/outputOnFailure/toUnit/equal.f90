@@ -34,6 +34,8 @@ module fassert_common_message_outputOnFailure_toUnit_equal
         procedure :: output_logical_rank2
         procedure :: output_logical_rank3
         procedure :: output_char_rank1
+        procedure :: output_char_rank2
+        procedure :: output_char_rank3
     end interface
 
 contains
@@ -375,16 +377,42 @@ contains
         write (msg_unit, '(A)') msg
     end subroutine output_logical_rank3
 
-    !>実測値と予測値を装置に出力する．
+    !>実測値と予測値の差の最大・最小値を装置に出力する．
     subroutine output_char_rank1(actual, expected)
         implicit none
-        character, intent(in) :: actual(:)
+        character(*), intent(in) :: actual(:)
             !! 実測値
-        character, intent(in) :: expected(:)
+        character(*), intent(in) :: expected(:)
             !! 予測値
 
         character(:), allocatable :: msg
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
     end subroutine output_char_rank1
+
+    !>実測値と予測値の差の最大・最小値を装置に出力する．
+    subroutine output_char_rank2(actual, expected)
+        implicit none
+        character(*), intent(in) :: actual(:, :)
+            !! 実測値
+        character(*), intent(in) :: expected(:, :)
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_char_rank2
+
+    !>実測値と予測値の差の最大・最小値を装置に出力する．
+    subroutine output_char_rank3(actual, expected)
+        implicit none
+        character(*), intent(in) :: actual(:, :, :)
+            !! 実測値
+        character(*), intent(in) :: expected(:, :, :)
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_char_rank3
 end module fassert_common_message_outputOnFailure_toUnit_equal

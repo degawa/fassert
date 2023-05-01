@@ -32,6 +32,8 @@ module fassert_common_message_outputOnFailure_toString_equal
         procedure :: output_logical_rank2_to_string
         procedure :: output_logical_rank3_to_string
         procedure :: output_char_rank1_to_string
+        procedure :: output_char_rank2_to_string
+        procedure :: output_char_rank3_to_string
     end interface
 
     character(*), private, parameter :: fmt_int = '('//fmt_indent//',A,'//int_specifier//')'
@@ -574,18 +576,85 @@ contains
 
     !>実測値と予測値を文字列に出力する．
     pure subroutine output_char_rank1_to_string(actual, expected, output_message)
+        use :: fassert_common_hasZero
         implicit none
-        character, intent(in) :: actual(:)
+        character(*), intent(in) :: actual(:)
             !! 実測値
-        character, intent(in) :: expected(:)
+        character(*), intent(in) :: expected(:)
             !! 予測値
         character(:), allocatable, intent(inout) :: output_message
 
         character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
 
-        write (buffer, fmt_char) "Expected: ", expected
-        call append(output_message, trim(buffer))
-        write (buffer, fmt_char) "Actual  : ", actual
-        call append(output_message, trim(buffer))
+        idx = findloc((actual == expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_char) "Expected: ", expected(idx(1))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_char) "Actual  : ", actual(idx(1))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank1) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
     end subroutine output_char_rank1_to_string
+
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_char_rank2_to_string(actual, expected, output_message)
+        use :: fassert_common_hasZero
+        implicit none
+        character(*), intent(in) :: actual(:, :)
+            !! 実測値
+        character(*), intent(in) :: expected(:, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual == expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_char) "Expected: ", expected(idx(1), idx(2))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_char) "Actual  : ", actual(idx(1), idx(2))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank2) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_char_rank2_to_string
+
+    !>実測値と予測値を文字列に出力する．
+    pure subroutine output_char_rank3_to_string(actual, expected, output_message)
+        use :: fassert_common_hasZero
+        implicit none
+        character(*), intent(in) :: actual(:, :, :)
+            !! 実測値
+        character(*), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(:), allocatable, intent(inout) :: output_message
+
+        character(256) :: buffer
+        integer(int32) :: idx(rank(actual))
+
+        idx = findloc((actual == expected), .false.)
+
+        if (has_zero(idx)) then
+            write (buffer, '('//fmt_indent//',A)') "All elements are equivalent."
+            call append(output_message, trim(buffer))
+        else
+            write (buffer, fmt_char) "Expected: ", expected(idx(1), idx(2), idx(3))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_char) "Actual  : ", actual(idx(1), idx(2), idx(3))
+            call append(output_message, trim(buffer))
+            write (buffer, fmt_position_rank3) "Position: ", idx
+            call append(output_message, trim(buffer))
+        end if
+    end subroutine output_char_rank3_to_string
 end module fassert_common_message_outputOnFailure_toString_equal
