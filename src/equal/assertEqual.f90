@@ -32,6 +32,8 @@ module assertEqual
         procedure :: assert_equiv_logical_rank3
         procedure :: assert_equal_char
         procedure :: assert_equal_char_rank1
+        procedure :: assert_equal_char_rank2
+        procedure :: assert_equal_char_rank3
         procedure :: assert_equal_user_defined
         procedure :: assert_equal_user_defined_rank1
         procedure :: assert_equal_user_defined_rank2
@@ -876,9 +878,9 @@ contains
                                        verbose, expected_failure, quiet)
         implicit none
 
-        character, intent(in) :: actual(:)
+        character(*), intent(in) :: actual(:)
             !! 実測値
-        character, intent(in) :: expected(:)
+        character(*), intent(in) :: expected(:)
             !! 予測値
         character(*), intent(in) :: test_name
             !! テスト名
@@ -894,6 +896,70 @@ contains
         call expect_equal(actual, expected, test_name, stat, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_equal_char_rank1
+    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>比較結果が偽であれば，プログラムの実行を停止する．
+    !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
+    !>`expected_failure`が真の場合，比較が失敗することを検査し，
+    !>プログラムを停止しない．比較が成功すると停止する．
+    !>
+    !>`quiet`が真の場合，成功時の出力を抑制する．
+    !>
+    subroutine assert_equal_char_rank2(actual, expected, test_name, &
+                                       verbose, expected_failure, quiet)
+        implicit none
+
+        character(*), intent(in) :: actual(:, :)
+            !! 実測値
+        character(*), intent(in) :: expected(:, :)
+            !! 予測値
+        character(*), intent(in) :: test_name
+            !! テスト名
+        logical, intent(in), optional :: verbose
+            !! 実測値と予測値を出力するフラグ
+        logical, intent(in), optional :: expected_failure
+            !! 予期された失敗を検査するかのフラグ
+        logical, intent(in), optional :: quiet
+            !! 成功時に出力を抑制するかのフラグ
+
+        logical :: stat
+
+        call expect_equal(actual, expected, test_name, stat, verbose, expected_failure, quiet)
+        call halt_on_failure(stat)
+    end subroutine assert_equal_char_rank2
+    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>比較結果が偽であれば，プログラムの実行を停止する．
+    !>
+    !>`verbose`が真であれば，実測値と予測値を出力する．
+    !>
+    !>`expected_failure`が真の場合，比較が失敗することを検査し，
+    !>プログラムを停止しない．比較が成功すると停止する．
+    !>
+    !>`quiet`が真の場合，成功時の出力を抑制する．
+    !>
+    subroutine assert_equal_char_rank3(actual, expected, test_name, &
+                                       verbose, expected_failure, quiet)
+        implicit none
+
+        character(*), intent(in) :: actual(:, :, :)
+            !! 実測値
+        character(*), intent(in) :: expected(:, :, :)
+            !! 予測値
+        character(*), intent(in) :: test_name
+            !! テスト名
+        logical, intent(in), optional :: verbose
+            !! 実測値と予測値を出力するフラグ
+        logical, intent(in), optional :: expected_failure
+            !! 予期された失敗を検査するかのフラグ
+        logical, intent(in), optional :: quiet
+            !! 成功時に出力を抑制するかのフラグ
+
+        logical :: stat
+
+        call expect_equal(actual, expected, test_name, stat, verbose, expected_failure, quiet)
+        call halt_on_failure(stat)
+    end subroutine assert_equal_char_rank3
 
     !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
