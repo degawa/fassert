@@ -68,6 +68,12 @@ module fassert_common_message_outputOnFailure_toString_equal
                                         = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank2//',")")'
     character(*), private, parameter :: fmt_real64_rank3 &
                                         = '('//fmt_indent//',A,'//real64_specifier//'," at (",'//fmt_index_rank3//',")")'
+    character(*), private, parameter :: fmt_position_rank1 &
+                                        = '('//fmt_indent//',A,"at (",'//fmt_index_rank1//',")")'
+    character(*), private, parameter :: fmt_position_rank2 &
+                                        = '('//fmt_indent//',A,"at (",'//fmt_index_rank2//',")")'
+    character(*), private, parameter :: fmt_position_rank3 &
+                                        = '('//fmt_indent//',A,"at (",'//fmt_index_rank3//',")")'
 
 contains
     !>実測値と予測値を文字列に出力する．
