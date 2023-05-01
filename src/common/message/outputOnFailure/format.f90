@@ -15,9 +15,11 @@ module fassert_common_message_outputOnFailure_format
     character(*), public, parameter :: real128_specifier = "E40.32e5"
         !! 16バイト浮動小数点数型変数の出力書式指定子
     character(*), public, parameter :: complex32_specifier = '"(",'//real32_specifier//',",",'//real32_specifier//',")"'
-        !! 4バイト浮動小数点数型変数の出力書式指定子
+        !! 4バイト複素数型変数の出力書式指定子
     character(*), public, parameter :: complex64_specifier = '"(",'//real64_specifier//',",",'//real64_specifier//',")"'
+        !! 8バイト複素数型変数の出力書式指定子
     character(*), public, parameter :: complex128_specifier = '"(",'//real128_specifier//',",",'//real128_specifier//',")"'
+        !! 16バイト複素数型変数の出力書式指定子
 
     character(*), private, parameter :: fmt_index_separator = ',",",'
         !! 配列添字の各要素の区切り
