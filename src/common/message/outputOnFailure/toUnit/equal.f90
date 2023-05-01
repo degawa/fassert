@@ -86,7 +86,7 @@ contains
         write (msg_unit, '(A)') msg
     end subroutine output_int64
 
-    !>実測値と予測値，それらの差を装置に出力する．
+    !>実測値と予測値を装置に出力する．
     subroutine output_real32(actual, expected)
         implicit none
         real(real32), intent(in) :: actual
@@ -99,7 +99,7 @@ contains
         write (msg_unit, '(A)') msg
     end subroutine output_real32
 
-    !>実測値と予測値，それらの差を装置に出力する．
+    !>実測値と予測値を装置に出力する．
     subroutine output_real64(actual, expected)
         implicit none
         real(real64), intent(in) :: actual
@@ -125,6 +125,31 @@ contains
         write (msg_unit, '(A)') msg
     end subroutine output_real128
 
+    !>実測値と予測値を装置に出力する．
+    subroutine output_complex32(actual, expected)
+        implicit none
+        complex(real32), intent(in) :: actual
+            !! 実測値
+        complex(real32), intent(in) :: expected
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_complex32
+
+    !>実測値と予測値を装置に出力する．
+    subroutine output_complex64(actual, expected)
+        implicit none
+        complex(real64), intent(in) :: actual
+            !! 実測値
+        complex(real64), intent(in) :: expected
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_complex64
 
     !>実測値と予測値を装置に出力する．
     subroutine output_complex128(actual, expected)
@@ -138,6 +163,32 @@ contains
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
     end subroutine output_complex128
+
+    !>実測値と予測値を装置に出力する．
+    subroutine output_logical(actual, expected)
+        implicit none
+        logical, intent(in) :: actual
+            !! 実測値
+        logical, intent(in) :: expected
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_logical
+
+    !>実測値と予測値を装置に出力する．
+    subroutine output_char(actual, expected)
+        implicit none
+        character(*), intent(in) :: actual
+            !! 実測値
+        character(*), intent(in) :: expected
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_char
 
     !>実測値と予測値の差の最大・最小値を装置に出力する．
     subroutine output_int32_rank1(actual, expected)
@@ -282,32 +333,44 @@ contains
         write (msg_unit, '(A)') msg
     end subroutine output_complex64
 
-    !>実測値と予測値を装置に出力する．
-    subroutine output_logical(actual, expected)
-        use :: fassert_common_message, only:to_string
+    !>実測値と予測値の差の最大・最小値を装置に出力する．
+    subroutine output_logical_rank1(actual, expected)
         implicit none
-        logical, intent(in) :: actual
+        logical, intent(in) :: actual(:)
             !! 実測値
-        logical, intent(in) :: expected
+        logical, intent(in) :: expected(:)
             !! 予測値
 
         character(:), allocatable :: msg
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
-    end subroutine output_logical
+    end subroutine output_logical_rank1
 
-    !>実測値と予測値を装置に出力する．
-    subroutine output_string(actual, expected)
+    !>実測値と予測値の差の最大・最小値を装置に出力する．
+    subroutine output_logical_rank2(actual, expected)
         implicit none
-        character(*), intent(in) :: actual
+        logical, intent(in) :: actual(:, :)
             !! 実測値
-        character(*), intent(in) :: expected
+        logical, intent(in) :: expected(:, :)
             !! 予測値
 
         character(:), allocatable :: msg
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
-    end subroutine output_string
+    end subroutine output_logical_rank2
+
+    !>実測値と予測値の差の最大・最小値を装置に出力する．
+    subroutine output_logical_rank3(actual, expected)
+        implicit none
+        logical, intent(in) :: actual(:, :, :)
+            !! 実測値
+        logical, intent(in) :: expected(:, :, :)
+            !! 予測値
+
+        character(:), allocatable :: msg
+        call output_on_failure(actual, expected, msg)
+        write (msg_unit, '(A)') msg
+    end subroutine output_logical_rank3
 
     !>実測値と予測値を装置に出力する．
     subroutine output_char_rank1(actual, expected)
