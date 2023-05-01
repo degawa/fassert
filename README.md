@@ -37,17 +37,18 @@ Supported types and ranks currently are listed below:
 
 |             procdure              |       types       |  rank   |                                        note                                        |
 | :-------------------------------- | :---------------- | :------ | :--------------------------------------------------------------------------------- |
-| `assert_equal`,<br>`expect_equal` | `integer(int8)`   | 0       | 0 means a scalar variable                                                          |
-|                                   | `integer(int16)`  | 0       |                                                                                    |
+| `assert_equal`,<br>`expect_equal` | `integer(int8)`   | 0,1,2,3 | 0 means a scalar variable                                                          |
+|                                   | `integer(int16)`  | 0,1,2,3 |                                                                                    |
 |                                   | `integer(int32)`  | 0,1,2,3 |                                                                                    |
-|                                   | `integer(int64)`  | 0       |                                                                                    |
+|                                   | `integer(int64)`  | 0,1,2,3 |                                                                                    |
 |                                   | `real(real32)`    | 0,1,2,3 |                                                                                    |
 |                                   | `real(real64)`    | 0,1,2,3 |                                                                                    |
-|                                   | `complex(real32)` | 0       |                                                                                    |
-|                                   | `complex(real64)` | 0       |                                                                                    |
-|                                   | `logical`         | 0       |                                                                                    |
-|                                   | `character`       | 1       |                                                                                    |
-|                                   | `character(*)`    | 0       |                                                                                    |
+|                                   | `real(real128)`   | 0,1,2,3 |                                                                                    |
+|                                   | `complex(real32)` | 0,1,2,3 |                                                                                    |
+|                                   | `complex(real64)` | 0,1,2,3 |                                                                                    |
+|                                   | `complex(real128)`| 0,1,2,3 |                                                                                    |
+|                                   | `logical`         | 0,1,2,3 |                                                                                    |
+|                                   | `character(*)`    | 0,1,2,3 |                                                                                    |
 |                                   | user-defined type | 0,1,2,3 | need to write comparator and message output procedures according to the interfaces |
 | `assert_true`,<br>`expect_true`   | `logical`         | 0       |                                                                                    |
 | `assert_false`,<br>`expect_false` | `logical`         | 0       |                                                                                    |
@@ -169,7 +170,7 @@ fassert = {git = "https://github.com/degawa/fassert.git"}
 
 ## Todo
 - [ ] To translate docstrings from Japanese into English.
-- [ ] To support `complex` types.
+- [x] To support `complex` types.
 - [ ] To support High-ranked arrays.
 - [ ] To add unit tests.
 - [ ] To generate codes using fypp.
