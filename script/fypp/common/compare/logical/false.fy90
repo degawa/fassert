@@ -1,0 +1,35 @@
+#:include "../../../common.fypp"
+module fassert_common_compare_logical_false
+    implicit none
+    private
+    public :: is_false
+    public :: are_false
+
+    interface are_false
+        #:for rank in RANKS
+        procedure :: are_all_false_rank${rank}$
+        #:endfor
+    end interface
+
+contains
+    !>引数が偽の場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function is_false(val)
+        implicit none
+        logical, intent(in) :: val
+        logical :: is_false
+
+        is_false = (val .eqv. .false.)
+    end function is_false
+
+    #:for rank in RANKS
+    !>配列の全要素が全て偽の場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function are_all_false_rank${rank}$(array) result(are_all_false)
+        implicit none
+        logical, intent(in) :: array${rank_suffix(rank)}$
+        logical :: are_all_false
+
+        are_all_false = all(array .eqv. .false.)
+    end function are_all_false_rank${rank}$
+
+    #:endfor
+end module fassert_common_compare_logical_false
