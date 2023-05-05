@@ -24,7 +24,6 @@ module fassert_common_message_outputOnFailure_toUnit_logical
 contains
     !>実測値と予測値を装置に出力する．
     subroutine output_true(actual)
-        use :: fassert_common_message, only:to_string
         implicit none
         logical, intent(in) :: actual
             !! 実測値
@@ -66,7 +65,6 @@ contains
         call output_on_expect_true_failure(actual, msg)
         write (msg_unit, '(A)') msg
     end subroutine output_true_rank3
-
 
     !>実測値と予測値を装置に出力する．
     subroutine output_false(actual)
