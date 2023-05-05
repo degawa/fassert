@@ -18,42 +18,6 @@ module fassert_common_message_outputOnFailure_toString_equal
         #:endfor
     end interface
 
-    character(*), private, parameter :: fmt_int = '('//fmt_indent//',A,'//int_specifier//')'
-        !! 整数の文字列出力書式
-    #:for kind, byte in REAL_KINDS_BYTES
-    character(*), private, parameter :: fmt_${kind}$ = '('//fmt_indent//',A,'//${kind}$_specifier//')'
-        !! ${byte}$バイト浮動小数点数の文字列出力書式
-    #:endfor
-    #:for kind, byte in COMPLEX_KINDS_BYTES
-    character(*), private, parameter :: fmt_${kind}$ = '('//fmt_indent//',A,'//${kind}$_specifier//')'
-        !! ${byte}$バイト複素数の文字列出力書式
-    #:endfor
-    character(*), private, parameter :: fmt_str = '('//fmt_indent//',A,A)'
-        !! 文字列の出力書式
-    character(*), private, parameter :: fmt_char = '('//fmt_indent//',A,*(A:," "))'
-        !! 文字の出力書式
-
-    #:for rank in RANKS
-    character(*), private, parameter :: fmt_int_rank${rank}$ &
-                                        = '('//fmt_indent//',A,'//int_specifier//'," at (",'//fmt_index_rank${rank}$//',")")'
-    #:endfor
-    #:for kind in REAL_KINDS
-    #:for rank in RANKS
-    character(*), private, parameter :: fmt_${kind}$_rank${rank}$ &
-                                        = '('//fmt_indent//',A,'//${kind}$_specifier//'," at (",'//fmt_index_rank${rank}$//',")")'
-    #:endfor
-    #:endfor
-    #:for kind in COMPLEX_KINDS
-    #:for rank in RANKS
-    character(*), private, parameter :: fmt_${kind}$_rank${rank}$ &
-                                        = '('//fmt_indent//',A,'//${kind}$_specifier//'," at (",'//fmt_index_rank${rank}$//',")")'
-    #:endfor
-    #:endfor
-    #:for rank in RANKS
-    character(*), private, parameter :: fmt_position_rank${rank}$ &
-                                        = '('//fmt_indent//',A,"at (",'//fmt_index_rank${rank}$//',")")'
-    #:endfor
-
 contains
     #:for kind, type in INTEGER_KINDS_TYPES
     !>実測値と予測値を文字列に出力する．
