@@ -1,8 +1,6 @@
 module fassert_common_message_outputOnFailure_toUnit_equal
     use, intrinsic :: iso_fortran_env
     use :: fassert_common_unit, msg_unit => assertion_message_unit
-    use :: fassert_common_message, only:default_verbose_format_indent
-    use :: fassert_common_message_outputOnFailure_format
     use :: fassert_common_message_outputOnFailure_toString_equal
     implicit none
     private
@@ -683,4 +681,5 @@ contains
         call output_on_failure(actual, expected, msg)
         write (msg_unit, '(A)') msg
     end subroutine output_char_rank3
+
 end module fassert_common_message_outputOnFailure_toUnit_equal
