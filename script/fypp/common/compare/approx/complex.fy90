@@ -1,0 +1,31 @@
+#:include "../../../common.fypp"
+module fassert_common_compare_approx_complex
+    use, intrinsic :: iso_fortran_env
+    implicit none
+    private
+    public :: is_approx_equal
+
+    interface is_approx_equal
+        #:for kind in COMPLEX_KINDS
+        procedure :: is_approx_equal_${kind}$
+        #:endfor
+    end interface
+
+contains
+    #:for i, kind_type in enumerate(COMPLEX_KINDS_TYPES)
+    #:set kind = kind_type[0]
+    #:set type = kind_type[1]
+    #:set rkind, rtype = REAL_KINDS_TYPES[i]
+    !>二つのスカラ値の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
+    pure function is_approx_equal_${kind}$(val1, val2, tolerance) result(is_equal)
+        implicit none
+        ${type}$, intent(in) :: val1
+        ${type}$, intent(in) :: val2
+        ${rtype}$, intent(in) :: tolerance
+        logical :: is_equal
+
+        is_equal = (abs(val1 - val2) <= tolerance)
+    end function is_approx_equal_${kind}$
+
+    #:endfor
+end module fassert_common_compare_approx_complex

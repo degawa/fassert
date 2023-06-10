@@ -6,6 +6,7 @@ module fassert_kit
     use :: fassert_common_store
     use :: fassert_common_unit
     use :: fassert_common_compare_equal
+    use :: fassert_common_compare_approx
     implicit none
     public
 end module fassert_kit
