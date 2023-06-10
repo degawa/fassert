@@ -32,7 +32,7 @@ contains
                    to_string(val1)//" and "//to_string(val2)//" are not equal within tolerance "//to_string(tol))
         if (occurred(error)) return
 
-        val1 = cmplx(0e0, 1e0); val2 = cmplx(1e0, 0e0); tol = sqrt(2e0)
+        val1 = cmplx(0e0, 1e0); val2 = cmplx(1e0, 0e0); tol = sqrt(2e0) + spacing(sqrt(2e0))
         call check(error, is_approx_equal(val1, val2, tol) .eqv. .true., &
                    to_string(val1)//" and "//to_string(val2)//" are equal within tolerance "//to_string(tol))
         if (occurred(error)) return
@@ -61,7 +61,7 @@ contains
                    to_string(val1)//" and "//to_string(val2)//" are not equal within tolerance "//to_string(tol))
         if (occurred(error)) return
 
-        val1 = cmplx(0d0, 1d0, kind=real64); val2 = cmplx(1d0, 0d0, kind=real64); tol = sqrt(2d0)
+        val1 = cmplx(0d0, 1d0, kind=real64); val2 = cmplx(1d0, 0d0, kind=real64); tol = sqrt(2d0) + spacing(sqrt(2d0))
         call check(error, is_approx_equal(val1, val2, tol) .eqv. .true., &
                    to_string(val1)//" and "//to_string(val2)//" are equal within tolerance "//to_string(tol))
         if (occurred(error)) return
