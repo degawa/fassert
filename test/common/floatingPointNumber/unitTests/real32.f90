@@ -4,6 +4,7 @@ module test_common_floatingPointNumber_unitTests_real32
     use :: testdrive_util, only:occurred
     use :: fassert_common_floatingPointNumber_real32
     use :: fassert_common_userSpecified, only:ULP
+    use :: strings_enclose
     implicit none
     private
     public :: is_distance_less_than_n_ulp_real32_returns_true
@@ -17,72 +18,66 @@ contains
             !! error handler
 
         real(real32) :: f, g
+        integer(int32) :: a, b
 
         f = 67329.234
         g = f + spacing(f)
-        ! block
-        !     integer(int32) :: a, b
-        !     a = transfer(f, mold=a)
-        !     b = transfer(g, mold=b)
-        !     print *, a, b ! 1199800478  1199800479
-        !     print *, f, g ! 67329.2344       67329.2422
-        ! end block
+        a = transfer(f, mold=a)
+        b = transfer(g, mold=b)
+        ! print *, a, b ! 1199800478  1199800479
+        ! print *, f, g ! 67329.2344       67329.2422
         call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
-                   to_string(f)//" and "//to_string(g)//" are within "//to_string(ULP)//" ULP")
+                   to_string(f)//enclose(to_string(a)//" ULP", "(")//" and "// &
+                   to_string(g)//enclose(to_string(b)//" ULP", "(")//" are within "// &
+                   to_string(ULP)//" ULP")
         if (occurred(error)) return
 
         f = 67329.234
         g = f - spacing(f)
-        ! block
-        !     integer(int32) :: a, b
-        !     a = transfer(f, mold=a)
-        !     b = transfer(g, mold=b)
-        !     print *, a, b ! 1199800478  1199800477
-        !     print *, f, g ! 67329.2344       67329.2266
-        ! end block
+        a = transfer(f, mold=a)
+        b = transfer(g, mold=b)
+        ! print *, a, b ! 1199800478  1199800477
+        ! print *, f, g ! 67329.2344       67329.2266
         call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
-                   to_string(f)//" and "//to_string(g)//" are within "//to_string(ULP)//" ULP")
+                   to_string(f)//enclose(to_string(a)//" ULP", "(")//" and "// &
+                   to_string(g)//enclose(to_string(b)//" ULP", "(")//" are within "// &
+                   to_string(ULP)//" ULP")
         if (occurred(error)) return
 
         f = huge(f)
         g = f - spacing(f)
-        ! block
-        !     integer(int32) :: a, b
-        !     a = transfer(f, mold=a)
-        !     b = transfer(g, mold=b)
-        !     print *, a, b ! 2139095039  2139095038
-        !     print *, f, g ! 3.40282347E+38   3.40282326E+38
-        ! end block
+        a = transfer(f, mold=a)
+        b = transfer(g, mold=b)
+        ! print *, a, b ! 2139095039  2139095038
+        ! print *, f, g ! 3.40282347E+38   3.40282326E+38
         call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
-                   to_string(f)//" and "//to_string(g)//" are within "//to_string(ULP)//" ULP")
+                   to_string(f)//enclose(to_string(a)//" ULP", "(")//" and "// &
+                   to_string(g)//enclose(to_string(b)//" ULP", "(")//" are within "// &
+                   to_string(ULP)//" ULP")
         if (occurred(error)) return
 
-        ! block
-        !     integer(int32) :: a, b
-        !     f = tiny(f)
-        !     a = transfer(f, mold=a)
-        !     b = a + 1
-        !     g = transfer(b, g)
-        !     print *, a, b ! 8388608     8388609
-        !     print *, f, g ! 1.17549435E-38   1.17549449E-38
-        ! end block
         f = 1.17549435e-38
         g = 1.17549449e-38
+        a = transfer(f, mold=a)
+        b = transfer(g, mold=b)
+        ! print *, a, b ! 8388608     8388609
+        ! print *, f, g ! 1.17549435E-38   1.17549449E-38
         call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
-                   to_string(f)//" and "//to_string(g)//" are within "//to_string(ULP)//" ULP")
+                   to_string(f)//enclose(to_string(a)//" ULP", "(")//" and "// &
+                   to_string(g)//enclose(to_string(b)//" ULP", "(")//" are within "// &
+                   to_string(ULP)//" ULP")
         if (occurred(error)) return
 
         f = tiny(f)
         g = f + spacing(f)
-        ! block
-        !     integer(int32) :: a, b
-        !     a = transfer(f, mold=a)
-        !     b = transfer(g, mold=b)
-        !     print *, a, b ! 8388608    16777216
-        !     print *, f, g ! 1.17549435E-38   2.35098870E-38
-        ! end block
+        a = transfer(f, mold=a)
+        b = transfer(g, mold=b)
+        ! print *, a, b ! 8388608    16777216
+        ! print *, f, g ! 1.17549435E-38   2.35098870E-38
         call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .false., &
-                   to_string(f)//" and "//to_string(g)//" are within "//to_string(ULP)//" ULP")
+                   to_string(f)//enclose(to_string(a)//" ULP", "(")//" and "// &
+                   to_string(g)//enclose(to_string(b)//" ULP", "(")//" are not within "// &
+                   to_string(ULP)//" ULP")
         if (occurred(error)) return
     end subroutine is_distance_less_than_n_ulp_real32_returns_true
 
