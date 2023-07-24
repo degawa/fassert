@@ -192,7 +192,6 @@ contains
         call check(error, sign_value == 0 .and. q_HEX == "7234567890ABCDEFFEDCBA0987654321", &
                    "expected 0x7234567890ABCDEFFEDCBA0987654321, but got "//q_HEX)
         if (occurred(error)) return
-
     end subroutine abs_returns_same_value_when_input_positive_value
 
     subroutine abs_returns_absolute_value_when_input_negative_value(error)
