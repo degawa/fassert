@@ -69,7 +69,7 @@ contains
         if (occurred(error)) return
 
         f = tiny(f)
-        g = f + spacing(f)
+        g = f*2d0 ! result of f + spacing(f) is compiler dependent
         a = transfer(f, mold=a)
         b = transfer(g, mold=b)
         ! print *, a, b ! 4503599627370496     9007199254740992
