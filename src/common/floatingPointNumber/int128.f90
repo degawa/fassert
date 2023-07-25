@@ -136,6 +136,7 @@ contains
         abs_int128%parts(4) = ibclr(abs_int128%parts(4), 31)
     end function abs_int128
 
+    !>`int128_type`変数を変換した文字列を返す．
     pure function to_string_int128(int128, remove_0_padding) result(str)
         use :: strith
         implicit none
@@ -194,6 +195,7 @@ contains
         end subroutine int128_to_string
     end function to_string_int128
 
+    !>`int128_type`から変換された4倍精度実数を返す．
     pure elemental function as_real128(int128) result(q)
         implicit none
         type(int128_type), intent(in) :: int128
