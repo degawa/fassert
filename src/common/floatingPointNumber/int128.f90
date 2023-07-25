@@ -125,7 +125,7 @@ contains
         abs_int128%parts(4) = ibclr(abs_int128%parts(4), 31)
     end function abs_int128
 
-    function to_string_int128(int128, remove_0_padding) result(str)
+    pure function to_string_int128(int128, remove_0_padding) result(str)
         use :: strith
         implicit none
         type(int128_type), intent(in) :: int128
@@ -135,7 +135,7 @@ contains
 
         str = to_string(int128, int128_to_string, remove_0_padding)
     contains
-        subroutine int128_to_string(var, as_unsigned, strint)
+        pure subroutine int128_to_string(var, as_unsigned, strint)
             implicit none
             class(*), intent(in) :: var
             logical, intent(in) :: as_unsigned
