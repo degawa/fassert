@@ -98,6 +98,17 @@ contains
     !>
     !>二つの値の差がユーザ指定のULP以内であるかを調べることが目的のため，
     !>最下位部分の減算ができればよく，繰り下がりは考慮していない．
+    !>
+    !>@warning
+    !>`f = 67329.2343750000000000000000000000000, g = g = f - spacing(f)`
+    !>と設定した場合，各成分の値は，
+    !>`as_int128(f)%parts = 00000000 00000000 3C000000 400F0701`,
+    !>`as_int128(g)%parts = FFFFFFFF FFFFFFFF 3BFFFFFF 400F0701`,
+    !>であり，各成分の減算結果は
+    !>`00000001 00000001 00000001 00000000`
+    !>となるので，最下位部分の減算をするだけでは不十分である．
+    !>@endwarning
+    !>
     pure elemental function subtract_each_part(lhs, rhs) result(sub)
         implicit none
         class(int128_type), intent(in) :: lhs
