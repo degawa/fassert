@@ -3,6 +3,7 @@ module test_common_floatingPointNumber_collection
     use :: fassert_common_userSpecified
     use :: test_common_floatingPointNumber_unitTests_real32
     use :: test_common_floatingPointNumber_unitTests_real64
+    use :: test_common_floatingPointNumber_unitTests_real128
     use :: test_common_floatingPointNumber_unitTests_int128
     implicit none
     private
@@ -48,7 +49,23 @@ contains
                                     abs_returns_absolute_value_when_input_negative_value) &
                      , new_unittest("subtract_each_part(), it should return the results of subtracting each part", &
                                     subtract_returns_result_of_subtracting_each_part) &
+                     , new_unittest("is_distance_less_than_n_ulp_real128(), it should return true when 2 values are within "// &
+                                    to_string(ULP)//" ulp.", &
+                                    is_distance_less_than_n_ulp_real128_returns_true) &
+                     , new_unittest("is_distance_less_than_n_ulp_real128(), it should return false "// &
+                                    "when 2 values are not within "//to_string(ULP)//" ulp.", &
+                                    is_distance_less_than_n_ulp_real128_returns_false) &
 #endif
+                     , new_unittest("are_close_real128(), it should return true when 2 values are within "// &
+                                    "relative epsilon with factor "//to_string(ULP)//".", &
+                                    are_close_real128_returns_T_when_within_relative_epsilon) &
+                     , new_unittest("are_close_real128(), it should return false when 2 values are not within "// &
+                                    "relative epsilon with factor "//to_string(ULP)//".", &
+                                    are_close_real128_returns_F_when_not_within_relative_epsilon) &
+                     , new_unittest("sign_real128(), it should return 0 when input a positive number", &
+                                    sign_real128_returns_0_when_input_positive_number) &
+                     , new_unittest("sign_real128(), it should return 1 when input a negative number", &
+                                    sign_real128_returns_1_when_input_negative_number) &
                      ]
     end subroutine collect_fp
 end module test_common_floatingPointNumber_collection
