@@ -29,6 +29,7 @@ contains
                                     sign_real64_returns_0_when_input_positive_number) &
                      , new_unittest("sign_real64(), it should return 1 when input a negative number", &
                                     sign_real64_returns_1_when_input_negative_number) &
+#if !defined(NAGFOR)
                      , new_unittest("new_int128_type(), it should return int128_type instance", &
                                     construct_int128_returns_int128_type_instance) &
                      , new_unittest("to_string_int128(), it should return 128bit integer in string", &
@@ -47,6 +48,7 @@ contains
                                     abs_returns_absolute_value_when_input_negative_value) &
                      , new_unittest("subtract_each_part(), it should return the results of subtracting each part", &
                                     subtract_returns_result_of_subtracting_each_part) &
+#endif
                      ]
     end subroutine collect_fp
 end module test_common_floatingPointNumber_collection

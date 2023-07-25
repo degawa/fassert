@@ -5,6 +5,7 @@ module test_common_floatingPointNumber_unitTests_int128
     use :: fassert_common_floatingPointNumber_int128
     implicit none
     private
+#if !defined(NAGFOR)
     public :: construct_int128_returns_int128_type_instance
     public :: to_string_int128_returns_128bit_integer_in_string
     public :: as_real128_returns_real128_with_the_same_bitset
@@ -244,4 +245,5 @@ contains
                    to_string(c%parts(4))//"]")
         if (occurred(error)) return
     end subroutine subtract_returns_result_of_subtracting_each_part
+#endif
 end module test_common_floatingPointNumber_unitTests_int128
