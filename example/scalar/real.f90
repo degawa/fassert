@@ -5,7 +5,7 @@ program real
     logical :: stat
 
     call expect_equal(0.+1., 1., "result should be 1 when input 0+1", stat)
-    call expect_equal(0.+1., 1., "result should be 1 when input 0+1", stat)
+    call expect_equal(0.-1., 1., "result should be 1 when input 0+1", stat)
     !|
     !```Fortran
     ! call expect_equal(0.+1., 1., "result should be 1 when input 0+1", stat)
