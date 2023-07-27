@@ -19,6 +19,9 @@ contains
                      new_unittest("is_distance_less_than_n_ulp_real32(), it should return true when 2 values are within "// &
                                   to_string(ULP)//" ulp.", &
                                   is_distance_less_than_n_ulp_real32_returns_true) &
+                     , new_unittest("is_distance_less_than_n_ulp_real32(), it should return false when 2 values are not within "// &
+                                    to_string(ULP)//" ulp.", &
+                                    is_distance_less_than_n_ulp_real32_returns_false) &
                      , new_unittest("sign_real32(), it should return 0 when input a positive number", &
                                     sign_real32_returns_0_when_input_positive_number) &
                      , new_unittest("sign_real32(), it should return 1 when input a negative number", &
@@ -26,6 +29,9 @@ contains
                      , new_unittest("is_distance_less_than_n_ulp_real64(), it should return true when 2 values are within "// &
                                     to_string(ULP)//" ulp.", &
                                     is_distance_less_than_n_ulp_real64_returns_true) &
+                     , new_unittest("is_distance_less_than_n_ulp_real64(), it should return false when 2 values are not within "// &
+                                    to_string(ULP)//" ulp.", &
+                                    is_distance_less_than_n_ulp_real64_returns_false) &
                      , new_unittest("sign_real64(), it should return 0 when input a positive number", &
                                     sign_real64_returns_0_when_input_positive_number) &
                      , new_unittest("sign_real64(), it should return 1 when input a negative number", &
