@@ -32,17 +32,23 @@ contains
     #:for kind, type in REAL_KINDS_TYPES
     #:for rank in RANKS
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
-    !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
-    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2, tolerance) result(are_same)
-        use :: fassert_common_optval
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2) result(are_same)
+        use :: fassert_common_floatingPointNumber_${kind}$
+        use :: fassert_common_userSpecified
         implicit none
         ${type}$, intent(in) :: array1${rank_suffix(rank)}$
         ${type}$, intent(in) :: array2${rank_suffix(rank)}$
-        ${type}$, intent(in), optional :: tolerance
         logical :: are_same
 
-        are_same = all(abs(array1 - array2) <= optval(tolerance, &
-                                                      default=epsilon(0._${kind}$)))
+        #:if kind == 'real128'
+#if defined(NAGFOR)
+        are_same = all(are_close(array1, array2, factor=ULP))
+#else
+        are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
+#endif
+        #:else
+        are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
+        #:endif
     end function are_all_values_equal_rank${rank}$_${kind}$
 
     #:endfor
@@ -54,17 +60,26 @@ contains
     #:set rkind, rtype = REAL_KINDS_TYPES[i]
     #:for rank in RANKS
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
-    !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
-    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2, tolerance) result(are_same)
-        use :: fassert_common_optval
+    pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2) result(are_same)
+        use :: fassert_common_floatingPointNumber_${rkind}$
+        use :: fassert_common_userSpecified
         implicit none
         ${type}$, intent(in) :: array1${rank_suffix(rank)}$
         ${type}$, intent(in) :: array2${rank_suffix(rank)}$
-        ${rtype}$, intent(in), optional :: tolerance
         logical :: are_same
 
-        are_same = all(abs(array1 - array2) <= optval(tolerance, &
-                                                      default=epsilon(0._${rkind}$)))
+        #:if rkind == 'real128'
+#if defined(NAGFOR)
+        are_same = all(are_close(array1%re, array2%re, factor=ULP) .and. &
+                       are_close(array1%im, array2%im, factor=ULP))
+#else
+        are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
+                       is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
+#endif
+        #:else
+        are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
+                       is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
+        #:endif
     end function are_all_values_equal_rank${rank}$_${kind}$
 
     #:endfor
@@ -73,9 +88,7 @@ contains
     #:for kind, type in LOGICAL_KINDS_TYPES
     #:for rank in RANKS
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
-    !>許容値が指定されない場合，マシンイプシロンが許容値として使われる．
     pure function are_all_values_equal_rank${rank}$_${kind}$(array1, array2) result(are_same)
-        use :: fassert_common_optval
         implicit none
         ${type}$, intent(in) :: array1${rank_suffix(rank)}$
         ${type}$, intent(in) :: array2${rank_suffix(rank)}$
