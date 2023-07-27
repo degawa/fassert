@@ -28,7 +28,7 @@ module assertApproxEqual
 
 contains
     #:for kind, type in REAL_KINDS_TYPES
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -67,7 +67,7 @@ contains
     #:endfor
     #:for kind, type in REAL_KINDS_TYPES
     #:for rank in RANKS
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -109,7 +109,7 @@ contains
     #:set kind = kind_type[0]
     #:set type = kind_type[1]
     #:set rtype = REAL_TYPES[i]
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -151,7 +151,7 @@ contains
     #:set type = kind_type[1]
     #:set rtype = REAL_TYPES[i]
     #:for rank in RANKS
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．

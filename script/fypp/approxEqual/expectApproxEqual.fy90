@@ -32,7 +32,7 @@ module expectApproxEqual
     interface
         #:for kind, type in REAL_KINDS_TYPES
         !>実測値`actual`と予測値`expected`の差が
-        !>許容値`tolerance`より小さいかを比較する．
+        !>許容値`tolerance`より小さいかを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -69,7 +69,7 @@ module expectApproxEqual
         #:for kind, type in REAL_KINDS_TYPES
         #:for rank in RANKS
         !>実測値`actual`と予測値`expected`の各要素の差が
-        !>許容値`tolerance`より小さいかを比較する．
+        !>許容値`tolerance`より小さいかを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -109,7 +109,7 @@ module expectApproxEqual
         #:set type = kind_type[1]
         #:set rtype = REAL_TYPES[i]
         !>実測値`actual`と予測値`expected`の差が
-        !>許容値`tolerance`より小さいかを比較する．
+        !>許容値`tolerance`より小さいかを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -149,7 +149,7 @@ module expectApproxEqual
         #:set rtype = REAL_TYPES[i]
         #:for rank in RANKS
         !>実測値`actual`と予測値`expected`の各要素の差が
-        !>許容値`tolerance`より小さいかを比較する．
+        !>許容値`tolerance`より小さいかを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -189,7 +189,7 @@ module expectApproxEqual
     interface
         #:for kind, type in REAL_KINDS_TYPES
         !>実測値`actual`と予測値`expected`の差が
-        !>許容値`tolerance`より小さいかを比較し，
+        !>許容値`tolerance`より小さいかを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -230,7 +230,7 @@ module expectApproxEqual
         #:for kind, type in REAL_KINDS_TYPES
         #:for rank in RANKS
         !>実測値`actual`と予測値`expected`の各要素の差が
-        !>許容値`tolerance`より小さいかを比較し，
+        !>許容値`tolerance`より小さいかを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -274,7 +274,7 @@ module expectApproxEqual
         #:set type = kind_type[1]
         #:set rtype = REAL_TYPES[i]
         !>実測値`actual`と予測値`expected`の差が
-        !>許容値`tolerance`より小さいかを比較し，
+        !>許容値`tolerance`より小さいかを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -318,7 +318,7 @@ module expectApproxEqual
         #:set rtype = REAL_TYPES[i]
         #:for rank in RANKS
         !>実測値`actual`と予測値`expected`の各要素の差が
-        !>許容値`tolerance`より小さいかを比較し，
+        !>許容値`tolerance`より小さいかを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
