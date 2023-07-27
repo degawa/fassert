@@ -3,7 +3,7 @@ submodule(expectApproxEqual) expectApproxEqual_real_implementaion
 contains
     #:for kind in REAL_KINDS
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -35,7 +35,7 @@ contains
     #:for kind in REAL_KINDS
     #:for rank in RANKS
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>

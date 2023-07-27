@@ -1,7 +1,7 @@
 #:include "../common.fypp"
 module assertApproxEqual
     use, intrinsic :: iso_fortran_env
-    use :: expectEqual
+    use :: expectApproxEqual
     use :: fassert_common_halt
     implicit none
     private
@@ -28,7 +28,7 @@ module assertApproxEqual
 
 contains
     #:for kind, type in REAL_KINDS_TYPES
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -60,14 +60,14 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$
 
     #:endfor
     #:for kind, type in REAL_KINDS_TYPES
     #:for rank in RANKS
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -99,7 +99,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$_rank${rank}$
 
@@ -109,7 +109,7 @@ contains
     #:set kind = kind_type[0]
     #:set type = kind_type[1]
     #:set rtype = REAL_TYPES[i]
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -141,7 +141,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$
 
@@ -151,7 +151,7 @@ contains
     #:set type = kind_type[1]
     #:set rtype = REAL_TYPES[i]
     #:for rank in RANKS
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -183,7 +183,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$_rank${rank}$
 

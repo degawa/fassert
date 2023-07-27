@@ -1,6 +1,6 @@
 module assertApproxEqual
     use, intrinsic :: iso_fortran_env
-    use :: expectEqual
+    use :: expectApproxEqual
     use :: fassert_common_halt
     implicit none
     private
@@ -34,7 +34,7 @@ module assertApproxEqual
     end interface
 
 contains
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -66,11 +66,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -102,11 +102,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -138,11 +138,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -174,11 +174,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -210,11 +210,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -246,11 +246,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32_rank3
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -282,11 +282,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -318,11 +318,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -354,11 +354,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64_rank3
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -390,11 +390,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -426,11 +426,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の各要素の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -462,11 +462,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128_rank3
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -498,11 +498,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -534,11 +534,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -570,11 +570,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -606,11 +606,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32_rank1
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -642,11 +642,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32_rank2
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -678,11 +678,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32_rank3
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -714,11 +714,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64_rank1
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -750,11 +750,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64_rank2
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -786,11 +786,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64_rank3
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -822,11 +822,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128_rank1
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -858,11 +858,11 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128_rank2
 
-    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを比較する．
+    !>実測値`actual`と予測値`expected`の差が許容値`tolerance`より小さいかを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -894,7 +894,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128_rank3
 

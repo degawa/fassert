@@ -1,7 +1,7 @@
 submodule(expectApproxEqual) expectApproxEqualMsg_real_implementaion
 contains
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -31,7 +31,7 @@ contains
     end procedure expect_approx_equal_real32_msg
 
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -61,7 +61,7 @@ contains
     end procedure expect_approx_equal_real64_msg
 
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -91,7 +91,7 @@ contains
     end procedure expect_approx_equal_real128_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -136,7 +136,7 @@ contains
     end procedure expect_approx_equal_real32_rank1_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -181,7 +181,7 @@ contains
     end procedure expect_approx_equal_real32_rank2_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -226,7 +226,7 @@ contains
     end procedure expect_approx_equal_real32_rank3_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -271,7 +271,7 @@ contains
     end procedure expect_approx_equal_real64_rank1_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -316,7 +316,7 @@ contains
     end procedure expect_approx_equal_real64_rank2_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -361,7 +361,7 @@ contains
     end procedure expect_approx_equal_real64_rank3_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -406,7 +406,7 @@ contains
     end procedure expect_approx_equal_real128_rank1_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -451,7 +451,7 @@ contains
     end procedure expect_approx_equal_real128_rank2_msg
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較し，
+    !>許容値`tolerance`より小さいかを検査し，
     !>出力を`output_message`に書き込む．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
