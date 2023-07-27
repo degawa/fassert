@@ -39,11 +39,15 @@ contains
         logical :: is_distance_less_than_n_ulp_real64
             !! 比較結果
 
-        is_distance_less_than_n_ulp_real64 = (absolute_distance_in_ulp(lhs, rhs) < ulp)
+        integer(int64) :: dist_in_ulp
+
+        dist_in_ulp = absolute_distance_in_ulp(lhs, rhs)
+        is_distance_less_than_n_ulp_real64 = (0_int64 <= dist_in_ulp .and. dist_in_ulp < ulp)
     end function is_distance_less_than_n_ulp_real64
 
     !>二つの倍精度実数の差の絶対値を計算し，ULP単位で返す．
     pure elemental function absolute_distance_in_ulp_real64(lhs, rhs) result(dist_in_ulp)
+        use :: strith
         implicit none
         real(real64), intent(in) :: lhs
             !! 比較される値
@@ -52,7 +56,14 @@ contains
         integer(int64) :: dist_in_ulp
             !! 差の絶対値（ULP単位）
 
-        dist_in_ulp = abs(as_int(lhs) - as_int(rhs))
+        type(strint_type) :: abs_dist
+
+        abs_dist = abs(to_string(as_int(lhs), as_unsigned=.true.) - to_string(as_int(rhs), as_unsigned=.true.))
+        if (abs_dist > int64_max) then !&
+            dist_in_ulp = huge(dist_in_ulp)
+        else
+            dist_in_ulp = to_int64(abs_dist%to_string())
+        end if
     end function absolute_distance_in_ulp_real64
 
     !>倍精度実数を64ビット整数に変換して返す．
