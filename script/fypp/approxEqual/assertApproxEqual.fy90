@@ -1,7 +1,7 @@
 #:include "../common.fypp"
 module assertApproxEqual
     use, intrinsic :: iso_fortran_env
-    use :: expectEqual
+    use :: expectApproxEqual
     use :: fassert_common_halt
     implicit none
     private
@@ -60,7 +60,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$
 
@@ -99,7 +99,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$_rank${rank}$
 
@@ -141,7 +141,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$
 
@@ -183,7 +183,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_${kind}$_rank${rank}$
 
