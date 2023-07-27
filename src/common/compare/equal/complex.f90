@@ -13,7 +13,6 @@ module fassert_common_compare_equal_complex
 contains
     !>二つのスカラ値の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     pure elemental function is_equal_complex32(val1, val2) result(is_equal)
-        use :: fassert_common_optval
         use :: fassert_common_floatingPointNumber_real32
         use :: fassert_common_userSpecified
         implicit none
@@ -27,7 +26,6 @@ contains
 
     !>二つのスカラ値の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     pure elemental function is_equal_complex64(val1, val2) result(is_equal)
-        use :: fassert_common_optval
         use :: fassert_common_floatingPointNumber_real64
         use :: fassert_common_userSpecified
         implicit none
@@ -41,7 +39,6 @@ contains
 
     !>二つのスカラ値の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
     pure elemental function is_equal_complex128(val1, val2) result(is_equal)
-        use :: fassert_common_optval
         use :: fassert_common_floatingPointNumber_real128
         use :: fassert_common_userSpecified
         implicit none
