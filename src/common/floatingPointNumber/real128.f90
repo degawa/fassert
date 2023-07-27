@@ -45,7 +45,7 @@ contains
         integer(int64) :: dist_in_ulp
         dist_in_ulp = absolute_distance_in_ulp(lhs, rhs)
 
-        is_distance_less_than_n_ulp_real128 = (dist_in_ulp < int(ulp, kind=int64))
+        is_distance_less_than_n_ulp_real128 = (0_int64 <= dist_in_ulp .and. dist_in_ulp < int(ulp, kind=int64))
     end function is_distance_less_than_n_ulp_real128
 
     !>二つの4倍精度実数の差の絶対値を計算し，ULP単位で返す．
@@ -59,13 +59,13 @@ contains
         integer(int64) :: dist_in_ulp
             !! 差の絶対値（ULP単位）
 
-        character(len=digits) :: abs_dist
+        type(strint_type) :: abs_dist
 
         abs_dist = abs(to_string(as_int128(lhs)) - to_string(as_int128(rhs)))
-        if (abs_dist .strithgt. weights_of_digits(64)-one)then !&
+        if (abs_dist > int64_max) then !&
             dist_in_ulp = huge(dist_in_ulp)
         else
-            dist_in_ulp = to_int64(abs_dist)
+            dist_in_ulp = to_int64(abs_dist%to_string())
         end if
     end function absolute_distance_in_ulp_real128
 
