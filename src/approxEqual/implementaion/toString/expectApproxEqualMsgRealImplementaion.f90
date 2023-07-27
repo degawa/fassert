@@ -109,7 +109,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -154,7 +154,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -199,7 +199,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -244,7 +244,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -289,7 +289,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -334,7 +334,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -379,7 +379,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -424,7 +424,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
@@ -469,7 +469,7 @@ contains
 
         logical :: has_same_values
 
-        ! 値比較の前に配列要素数を検査し，異なっていれば失敗とする．
+        ! 値比較の前に配列要素数を比較し，異なっていれば失敗とする．
         block
             logical :: array_shape_stat
             character(:), allocatable :: shape_check_msg
