@@ -2,6 +2,8 @@ module fassert
     use :: fassert_common_unit
     use :: assertEqual
     use :: expectEqual
+    use :: assertApproxEqual
+    use :: expectApproxEqual
     use :: expectSameShape
     use :: assertLogical
     use :: expectLogical
@@ -9,10 +11,12 @@ module fassert
     private
     ! assert procedures
     public :: assert_equal
+    public :: assert_approx_equal
     public :: assert_true
     public :: assert_false
     ! expect procedures
     public :: expect_equal
+    public :: expect_approx_equal
     public :: expect_true
     public :: expect_false
     public :: expect_same_shape
