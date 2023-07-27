@@ -23,8 +23,8 @@ contains
             select type (expected); type is (vector2d_type)
 
                 is_equal_vec2d = &
-                    all([is_approx_equal(actual%x, expected%x), &
-                         is_approx_equal(actual%y, expected%y)])
+                    all([is_equal(actual%x, expected%x), &
+                         is_equal(actual%y, expected%y)])
 
             end select
         end select
