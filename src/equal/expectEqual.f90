@@ -118,7 +118,7 @@ module expectEqual
     end interface
 
     interface
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -148,7 +148,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int8
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -178,7 +178,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int16
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -208,7 +208,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int32
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -238,7 +238,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int64
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -268,7 +268,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int8_rank1
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -298,7 +298,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int8_rank2
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -328,7 +328,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int8_rank3
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -358,7 +358,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int16_rank1
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -388,7 +388,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int16_rank2
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -418,7 +418,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int16_rank3
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -448,7 +448,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int32_rank1
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -478,7 +478,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int32_rank2
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -508,7 +508,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int32_rank3
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -538,7 +538,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int64_rank1
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -568,7 +568,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int64_rank2
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -598,7 +598,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_int64_rank3
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -628,7 +628,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real32
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -658,7 +658,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real64
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -688,7 +688,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real128
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -718,7 +718,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real32_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -748,7 +748,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real32_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -778,7 +778,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real32_rank3
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -808,7 +808,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real64_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -838,7 +838,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real64_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -868,13 +868,13 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real64_rank3
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
         !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
         !>
-        !>`expected_failure`が真であれば，比較が失敗することを検査する．
+        !>`expected_failure`が真であれば，比較が失敗す���ことを検査する．
         !>
         !>`quiet`が真の場合，成功時の出力を抑制する．
         !>
@@ -898,7 +898,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real128_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -928,7 +928,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real128_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -958,7 +958,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_real128_rank3
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -988,7 +988,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex32
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1018,7 +1018,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex64
 
-        !>実測値`actual`と予測値`expected`の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1048,7 +1048,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex128
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1078,7 +1078,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex32_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1108,7 +1108,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex32_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1138,7 +1138,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex32_rank3
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1168,7 +1168,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex64_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1198,7 +1198,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex64_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1228,7 +1228,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex64_rank3
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1258,7 +1258,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex128_rank1
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1288,7 +1288,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex128_rank2
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1318,7 +1318,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_complex128_rank3
 
-        !>実測値`actual`と予測値`expected`が等価かを比較する．
+        !>実測値`actual`と予測値`expected`が等価かを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1348,7 +1348,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equiv_logical
 
-        !>実測値`actual`と予測値`expected`が等価かを比較する．
+        !>実測値`actual`と予測値`expected`が等価かを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1378,7 +1378,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equiv_logical_rank1
 
-        !>実測値`actual`と予測値`expected`が等価かを比較する．
+        !>実測値`actual`と予測値`expected`が等価かを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1408,7 +1408,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equiv_logical_rank2
 
-        !>実測値`actual`と予測値`expected`が等価かを比較する．
+        !>実測値`actual`と予測値`expected`が等価かを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1438,7 +1438,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equiv_logical_rank3
 
-        !>実測値`actual`と予測値`expected`が同じ文字列かを比較する．
+        !>実測値`actual`と予測値`expected`が同じ文字列かを検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1468,7 +1468,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_char
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1498,7 +1498,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_char_rank1
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1528,7 +1528,7 @@ module expectEqual
                 !! 成功時に出力を抑制するかのフラグ
         end subroutine expect_equal_char_rank2
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
         !>
@@ -1561,7 +1561,7 @@ module expectEqual
     end interface
 
     interface
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1595,7 +1595,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int8_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1629,7 +1629,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int16_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1663,7 +1663,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int32_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1697,7 +1697,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int64_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1731,7 +1731,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int8_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1765,7 +1765,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int8_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1799,7 +1799,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int8_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1833,7 +1833,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int16_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1867,7 +1867,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int16_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1901,7 +1901,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int16_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1935,7 +1935,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int32_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -1969,7 +1969,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int32_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2003,7 +2003,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int32_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2037,7 +2037,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int64_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2046,7 +2046,7 @@ module expectEqual
         !>
         !>`expected_failure`が真であれば，比較が失敗することを検査する．
         !>
-        !>`quiet`が真の場合，成功時の出力を抑制する．
+        !>`quiet`が真の場��，成功時の出力を抑制する．
         !>
         pure module subroutine expect_equal_int64_rank2_msg(actual, expected, test_name, stat, &
                                                             verbose, expected_failure, quiet, &
@@ -2071,7 +2071,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int64_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2105,7 +2105,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_int64_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2139,7 +2139,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real32_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2173,7 +2173,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real64_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2207,7 +2207,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real128_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2241,7 +2241,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real32_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2275,7 +2275,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real32_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2309,7 +2309,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real32_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2343,7 +2343,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real64_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2377,7 +2377,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real64_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2411,7 +2411,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real64_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2445,7 +2445,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real128_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2479,7 +2479,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real128_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2513,7 +2513,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_real128_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`のの等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2547,7 +2547,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex32_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`のの等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2581,7 +2581,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex64_msg
 
-        !>実測値`actual`と予測値`expected`の等値性を比較し，
+        !>実測値`actual`と予測値`expected`のの等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2615,7 +2615,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex128_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2649,7 +2649,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex32_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2683,7 +2683,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex32_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2717,7 +2717,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex32_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2751,7 +2751,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex64_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2785,7 +2785,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex64_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2819,7 +2819,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex64_rank3_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2853,7 +2853,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex128_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の��要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2887,7 +2887,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex128_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の各要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2921,7 +2921,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_complex128_rank3_msg
 
-        !>実測値`actual`と予測値`expected`が等価かを比較し，
+        !>実測値`actual`と予測値`expected`が等価かを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2955,7 +2955,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equiv_logical_msg
 
-        !>実測値`actual`と予測値`expected`が等価かを比較し，
+        !>実測値`actual`と予測値`expected`が等価かを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -2989,7 +2989,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equiv_logical_rank1_msg
 
-        !>実測値`actual`と予測値`expected`が等価かを比較し，
+        !>実測値`actual`と予測値`expected`が等価かを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3023,7 +3023,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equiv_logical_rank2_msg
 
-        !>実測値`actual`と予測値`expected`が等価かを比較し，
+        !>実測値`actual`と予測値`expected`が等価かを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3057,7 +3057,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equiv_logical_rank3_msg
 
-        !>実測値`actual`と予測値`expected`が同じ文字列かを比較し，
+        !>実測値`actual`と予測値`expected`が同じ文字列かを検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3091,7 +3091,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_char_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3125,7 +3125,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_char_rank1_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3159,7 +3159,7 @@ module expectEqual
                 !! 出力を格納する文字列
         end subroutine expect_equal_char_rank2_msg
 
-        !>実測値`actual`と予測値`expected`の全要素の等値性を比較し，
+        !>実測値`actual`と予測値`expected`の全要素の等値性を検査し，
         !>出力を`output_message`に書き込む．
         !>
         !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3196,7 +3196,7 @@ module expectEqual
     end interface
 
 contains
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較には，手続`comparator`が用いられる．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3249,7 +3249,7 @@ contains
             call verbose_message_writer(actual, expected)
     end subroutine expect_equal_user_defined
 
-    !>実測値`actual`と予測値`expected`の等値性を比較し，
+    !>実測値`actual`と予測値`expected`の等値性を検査し，
     !>出力を`output_message`に書き込む．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -3306,7 +3306,7 @@ contains
             call verbose_message_writer(actual, expected, output_message)
     end subroutine expect_equal_user_defined_msg
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較には，手続`comparator`が用いられる．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3374,7 +3374,7 @@ contains
             call verbose_message_writer(actual, expected)
     end subroutine expect_equal_user_defined_rank1
 
-    !>実測値`actual`と予測値`expected`の等値性を比較し，
+    !>実測値`actual`と予測値`expected`の等値性を検査し，
     !>出力を`output_message`に書き込む．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -3446,7 +3446,7 @@ contains
             call verbose_message_writer(actual, expected, output_message)
     end subroutine expect_equal_user_defined_rank1_msg
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較には，手続`comparator`が用いられる．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3514,7 +3514,7 @@ contains
             call verbose_message_writer(actual, expected)
     end subroutine expect_equal_user_defined_rank2
 
-    !>実測値`actual`と予測値`expected`の等値性を比較し，
+    !>実測値`actual`と予測値`expected`の等値性を検査し，
     !>出力を`output_message`に書き込む．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -3586,7 +3586,7 @@ contains
             call verbose_message_writer(actual, expected, output_message)
     end subroutine expect_equal_user_defined_rank2_msg
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較には，手続`comparator`が用いられる．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
@@ -3654,7 +3654,7 @@ contains
             call verbose_message_writer(actual, expected)
     end subroutine expect_equal_user_defined_rank3
 
-    !>実測値`actual`と予測値`expected`の等値性を比較し，
+    !>実測値`actual`と予測値`expected`の等値性を検査し，
     !>出力を`output_message`に書き込む．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -3725,4 +3725,5 @@ contains
             .and. present(verbose_message_writer)) &
             call verbose_message_writer(actual, expected, output_message)
     end subroutine expect_equal_user_defined_rank3_msg
+
 end module expectEqual

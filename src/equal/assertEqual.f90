@@ -62,7 +62,7 @@ module assertEqual
     end interface
 
 contains
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -94,7 +94,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int8
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -126,7 +126,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int16
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -158,7 +158,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int32
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -190,7 +190,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int64
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -223,7 +223,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int8_rank1
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -256,7 +256,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int8_rank2
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -289,7 +289,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int8_rank3
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -322,7 +322,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int16_rank1
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -355,7 +355,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int16_rank2
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -388,7 +388,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int16_rank3
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -421,7 +421,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int32_rank1
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -454,7 +454,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int32_rank2
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -487,7 +487,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int32_rank3
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -520,7 +520,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int64_rank1
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -553,7 +553,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int64_rank2
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -586,7 +586,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_int64_rank3
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -619,7 +619,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real32
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -652,7 +652,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real64
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -685,7 +685,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real128
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -718,7 +718,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real32_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -751,7 +751,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real32_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -784,7 +784,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real32_rank3
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -817,7 +817,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real64_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -850,7 +850,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real64_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -883,7 +883,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real64_rank3
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -916,7 +916,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real128_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -949,7 +949,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real128_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値の差の最大・最小値を出力する．
@@ -982,7 +982,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_real128_rank3
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1015,7 +1015,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex32
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1048,12 +1048,12 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex64
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
     !>
-    !>`expected_failure`が真の場合，比較が失敗することを検査し，
+    !>`expected_failure`が真の場��，比較が失敗することを検査し，
     !>プログラムを停止しない．比較が成功すると停止する．
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
@@ -1081,7 +1081,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex128
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1114,7 +1114,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex32_rank1
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1147,7 +1147,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex32_rank2
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1180,7 +1180,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex32_rank3
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1213,7 +1213,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex64_rank1
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1246,7 +1246,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex64_rank2
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1279,7 +1279,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex64_rank3
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1312,7 +1312,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex128_rank1
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1345,7 +1345,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex128_rank2
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値，それらの差を出力する．
@@ -1378,7 +1378,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_complex128_rank3
 
-    !>実測値`actual`と予測値`expected`が等価かを比較する．
+    !>実測値`actual`と予測値`expected`が等価かを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1411,7 +1411,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equiv_logical
 
-    !>実測値`actual`と予測値`expected`が等価かを比較する．
+    !>実測値`actual`と予測値`expected`が等価かを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1444,7 +1444,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equiv_logical_rank1
 
-    !>実測値`actual`と予測値`expected`が等価かを比較する．
+    !>実測値`actual`と予測値`expected`が等価かを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1477,7 +1477,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equiv_logical_rank2
 
-    !>実測値`actual`と予測値`expected`が等価かを比較する．
+    !>実測値`actual`と予測値`expected`が等価かを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1510,7 +1510,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equiv_logical_rank3
 
-    !>実測値`actual`と予測値`expected`が同じ文字列かを比較する．
+    !>実測値`actual`と予測値`expected`が同じ文字列かを検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1543,7 +1543,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_char
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1576,7 +1576,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_char_rank1
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1609,7 +1609,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_char_rank2
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>
     !>`verbose`が真であれば，実測値と予測値を出力する．
@@ -1642,7 +1642,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_char_rank3
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -1684,7 +1684,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_user_defined
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -1726,7 +1726,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_user_defined_rank1
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>比較には，手続`comparator`が用いられる．
     !>
@@ -1768,7 +1768,7 @@ contains
         call halt_on_failure(stat)
     end subroutine assert_equal_user_defined_rank2
 
-    !>実測値`actual`と予測値`expected`の全要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>比較結果が偽であれば，プログラムの実行を停止する．
     !>比較には，手続`comparator`が用いられる．
     !>

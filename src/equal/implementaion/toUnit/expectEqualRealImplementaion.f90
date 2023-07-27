@@ -1,6 +1,6 @@
 submodule(expectEqual) expectEqual_real_implementaion
 contains
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -28,7 +28,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real32
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -56,7 +56,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real64
 
-    !>実測値`actual`と予測値`expected`の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -84,8 +84,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real128
 
-
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -128,7 +127,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real32_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -171,7 +170,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real32_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -214,7 +213,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real32_rank3
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -257,7 +256,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real64_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -300,7 +299,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real64_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -343,7 +342,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real64_rank3
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -386,7 +385,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real128_rank1
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -429,7 +428,7 @@ contains
         if (is_verbose_output(stat, verbose, quiet)) call output_on_failure(actual, expected)
     end procedure expect_equal_real128_rank2
 
-    !>実測値`actual`と予測値`expected`の各要素の等値性を比較する．
+    !>実測値`actual`と予測値`expected`の全要素の等値性を検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
