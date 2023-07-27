@@ -1,6 +1,6 @@
 module assertApproxEqual
     use, intrinsic :: iso_fortran_env
-    use :: expectEqual
+    use :: expectApproxEqual
     use :: fassert_common_halt
     implicit none
     private
@@ -66,7 +66,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32
 
@@ -102,7 +102,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64
 
@@ -138,7 +138,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128
 
@@ -174,7 +174,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32_rank1
 
@@ -210,7 +210,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32_rank2
 
@@ -246,7 +246,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real32_rank3
 
@@ -282,7 +282,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64_rank1
 
@@ -318,7 +318,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64_rank2
 
@@ -354,7 +354,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real64_rank3
 
@@ -390,7 +390,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128_rank1
 
@@ -426,7 +426,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128_rank2
 
@@ -462,7 +462,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_real128_rank3
 
@@ -498,7 +498,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32
 
@@ -534,7 +534,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64
 
@@ -570,7 +570,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128
 
@@ -606,7 +606,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32_rank1
 
@@ -642,7 +642,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32_rank2
 
@@ -678,7 +678,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex32_rank3
 
@@ -714,7 +714,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64_rank1
 
@@ -750,7 +750,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64_rank2
 
@@ -786,7 +786,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex64_rank3
 
@@ -822,7 +822,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128_rank1
 
@@ -858,7 +858,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128_rank2
 
@@ -894,7 +894,7 @@ contains
 
         logical :: stat
 
-        call expect_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
+        call expect_approx_equal(actual, expected, test_name, stat, tolerance, verbose, expected_failure, quiet)
         call halt_on_failure(stat)
     end subroutine assert_approx_equal_complex128_rank3
 
