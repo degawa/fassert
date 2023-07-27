@@ -1,8 +1,7 @@
 submodule(expectApproxEqual) expectApproxEqual_complex_implementaion
 contains
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較し，
-    !>出力を`output_message`に書き込む．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -31,8 +30,7 @@ contains
     end procedure expect_approx_equal_complex32
 
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較し，
-    !>出力を`output_message`に書き込む．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -61,8 +59,7 @@ contains
     end procedure expect_approx_equal_complex64
 
     !>実測値`actual`と予測値`expected`の差が
-    !>許容値`tolerance`より小さいかを比較し，
-    !>出力を`output_message`に書き込む．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -91,7 +88,7 @@ contains
     end procedure expect_approx_equal_complex128
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -135,7 +132,7 @@ contains
     end procedure expect_approx_equal_complex32_rank1
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -179,7 +176,7 @@ contains
     end procedure expect_approx_equal_complex32_rank2
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -223,7 +220,7 @@ contains
     end procedure expect_approx_equal_complex32_rank3
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -267,7 +264,7 @@ contains
     end procedure expect_approx_equal_complex64_rank1
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -311,7 +308,7 @@ contains
     end procedure expect_approx_equal_complex64_rank2
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -355,7 +352,7 @@ contains
     end procedure expect_approx_equal_complex64_rank3
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -399,7 +396,7 @@ contains
     end procedure expect_approx_equal_complex128_rank1
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
@@ -443,7 +440,7 @@ contains
     end procedure expect_approx_equal_complex128_rank2
 
     !>実測値`actual`と予測値`expected`の各要素の差が
-    !>許容値`tolerance`より小さいかを比較する．
+    !>許容値`tolerance`より小さいかを検査する．
     !>
     !>`stat`が渡されていれば，比較結果を`stat`に書き込む．
     !>
