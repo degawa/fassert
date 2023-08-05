@@ -163,6 +163,15 @@ Then, install the library using:
 fpm install --prefix path/to/your/libdir
 ```
 
+### Running the tests
+To run the tests for the assert using fpm, execute the following command:
+
+```console
+fpm test --flag "-DWITH_QP"
+```
+
+`WITH_QP` is a preprocessor macro for enabling `real128` types in test-drive, the testing library.
+
 ### Reference from your project
 Add the following `use` statement to modules or procedures calling fassert.
 
