@@ -151,6 +151,12 @@ To build the library using fpm, execute the following command:
 fpm build
 ```
 
+Specify the preprocessor macro `FASSERT_ULP` to set the tolerance for evaluating the equality of floating-point numbers as follows:
+
+```console
+fpm build --flag "-DFASSERT_ULP=4"
+```
+
 Then, install the library using:
 
 ```console
