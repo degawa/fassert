@@ -18,17 +18,19 @@ They are designed to complete on their own. Therefore, extending features, such 
 This repository aims to provide an extensible assertion library, fassert, that can collaborate with unit testing frameworks.
 
 ## Overview
-The current version of fassert provides 7 assertion procedures.
+The current version of fassert provides 9 assertion procedures.
 
-|      procedure      |                         functionality                          |
-| :------------------ | :------------------------------------------------------------- |
-| `assert_equal`      | checks that an actual value is equal to the expected one       |
-| `expect_equal`      | checks that an actual value is equal to the expected one       |
-| `assert_true`       | checks that an actual value is true                            |
-| `expect_true`       | checks that an actual value is true                            |
-| `assert_false`      | checks that an actual value is false                           |
-| `expect_false`      | checks that an actual value is false                           |
-| `expect_same_shape` | checks that the actual and expected values have the same shape |
+|       procedure       |                               functionality                               |
+| :-------------------- | :------------------------------------------------------------------------ |
+| `assert_equal`        | checks that an actual value is equal to the expected one                  |
+| `expect_equal`        | checks that an actual value is equal to the expected one                  |
+| `assert_true`         | checks that an actual value is true                                       |
+| `expect_true`         | checks that an actual value is true                                       |
+| `assert_false`        | checks that an actual value is false                                      |
+| `expect_false`        | checks that an actual value is false                                      |
+| `expect_same_shape`   | checks that the actual and expected values have the same shape            |
+| `assert_approx_equal` | checks that an actual value is equal to the expected one within tolerance |
+| `expect_approx_equal` | checks that an actual value is equal to the expected one within tolerance |
 
 The procedures are classified  into two types.
 1. procedures beginning with `assert` immediately error stops the program when the assertion fails.
