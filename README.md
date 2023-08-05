@@ -38,24 +38,30 @@ The procedures are classified  into two types.
 
 Supported types and ranks currently are listed below:
 
-|             procdure              |       types       |  rank   |                                        note                                        |
-| :-------------------------------- | :---------------- | :------ | :--------------------------------------------------------------------------------- |
-| `assert_equal`,<br>`expect_equal` | `integer(int8)`   | 0,1,2,3 | 0 means a scalar variable                                                          |
-|                                   | `integer(int16)`  | 0,1,2,3 |                                                                                    |
-|                                   | `integer(int32)`  | 0,1,2,3 |                                                                                    |
-|                                   | `integer(int64)`  | 0,1,2,3 |                                                                                    |
-|                                   | `real(real32)`    | 0,1,2,3 |                                                                                    |
-|                                   | `real(real64)`    | 0,1,2,3 |                                                                                    |
-|                                   | `real(real128)`   | 0,1,2,3 |                                                                                    |
-|                                   | `complex(real32)` | 0,1,2,3 |                                                                                    |
-|                                   | `complex(real64)` | 0,1,2,3 |                                                                                    |
-|                                   | `complex(real128)`| 0,1,2,3 |                                                                                    |
-|                                   | `logical`         | 0,1,2,3 |                                                                                    |
-|                                   | `character(*)`    | 0,1,2,3 |                                                                                    |
-|                                   | user-defined type | 0,1,2,3 | need to write comparator and message output procedures according to the interfaces |
-| `assert_true`,<br>`expect_true`   | `logical`         | 0,1,2,3 |                                                                                    |
-| `assert_false`,<br>`expect_false` | `logical`         | 0,1,2,3 |                                                                                    |
-| `expect_same_shape`               | any               | 1,2,3   | Any types, including user-defined types, are acceptable.<br>The intended use is to compare array shapes in `assert_equal`/`expect_equal` before comparing those values.|
+|                    procdure                     |       types        |  rank   |                                        note                                        |
+| :---------------------------------------------- | :----------------- | :------ | :--------------------------------------------------------------------------------- |
+| `assert_equal`,<br>`expect_equal`               | `integer(int8)`    | 0,1,2,3 | 0 means a scalar variable                                                          |
+|                                                 | `integer(int16)`   | 0,1,2,3 |                                                                                    |
+|                                                 | `integer(int32)`   | 0,1,2,3 |                                                                                    |
+|                                                 | `integer(int64)`   | 0,1,2,3 |                                                                                    |
+|                                                 | `real(real32)`     | 0,1,2,3 | The equality of floating-point numbers is evaluated based on the integers converted from them to have the same bitset. |
+|                                                 | `real(real64)`     | 0,1,2,3 | The default tolerance is 2, which can be specified by means of the preprocessor macro `FASSERT_ULP` at compile time. |
+|                                                 | `real(real128)`    | 0,1,2,3 | If the `real128` is not binary128, for example double-double in NAG Fortran, the equality is evaluated based on the relative epsilon.  |
+|                                                 | `complex(real32)`  | 0,1,2,3 | The equality is evaluated whether both the real and imaginary parts converted to integers are within the tolerance. |
+|                                                 | `complex(real64)`  | 0,1,2,3 |                                                                                    |
+|                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
+|                                                 | `logical`          | 0,1,2,3 |                                                                                    |
+|                                                 | `character(*)`     | 0,1,2,3 |                                                                                    |
+|                                                 | user-defined type  | 0,1,2,3 | need to write comparator and message output procedures according to the interfaces |
+| `assert_true`,<br>`expect_true`                 | `logical`          | 0,1,2,3 |                                                                                    |
+| `assert_false`,<br>`expect_false`               | `logical`          | 0,1,2,3 |                                                                                    |
+| `assert_approx_equal`,<br>`expect_approx_equal` | `real(real32)`     | 0,1,2,3 |                                                                                    |
+|                                                 | `real(real64)`     | 0,1,2,3 |                                                                                    |
+|                                                 | `real(real128)`    | 0,1,2,3 |                                                                                    |
+|                                                 | `complex(real32)`  | 0,1,2,3 | The equality is evaluated the l2 norm of the real and imaginary parts.             |
+|                                                 | `complex(real64)`  | 0,1,2,3 |                                                                                    |
+|                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
+| `expect_same_shape`                             | any                | 1,2,3   | Any types, including user-defined types, are acceptable.<br>The intended use is to compare array shapes in `assert_equal`/`expect_equal` before comparing those values. |
 
 The procedures have several  optional arguments. `assert_*` procedures have 3 optional logical arguments, `expected_failure`, `verbose`, and `quiet`. Setting `expected_failure` to `.true.`, the procedures assert that the test will fail as expected. `verbose` and `quiet` control the output of the message from the procedures. `expect_*` procedures have the same arguments, excepting `expect_same_shape` which does not have `expected_failure`. In addition, the procedures have `output_message` argument specifying a string to store the output message instead of outputting it to a unit.
 
