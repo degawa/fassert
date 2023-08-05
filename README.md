@@ -63,7 +63,7 @@ Supported types and ranks currently are listed below:
 |                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
 | `expect_same_shape`                             | any                | 1,2,3   | Any types, including user-defined types, are acceptable.<br>The intended use is to compare array shapes in `assert_equal`/`expect_equal` before comparing those values. |
 
-The procedures have several  optional arguments. `assert_*` procedures have 3 optional logical arguments, `expected_failure`, `verbose`, and `quiet`. Setting `expected_failure` to `.true.`, the procedures assert that the test will fail as expected. `verbose` and `quiet` control the output of the message from the procedures. `expect_*` procedures have the same arguments, excepting `expect_same_shape` which does not have `expected_failure`. In addition, the procedures have `output_message` argument specifying a string to store the output message instead of outputting it to a unit.
+The procedures have several optional arguments. `assert_*` procedures have 3 optional logical arguments, `expected_failure`, `verbose`, and `quiet`. Setting `expected_failure` to `.true.`, the procedures assert that the test will fail as expected. `verbose` and `quiet` control the output of the message from the procedures. `expect_*` procedures have the same arguments, excepting `expect_same_shape` which does not have `expected_failure`. In addition, the procedures have `output_message` argument specifying a string to store the output message instead of outputting it to a unit.
 
 ### Examples
 - A simple assertion
