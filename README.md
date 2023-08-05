@@ -58,7 +58,7 @@ Supported types and ranks currently are listed below:
 | `assert_approx_equal`,<br>`expect_approx_equal` | `real(real32)`     | 0,1,2,3 |                                                                                    |
 |                                                 | `real(real64)`     | 0,1,2,3 |                                                                                    |
 |                                                 | `real(real128)`    | 0,1,2,3 |                                                                                    |
-|                                                 | `complex(real32)`  | 0,1,2,3 | The equality is evaluated the l2 norm of the real and imaginary parts.             |
+|                                                 | `complex(real32)`  | 0,1,2,3 | The equality is evaluated whether the l2 norm of the real and imaginary parts is within the tolerance. |
 |                                                 | `complex(real64)`  | 0,1,2,3 |                                                                                    |
 |                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
 | `expect_same_shape`                             | any                | 1,2,3   | Any types, including user-defined types, are acceptable.<br>The intended use is to compare array shapes in `assert_equal`/`expect_equal` before comparing those values. |
