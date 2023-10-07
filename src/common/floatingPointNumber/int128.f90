@@ -137,25 +137,28 @@ contains
     end function abs_int128
 
     !>`int128_type`変数を変換した文字列を返す．
-    pure function to_string_int128(int128, remove_0_padding) result(str)
+    pure function to_string_int128(int128, remove_0_padding, as_unsigned) result(str)
         use :: strith
         implicit none
         type(int128_type), intent(in) :: int128
             !! 文字列に変換したい`int128_type`
         logical, intent(in), optional :: remove_0_padding
             !! 上位桁の0を削除するフラグ
+        logical, intent(in), optional :: as_unsigned
+            !! 符号なし整数として取り扱うフラグ
         character(:), allocatable :: str
 
-        str = to_string(int128, int128_to_string, remove_0_padding)
+        str = to_string(int128, int128_to_string, remove_0_padding, as_unsigned)
     contains
-        pure subroutine int128_to_string(var, as_unsigned, strint)
+        pure subroutine int128_to_string(var, as_unsigned_, strint)
             implicit none
             class(*), intent(in) :: var
-            logical, intent(in) :: as_unsigned
+            logical, intent(in) :: as_unsigned_
             character(len=digits), intent(inout) :: strint
 
             integer(int32) :: i, bit
-            integer(int32), parameter :: lower_digit_bit_sizes(2:4) = [bit_size(int128%parts(1)), &
+            integer(int32), parameter :: lower_digit_bit_sizes(1:4) = [0, &
+                                                                       bit_size(int128%parts(1)), &
                                                                        bit_size(int128%parts(1)) + &
                                                                        bit_size(int128%parts(2)), &
                                                                        bit_size(int128%parts(1)) + &
@@ -167,7 +170,7 @@ contains
                 ! 0-31 bits
                 do i = 0, bit_size(var%parts(1)) - 1
                     bit = ibits(var%parts(1), pos=i, len=1)
-                    if (bit == 1) strint = weights_of_digits(i) + strint
+                    if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(1)) + strint
                 end do
                 ! 32-63 bits
                 do i = 0, bit_size(var%parts(2)) - 1
@@ -187,7 +190,7 @@ contains
                 ! 127 bit
                 i = bit_size(var%parts(4)) - 1
                 bit = ibits(var%parts(4), pos=i, len=1)
-                if (as_unsigned) then
+                if (as_unsigned_) then
                     if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(4)) + strint
                 else
                     if (bit == 1) strint = strint - weights_of_digits(i + lower_digit_bit_sizes(4))
