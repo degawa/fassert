@@ -143,6 +143,7 @@ contains
         type(int128_type), intent(in) :: int128
             !! 文字列に変換したい`int128_type`
         logical, intent(in), optional :: remove_0_padding
+            !! 上位桁の0を削除するフラグ
         character(:), allocatable :: str
 
         str = to_string(int128, int128_to_string, remove_0_padding)
