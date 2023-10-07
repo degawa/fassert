@@ -58,12 +58,9 @@ contains
 
         type(strint_type) :: abs_dist
 
-        abs_dist = abs(to_string(as_int(lhs), as_unsigned=.true.) - to_string(as_int(rhs), as_unsigned=.true.))
-        if (abs_dist > int32_max) then !&
-            dist_in_ulp = huge(dist_in_ulp)
-        else
-            dist_in_ulp = to_int32(abs_dist%to_string())
-        end if
+        abs_dist = min(abs(to_string(as_int(lhs), as_unsigned=.true.) - to_string(as_int(rhs), as_unsigned=.true.)), &
+                       int32_max)
+        dist_in_ulp = to_int32(abs_dist%to_string())
     end function absolute_distance_in_ulp_real32
 
     !>単精度実数を32ビット整数に変換して返す．

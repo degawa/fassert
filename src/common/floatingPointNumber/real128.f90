@@ -61,12 +61,10 @@ contains
 
         type(strint_type) :: abs_dist
 
-        abs_dist = abs(to_string(as_int128(lhs)) - to_string(as_int128(rhs)))
-        if (abs_dist > int64_max) then !&
-            dist_in_ulp = huge(dist_in_ulp)
-        else
-            dist_in_ulp = to_int64(abs_dist%to_string())
-        end if
+        !128ビット整数は利用できないので，64ビット整数の最大値を上限とする．
+        abs_dist = min(abs(to_string(as_int128(lhs), as_unsigned=.true.) - to_string(as_int128(rhs), as_unsigned=.true.)), &
+                       int64_max)
+        dist_in_ulp = to_int64(abs_dist%to_string())
     end function absolute_distance_in_ulp_real128
 
     !>4倍精度実数を`int128_type`に変換して返す．

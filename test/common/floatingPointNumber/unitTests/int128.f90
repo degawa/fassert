@@ -14,7 +14,6 @@ module test_common_floatingPointNumber_unitTests_int128
     public :: raw_sign_returns_1_when_input_negative_value
     public :: abs_returns_same_value_when_input_positive_value
     public :: abs_returns_absolute_value_when_input_negative_value
-    public :: subtract_returns_result_of_subtracting_each_part
 
 contains
     subroutine construct_int128_returns_int128_type_instance(error)
@@ -63,6 +62,20 @@ contains
         call check(error, str == "170141183460469231731687303715884105727", &
                    "converted string "//str//" from 0x 7FFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF&
                    &is not 170141183460469231731687303715884105727")
+        if (occurred(error)) return
+
+        int128%parts(1:4) = int(Z"FFFFFFFF", kind=int32)
+        str = to_string(int128, remove_0_padding=.true.)
+        call check(error, str == "-1", &
+                   "converted string "//str//" from 0x FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF&
+                   &is not -1")
+        if (occurred(error)) return
+
+        int128%parts(1:4) = int(Z"FFFFFFFF", kind=int32)
+        str = to_string(int128, remove_0_padding=.true., as_unsigned=.true.)
+        call check(error, str == "340282366920938463463374607431768211455", &
+                   "converted string "//str//" from 0x FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF&
+                   &is not 340282366920938463463374607431768211455")
         if (occurred(error)) return
     end subroutine to_string_int128_returns_128bit_integer_in_string
 
@@ -215,35 +228,5 @@ contains
                    "expected 0x0234567890ABCDEFFEDCBA0987654321, but got "//q_HEX)
         if (occurred(error)) return
     end subroutine abs_returns_absolute_value_when_input_negative_value
-
-    subroutine subtract_returns_result_of_subtracting_each_part(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        type(int128_type) :: a, b, c
-
-        a = new_int128_type(int(Z"FFFFFFFF"), int(Z"FFFFFFFF"), int(Z"FFFFFFFF"), int(Z"FFFFFFFF"))
-        b = new_int128_type(int(Z"00000000"), int(Z"00000000"), int(Z"00000000"), int(Z"00000000"))
-        c = a - b
-        call check(error, all(c%parts == -1), &
-                   "expected [-1, -1, -1, -1], but got "// &
-                   to_string(c%parts(1))//", "// &
-                   to_string(c%parts(2))//", "// &
-                   to_string(c%parts(3))//", "// &
-                   to_string(c%parts(4)))
-        if (occurred(error)) return
-
-        a = new_int128_type(int(Z"00000000"), int(Z"00000000"), int(Z"00000000"), int(Z"00000000"))
-        b = new_int128_type(int(Z"FFFFFFF0"), int(Z"FFFFFFF1"), int(Z"FFFFFFF2"), int(Z"FFFFFFF3"))
-        c = a - b
-        call check(error, all(c%parts == [13, 14, 15, 16]), &
-                   "expected [13, 14, 15, 16], but got ["// &
-                   to_string(c%parts(1))//", "// &
-                   to_string(c%parts(2))//", "// &
-                   to_string(c%parts(3))//", "// &
-                   to_string(c%parts(4))//"]")
-        if (occurred(error)) return
-    end subroutine subtract_returns_result_of_subtracting_each_part
 #endif
 end module test_common_floatingPointNumber_unitTests_int128

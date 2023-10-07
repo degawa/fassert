@@ -27,9 +27,6 @@ module fassert_common_floatingPointNumber_int128
     contains
         procedure, public, pass :: raw_sign
         !* 符号ビットの値を返却
-        procedure, public, pass(lhs) :: subtract_each_part
-        !* 減算を計算
-        generic :: operator(-) => subtract_each_part
     end type int128_type
 
     interface abs
@@ -94,34 +91,6 @@ contains
         raw_sign = ibits(this%parts(4), pos=31, len=1)
     end function raw_sign
 
-    !>二つの`int128_type`変数の減算を計算して結果を`int128_type`で返す．
-    !>
-    !>二つの値の差がユーザ指定のULP以内であるかを調べることが目的のため，
-    !>最下位部分の減算ができればよく，繰り下がりは考慮していない．
-    !>
-    !>@warning
-    !>`f = 67329.2343750000000000000000000000000, g = g = f - spacing(f)`
-    !>と設定した場合，各成分の値は，
-    !>`as_int128(f)%parts = 00000000 00000000 3C000000 400F0701`,
-    !>`as_int128(g)%parts = FFFFFFFF FFFFFFFF 3BFFFFFF 400F0701`,
-    !>であり，各成分の減算結果は
-    !>`00000001 00000001 00000001 00000000`
-    !>となるので，最下位部分の減算をするだけでは不十分である．
-    !>@endwarning
-    !>
-    pure elemental function subtract_each_part(lhs, rhs) result(sub)
-        implicit none
-        class(int128_type), intent(in) :: lhs
-            !! 減算記号の左側の値．<br>
-            !! 当該実体仮引数
-        class(int128_type), intent(in) :: rhs
-            !! 減算記号の右側の値．
-        type(int128_type) :: sub
-            !! 減算結果
-
-        sub%parts = lhs%parts - rhs%parts
-    end function subtract_each_part
-
     !>`int128_type`変数の絶対値を返す
     pure elemental function abs_int128(int128)
         implicit none
@@ -137,24 +106,28 @@ contains
     end function abs_int128
 
     !>`int128_type`変数を変換した文字列を返す．
-    pure function to_string_int128(int128, remove_0_padding) result(str)
+    pure function to_string_int128(int128, remove_0_padding, as_unsigned) result(str)
         use :: strith
         implicit none
         type(int128_type), intent(in) :: int128
             !! 文字列に変換したい`int128_type`
         logical, intent(in), optional :: remove_0_padding
+            !! 上位桁の0を削除するフラグ
+        logical, intent(in), optional :: as_unsigned
+            !! 符号なし整数として取り扱うフラグ
         character(:), allocatable :: str
 
-        str = to_string(int128, int128_to_string, remove_0_padding)
+        str = to_string(int128, int128_to_string, remove_0_padding, as_unsigned)
     contains
-        pure subroutine int128_to_string(var, as_unsigned, strint)
+        pure subroutine int128_to_string(var, as_unsigned_, strint)
             implicit none
             class(*), intent(in) :: var
-            logical, intent(in) :: as_unsigned
+            logical, intent(in) :: as_unsigned_
             character(len=digits), intent(inout) :: strint
 
             integer(int32) :: i, bit
-            integer(int32), parameter :: lower_digit_bit_sizes(2:4) = [bit_size(int128%parts(1)), &
+            integer(int32), parameter :: lower_digit_bit_sizes(1:4) = [0, &
+                                                                       bit_size(int128%parts(1)), &
                                                                        bit_size(int128%parts(1)) + &
                                                                        bit_size(int128%parts(2)), &
                                                                        bit_size(int128%parts(1)) + &
@@ -166,7 +139,7 @@ contains
                 ! 0-31 bits
                 do i = 0, bit_size(var%parts(1)) - 1
                     bit = ibits(var%parts(1), pos=i, len=1)
-                    if (bit == 1) strint = weights_of_digits(i) + strint
+                    if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(1)) + strint
                 end do
                 ! 32-63 bits
                 do i = 0, bit_size(var%parts(2)) - 1
@@ -186,7 +159,7 @@ contains
                 ! 127 bit
                 i = bit_size(var%parts(4)) - 1
                 bit = ibits(var%parts(4), pos=i, len=1)
-                if (as_unsigned) then
+                if (as_unsigned_) then
                     if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(4)) + strint
                 else
                     if (bit == 1) strint = strint - weights_of_digits(i + lower_digit_bit_sizes(4))
