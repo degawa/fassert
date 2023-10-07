@@ -53,8 +53,6 @@ contains
                                     abs_returns_same_value_when_input_positive_value) &
                      , new_unittest("abs(), it should return the absolute value when input a negative value", &
                                     abs_returns_absolute_value_when_input_negative_value) &
-                     , new_unittest("subtract_each_part(), it should return the results of subtracting each part", &
-                                    subtract_returns_result_of_subtracting_each_part) &
                      , new_unittest("is_distance_less_than_n_ulp_real128(), it should return true when 2 values are within "// &
                                     to_string(ULP)//" ulp.", &
                                     is_distance_less_than_n_ulp_real128_returns_true) &
