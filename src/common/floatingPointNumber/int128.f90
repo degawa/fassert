@@ -1,6 +1,5 @@
 module fassert_common_floatingPointNumber_int128
     use, intrinsic :: iso_fortran_env
-    use :: fassert_common_floatingPointNumber_bitLength
     implicit none
     private
     public :: new_int128_type
@@ -10,7 +9,6 @@ module fassert_common_floatingPointNumber_int128
     public :: to_string
 
     !>128ビット整数を取り扱うための派生型．
-    !>4倍精度実数の差をULP単位で計算する際に，
     !>4倍精度実数を整数に変換するために用いる事を想定．
     !>
     !>```console
@@ -22,14 +20,11 @@ module fassert_common_floatingPointNumber_int128
     !>              parts(4)                        parts(3)                         parts(2)                       parts(1)
     !>```
     type, public :: int128_type
-        integer(int32), public :: parts(4)
+        integer(int32), public :: parts(128/32)
             !! 4倍精度実数のビット列を格納するための配列．
     contains
         procedure, public, pass :: raw_sign
         !* 符号ビットの値を返却
-        procedure, public, pass(lhs) :: subtract_each_part
-        !* 減算を計算
-        generic :: operator(-) => subtract_each_part
     end type int128_type
 
     interface abs
@@ -62,7 +57,7 @@ contains
         type(int128_type) :: new_int128
             !! 4倍精度実数を変換した`int128_type`変数
 
-        new_int128%parts(:) = transfer(q, to_int32, size=4)
+        new_int128%parts(:) = transfer(q, to_int32, size=128/32)
     end function construct_int128_from_real128
 
     !>4個の32 bit整数を`int128_type`に変換した変数を返す．
@@ -93,34 +88,6 @@ contains
         ! 最上位部分（parts(4)）の31ビット目が符号ビット
         raw_sign = ibits(this%parts(4), pos=31, len=1)
     end function raw_sign
-
-    !>二つの`int128_type`変数の減算を計算して結果を`int128_type`で返す．
-    !>
-    !>二つの値の差がユーザ指定のULP以内であるかを調べることが目的のため，
-    !>最下位部分の減算ができればよく，繰り下がりは考慮していない．
-    !>
-    !>@warning
-    !>`f = 67329.2343750000000000000000000000000, g = g = f - spacing(f)`
-    !>と設定した場合，各成分の値は，
-    !>`as_int128(f)%parts = 00000000 00000000 3C000000 400F0701`,
-    !>`as_int128(g)%parts = FFFFFFFF FFFFFFFF 3BFFFFFF 400F0701`,
-    !>であり，各成分の減算結果は
-    !>`00000001 00000001 00000001 00000000`
-    !>となるので，最下位部分の減算をするだけでは不十分である．
-    !>@endwarning
-    !>
-    pure elemental function subtract_each_part(lhs, rhs) result(sub)
-        implicit none
-        class(int128_type), intent(in) :: lhs
-            !! 減算記号の左側の値．<br>
-            !! 当該実体仮引数
-        class(int128_type), intent(in) :: rhs
-            !! 減算記号の右側の値．
-        type(int128_type) :: sub
-            !! 減算結果
-
-        sub%parts = lhs%parts - rhs%parts
-    end function subtract_each_part
 
     !>`int128_type`変数の絶対値を返す
     pure elemental function abs_int128(int128)
