@@ -17,11 +17,11 @@ library = true
 [preprocess.cpp]
 
 [dependencies]
-strith= {git = "https://github.com/degawa/strith.git"}
 
 [dev-dependencies]
-test-drive = { git="https://github.com/fortran-lang/test-drive" }
-testdrive_util = { git="https://github.com/degawa/testdrive_util" }
-newunit = { git="https://github.com/degawa/newunit" }
+test-drive = {git = "https://github.com/fortran-lang/test-drive"}
+testdrive_util = {git = "https://github.com/degawa/testdrive_util"}
+newunit = {git = "https://github.com/degawa/newunit"}
 enclose = {git = "https://github.com/degawa/enclose.git"}
 par-funnel = {git = "https://github.com/degawa/par-funnel.git"}
+strith = {git = "https://github.com/degawa/strith.git"}
