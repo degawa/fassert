@@ -46,7 +46,7 @@ Supported types and ranks currently are listed below:
 |                                                 | `integer(int64)`   | 0,1,2,3 |                                                                                    |
 |                                                 | `real(real32)`     | 0,1,2,3 | The equality of floating-point numbers is evaluated based on the integers converted from them to have the same bitset. |
 |                                                 | `real(real64)`     | 0,1,2,3 | The default tolerance is 2, which can be specified by means of the preprocessor macro `FASSERT_ULP` at compile time. |
-|                                                 | `real(real128)`    | 0,1,2,3 | If the `real128` is not binary128, for example double-double in NAG Fortran, the equality is evaluated based on the relative epsilon.  |
+|                                                 | `real(real128)`    | 0,1,2,3 |                                                                                    |
 |                                                 | `complex(real32)`  | 0,1,2,3 | The equality is evaluated whether both the real and imaginary parts converted to integers are within the tolerance. |
 |                                                 | `complex(real64)`  | 0,1,2,3 |                                                                                    |
 |                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
