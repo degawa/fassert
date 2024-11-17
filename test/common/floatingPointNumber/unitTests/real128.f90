@@ -3,9 +3,10 @@ module test_common_floatingPointNumber_unitTests_real128
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred
     use :: fassert_common_floatingPointNumber_real128
-    use :: fassert_common_floatingPointNumber_int128, to_str => to_string
+    use :: fassert_common_floatingPointNumber_int128, only:as_int128
     use :: fassert_common_userSpecified, only:ULP
     use :: strings_enclose
+    use :: test_common_floatingPointNumber_unitTests_int128, to_str => to_string
     implicit none
     private
     public :: is_distance_less_than_n_ulp_real128_returns_true

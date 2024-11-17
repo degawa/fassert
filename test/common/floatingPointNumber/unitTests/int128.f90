@@ -10,13 +10,77 @@ module test_common_floatingPointNumber_unitTests_int128
     public :: to_string_int128_returns_128bit_integer_in_string
     public :: as_real128_returns_real128_with_the_same_bitset
     public :: as_int128_returns_int128_with_the_same_bitset
-    public :: raw_sign_returns_0_when_input_positive_value
-    public :: raw_sign_returns_1_when_input_negative_value
-    public :: abs_returns_same_value_when_input_positive_value
-    public :: abs_returns_absolute_value_when_input_negative_value
-    public :: subtract_returns_result_of_subtracting_each_part
+    public :: to_string
+
+    interface to_string
+        procedure :: to_string_int128
+    end interface
 
 contains
+    !>`int128_type`変数を変換した文字列を返す．
+    pure function to_string_int128(int128, remove_0_padding) result(str)
+        use :: strith, only:strith__udt_to_string => to_string
+        implicit none
+        type(int128_type), intent(in) :: int128
+            !! 文字列に変換したい`int128_type`
+        logical, intent(in), optional :: remove_0_padding
+            !! 変換された文字列から先頭の0埋めを削除するかのフラグ
+        character(:), allocatable :: str
+            !! 文字列に変換された`int128_type`
+
+        str = strith__udt_to_string(int128, int128_to_string, remove_0_padding)
+    contains
+        pure subroutine int128_to_string(var, as_unsigned, strint)
+            use :: strith, only: &
+                weights_of_digits, digits, zero, &
+                assignment(=), operator(+), operator(-)
+            implicit none
+            class(*), intent(in) :: var
+            logical, intent(in) :: as_unsigned
+            character(len=digits), intent(inout) :: strint
+
+            integer(int32) :: i, bit
+            integer(int32), parameter :: lower_digit_bit_sizes(2:4) = [bit_size(int128%parts(1)), &
+                                                                       bit_size(int128%parts(1)) + &
+                                                                       bit_size(int128%parts(2)), &
+                                                                       bit_size(int128%parts(1)) + &
+                                                                       bit_size(int128%parts(2)) + &
+                                                                       bit_size(int128%parts(3))]
+
+            strint = zero
+            select type (var); type is (int128_type)
+                ! 0-31 bits
+                do i = 0, bit_size(var%parts(1)) - 1
+                    bit = ibits(var%parts(1), pos=i, len=1)
+                    if (bit == 1) strint = weights_of_digits(i) + strint
+                end do
+                ! 32-63 bits
+                do i = 0, bit_size(var%parts(2)) - 1
+                    bit = ibits(var%parts(2), pos=i, len=1)
+                    if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(2)) + strint
+                end do
+                ! 64-95 bits
+                do i = 0, bit_size(var%parts(3)) - 1
+                    bit = ibits(var%parts(3), pos=i, len=1)
+                    if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(3)) + strint
+                end do
+                ! 96-126 bits
+                do i = 0, bit_size(var%parts(4)) - 2
+                    bit = ibits(var%parts(4), pos=i, len=1)
+                    if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(4)) + strint
+                end do
+                ! 127 bit
+                i = bit_size(var%parts(4)) - 1
+                bit = ibits(var%parts(4), pos=i, len=1)
+                if (as_unsigned) then
+                    if (bit == 1) strint = weights_of_digits(i + lower_digit_bit_sizes(4)) + strint
+                else
+                    if (bit == 1) strint = strint - weights_of_digits(i + lower_digit_bit_sizes(4))
+                end if
+            end select
+        end subroutine int128_to_string
+    end function to_string_int128
+
     subroutine construct_int128_returns_int128_type_instance(error)
         implicit none
         type(error_type), allocatable, intent(out) :: error
@@ -111,139 +175,5 @@ contains
                    " from 0x ABCDEF01 23456789 98765432 10FEDCBA is not 10FEDCBA 98765432 23456789 ABCDEF01")
         if (occurred(error)) return
     end subroutine as_int128_returns_int128_with_the_same_bitset
-
-    subroutine raw_sign_returns_0_when_input_positive_value(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        real(real128) :: q
-        type(int128_type) :: int128
-        integer(int32) :: sign_value
-
-        int128 = as_int128(huge(q))
-        sign_value = raw_sign(int128)
-        call check(error, sign_value == 0, &
-                   "expected the sign bit of "//to_string(int128, remove_0_padding=.true.)// &
-                   " is 0, but got "//to_string(sign_value))
-        if (occurred(error)) return
-
-        int128 = as_int128(tiny(q))
-        sign_value = raw_sign(int128)
-        call check(error, sign_value == 0, &
-                   "expected the sign bit of "//to_string(int128, remove_0_padding=.true.)// &
-                   " is 0, but got "//to_string(sign_value))
-        if (occurred(error)) return
-
-        int128 = as_int128(real(0, real128))
-        sign_value = raw_sign(int128)
-        call check(error, sign_value == 0, &
-                   "expected the sign bit of "//to_string(int128, remove_0_padding=.true.)// &
-                   " is 0, but got "//to_string(sign_value))
-        if (occurred(error)) return
-    end subroutine raw_sign_returns_0_when_input_positive_value
-
-    subroutine raw_sign_returns_1_when_input_negative_value(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        real(real128) :: q
-        type(int128_type) :: int128
-        integer(int32) :: sign_value
-
-        int128 = as_int128(-huge(q))
-        sign_value = raw_sign(int128)
-        call check(error, sign_value == 1, &
-                   "expected the sign bit of "//to_string(int128, remove_0_padding=.true.)// &
-                   " is 1, but got "//to_string(sign_value))
-        if (occurred(error)) return
-
-        int128 = as_int128(-tiny(q))
-        sign_value = raw_sign(int128)
-        call check(error, sign_value == 1, &
-                   "expected the sign bit of "//to_string(int128, remove_0_padding=.true.)// &
-                   " is 1, but got "//to_string(sign_value))
-        if (occurred(error)) return
-
-        int128 = as_int128(-real(0, real128)) ! real(-0, real128) returns positive 0
-        sign_value = raw_sign(int128)
-        call check(error, sign_value == 1, &
-                   "expected the sign bit of "//to_string(int128, remove_0_padding=.true.)// &
-                   " is 1, but got "//to_string(sign_value))
-        if (occurred(error)) return
-    end subroutine raw_sign_returns_1_when_input_negative_value
-
-    subroutine abs_returns_same_value_when_input_positive_value(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        real(real128) :: q
-        type(int128_type) :: int128, abs_int128
-        integer(int32) :: sign_value
-        character(len=32) :: q_HEX
-
-        int128 = new_int128_type(int(Z"72345678"), int(Z"90ABCDEF"), int(Z"FEDCBA09"), int(Z"87654321"))
-
-        abs_int128 = abs(int128)
-        sign_value = raw_sign(abs_int128)
-        q = as_real128(abs_int128)
-        write (q_HEX, "(Z32.32)") q
-        call check(error, sign_value == 0 .and. q_HEX == "7234567890ABCDEFFEDCBA0987654321", &
-                   "expected 0x7234567890ABCDEFFEDCBA0987654321, but got "//q_HEX)
-        if (occurred(error)) return
-    end subroutine abs_returns_same_value_when_input_positive_value
-
-    subroutine abs_returns_absolute_value_when_input_negative_value(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        real(real128) :: q
-        type(int128_type) :: int128, abs_int128
-        integer(int32) :: sign_value
-        character(len=32) :: q_HEX
-
-        int128 = new_int128_type(int(Z"82345678"), int(Z"90ABCDEF"), int(Z"FEDCBA09"), int(Z"87654321"))
-
-        abs_int128 = abs(int128)
-        sign_value = raw_sign(abs_int128)
-        q = as_real128(abs_int128)
-        write (q_HEX, "(Z32.32)") q
-        call check(error, sign_value == 0 .and. q_HEX == "0234567890ABCDEFFEDCBA0987654321", &
-                   "expected 0x0234567890ABCDEFFEDCBA0987654321, but got "//q_HEX)
-        if (occurred(error)) return
-    end subroutine abs_returns_absolute_value_when_input_negative_value
-
-    subroutine subtract_returns_result_of_subtracting_each_part(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        type(int128_type) :: a, b, c
-
-        a = new_int128_type(int(Z"FFFFFFFF"), int(Z"FFFFFFFF"), int(Z"FFFFFFFF"), int(Z"FFFFFFFF"))
-        b = new_int128_type(int(Z"00000000"), int(Z"00000000"), int(Z"00000000"), int(Z"00000000"))
-        c = a - b
-        call check(error, all(c%parts == -1), &
-                   "expected [-1, -1, -1, -1], but got "// &
-                   to_string(c%parts(1))//", "// &
-                   to_string(c%parts(2))//", "// &
-                   to_string(c%parts(3))//", "// &
-                   to_string(c%parts(4)))
-        if (occurred(error)) return
-
-        a = new_int128_type(int(Z"00000000"), int(Z"00000000"), int(Z"00000000"), int(Z"00000000"))
-        b = new_int128_type(int(Z"FFFFFFF0"), int(Z"FFFFFFF1"), int(Z"FFFFFFF2"), int(Z"FFFFFFF3"))
-        c = a - b
-        call check(error, all(c%parts == [13, 14, 15, 16]), &
-                   "expected [13, 14, 15, 16], but got ["// &
-                   to_string(c%parts(1))//", "// &
-                   to_string(c%parts(2))//", "// &
-                   to_string(c%parts(3))//", "// &
-                   to_string(c%parts(4))//"]")
-        if (occurred(error)) return
-    end subroutine subtract_returns_result_of_subtracting_each_part
 #endif
 end module test_common_floatingPointNumber_unitTests_int128
