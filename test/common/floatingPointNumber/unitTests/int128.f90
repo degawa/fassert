@@ -36,8 +36,13 @@ contains
                 assignment(=), operator(+), operator(-)
             implicit none
             class(*), intent(in) :: var
+                !! 文字列に変換される任意型の変数
             logical, intent(in) :: as_unsigned
+                !! 符号なし整数として扱うかのフラグ．<br>
+                !! `to_string`の引数`as_unsigned`を引き継ぐ．
+                !! 引数が省略された場合は標準値として`.false.`が渡される．
             character(len=digits), intent(inout) :: strint
+                !! 文字列に変換された`var`
 
             integer(int32) :: i, bit
             integer(int32), parameter :: lower_digit_bit_sizes(2:4) = [bit_size(int128%parts(1)), &
