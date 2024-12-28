@@ -133,6 +133,20 @@ contains
                    "converted string "//str//" from 0x 7FFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF&
                    &is not 170141183460469231731687303715884105727")
         if (occurred(error)) return
+
+        int128%parts(1:4) = int(Z"FFFFFFFF", kind=int32)
+        str = to_string(int128, remove_0_padding=.true.)
+        call check(error, str == "-1", &
+                   "converted string "//str//" from 0x FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF&
+                   &is not -1")
+        if (occurred(error)) return
+
+        int128%parts(1:4) = int(Z"FFFFFFFF", kind=int32)
+        str = to_string(int128, remove_0_padding=.true., as_unsigned=.true.)
+        call check(error, str == "340282366920938463463374607431768211455", &
+                   "converted string "//str//" from 0x FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF&
+                   &is not 340282366920938463463374607431768211455")
+        if (occurred(error)) return
     end subroutine to_string_int128_returns_128bit_integer_in_string
 
     subroutine as_real128_returns_real128_with_the_same_bitset(error)
