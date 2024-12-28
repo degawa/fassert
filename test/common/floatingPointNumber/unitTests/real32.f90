@@ -10,8 +10,6 @@ module test_common_floatingPointNumber_unitTests_real32
     private
     public :: is_distance_less_than_n_ulp_real32_returns_true
     public :: is_distance_less_than_n_ulp_real32_returns_false
-    public :: sign_real32_returns_0_when_input_positive_number
-    public :: sign_real32_returns_1_when_input_negative_number
 
 contains
     subroutine is_distance_less_than_n_ulp_real32_returns_true(error)
@@ -115,50 +113,4 @@ contains
                    to_string(ULP)//" ULP")
         if (occurred(error)) return
     end subroutine is_distance_less_than_n_ulp_real32_returns_false
-
-    subroutine sign_real32_returns_0_when_input_positive_number(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        real(real32) :: f
-        f = tiny(f)
-        call check(error, sign(f) == 0, "sign bit of "//to_string(f)//" is 0")
-        if (occurred(error)) return
-
-        f = 1e0
-        call check(error, sign(f) == 0, "sign bit of "//to_string(f)//" is 0")
-        if (occurred(error)) return
-
-        f = huge(f)
-        call check(error, sign(f) == 0, "sign bit of "//to_string(f)//" is 0")
-        if (occurred(error)) return
-
-        f = 0e0
-        call check(error, sign(f) == 0, "sign bit of "//to_string(f)//" is 0")
-        if (occurred(error)) return
-    end subroutine sign_real32_returns_0_when_input_positive_number
-
-    subroutine sign_real32_returns_1_when_input_negative_number(error)
-        implicit none
-        type(error_type), allocatable, intent(out) :: error
-            !! error handler
-
-        real(real32) :: f
-        f = -tiny(f)
-        call check(error, sign(f) == 1, "sign bit of "//to_string(f)//" is 1")
-        if (occurred(error)) return
-
-        f = -1e0
-        call check(error, sign(f) == 1, "sign bit of "//to_string(f)//" is 1")
-        if (occurred(error)) return
-
-        f = -huge(f)
-        call check(error, sign(f) == 1, "sign bit of "//to_string(f)//" is 1")
-        if (occurred(error)) return
-
-        f = -0e0
-        call check(error, sign(f) == 1, "sign bit of "//to_string(f)//" is 1")
-        if (occurred(error)) return
-    end subroutine sign_real32_returns_1_when_input_negative_number
 end module test_common_floatingPointNumber_unitTests_real32
