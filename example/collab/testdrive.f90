@@ -64,4 +64,14 @@ program collab_testdrive
                   new_testsuite("collaboration with testdrive", collect) &
                   ]
     call run_test(test_suites)
+    !|
+    !```Fortran
+    ! # Testing: collaboration with testdrive
+    !   Starting doublify() should return 20 when input 10 ... (1/1)
+    !        ... doublify() should return 20 when input 10 [FAILED]
+    !   Message: FAILED: it should return 20 when input 10
+    !     Expected: 20
+    !     Actual  : 0
+    ! 1 test(s) failed!
+    !```
 end program collab_testdrive
