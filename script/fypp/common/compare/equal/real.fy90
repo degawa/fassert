@@ -22,15 +22,7 @@ contains
         ${type}$, intent(in) :: val2
         logical :: is_equal
 
-        #:if kind == 'real128'
-#if defined(NAGFOR)
-        is_equal = are_close(val1, val2, factor=ULP)
-#else
         is_equal = is_distance_less_than_n_ulp(val1, val2, ULP)
-#endif
-        #:else
-        is_equal = is_distance_less_than_n_ulp(val1, val2, ULP)
-        #:endif
     end function is_equal_${kind}$
 
     #:endfor

@@ -40,15 +40,7 @@ contains
         ${type}$, intent(in) :: array2${rank_suffix(rank)}$
         logical :: are_same
 
-        #:if kind == 'real128'
-#if defined(NAGFOR)
-        are_same = all(are_close(array1, array2, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
-#endif
-        #:else
-        are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
-        #:endif
     end function are_all_values_equal_rank${rank}$_${kind}$
 
     #:endfor
@@ -68,18 +60,8 @@ contains
         ${type}$, intent(in) :: array2${rank_suffix(rank)}$
         logical :: are_same
 
-        #:if rkind == 'real128'
-#if defined(NAGFOR)
-        are_same = all(are_close(array1%re, array2%re, factor=ULP) .and. &
-                       are_close(array1%im, array2%im, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
                        is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
-#endif
-        #:else
-        are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
-                       is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
-        #:endif
     end function are_all_values_equal_rank${rank}$_${kind}$
 
     #:endfor
