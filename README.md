@@ -201,3 +201,8 @@ fassert = {git = "https://github.com/degawa/fassert.git"}
 - [ ] To add other assertion procedures.
     - [x] `assert_approx_equal`
     - [x] `assert_char_equal`
+    - [ ] `assert_not_equal`
+    - [ ] `assert_greater`
+    - [ ] `assert_less`
+    - [ ] `assert_greater_equal`
+    - [ ] `assert_less_equal`
