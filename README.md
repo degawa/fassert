@@ -200,3 +200,4 @@ fassert = {git = "https://github.com/degawa/fassert.git"}
 - [x] To generate codes using fypp.
 - [ ] To add other assertion procedures.
     - [x] `assert_approx_equal`
+    - [x] `assert_char_equal`
