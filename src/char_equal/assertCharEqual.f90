@@ -32,9 +32,9 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_(actual, expected, test_name, &
-                                         ignore_case, &
-                                         verbose, expected_failure, quiet)
+    subroutine assert_char_equal_(actual, expected, test_name, &
+                                  ignore_case, &
+                                  verbose, expected_failure, quiet)
         character(*), intent(in) :: actual
             !! 実測値
         character(*), intent(in) :: expected
@@ -71,9 +71,9 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_rank1(actual, expected, test_name, &
-                                              ignore_case, &
-                                              verbose, expected_failure, quiet)
+    subroutine assert_char_equal_rank1(actual, expected, test_name, &
+                                       ignore_case, &
+                                       verbose, expected_failure, quiet)
         character(*), intent(in) :: actual(:)
             !! 実測値
         character(*), intent(in) :: expected(:)
@@ -110,9 +110,9 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_rank2(actual, expected, test_name, &
-                                              ignore_case, &
-                                              verbose, expected_failure, quiet)
+    subroutine assert_char_equal_rank2(actual, expected, test_name, &
+                                       ignore_case, &
+                                       verbose, expected_failure, quiet)
         character(*), intent(in) :: actual(:, :)
             !! 実測値
         character(*), intent(in) :: expected(:, :)
@@ -149,9 +149,9 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_rank3(actual, expected, test_name, &
-                                              ignore_case, &
-                                              verbose, expected_failure, quiet)
+    subroutine assert_char_equal_rank3(actual, expected, test_name, &
+                                       ignore_case, &
+                                       verbose, expected_failure, quiet)
         character(*), intent(in) :: actual(:, :, :)
             !! 実測値
         character(*), intent(in) :: expected(:, :, :)
@@ -189,10 +189,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_msg(actual, expected, test_name, &
-                                            ignore_case, &
-                                            verbose, expected_failure, quiet, &
-                                            output_message)
+    subroutine assert_char_equal_msg(actual, expected, test_name, &
+                                     ignore_case, &
+                                     verbose, expected_failure, quiet, &
+                                     output_message)
         character(*), intent(in) :: actual
             !! 実測値
         character(*), intent(in) :: expected
@@ -233,10 +233,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_rank1_msg(actual, expected, test_name, &
-                                                  ignore_case, &
-                                                  verbose, expected_failure, quiet, &
-                                                  output_message)
+    subroutine assert_char_equal_rank1_msg(actual, expected, test_name, &
+                                           ignore_case, &
+                                           verbose, expected_failure, quiet, &
+                                           output_message)
         character(*), intent(in) :: actual(:)
             !! 実測値
         character(*), intent(in) :: expected(:)
@@ -277,10 +277,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_rank2_msg(actual, expected, test_name, &
-                                                  ignore_case, &
-                                                  verbose, expected_failure, quiet, &
-                                                  output_message)
+    subroutine assert_char_equal_rank2_msg(actual, expected, test_name, &
+                                           ignore_case, &
+                                           verbose, expected_failure, quiet, &
+                                           output_message)
         character(*), intent(in) :: actual(:, :)
             !! 実測値
         character(*), intent(in) :: expected(:, :)
@@ -321,10 +321,10 @@ contains
     !>
     !>`quiet`が真の場合，成功時の出力を抑制する．
     !>
-    module subroutine assert_char_equal_rank3_msg(actual, expected, test_name, &
-                                                  ignore_case, &
-                                                  verbose, expected_failure, quiet, &
-                                                  output_message)
+    subroutine assert_char_equal_rank3_msg(actual, expected, test_name, &
+                                           ignore_case, &
+                                           verbose, expected_failure, quiet, &
+                                           output_message)
         character(*), intent(in) :: actual(:, :, :)
             !! 実測値
         character(*), intent(in) :: expected(:, :, :)
