@@ -46,13 +46,8 @@ contains
         complex(real128), intent(in) :: val2
         logical :: is_equal
 
-#if defined(NAGFOR)
-        is_equal = (are_close(val1%re, val2%re, factor=ULP) .and. &
-                    are_close(val1%im, val2%im, factor=ULP))
-#else
         is_equal = (is_distance_less_than_n_ulp(val1%re, val2%re, ULP) .and. &
                     is_distance_less_than_n_ulp(val1%im, val2%im, ULP))
-#endif
     end function is_equal_complex128
 
 end module fassert_common_compare_equal_complex

@@ -44,11 +44,7 @@ contains
         real(real128), intent(in) :: val2
         logical :: is_equal
 
-#if defined(NAGFOR)
-        is_equal = are_close(val1, val2, factor=ULP)
-#else
         is_equal = is_distance_less_than_n_ulp(val1, val2, ULP)
-#endif
     end function is_equal_real128
 
 end module fassert_common_compare_equal_real
