@@ -6,7 +6,9 @@ module test_common_floatingPointNumber_unitTests_real128
     use :: fassert_common_floatingPointNumber_int128, only:as_int128
     use :: fassert_common_userSpecified, only:ULP
     use :: strings_enclose
+#if !defined(NAGFOR)
     use :: test_common_floatingPointNumber_unitTests_int128, to_str => to_string
+#endif
     implicit none
     private
     public :: is_distance_less_than_n_ulp_real128_returns_true
@@ -24,6 +26,7 @@ contains
 
         f = 67329.234
         g = f + spacing(f)
+#if !defined(NAGFOR)
         a = to_str(as_int128(f), remove_0_padding=.true.)
         b = to_str(as_int128(g), remove_0_padding=.true.)
         ! print '(2(A:," "))', a, b ! 85148618257777126945509618650670170112 85148618257777126945509618650670170113
@@ -32,10 +35,15 @@ contains
                    to_string(f)//enclose(a//" ULP", "(")//" and "// &
                    to_string(g)//enclose(b//" ULP", "(")//" are not within "// &
                    to_string(ULP)//" ULP")
+#else
+        call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
+                   "expected .true. but got .false.")
+#endif
         if (occurred(error)) return
 
         f = 67329.234
         g = f - spacing(f)
+#if !defined(NAGFOR)
         a = to_str(as_int128(f), remove_0_padding=.true.)
         b = to_str(as_int128(g), remove_0_padding=.true.)
         ! print '(2(A:," "))', a, b ! 85148618257777126945509618650670170112 85148618257777126945509618650670170111
@@ -44,10 +52,15 @@ contains
                    to_string(f)//enclose(a//" ULP", "(")//" and "// &
                    to_string(g)//enclose(b//" ULP", "(")//" are not within "// &
                    to_string(ULP)//" ULP")
+#else
+        call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
+                   "expected .true. but got .false.")
+#endif
         if (occurred(error)) return
 
         f = huge(f)
         g = f - spacing(f)
+#if !defined(NAGFOR)
         a = to_str(as_int128(f), remove_0_padding=.true.)
         b = to_str(as_int128(g), remove_0_padding=.true.)
         ! print '(2(A:," "))', a, b ! 170135991163610696904058773219554885631 170135991163610696904058773219554885630
@@ -56,6 +69,10 @@ contains
                    to_string(f)//enclose(a//" ULP", "(")//" and "// &
                    to_string(g)//enclose(b//" ULP", "(")//" are not within "// &
                    to_string(ULP)//" ULP")
+#else
+        call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .true., &
+                   "expected .true. but got .false.")
+#endif
         if (occurred(error)) return
     end subroutine is_distance_less_than_n_ulp_real128_returns_true
 
@@ -69,6 +86,7 @@ contains
 
         f = tiny(f)
         g = f*2
+#if !defined(NAGFOR)
         a = to_str(as_int128(f), remove_0_padding=.true.)
         b = to_str(as_int128(g), remove_0_padding=.true.)
         ! print '(2(A:," "))', a, b ! 5192296858534827628530496329220096 10384593717069655257060992658440192
@@ -77,6 +95,10 @@ contains
                    to_string(f)//enclose(a//" ULP", "(")//" and "// &
                    to_string(g)//enclose(b//" ULP", "(")//" are within "// &
                    to_string(ULP)//" ULP")
+#else
+        call check(error, is_distance_less_than_n_ulp(f, g, ULP) .eqv. .false., &
+                   "expected .false. but got .true.")
+#endif
         if (occurred(error)) return
     end subroutine is_distance_less_than_n_ulp_real128_returns_false
 end module test_common_floatingPointNumber_unitTests_real128
