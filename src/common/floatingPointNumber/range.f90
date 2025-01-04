@@ -141,7 +141,7 @@ contains
             !! `f`から`ulp`ULP離れた4倍精度実数
 
         integer(int32) :: i
-
+#if !defined(NAGFOR)
         lower_bound = f
         do i = 1, ulp
             ! fから1 ulpずつ離れた値を段階的に求める．
@@ -153,6 +153,20 @@ contains
             ! 値を返すことも可能だが，`ulp`は2~4程度であるため，
             ! ループを回しきっても大した負荷にはならないと推定される．
         end do
+#else
+        real(real128) :: relative_epsilon, space
+
+        lower_bound = f
+        if (lower_bound == -huge(f)) return
+        do i = 1, ulp
+            ! 相対イプシロン
+            relative_epsilon = epsilon(lower_bound)*abs(lower_bound)
+            ! 浮動小数点数の区間
+            space = spacing(lower_bound)
+
+            lower_bound = max(-huge(f), lower_bound - min(space, relative_epsilon))
+        end do
+#endif
     end function get_lower_bound_real128
 
     !>4倍精度実数`f`から正の無限大の方向に`ulp`ULP離れた実数を返す．
@@ -168,7 +182,7 @@ contains
             !! `f`から`ulp`ULP離れた4倍精度実数
 
         integer(int32) :: i
-
+#if !defined(NAGFOR)
         upper_bound = f
         do i = 1, ulp
             ! fから1 ulpずつ離れた値を段階的に求める
@@ -180,5 +194,19 @@ contains
             ! 値を返すことも可能だが，`ulp`は2~4程度であるため，
             ! ループを回しきっても大した負荷にはならないと推定される．
         end do
+#else
+        real(real128) :: relative_epsilon, space
+
+        upper_bound = f
+        if (upper_bound == huge(f)) return
+        do i = 1, ulp
+            ! 相対イプシロン
+            relative_epsilon = epsilon(upper_bound)*abs(upper_bound)
+            ! 浮動小数点数の区間
+            space = spacing(upper_bound)
+
+            upper_bound = min(huge(f), upper_bound + min(space, relative_epsilon))
+        end do
+#endif
     end function get_upper_bound_real128
 end module fassert_common_floatingPointNumber_range

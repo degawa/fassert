@@ -245,11 +245,7 @@ contains
         real(real128), intent(in) :: array2(:)
         logical :: are_same
 
-#if defined(NAGFOR)
-        are_same = all(are_close(array1, array2, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
-#endif
     end function are_all_values_equal_rank1_real128
 
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
@@ -261,11 +257,7 @@ contains
         real(real128), intent(in) :: array2(:, :)
         logical :: are_same
 
-#if defined(NAGFOR)
-        are_same = all(are_close(array1, array2, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
-#endif
     end function are_all_values_equal_rank2_real128
 
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
@@ -277,11 +269,7 @@ contains
         real(real128), intent(in) :: array2(:, :, :)
         logical :: are_same
 
-#if defined(NAGFOR)
-        are_same = all(are_close(array1, array2, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1, array2, ULP))
-#endif
     end function are_all_values_equal_rank3_real128
 
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
@@ -371,13 +359,8 @@ contains
         complex(real128), intent(in) :: array2(:)
         logical :: are_same
 
-#if defined(NAGFOR)
-        are_same = all(are_close(array1%re, array2%re, factor=ULP) .and. &
-                       are_close(array1%im, array2%im, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
                        is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
-#endif
     end function are_all_values_equal_rank1_complex128
 
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
@@ -389,13 +372,8 @@ contains
         complex(real128), intent(in) :: array2(:, :)
         logical :: are_same
 
-#if defined(NAGFOR)
-        are_same = all(are_close(array1%re, array2%re, factor=ULP) .and. &
-                       are_close(array1%im, array2%im, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
                        is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
-#endif
     end function are_all_values_equal_rank2_complex128
 
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
@@ -407,13 +385,8 @@ contains
         complex(real128), intent(in) :: array2(:, :, :)
         logical :: are_same
 
-#if defined(NAGFOR)
-        are_same = all(are_close(array1%re, array2%re, factor=ULP) .and. &
-                       are_close(array1%im, array2%im, factor=ULP))
-#else
         are_same = all(is_distance_less_than_n_ulp(array1%re, array2%re, ULP) .and. &
                        is_distance_less_than_n_ulp(array1%im, array2%im, ULP))
-#endif
     end function are_all_values_equal_rank3_complex128
 
     !>二つの配列の全要素の差が許容値以下の場合に`.true.`，そうでない場合`.false.`を返す．
