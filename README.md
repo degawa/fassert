@@ -164,7 +164,7 @@ fpm install --prefix path/to/your/libdir
 ```
 
 ### Running the tests
-To run the tests for the assert using fpm, execute the following command:
+To run the tests for the fassert using fpm, execute the following command:
 
 ```console
 fpm test --flag "-DWITH_QP"
