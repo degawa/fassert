@@ -57,10 +57,10 @@ Supported types and ranks currently are listed below:
 |                                                 | user-defined type  | 0,1,2,3 | need to write comparator and message output procedures according to the interfaces |
 | `assert_true`,<br>`expect_true`                 | `logical`          | 0,1,2,3 |                                                                                    |
 | `assert_false`,<br>`expect_false`               | `logical`          | 0,1,2,3 |                                                                                    |
-| `assert_approx_equal`,<br>`expect_approx_equal` | `real(real32)`     | 0,1,2,3 |                                                                                    |
+| `assert_approx_equal`,<br>`expect_approx_equal` | `real(real32)`     | 0,1,2,3 | The equality is evaluated whether the l2 norm of the real and imaginary parts is within the tolerance. |
 |                                                 | `real(real64)`     | 0,1,2,3 |                                                                                    |
 |                                                 | `real(real128)`    | 0,1,2,3 |                                                                                    |
-|                                                 | `complex(real32)`  | 0,1,2,3 | The equality is evaluated whether the l2 norm of the real and imaginary parts is within the tolerance. |
+|                                                 | `complex(real32)`  | 0,1,2,3 |                                                                                    |
 |                                                 | `complex(real64)`  | 0,1,2,3 |                                                                                    |
 |                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
 | `assert_char_equal`,<br>`expect_char_equal`     | `character(*)`     | 0,1,2,3 | The equality is evaluated as whether two characters are equal, including length, with optional case sensitivity. |
