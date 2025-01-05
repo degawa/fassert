@@ -209,3 +209,4 @@ fassert = {git = "https://github.com/degawa/fassert.git"}
     - [ ] `assert_less`
     - [ ] `assert_greater_equal`
     - [ ] `assert_less_equal`
+    - [ ] `assert_same_type`
