@@ -9,7 +9,7 @@ contains
     subroutine collect_expect_char_equal(test_suite)
         implicit none
         type(unittest_type), allocatable, intent(out) :: test_suite(:)
-        !! collection of tests
+            !! collection of tests
 
         test_suite = [ &
                      new_unittest("expect_char_equal(), success cases.", &
