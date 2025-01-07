@@ -18,7 +18,7 @@ They are designed to complete on their own. Therefore, extending features, such 
 This repository aims to provide an extensible assertion library, fassert, that can collaborate with unit testing frameworks.
 
 ## Overview
-The current version of fassert provides 9 assertion procedures.
+The current version of fassert provides 13 assertion procedures.
 
 |       procedure       |                               functionality                               |
 | :-------------------- | :------------------------------------------------------------------------ |
@@ -33,6 +33,8 @@ The current version of fassert provides 9 assertion procedures.
 | `expect_approx_equal` | checks that an actual value is equal to the expected one within tolerance |
 | `assert_char_equal`   | checks that an actual character string is equal to the expected one       |
 | `expect_char_equal`   | checks that an actual character string is equal to the expected one       |
+| `assert_same_type`    | checks that the actual and expected values are the same type              |
+| `expect_same_type`    | checks that the actual and expected values are the same type              |
 
 The procedures are classified  into two types.
 1. procedures beginning with `assert` immediately error stops the program when the assertion fails.
@@ -64,6 +66,7 @@ Supported types and ranks currently are listed below:
 |                                                 | `complex(real64)`  | 0,1,2,3 |                                                                                    |
 |                                                 | `complex(real128)` | 0,1,2,3 |                                                                                    |
 | `assert_char_equal`,<br>`expect_char_equal`     | `character(*)`     | 0,1,2,3 | The equality is evaluated as whether two characters are equal, including length, with optional case sensitivity. |
+| `assert_same_type`,<br>`expect_same_type`       | any                | 0,1,2,3 | Any types, including user-defined types, are acceptable. However, a comparison between arrays of different ranks is not possible.|
 | `expect_same_shape`                             | any                | 1,2,3   | Any types, including user-defined types, are acceptable.<br>The intended use is to compare array shapes in `assert_equal`/`expect_equal` before comparing those values. |
 
 The procedures have several optional arguments. `assert_*` procedures have 3 optional logical arguments, `expected_failure`, `verbose`, and `quiet`. Setting `expected_failure` to `.true.`, the procedures assert that the test will fail as expected. `verbose` and `quiet` control the output of the message from the procedures. `expect_*` procedures have the same arguments, excepting `expect_same_shape` which does not have `expected_failure`. In addition, the procedures have `output_message` argument specifying a string to store the output message instead of outputting it to a unit.
@@ -209,4 +212,4 @@ fassert = {git = "https://github.com/degawa/fassert.git"}
     - [ ] `assert_less`
     - [ ] `assert_greater_equal`
     - [ ] `assert_less_equal`
-    - [ ] `assert_same_type`
+    - [x] `assert_same_type`
