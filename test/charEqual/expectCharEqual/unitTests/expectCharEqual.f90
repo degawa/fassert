@@ -1,7 +1,7 @@
 module test_charEqual_expectCharEqual_unitTests_expect
     use, intrinsic :: iso_fortran_env
-    use :: testdrive, only:error_type, check, to_string
-    use :: testdrive_util, only:occurred, to_string, get_all_actual_value
+    use :: testdrive, only:error_type
+    use :: testdrive_util, only:occurred, to_string
     use :: fassert_common_message, only:NL
     use :: expectCharEqual
     use :: test_charEqual_expectCharEqual_unitTests_common
