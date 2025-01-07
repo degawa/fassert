@@ -2,6 +2,7 @@ module test_charEqual_expectCharEqual_unitTests_common
     use, intrinsic :: iso_fortran_env
     use :: testdrive, only:error_type, check, to_string
     use :: testdrive_util, only:occurred, to_string, get_all_actual_value
+    use :: fassert_common_message, only:NL
     use :: fassert_common_compare_equal_char, only:is_equal
     use :: fassert_common_unit
     implicit none
@@ -15,7 +16,6 @@ module test_charEqual_expectCharEqual_unitTests_common
     logical, private, parameter :: ignore_case = .true.
     logical, private, parameter :: check_len = .true.
 
-    character(*), private, parameter :: NL = new_line(" ")
 contains
     subroutine check_result(error, stat, expected, stat_exp, message_outpt_unit_number)
         implicit none
